@@ -2,7 +2,7 @@
 'caption'=> $modality->name])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/modalities">Daftar Modality</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('modalities.index') }}">Daftar Modality</a></li>
     <li class="breadcrumb-item">{{ Str::limit($modality->name, 20, '...') }}</li>
 @endsection
 @section('content')

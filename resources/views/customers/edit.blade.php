@@ -1,7 +1,7 @@
 @extends('layouts.app',['title'=> 'Edit Customer'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('modalities.index') }}">Daftar Customer</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Daftar Customer</a></li>
     <li class="breadcrumb-item">Edit {{ $customer->name }}</li>
 @endsection
 
@@ -17,7 +17,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="/customers/{{ $customer->slug }}/edit">
+                    <form role="form" method="post" action="{{ route('customers.update', $customer->slug) }}">
                         @method('patch')
                         @csrf
                         @include('customers.partials.form-control')

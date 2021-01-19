@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('modalities', 'ModalityController@index')->name('modalities.index');
     Route::get('modalities/create', 'ModalityController@create')->name('modalities.create');
     Route::post('modalities/store', 'ModalityController@store')->name('modalities.store');
-    Route::get('modalities/{modality:slug}/edit', 'ModalityController@edit');
+    Route::get('modalities/{modality:slug}/edit', 'ModalityController@edit')->name('modalities.edit');
     Route::patch('modalities/{modality:slug}/edit', 'ModalityController@update')->name('modalities.update');
     Route::get('modalities/{modality:slug}', 'ModalityController@show')->name('modalities.show');
 
@@ -40,4 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::get('hospitals/create', 'HospitalController@create')->name('hospitals.create');
     Route::post('hospitals/store', 'HospitalController@store')->name('hospitals.store');
     Route::get('hospitals/{hospital:slug}/edit', 'HospitalController@edit')->name('hospitals.edit');
+    Route::patch('hospitals/{hospital:slug}/edit', 'HospitalController@store')->name('hospitals.update');
 });

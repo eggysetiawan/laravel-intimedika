@@ -3,7 +3,7 @@
 
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/hospitals">Daftar Rumah Sakit</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('modalities.index') }}">Daftar Rumah Sakit</a></li>
     <li class="breadcrumb-item">Edit</li>
 @endsection
 
@@ -19,7 +19,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="/hospitals/{{ $hospital->slug }}/edit">
+                    <form role="form" method="post" action="{{ route('hospital.update', $hospital->slug) }}">
                         @csrf
                         @include('hospitals.partials.form-control')
                     </form>

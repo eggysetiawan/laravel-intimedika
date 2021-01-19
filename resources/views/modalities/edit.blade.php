@@ -18,7 +18,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="/modalities/{{ $modality->slug }}/edit">
+                    <form role="form" method="post" action="{{ route('modalities.update', $modality->slug) }}">
                         @method('patch')
                         @csrf
                         @include('modalities.partials.form-control', ['submit' => 'Update'])

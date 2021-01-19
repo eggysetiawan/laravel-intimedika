@@ -58,9 +58,10 @@
                                     <td>{{ $modality->reference }}</td>
                                     <td>
                                         {{ Str::limit($modality->spec, 50) }}
-                                        <div><a href="/modalities/{{ $modality->slug }}">Read More..</a></div>
+                                        <div><a href="{{ route('modalities.show', $modality->slug) }}">Read More..</a></div>
                                     </td>
-                                    <td><a href="/modalities/{{ $modality->slug }}/edit" class="btn btn-success btn-sm">Edit</a>
+                                    <td><a href="{{ route('modalities.edit', $modality->slug) }}"
+                                            class="btn btn-success btn-sm">Edit</a>
                                     </td>
                                 </tr>
                             </tbody>

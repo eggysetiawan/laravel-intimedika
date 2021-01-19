@@ -54,7 +54,7 @@
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->role }}</td>
                                     <td>
-                                        <a href="/customers/{{ $customer->slug }}/edit"
+                                        <a href="{{ route('customers.edit', $customer->slug) }}"
                                             class="badge badge-primary px-1">edit</a>
                                     </td>
 

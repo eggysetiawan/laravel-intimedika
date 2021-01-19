@@ -3,7 +3,7 @@
 
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/customers">Daftar Customer</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('customers.index') }}">Daftar Customer</a></li>
     <li class="breadcrumb-item">Tambah</li>
 @endsection
 
@@ -19,7 +19,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="/customers/store">
+                    <form role="form" method="post" action="{{ route('customers.store') }}">
                         @csrf
                         @include('customers.partials.form-control', ['submit' => 'Create'])
                     </form>
