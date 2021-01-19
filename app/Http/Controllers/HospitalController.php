@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Hospital;
+use App\Http\Requests\HospitalRequest;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class HospitalController extends Controller
 {
     public function index()
     {
-        $hospitals = Hospital::where('name', '!=', '')->orderBy('name', 'asc')->paginate(10);
+        $hospitals = Hospital::where('name', '!=', '')->latest()->paginate(10);
         return view('hospitals.index', compact('hospitals'));
     }
 
@@ -21,13 +22,10 @@ class HospitalController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(HospitalRequest $request)
     {
-        $attr = $this->validateRequest();
+        $attr = $request->all();
         $attr['slug'] = Str::slug(request('name'));
-        $attr['code'] = request('code');
-        $attr['class'] = request('class');
-        $attr['email'] = request('email');
         Hospital::create($attr);
 
         // alert success
@@ -36,21 +34,17 @@ class HospitalController extends Controller
         return redirect('visits/add');
     }
 
-    public function validateRequest()
+    public function edit(Hospital $hospital)
     {
-        return request()->validate(
-            [
-                'name' => 'required',
-                'phone' => 'required|numeric',
-                'city' => 'required',
-                'address' => 'required',
-            ],
-            [
-                'name.required' => 'Nama Rumah Sakit wajib diisi!',
-                'phone.required' => 'Nomor Tlp wajib diisi!',
-                'city.required' => 'Kota wajib diisi!',
-                'address.required' => 'Alamat wajib diisi!',
-            ]
-        );
+        return view('hospitals.edit', compact('hospital'));
+    }
+
+    public function update(HospitalRequest $request, Hospital $hospital)
+    {
+        $attr = $request->all();
+        $hospital->update($attr);
+        session()->flash('success', 'Rumah Sakit berhasil di Update!');
+
+        return redirect('hospitals');
     }
 }

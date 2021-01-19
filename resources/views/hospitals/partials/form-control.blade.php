@@ -44,7 +44,12 @@
     <div class="form-group">
         <label for="class">Kelas/Tipe*</label>
         <select name="class" id="class" class="form-control">
-            <option selected disabled>Pilih Kelas</option>
+            @isset($hospital->class)
+                <option value="{{ $hospital->class }}">Kelas {{ $hospital->class }}</option>
+
+            @else
+                <option selected disabled>Pilih Kelas</option>
+            @endisset
             <option value="A">Kelas A</option>
             <option value="B">Kelas B</option>
             <option value="C">Kelas C</option>
@@ -68,7 +73,7 @@
     <div class="form-group">
         <label for="address">Alamat*</label>
         <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="30"
-            rows="4" placeholder="Masukkan alamat rumah sakit..">{{ old('address') }}</textarea>
+            rows="4" placeholder="Masukkan alamat rumah sakit..">{{ old('address') ?? $hospital->address }}</textarea>
         @error('address')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}

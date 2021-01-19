@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visit;
 use App\Customer;
+use App\Http\Requests\CustomerRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,10 +28,10 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(CustomerRequest $request)
     {
         // validate input
-        $attr = $this->validateRequest();
+        $attr = $request->all();
 
         // assignt name to slug
         $attr['slug'] = Str::slug(request('name'));
@@ -38,8 +39,7 @@ class CustomerController extends Controller
         $customer_id = $customers->id + 1;
         $attr['id'] = $customer_id;
         $attr['username'] = Auth::user()->username;
-        $attr['role'] = request('role');
-        $attr['email'] = request('email');
+
 
 
         Customer::create($attr);
@@ -49,7 +49,6 @@ class CustomerController extends Controller
         session()->flash('success', 'Customer Baru Berhasil di Buat!');
 
         return redirect('customers');
-        // return back();
     }
 
     public function edit(Customer $customer)
@@ -57,9 +56,9 @@ class CustomerController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Customer $customer)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        $attr = $this->validateRequest();
+        $attr = $request->all();
 
         $customer->update($attr);
 
@@ -67,24 +66,5 @@ class CustomerController extends Controller
         session()->flash('success', 'Customer Berhasil di Update!');
 
         return redirect('customers');
-    }
-
-    public function validateRequest()
-    {
-        return request()->validate(
-            [
-                'role' => 'required',
-                'email' => 'required',
-                'name' => 'required',
-                'mobile' => 'required',
-            ],
-            // costumizing error message (optional)
-            [
-                'role.required' => 'Jabatan wajib diisi!',
-                'email.required' => 'Email wajib diisi!',
-                'name.required' => 'Nama wajib diisi!',
-                'mobile.required' => 'Nomor Hp wajib diisi!',
-            ]
-        );
     }
 }

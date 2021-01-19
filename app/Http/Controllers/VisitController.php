@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Visit;
 use App\Customer;
 use App\Hospital;
+use App\Http\Requests\VisitRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,69 +32,11 @@ class VisitController extends Controller
             'customers' => $customers,
         ]);
     }
-    // public function add()
-    // {
-    //     return view('visits.create', [
-    //         'visit' => new Visit(),
-    //         'customers' => Customer::get(),
-    //     ]);
-    // }
 
-    // pick function 1 or 2
-    // function to insert data into the database (function 1)
-
-    // public function store(Request $request)
-    // {
-    // validate input
-    // $request->validate(
-    //     [
-    //         'name' => 'required',
-    //         'result' => 'required',
-    //     ],
-
-    // costumizing error message (optional)
-    //     [
-    //         'name.required' => 'Nama wajib diisi!',
-    //         'result.required' => 'Hasil kunjungan wajib diisi!',
-    //     ]
-    // );
-
-
-    // pick 1 or 2
-    // insert into table visit (1)
-
-    // Visit::create([
-    //     'name' => $request->name,
-    //     'mobile' => $request->slug,
-    //     'slug' => Str::slug($request->mobile),
-    //     'result' => $request->result,
-    // ]);
-
-    // end insert into table visit
-
-
-
-    // another way to insert (2)
-
-    // $visit = $request->all();
-    // $visit['slug'] = Str::slug($request->name);
-    // Visit::create($visit);
-
-    // end another way to insert
-
-    // return redirect()->to('visits');
-    // return back();
-    // }
-
-    // end function (1)
-
-
-
-    // another way to store data into the database function (2)
-    public function store()
+    public function store(VisitRequest $request)
     {
         // validate input
-        $attr = $this->validateRequest();
+        $attr = $request->all();
 
         // assignt name to slug
         $attr['slug'] = Str::slug(request('request'));
@@ -107,7 +50,6 @@ class VisitController extends Controller
         session()->flash('success', 'Kunjungan Berhasil di Buat!');
 
         return redirect('visits');
-        // return back();
     }
 
     public function add()
@@ -119,29 +61,30 @@ class VisitController extends Controller
         ]);
     }
 
-    public function addStore()
+    public function addStore(VisitRequest $request)
     {
         // validate input
-        $attr = $this->validateRequest();
-        $attr2 = $this->validateRequest2();
-
+        $attr = $request->all();
         // assignt name to slug
-        $attr['slug'] = Str::slug(request('request'));
-        $customers = Customer::latest('id')->first();
-        $customer_id = $customers->id + 1;
 
-        // to visits table
-        $attr['customer_id'] =  $customer_id;
-        $attr['username'] = Auth::user()->username;
-        Visit::create($attr);
+        // manually add customer id
+        $customer_id = Customer::latest('id')->first()->id + 1;
 
         // to customers table
-        $attr2['id'] = $customer_id;
-        $attr2['hospital_id'] = request('hospital');
-        $attr2['slug'] = Str::slug(request('name'));
-        $attr2['username'] = Auth::user()->username;
-        $attr2['email'] = request('email');
-        Customer::create($attr2);
+        $attr['id'] = $customer_id;
+        $attr['hospital_id'] = request('hospital');
+        $attr['slug'] = Str::slug(request('name'));
+        $attr['username'] = Auth::user()->username;
+        Customer::create($attr);
+
+
+
+        // to visits table
+        $attr2['slug'] = Str::slug(request('request'));
+        $attr2['customer_id'] =  $customer_id;
+        Visit::create($attr2);
+
+
 
 
 
@@ -158,9 +101,9 @@ class VisitController extends Controller
         return view('visits.edit', compact('visit'));
     }
 
-    public function update(Visit $visit)
+    public function update(VisitRequest $request, Visit $visit)
     {
-        $attr = $this->validateRequest();
+        $attr = $request->all();
 
         $visit->update($attr);
 
@@ -170,35 +113,8 @@ class VisitController extends Controller
         return redirect('visits');
     }
 
-    public function validateRequest()
-    {
-        return request()->validate(
-            [
-                'result' => 'required',
-                'request' => 'required',
-            ],
-            // costumizing error message (optional)
-            [
-                'result.required' => 'Hasil kunjungan wajib diisi!',
-                'request.required' => 'Permintaan kunjungan wajib diisi!',
-            ]
-        );
-    }
-    public function validateRequest2()
-    {
-        return request()->validate(
-            [
-                'name' => 'required',
-                'mobile' => 'required',
-                'role' => 'required',
-            ],
-            // costumizing error message (optional)
-            [
-                'name.required' => 'Nama wajib diisi!',
-                'mobile.required' => 'Nomor Hp wajib diisi!',
-            ]
-        );
-    }
+
+
 
     public function destroy(Visit $visit)
     {

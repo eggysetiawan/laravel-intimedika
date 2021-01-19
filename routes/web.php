@@ -40,5 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::get('hospitals/create', 'HospitalController@create')->name('hospitals.create');
     Route::post('hospitals/store', 'HospitalController@store')->name('hospitals.store');
     Route::get('hospitals/{hospital:slug}/edit', 'HospitalController@edit')->name('hospitals.edit');
-    Route::patch('hospitals/{hospital:slug}/edit', 'HospitalController@store')->name('hospitals.update');
+    Route::patch('hospitals/{hospital:slug}/edit', 'HospitalController@update')->name('hospitals.update');
 });

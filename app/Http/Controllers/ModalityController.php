@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ModalityRequest;
 use App\Modality;
 use Illuminate\Support\Str;
 
@@ -31,12 +32,10 @@ class ModalityController extends Controller
     }
 
 
-    public function store()
+    public function store(ModalityRequest $request)
     {
-        $attr = $this->validateRequest();
+        $attr = $request->all();
         $attr['slug'] = Str::slug(request('name'));
-        $attr['stock'] = request('stock');
-        $attr['spec'] = request('spec');
 
         Modality::create($attr);
 
@@ -50,12 +49,9 @@ class ModalityController extends Controller
         return view('modalities.edit', compact('modality'));
     }
 
-    public function update(Modality $modality)
+    public function update(ModalityRequest $request, Modality $modality)
     {
-        $attr = $this->validateRequest();
-        $attr['stock'] = request('stock');
-        $attr['spec'] = request('spec');
-
+        $attr = $request->all();
 
         $modality->update($attr);
 
@@ -65,29 +61,7 @@ class ModalityController extends Controller
         return redirect('modalities');
     }
 
-    public function validateRequest()
-    {
-        return request()->validate(
-            [
-                'name' => 'required',
-                'model' => 'required',
-                'brand' => 'required',
-                'category' => 'required',
-                'reference' => 'required',
-                'price' => 'required|numeric',
-            ],
-            // costumizing error message (optional)
-            [
-                'name.required' => 'Nama Alat wajib diisi!',
-                'model.required' => 'Model Alat wajib diisi!',
-                'brand.required' => 'Brand Alat wajib diisi!',
-                'price.required' => 'Harga Alat wajib diisi!',
-                'category.required' => 'Pilih kategori alat!',
-                'reference.required' => 'Pilih referensi alat!',
-                'price.numeric' => 'Harga Alat hanya berupa angka!',
-            ]
-        );
-    }
+
 
     /**
      * Display the specified resource.
