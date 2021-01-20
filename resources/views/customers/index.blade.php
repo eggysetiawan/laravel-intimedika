@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                <a href="{{ route('customers.create') }}" class="btn btn-primary">Tambah Customer</a>
+                <a href="{{ route('customers.create') }}" class="btn bg-teal">Tambah Customer</a>
             </div>
         </div>
     </div>
@@ -38,9 +38,11 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama</th>
+                                <th>Rumah Sakit</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Jabatan</th>
+                                <th>Kunjungan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -50,12 +52,17 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $customer->name }}</td>
+                                    <td>{{ $customer->hospital->name }}</td>
                                     <td>{{ $customer->mobile }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->role }}</td>
                                     <td>
+                                        <a
+                                            href="{{ route('customers.show', $customer->slug) }}">{{ $customer->visits->count() }}</a>
+                                    </td>
+                                    <td>
                                         <a href="{{ route('customers.edit', $customer->slug) }}"
-                                            class="badge badge-primary px-1">edit</a>
+                                            class="badge bg-gradient-light px-1">edit</a>
                                     </td>
 
                                 </tr>
@@ -70,14 +77,15 @@
                     </table>
                     {{-- agar ditengah = center , kanan = end, kiri = start
                     --}}
-                    <div class="d-flex justify-content-end mr-4">
-                        <div>
-                            {{ $customers->links() }}
-                        </div>
-                    </div>
+
+
                 </div>
                 <!-- /.card-body -->
             </div>
+            <div class="d-flex justify-content-center">
+                {{ $customers->links() }}
+            </div>
+
             <!-- /.card -->
         </div>
 

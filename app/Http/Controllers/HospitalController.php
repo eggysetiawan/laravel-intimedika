@@ -31,7 +31,7 @@ class HospitalController extends Controller
         // alert success
         session()->flash('success', 'Rumah Sakit berhasil di buat!');
 
-        return redirect('visits/add');
+        return redirect('hospitals');
     }
 
     public function edit(Hospital $hospital)
@@ -45,6 +45,13 @@ class HospitalController extends Controller
         $hospital->update($attr);
         session()->flash('success', 'Rumah Sakit berhasil di Update!');
 
+        return redirect('hospitals');
+    }
+
+    public function destroy(Hospital $hospital)
+    {
+        $hospital->delete();
+        session()->flash('success', 'data berhasil di hapus!');
         return redirect('hospitals');
     }
 }

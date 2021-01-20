@@ -6,21 +6,95 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-center">
-        <div class="col-md-11">
-            <h1><a href="{{ route('customers.show', $visit->customer->slug) }}">{{ $visit->customer->name }}</a></h1>
-            <a href="{{ route('customers.edit', $visit->customer->slug) }}">Edit data customer</a>
-            <hr>
-            <small class="text-secondary">
-                Diterbitkan pada : {{ $visit->created_at->format('d F, Y') }} - {{ $visit->customer->hospital->name }}
-            </small>
-            <div>
-                {{ $visit->result }}
+        <div class="col-md-6">
+            <!-- Box Comment -->
+            <div class="card card-widget">
+
+                <!-- /.card-header -->
+                <div class="card-header">
+                    <div class="user-block">
+                        <img class="img-circle" src="{{ $visit->customer->gravatar() }}" alt="User Image">
+                        <span class="username"><a href="#">{{ $visit->customer->name }}</a></span>
+                        <span class="description">{{ $visit->customer->hospital->name }} -
+                            {{ $visit->created_at->diffForHumans() }}</span>
+                    </div>
+                    <!-- /.user-block -->
+                    <div class="card-tools">
+                        <button title="Minimize" type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
+                        @can('update', $visit)
+                            <a href="{{ route('customers.edit', $visit->customer->slug) }}" title="Edit ">
+                                <button class="btn btn-tool"><i class="fas fa-user-edit"></i></button>
+                            </a>
+                        @endcan
+
+                        @can('delete', $visit)
+                            <button type="button" title="Hapus" data-toggle="modal" data-target="#exampleModal"
+                                class="btn btn-tool"><i class="fas fa-times"></i>
+                            </button>
+                        @endcan
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <div class="card-body">
+                    @if ($visit->image)
+                        <img class="img-fluid pad" style="height:270px;object-fit:cover;object-position:center;width:600px"
+                            src="{{ $visit->takeImage }}" alt="Photo">
+                    @endif
+                    <p>
+                        <dt>Permintaan</dt>
+                        <dd>{{ $visit->request }}</dd>
+                    </p>
+                    <hr>
+                    <p>
+                        <dt>Hasil Kunjungan</dt>
+                        <dd>{{ $visit->result }}</dd>
+                    </p>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                    <span class="float-right text-muted">{{ $visit->comments->count() }} comments</span>
+                </div>
+                <!-- /.card-body -->
+                @if ($visit->comments->count() > 0)
+                    <div class="card-footer card-comments">
+                        @foreach ($visit->comments as $comment)
+                            <div class="card-comment">
+                                <!-- User image -->
+                                <img class="img-circle img-sm" src="{{ $comment->author->gravatar() }}" alt="User Image">
+
+                                <div class="comment-text">
+                                    <span class="username">
+                                        {{ $comment->author->name }}
+                                        <span
+                                            class="text-muted float-right">{{ $comment->created_at->diffForHumans() }}</span>
+                                    </span><!-- /.username -->
+                                    {{ $comment->comment }}
+                                </div>
+                                <!-- /.comment-text -->
+                            </div>
+                        @endforeach
+
+                    </div>
+                @endif
+
+
+
+                <!-- /.card-footer -->
+                <div class="card-footer">
+                    <form action="#" method="post">
+                        <img class="img-fluid img-circle img-sm" src="{{ auth()->user()->gravatar() }}" alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <input type="text" class="form-control form-control-sm"
+                                placeholder="Press enter to post comment">
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer -->
             </div>
-            <!-- Button trigger modal -->
-            <a href="javascript:" class="text-danger px-2" data-toggle="modal" data-target="#exampleModal">
-                Delete
-            </a>
-            <a href="{{ route('visits.edit', $visit->slug) }}">Edit</a>
+            <!-- /.card -->
+
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,6 +122,7 @@
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
     </div>

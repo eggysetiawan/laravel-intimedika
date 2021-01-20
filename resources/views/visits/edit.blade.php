@@ -18,7 +18,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{ route('visits.edit', $visit->slug) }}">
+                    <form role="form" method="post" action="{{ route('visits.edit', $visit->slug) }}" novalidate>
                         @method('patch')
                         @csrf
                         @include('visits.partials.form-control')

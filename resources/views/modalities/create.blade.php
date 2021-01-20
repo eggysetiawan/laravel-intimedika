@@ -18,7 +18,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="{{ route('modalities.store') }}">
+                    <form role="form" method="post" action="{{ route('modalities.store') }}" novalidate>
                         @csrf
                         @include('modalities.partials.form-control', ['submit' => 'Submit'])
                     </form>

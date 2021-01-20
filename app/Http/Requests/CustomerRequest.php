@@ -28,15 +28,25 @@ class CustomerRequest extends FormRequest
             'email' => 'email|unique:customers,email',
             'name' => 'required',
             'mobile' => 'required',
+            'hospital' => 'unique:customers,hospital_id',
         ];
     }
 
-    public function messages()
+    public function attributes()
     {
         return [
-            'role.required' => 'Jabatan wajib diisi!',
-            'name.required' => 'Nama wajib diisi!',
-            'mobile.required' => 'Nomor Hp wajib diisi!',
+            'role' => 'Jabatan',
+            'email' => 'Email',
+            'name' => 'Nama',
+            'mobile' => 'Nomor Hp',
+            'hospital' => 'Rumah Sakit',
         ];
     }
+
+    // public function messages()
+    // {
+    //     [
+    //         'hospital.unique' => 'Rumah Sakit ini sudah pernah dikunjungi oleh sales lain!',
+    //     ];
+    // }
 }

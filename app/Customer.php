@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $fillable = ['id', 'slug', 'name', 'mobile', 'role', 'email', 'username', 'hospital_id'];
+    protected $fillable = ['id', 'slug', 'name', 'mobile', 'role', 'email', 'hospital_id'];
+
+    public function gravatar($size = 150)
+    {
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim("$this->email"))) . "?d=mp&s=" . $size;
+    }
 
     public function visits()
     {
@@ -15,5 +20,10 @@ class Customer extends Model
     public function hospital()
     {
         return $this->belongsTo(Hospital::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

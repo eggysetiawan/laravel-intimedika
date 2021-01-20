@@ -2,20 +2,21 @@
     <div class="form-group">
         <label for="hospital">Pilih Rumah Sakit</label>
         <div class="input-group">
-            <select name="hospital" id="hospital" class="form-control select2">
+            <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
                 <option selected disabled>Pilih Rumah Sakit</option>
                 @foreach ($hospitals as $hospital)
                     <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
                 @endforeach
             </select>
+            <span class="input-group-append">
+                <a class="btn btn-teal bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}">+</a>
+            </span>
             @error('hospital')
                 <span class="invalid-feedback" role="alert">
                     {{ $message }}
                 </span>
             @enderror
-            <span class="input-group-append">
-                <a class="btn btn-primary btn-flat" target="_blank" href="{{ route('hospitals.create') }}">+</a>
-            </span>
+
         </div>
     </div>
     <div class="form-group">
@@ -62,7 +63,6 @@
     </div>
 
     @empty($customer->name)
-
         <div class="form-group">
             <label for="request">Permintaan</label>
             <textarea name="request" id="request" class="form-control @error('request') is-invalid @enderror" cols="30"
@@ -83,6 +83,15 @@
                 </span>
             @enderror
         </div>
+
+        <div class="form-group">
+            <input type="file" name="img" id="img" class="form-control @error('img') is-invalid @enderror">
+            @error('img')
+                <span class="invalid-feedback" role="alert">
+                    {{ $message }}
+                </span>
+            @enderror
+        </div>
     @endempty
 
 
@@ -90,5 +99,5 @@
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary">{{ $submit ?? 'Update' }}</button>
+    <button type="submit" class="btn btn-teal bg-teal">{{ $submit ?? 'Update' }}</button>
 </div>

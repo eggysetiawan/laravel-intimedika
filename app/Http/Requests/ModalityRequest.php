@@ -29,23 +29,32 @@ class ModalityRequest extends FormRequest
             'brand' => 'required',
             'category' => 'required',
             'reference' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'filled|numeric',
             'spec' => 'nullable|string',
-            'stock' => 'required|numeric',
+            'stock' => 'filled|numeric',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Nama Alat wajib diisi!',
-            'model.required' => 'Model Alat wajib diisi!',
-            'brand.required' => 'Brand Alat wajib diisi!',
-            'price.required' => 'Harga Alat wajib diisi atau berikan nilai 0!',
-            'category.required' => 'Pilih kategori alat!',
-            'reference.required' => 'Pilih referensi alat!',
-            'price.numeric' => 'Harga Alat hanya berupa angka!',
-            'stock.required' => 'Silahkan berikan nilai 0 jika stok kosong!',
+
+            'price.filled' => 'Harga Alat harus memiliki nilai atau berikan nilai 0!',
+            'stock.filled' => 'Silahkan berikan nilai 0 jika stok kosong!',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Nama Alat',
+            'model' => 'Model',
+            'brand' => 'Merk',
+            'category' => 'Kategori',
+            'reference' => 'Referensi',
+            'price' => 'Harga',
+            'spec' => 'Spesifikasi',
+            'stock' => 'Stok',
         ];
     }
 }

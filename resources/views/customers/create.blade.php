@@ -19,7 +19,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="{{ route('customers.store') }}">
+                    <form role="form" method="post" action="{{ route('customers.store') }}" novalidate>
                         @csrf
                         @include('customers.partials.form-control', ['submit' => 'Create'])
                     </form>

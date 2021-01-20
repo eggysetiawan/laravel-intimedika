@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\VisitComment;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -37,8 +38,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function gravatar($size = 150)
+    {
+        return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=mp&s=" . $size;
+    }
+
     public function visits()
     {
         return $this->hasMany(Visit::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(VisitComment::class, 'id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->level == "top";
     }
 }

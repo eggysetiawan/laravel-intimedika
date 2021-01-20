@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('visits', 'VisitController@index')->name('visits.index');
@@ -41,4 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('hospitals/store', 'HospitalController@store')->name('hospitals.store');
     Route::get('hospitals/{hospital:slug}/edit', 'HospitalController@edit')->name('hospitals.edit');
     Route::patch('hospitals/{hospital:slug}/edit', 'HospitalController@update')->name('hospitals.update');
+    Route::delete('hospitals/{hospital:slug}/delete', 'HospitalController@destroy')->name('hospitals.delete');
+
+    Route::get('search/visits', 'SearchController@visit')->name('search.visits');
 });

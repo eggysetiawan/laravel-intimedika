@@ -30,16 +30,28 @@ class VisitRequest extends FormRequest
             'mobile' => 'sometimes|required',
             'role' => 'sometimes|required',
             'email' => 'sometimes|email|unique:customers,email',
+            'hospital' => 'unique:customers,hospital_id',
+            'img' => 'image|mimes:png,jpg,jpeg,svg|max:10240',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Nama wajib diisi!',
-            'mobile.required' => 'Nomor Hp wajib diisi!',
-            'result.required' => 'Hasil kunjungan wajib diisi!',
-            'request.required' => 'Permintaan kunjungan wajib diisi!',
+            'hospital.unique' => 'Rumah Sakit sudah pernah di Kunjungi oleh Sales lain!',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'result' => 'Hasil Kunjungan',
+            'request' => 'Permintaan Kunjungan',
+            'name' => 'Nama',
+            'mobile' => 'No Hp',
+            'role' => 'Jabatan',
+            'email' => 'Email',
+            'hospital' => 'Rumah Sakit',
         ];
     }
 }

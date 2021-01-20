@@ -18,7 +18,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="/visits/store">
+                    <form role="form" method="post" action="/visits/store" novalidate enctype="multipart/form-data">
                         @csrf
                         @include('visits.partials.add-form-control', ['submit' => 'Create'])
                     </form>

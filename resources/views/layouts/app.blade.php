@@ -12,14 +12,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ 'IPI | ' . $title ?? 'Portal Intimedika' }}</title>
+    <title>{{ 'IPI Portal | ' . $title ?? 'Portal Intimedika' }}</title>
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     @include('layouts.head')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-teal">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -68,6 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
     @include('layouts.script-footer')
+    @yield('script')
 </body>
 
 

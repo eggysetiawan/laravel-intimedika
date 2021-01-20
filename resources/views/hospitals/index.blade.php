@@ -53,6 +53,14 @@
 
                                     <td><a href="{{ route('hospitals.edit', $hospital->slug) }}"
                                             class="btn btn-success btn-sm">Edit</a>
+                                        <form action="{{ route('hospitals.delete', $hospital->slug) }}" class="d-inline"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Apakah anda yakin?')">Delete</button>
+                                        </form>
+
                                     </td>
                                 </tr>
                             </tbody>

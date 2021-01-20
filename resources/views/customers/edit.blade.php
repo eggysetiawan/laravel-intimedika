@@ -17,7 +17,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{ route('customers.update', $customer->slug) }}">
+                    <form role="form" method="post" action="{{ route('customers.update', $customer->slug) }}" novalidate>
                         @method('patch')
                         @csrf
                         @include('customers.partials.form-control')

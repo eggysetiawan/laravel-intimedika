@@ -29,34 +29,41 @@
                     <h3 class="card-title">{{ $customer->name ?? 'Table Kunjungan' }}</h3>
 
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <form action="{{ route('search.visits') }}" method="GET">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="query" class="form-control float-right" placeholder="Search">
 
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Rumah Sakit</th>
                                 <th>Nama</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Jabatan</th>
                                 <th>Request</th>
                                 <th>Hasil Kunjungan</th>
+                                <th>Nama Sales</th>
                             </tr>
                         </thead>
+
                         @forelse($visits as $visit)
 
                             <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $visit->customer->hospital->name }}</td>
                                     <td>{{ $visit->customer->name }}</td>
                                     <td>{{ $visit->customer->mobile }}</td>
                                     <td>{{ $visit->customer->email }}</td>
@@ -64,8 +71,9 @@
                                     <td>{{ $visit->request }}</td>
                                     <td>
                                         {{ Str::limit($visit->result, 50) }}
-                                        <div><a href="{{ route('visits.show', $visit->slug) }}">Read More..</a></div>
+                                        <div><a href="{{ route('visits.show', $visit->slug, '...') }}">Read More</a></div>
                                     </td>
+                                    <td>{{ $visit->author->name }}</td>
                                 </tr>
                             </tbody>
                         @empty
