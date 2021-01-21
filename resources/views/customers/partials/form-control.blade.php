@@ -14,7 +14,7 @@
                 @endforeach
             </select>
             <span class="input-group-append">
-                <a class="btn btn-primary btn-flat" target="_blank" href="{{ route('hospitals.create') }}">+</a>
+                <a class="btn bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}">+</a>
             </span>
             @error('hospital')
                 <span class="invalid-feedback" role="alert">
@@ -74,5 +74,5 @@
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary">{{ $submit ?? 'Update' }}</button>
+    <button type="submit" class="btn bg-teal">{{ $submit ?? 'Update' }}</button>
 </div>

@@ -12,7 +12,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card card-primary">
+                <div class="card card-teal">
                     <div class="card-header">
                         <h3 class="card-title">Tambah Customer</h3>
                     </div>

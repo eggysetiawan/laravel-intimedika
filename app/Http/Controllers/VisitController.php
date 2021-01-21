@@ -99,14 +99,9 @@ class VisitController extends Controller
         // assignt name to slug
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
 
-        // manually add customer id
-        $customer_id = Customer::latest('id')->first()->id + 1;
-
-        // to customers table
-        $attr['id'] = $customer_id;
         $attr['hospital_id'] = request('hospital');
         $attr['user_id'] = auth()->id();
-        auth()->user()->customers()->create($attr);
+        $customer = Customer::create($attr);
 
 
 
@@ -121,7 +116,7 @@ class VisitController extends Controller
         $slug = Str::slug(request('request') . ' ' . $hospitalName);
 
         $attr['slug'] = $slug;
-        $attr['customer_id'] =  $customer_id;
+        $attr['customer_id'] =  $customer->id;
         $attr['image'] = $img;
         auth()->user()->visits()->create($attr);
 
@@ -129,7 +124,6 @@ class VisitController extends Controller
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
 
         return redirect('visits');
-        // return back();
     }
 
     public function edit(Visit $visit)

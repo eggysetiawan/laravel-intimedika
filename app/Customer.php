@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $fillable = ['id', 'slug', 'name', 'mobile', 'role', 'email', 'hospital_id'];
+    protected $fillable = ['slug', 'name', 'mobile', 'role', 'email', 'hospital_id', 'user_id'];
 
     public function gravatar($size = 150)
     {

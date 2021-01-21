@@ -45,9 +45,6 @@ class CustomerController extends Controller
 
         // assignt name to slug (slug = name-role)
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
-        $customers = Customer::latest('id')->first();
-        $customer_id = $customers->id + 1;
-        $attr['id'] = $customer_id;
         $attr['hospital_id'] = request('hospital');
         auth()->user()->customers()->create($attr);
 
@@ -60,7 +57,10 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        $hospitals = Hospital::select(['id', 'name', 'city'])->orderBy('name', 'asc')->where('name', '!=', '')->get();
+        $hospitals = Hospital::select(['id', 'name', 'city'])
+            ->orderBy('name', 'asc')
+            ->where('name', '!=', '')
+            ->get();
         return view('customers.edit', compact('customer', 'hospitals'));
     }
 
