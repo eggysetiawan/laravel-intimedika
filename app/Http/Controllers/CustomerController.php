@@ -13,7 +13,7 @@ class CustomerController extends Controller
     {
 
         if (auth()->user()->level == "top") :
-            $customers = Customer::with('author', 'visits', 'hospital')
+            $customers = Customer::with('author', 'visits', 'hospitals')
                 ->latest()
                 ->paginate(10);
         else :
@@ -37,6 +37,13 @@ class CustomerController extends Controller
             'hospitals' => Hospital::select('id', 'name', 'city')->orderBy('name', 'asc')->where('name', '!=', '')->get()
         ]);
     }
+    public function create2()
+    {
+        return view('customers.create', [
+            'customer' => new Customer(),
+            'nohospital' => '1',
+        ]);
+    }
 
     public function store(CustomerRequest $request)
     {
@@ -45,8 +52,16 @@ class CustomerController extends Controller
 
         // assignt name to slug (slug = name-role)
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
-        $attr['hospital_id'] = request('hospital');
-        auth()->user()->customers()->create($attr);
+        $nohospital = (@request('hospital') == 'false') ? true : false;
+
+        if ($nohospital) :
+            auth()->user()->customers()->create($attr);
+
+        else :
+            $customer = auth()->user()->customers()->create($attr);
+            $customer->hospitals()->attach(request('hospital'));
+        endif;
+
 
 
         // alert success

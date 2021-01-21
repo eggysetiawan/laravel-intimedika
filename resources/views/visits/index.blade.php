@@ -15,9 +15,9 @@
 @section('content')
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
-            <div class="btn-group">
-                <a href="{{ route('visits.add') }}" class="btn btn-primary">Kunjungan Baru</a>
-                <a href="{{ route('visits.create') }}" class="btn btn-secondary">Tambah Kunjungan</a>
+            <div class="btn-group ">
+                <a href="{{ route('visits.add') }}" class="btn bg-teal btn-sm">Kunjungan Baru</a>
+                <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
                             <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $visit->customer->hospital->name }}</td>
+                                    <td>{{ $visit->customer->hospitals->first()->name }}</td>
                                     <td>{{ $visit->customer->name }}</td>
                                     <td>{{ $visit->customer->mobile }}</td>
                                     <td>{{ $visit->customer->email }}</td>

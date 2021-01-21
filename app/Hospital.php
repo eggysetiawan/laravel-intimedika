@@ -11,6 +11,6 @@ class Hospital extends Model
 
     public function customers()
     {
-        return $this->hasOne(Customer::class);
+        return $this->belongsToMany(Customer::class);
     }
 }

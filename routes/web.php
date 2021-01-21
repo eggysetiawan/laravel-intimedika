@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     // route customers
     Route::get('customers', 'CustomerController@index')->name('customers.index');
     Route::get('customers/create', 'CustomerController@create')->name('customers.create');
+    Route::get('customers/create-2', 'CustomerController@create2')->name('customers.create-2');
     Route::post('customers/store', 'CustomerController@store')->name('customers.store');
     Route::get('customers/{customer:slug}/edit', 'CustomerController@edit')->name('customers.edit');
     Route::patch('customers/{customer:slug}/edit', 'CustomerController@update')->name('customers.update');

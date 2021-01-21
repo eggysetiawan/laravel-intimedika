@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                <a href="{{ route('customers.create') }}" class="btn bg-teal">Tambah Customer</a>
+                <a href="{{ route('customers.create') }}" class="btn bg-teal btn-sm">Tambah Customer</a>
             </div>
         </div>
     </div>
@@ -37,12 +37,12 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama</th>
-                                <th>Rumah Sakit</th>
+                                <th>Nama/Perusahaan</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Jabatan</th>
                                 <th>Kunjungan</th>
+                                <th>Sales</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -52,7 +52,6 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $customer->name }}</td>
-                                    <td>{{ $customer->hospital->name }}</td>
                                     <td>{{ $customer->mobile }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->role }}</td>
@@ -60,6 +59,7 @@
                                         <a
                                             href="{{ route('customers.show', $customer->slug) }}">{{ $customer->visits->count() }}</a>
                                     </td>
+                                    <td>{{ $customer->author->name }}</td>
                                     <td>
                                         <a href="{{ route('customers.edit', $customer->slug) }}"
                                             class="badge bg-gradient-light px-1">edit</a>

@@ -62,7 +62,6 @@ class VisitController extends Controller
         $hospitalName = $hospitalName1->name;
 
         $slug = Str::slug(request('request') . ' ' . $hospitalName);
-        $attr['hospital_id'] = request('hospital');
         $attr['slug'] = $slug;
         $attr['customer_id'] =  request('customer');
         $attr['image'] = $img;
@@ -92,16 +91,15 @@ class VisitController extends Controller
 
     public function addStore(VisitRequest $request)
     {
-
         // validate input
         $attr = $request->all();
 
         // assignt name to slug
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
 
-        $attr['hospital_id'] = request('hospital');
         $attr['user_id'] = auth()->id();
         $customer = Customer::create($attr);
+        $customer->hospitals()->attach(request('hospital'));
 
 
 

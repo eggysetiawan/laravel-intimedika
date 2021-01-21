@@ -28,7 +28,7 @@ class CustomerRequest extends FormRequest
             'email' => 'email|unique:customers,email',
             'name' => 'required',
             'mobile' => 'required',
-            'hospital' => 'unique:customers,hospital_id',
+            'address' => 'string',
         ];
     }
 
@@ -39,7 +39,7 @@ class CustomerRequest extends FormRequest
             'email' => 'Email',
             'name' => 'Nama',
             'mobile' => 'Nomor Hp',
-            'hospital' => 'Rumah Sakit',
+            'address' => 'Alamat',
         ];
     }
 

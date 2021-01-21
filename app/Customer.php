@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $fillable = ['slug', 'name', 'mobile', 'role', 'email', 'hospital_id', 'user_id'];
+    protected $fillable = ['slug', 'name', 'mobile', 'role', 'email',  'user_id'];
 
     public function gravatar($size = 150)
     {
@@ -17,9 +17,11 @@ class Customer extends Model
     {
         return $this->hasMany(Visit::class);
     }
-    public function hospital()
+
+    public function hospitals()
     {
-        return $this->belongsTo(Hospital::class);
+        // return $this->belongsToMany(Hospital::class)->using(CustomerHospital::class);
+        return $this->belongsToMany(Hospital::class);
     }
 
     public function author()
