@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTesterTable extends Migration
+class CreateVisitcommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateTesterTable extends Migration
      */
     public function up()
     {
-        Schema::create('tester', function (Blueprint $table) {
+        Schema::create('visitcomments', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
+            $table->foreignId('visit_id')->constrained('visits')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->longText('comment');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateTesterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tester');
+        Schema::dropIfExists('visitcomments');
     }
 }

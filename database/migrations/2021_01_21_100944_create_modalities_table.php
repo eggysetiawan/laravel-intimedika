@@ -15,14 +15,15 @@ class CreateModalitiesTable extends Migration
     {
         Schema::create('modalities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('model');
-            $table->string('brand');
-            $table->string('price');
-            $table->text('spec');
-            $table->string('stock');
-            $table->string('type');
-            $table->string('reference');
+            $table->string('name', 100);
+            $table->string('slug');
+            $table->string('model', 100);
+            $table->string('brand', 100);
+            $table->string('price')->default(0);
+            $table->longText('spec');
+            $table->bigInteger('stock')->default(0);
+            $table->string('category', 50);
+            $table->string('reference', 50);
             $table->timestamps();
         });
     }
