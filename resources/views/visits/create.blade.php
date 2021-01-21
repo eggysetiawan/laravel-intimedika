@@ -2,7 +2,7 @@
 
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/visits">Kunjungan Harian</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('visits.index') }}">Kunjungan Harian</a></li>
     <li class="breadcrumb-item">Tambah Kunjungan Harian</li>
 @endsection
 
@@ -11,14 +11,15 @@
 
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card card-primary">
+                <div class="card card-teal">
                     <div class="card-header">
                         <h3 class="card-title">Tambah Kunjungan Harian</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="/visits/store" novalidate enctype="multipart/form-data">
+                    <form role="form" method="post" action="{{ route('visits.store') }}" novalidate
+                        enctype="multipart/form-data">
                         @csrf
                         @include('visits.partials.add-form-control', ['submit' => 'Create'])
                     </form>
