@@ -43,4 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('hospitals/{hospital:slug}/delete', 'HospitalController@destroy')->name('hospitals.delete');
 
     Route::get('search/visits', 'SearchController@visit')->name('search.visits');
+
+    //hospitals
+    Route::get('offers', 'OfferController@index')->name('offers.index');
+    Route::get('offers/create', 'OfferController@create')->name('offers.create');
+    Route::get('offers/create-cust', 'OfferController@createCust')->name('offers.create-cust');
+    Route::post('offers/store', 'OfferController@store')->name('offers.store');
 });

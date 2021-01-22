@@ -1,0 +1,47 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateOffersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('offers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('user_id')->constrained('users');
+            $table->integer('offer_no');
+            $table->string('budget', 10);
+            $table->enum('reference', ['E-Catalogue', 'Non E-Catalogue']);
+            $table->dateTime('offer_date')->nullable();
+            $table->longText('price_note')->nullable();
+            $table->string('warranty_note', 50)->nullable();
+            $table->longText('availability_note')->nullable();
+            $table->longText('payment_note')->nullable();
+            $table->longText('note')->nullable();
+            $table->boolean('approve')->nullable();
+            $table->string('image')->nullable();
+            $table->dateTime('approved_at')->nullable();
+            $table->dateTime('approved_by')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('offers');
+    }
+}

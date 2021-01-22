@@ -8,7 +8,12 @@
     <div class="d-flex justify-content-center">
         <div class="col-md-6">
             <h1>Kunjungan Harian</h1>
-            @foreach ($customer->visits as $visit)
+
+            @foreach ($customer
+            ->visits()
+            ->latest()
+            ->get()
+        as $visit)
                 <!-- Box Comment -->
                 <div class="card card-widget mb-5">
                     <!-- /.card-header -->
@@ -41,7 +46,7 @@
                     <div class="card-body">
                         @if ($visit->image)
                             <img class="img-fluid pad"
-                                style="height:270px;object-fit:cover;object-position:center;width:600px"
+                                style="height:270px;object-fit:cover;object-position:center;width:600px;"
                                 src="{{ $visit->takeImage }}" alt="Photo">
                         @endif
                         <p>

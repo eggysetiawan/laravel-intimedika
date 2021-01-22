@@ -5,7 +5,7 @@
 
 @section('breadcrumb')
     @isset($customer)
-        <li class="breadcrumb-item"><a href="/visits">Kunjungan Harian</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('visits') }}">Kunjungan Harian</a></li>
         <li class="breadcrumb-item">{{ $customer->name }}</li>
     @else
         <li class="breadcrumb-item">Kunjungan Harian</li>
