@@ -23,10 +23,15 @@ class OfferController extends Controller
             ->select(['id', 'name'])
             ->orderBy('name', 'asc')
             ->get();
+        $attr = [
+            'routes' => 'offers.create-cust',
+            'icon' => 'RS',
+            'color' => 'bg-maroon',
+        ];
         return view('offers.create', [
             'offer' => new Offer(),
             'customers' => $customers,
-            'routes' => 'offers.create-cust',
+            'attr' => $attr
         ]);
     }
     public function createCust()
@@ -35,10 +40,15 @@ class OfferController extends Controller
             ->select(['id', 'name'])
             ->orderBy('name', 'asc')
             ->get();
+        $attr = [
+            'routes' => 'offers.create',
+            'icon' => 'PT',
+            'color' =>  'bg-indigo'
+        ];
         return view('offers.create', [
             'offer' => new Offer(),
             'customers' => $customers,
-            'routes' => 'offers.create',
+            'attr' => $attr
         ]);
     }
 }

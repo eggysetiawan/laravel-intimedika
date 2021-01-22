@@ -13,7 +13,7 @@
                 @endforeach
             </select>
             <span class="input-group-append">
-                <a class="btn bg-warning btn-flat" href="{{ route($routes) }}"></a>
+                <a class="btn {{ $attr['color'] }} btn-flat" href="{{ route($attr['routes']) }}">{{ $attr['icon'] }}</a>
             </span>
         </div>
         @error('hospital')
