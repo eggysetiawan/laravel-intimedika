@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group ">
@@ -21,7 +22,6 @@
             </div>
         </div>
     </div>
-
     <div class="d-flex justify-content-center">
         <div class="col-md-12">
             <div class="card">

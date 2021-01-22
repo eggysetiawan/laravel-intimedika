@@ -5,11 +5,11 @@
             <div class="input-group">
                 <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
                     <option selected disabled>Pilih Rumah Sakit</option>
-                    @isset($customer->hospital_id)
-                        <option value="{{ $customer->hospital->id }}" selected>
-                            {{ $customer->hospital->name . ' - ' . $customer->hospital->city }}
+                    @if ($customer->hospitals())
+                        <option value="{{ $customer->hospitals->first()->id }}" selected>
+                            {{ $customer->hospitals->first()->name . ' - ' . $customer->hospitals->first()->city }}
                         </option>
-                    @endisset
+                    @endif
                     @foreach ($hospitals as $hospital)
                         <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
                     @endforeach

@@ -1,0 +1,70 @@
+{
+  "workbench.colorTheme": "Tinacious Design",
+  "php.suggest.basic": false,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.find.addExtraSpaceOnTop": false,
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.lineHeight": 35,
+  "oneDarkPro.bold": true,
+  "oneDarkPro.vivid": true,
+  "window.zoomLevel": 0,
+  "workbench.iconTheme": "vscode-great-icons",
+  "editor.fontWeight": 620,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "editor.fontSize": 15,
+  "intelephense.environment.phpVersion": "7.3.0",
+  "editor.fontLigatures": true,
+  "intelephense.diagnostics.undefinedMethods": false,
+  "better-comments.multilineComments": true,
+  "better-comments.highlightPlainText": false,
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }
+  ],
+}

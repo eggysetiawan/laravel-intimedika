@@ -34,6 +34,15 @@
         @enderror
     </div>
 
+    <div class="form-group">
+        <input type="file" name="img" id="img" class="form-control @error('img') is-invalid @enderror">
+        @error('img')
+            <span class="invalid-feedback" role="alert">
+                {{ $message }}
+            </span>
+        @enderror
+    </div>
+
 
 </div>
 <!-- /.card-body -->

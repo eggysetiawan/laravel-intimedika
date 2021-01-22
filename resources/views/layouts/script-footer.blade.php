@@ -2,6 +2,8 @@
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 {{-- select2 --}}
@@ -14,6 +16,42 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
+@if (session()->has('success'))
+    <script>
+        $(document).ready(function() {
+            $(document).Toasts('create', {
+                class: 'bg-success bot-left',
+                position: 'bottomLeft',
+                fixed: true,
+                title: 'Berhasil!',
+                autohide: true,
+                delay: 3500,
+                // subtitle: 'Subtitle',
+                body: "{{ session()->get('success') }}"
+            }).delay(200).slideUp(300).fadeIn(400);
+        });
+
+    </script>
+@endif
+
+@if (session()->has('error'))
+    <script>
+        $(document).ready(function() {
+            $(document).Toasts('create', {
+                class: 'bg-danger bot-left',
+                position: 'bottomLeft',
+                fixed: true,
+                title: 'Something wrong!',
+                autohide: true,
+                delay: 3500,
+                subtitle: 'Subtitle',
+                body: "{{ session()->get('error') }}"
+            })
+        });
+
+    </script>
+
+@endif
 
 <script>
     $(function() {

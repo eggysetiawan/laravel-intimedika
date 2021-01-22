@@ -36,9 +36,6 @@ class VisitController extends Controller
 
     public function create()
     {
-
-
-
         $customers = Customer::whereHas('hospitals')
             ->select(['id', 'name'])
             ->orderBy('name', 'asc')
@@ -55,21 +52,20 @@ class VisitController extends Controller
         // validate input
         $attr = $request->all();
 
-        $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
+
 
 
         // assign to slug
-        $hospitalName1 = Hospital::select('name')
-            ->where('id', request('hospital'))
-            ->first();
-
-        $timestamp = date('Y-m-d-H-i');
-
+        $timestamp = date('Y-m-d-H-i-s');
         $slug = Str::slug(request('request') . ' ' . $timestamp);
         $attr['slug'] = $slug;
-        $attr['customer_id'] =  request('customer');
+
+        // image
+        $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
         $attr['image'] = $img;
 
+        // customer_id
+        $attr['customer_id'] =  request('customer');
 
         // insert
         auth()->user()->visits()->create($attr);
@@ -111,7 +107,7 @@ class VisitController extends Controller
         // to visits table
 
         // assign to slug  (slug = name-hospitalname)
-        $timestamp = date('Y-m-d-H-i');
+        $timestamp = date('Y-m-d-H-i-s');
         $slug = Str::slug(request('request') . ' ' . $timestamp);
 
         $attr['slug'] = $slug;

@@ -1,4 +1,4 @@
-@if (session()->has('success'))
+{{-- @if (session()->has('success'))
     <div class="container"></div>
     <div class="row">
         <div class="col-md-4">
@@ -9,7 +9,7 @@
     </div>
     </div>
 
-@endif
+@endif --}}
 @if (session()->has('error'))
     <div class="container"></div>
     <div class="row">
