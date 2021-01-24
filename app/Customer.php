@@ -20,7 +20,6 @@ class Customer extends Model
 
     public function hospitals()
     {
-        // return $this->belongsToMany(Hospital::class)->using(CustomerHospital::class);
         return $this->belongsToMany(Hospital::class);
     }
 

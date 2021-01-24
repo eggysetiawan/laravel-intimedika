@@ -18,7 +18,6 @@ class CreateVisitsTable extends Migration
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('slug', 150);
-            $table->string('image')->nullable();
             $table->longText('request')->nullable();
             $table->longText('result')->nullable();
             $table->timestamps();

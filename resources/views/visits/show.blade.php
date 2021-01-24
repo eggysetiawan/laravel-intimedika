@@ -38,10 +38,8 @@
                     <!-- /.card-tools -->
                 </div>
                 <div class="card-body">
-                    @if ($visit->image)
-                        <img class="img-fluid pad" style="height:270px;object-fit:cover;object-position:center;width:600px"
-                            src="{{ $visit->takeImage }}" alt="Photo">
-                    @endif
+                    <img class="img-fluid pad" style="height:270px;object-fit:cover;object-position:center;width:600px"
+                        src="{{ $visit->getFirstMedia('images')->getUrl() }}" alt="Photo">
                     <p>
                         <dt>Permintaan</dt>
                         <dd>{{ $visit->request }}</dd>

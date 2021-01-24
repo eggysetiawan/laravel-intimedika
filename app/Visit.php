@@ -4,11 +4,21 @@ namespace App;
 
 use App\User;
 use App\VisitComment;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Visit extends Model
+class Visit extends Model implements HasMedia
 {
-    protected $fillable = ['request', 'slug', 'result', 'customer_id', 'image'];
+
+    use InteractsWithMedia;
+
+    protected $fillable = ['request', 'slug', 'result', 'customer_id'];
+
+    public static function last()
+    {
+        return static::all()->last();
+    }
 
     public function customer()
     {

@@ -103,7 +103,7 @@ class VisitController extends Controller
 
 
 
-        $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
+        // $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
         // to visits table
 
         // assign to slug  (slug = name-hospitalname)
@@ -112,8 +112,11 @@ class VisitController extends Controller
 
         $attr['slug'] = $slug;
         $attr['customer_id'] =  $customer->id;
-        $attr['image'] = $img;
-        auth()->user()->visits()->create($attr);
+        // $attr['image'] = $img;
+
+        $visit = auth()->user()->visits()->create($attr);
+        $visit->addMediaFromRequest('img')->toMediaCollection('images');
+
 
         // alert success
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
