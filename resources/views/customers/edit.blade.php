@@ -11,7 +11,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card card-primary">
+                <div class="card card-teal">
                     <div class="card-header">
                         <h3 class="card-title">Edit Customer {{ $customer->name }}</h3>
                     </div>
@@ -20,7 +20,7 @@
                     <form role="form" method="post" action="{{ route('customers.update', $customer->slug) }}" novalidate>
                         @method('patch')
                         @csrf
-                        @include('customers.partials.form-control')
+                        @include('customers.partials.edit-form-control')
                     </form>
                 </div>
                 <!-- /.card -->

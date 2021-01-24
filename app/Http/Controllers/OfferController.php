@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Offer;
 use App\Customer;
-use Illuminate\Http\Request;
+use App\Modality;
 
 class OfferController extends Controller
 {
@@ -31,6 +31,8 @@ class OfferController extends Controller
             'offer' => new Offer(),
             'customers' => $customers,
             'attr' => $attr,
+            'modalities' => Modality::orderBy('name', 'asc')->get(),
+            'count' => request('count'),
         ]);
     }
     public function createCust()
@@ -47,7 +49,9 @@ class OfferController extends Controller
         return view('offers.create', [
             'offer' => new Offer(),
             'customers' => $customers,
-            'attr' => $attr
+            'attr' => $attr,
+            'modalities' => Modality::orderBy('name', 'asc')->get(),
+            'count' => request('count'),
         ]);
     }
 }

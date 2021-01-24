@@ -115,9 +115,6 @@ class VisitController extends Controller
             ->usingFileName($imgSlug)
             ->toMediaCollection('images');
 
-
-
-
         // alert success
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
 

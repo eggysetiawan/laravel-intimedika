@@ -63,6 +63,13 @@
                         </li> --}}
                         {{-- </ul>
                 </li> --}}
+                <li class="nav-item">
+                    <a href="{{ route('modalities.index') }}"
+                        class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">
+                        <i class="fas fa-charging-station nav-icon"></i>
+                        <p>Alat Kesehatan</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('customers.index') }}"
@@ -79,13 +86,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('modalities.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">
-                        <i class="fas fa-charging-station nav-icon"></i>
-                        <p>Alat Kesehatan</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="{{ route('offers.index') }}"
                         class="nav-link {{ request()->segment(1) == 'offers' ? ' active' : '' }}">

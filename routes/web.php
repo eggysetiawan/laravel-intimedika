@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 
     //hospitals
     Route::get('offers', 'OfferController@index')->name('offers.index');
-    Route::get('offers/create', 'OfferController@create')->name('offers.create');
-    Route::get('offers/create-cust', 'OfferController@createCust')->name('offers.create-cust');
+    Route::post('offers/create', 'OfferController@create')->name('offers.create');
+    Route::post('offers/create-cust', 'OfferController@createCust')->name('offers.create-cust');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
 });

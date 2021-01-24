@@ -6,6 +6,7 @@ use App\Customer;
 use App\Hospital;
 use Illuminate\Support\Str;
 use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\CustomerUpdateRequest;
 
 class CustomerController extends Controller
 {
@@ -79,7 +80,7 @@ class CustomerController extends Controller
         return view('customers.edit', compact('customer', 'hospitals'));
     }
 
-    public function update(CustomerRequest $request, Customer $customer)
+    public function update(CustomerUpdateRequest $request, Customer $customer)
     {
         $attr = $request->all();
         $attr['hospital_id'] = request('hospital');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class CustomerUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class CustomerRequest extends FormRequest
     {
         return [
             'role' => 'required',
-            'email' => 'email|unique:customers,email',
+            'email' => 'email|required|sometimes',
             'name' => 'required|string',
             'mobile' => 'required|numeric',
             'address' => 'string',
@@ -42,11 +42,4 @@ class CustomerRequest extends FormRequest
             'address' => 'Alamat',
         ];
     }
-
-    // public function messages()
-    // {
-    //     [
-    //         'hospital.unique' => 'Rumah Sakit ini sudah pernah dikunjungi oleh sales lain!',
-    //     ];
-    // }
 }

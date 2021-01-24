@@ -5,12 +5,17 @@
             <div class="input-group">
                 <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
                     <option selected disabled>Pilih Rumah Sakit</option>
+                    @if ($customer->hospitals())
+                        <option value="{{ $customer->hospitals->first()->id }}" selected>
+                            {{ $customer->hospitals->first()->name . ' - ' . $customer->hospitals->first()->city }}
+                        </option>
+                    @endif
                     @foreach ($hospitals as $hospital)
                         <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
                     @endforeach
                 </select>
                 <span class="input-group-append">
-                    <a class="btn bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}" title="Rumah Sakit tidak ditemukan? tambahkan disini.">+</a>
+                    <a class="btn bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}">+</a>
                     <a class="btn btn-danger btn-flat fa fa-times-circle" href="{{ route('customers.create-2') }}"
                         title="Hilangkan Rumah Sakit"></a>
                 </span>
@@ -72,9 +77,7 @@
 
     <div class="form-group">
         <label for="address">Alamat</label>
-        <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" rows="5">
-        {{ old('address') ?? $customer->address }}
-        </textarea>
+        <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" rows="5">{{ old('address') ?? $customer->address }}</textarea>
     </div>
 
 
