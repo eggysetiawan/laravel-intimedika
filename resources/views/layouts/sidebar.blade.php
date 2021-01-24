@@ -83,7 +83,7 @@
                     <a href="{{ route('modalities.index') }}"
                         class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">
                         <i class="fas fa-charging-station nav-icon"></i>
-                        <p>Modality</p>
+                        <p>Alat Kesehatan</p>
                     </a>
                 </li>
                 <li class="nav-item">

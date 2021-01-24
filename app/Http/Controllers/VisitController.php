@@ -13,8 +13,8 @@ class VisitController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->level == "top") :
-            $visits =  Visit::with('customer', 'author')
+        if (auth()->user()->level == 'top') :
+            $visits = Visit::with('customer', 'author')
                 ->latest()
                 ->paginate(10);
         else :
@@ -52,24 +52,23 @@ class VisitController extends Controller
         // validate input
         $attr = $request->all();
 
-
-
-
         // assign to slug
         $timestamp = date('Y-m-d-H-i-s');
         $slug = Str::slug(request('request') . ' ' . $timestamp);
         $attr['slug'] = $slug;
 
         // image
-        $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
-        $attr['image'] = $img;
+        // $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
+        // $attr['image'] = $img;
 
         // customer_id
-        $attr['customer_id'] =  request('customer');
+        $attr['customer_id'] = request('customer');
 
         // insert
-        auth()->user()->visits()->create($attr);
-
+        auth()
+            ->user()
+            ->visits()
+            ->create($attr);
 
         // alert success
         session()->flash('success', 'Kunjungan Berhasil di Buat!');
@@ -85,7 +84,6 @@ class VisitController extends Controller
                 ->orderBy('name', 'asc')
                 ->where('name', '!=', '')
                 ->get(),
-
         ]);
     }
 
@@ -102,20 +100,22 @@ class VisitController extends Controller
         $customer->hospitals()->attach(request('hospital'));
 
 
-
-        // $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
-        // to visits table
-
-        // assign to slug  (slug = name-hospitalname)
+        // assign to slug (slug = name-hospitalname)
         $timestamp = date('Y-m-d-H-i-s');
         $slug = Str::slug(request('request') . ' ' . $timestamp);
 
         $attr['slug'] = $slug;
-        $attr['customer_id'] =  $customer->id;
-        // $attr['image'] = $img;
-
+        $attr['customer_id'] = $customer->id;
         $visit = auth()->user()->visits()->create($attr);
-        $visit->addMediaFromRequest('img')->toMediaCollection('images');
+
+        $imgSlug = $slug . '.' . request()->file('img')->extension();
+
+        $visit
+            ->addMediaFromRequest('img')
+            ->usingFileName($imgSlug)
+            ->toMediaCollection('images');
+
+
 
 
         // alert success
@@ -131,12 +131,13 @@ class VisitController extends Controller
 
     public function update(VisitRequest $request, Visit $visit)
     {
-
         $this->authorize('update', $visit);
 
         if (request()->file('img')) :
             Storage::delete($visit->image);
-            $img =  request()->file('img')->store('images/visits');
+            $img = request()
+                ->file('img')
+                ->store('images/visits');
         else :
             $img = $visit->image;
         endif;
@@ -150,9 +151,6 @@ class VisitController extends Controller
 
         return redirect('visits');
     }
-
-
-
 
     public function destroy(Visit $visit)
     {

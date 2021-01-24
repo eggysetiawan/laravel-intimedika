@@ -27,10 +27,10 @@ class VisitRequest extends FormRequest
             'result' => 'required',
             'request' => 'required',
             'name' => 'sometimes|required',
-            'mobile' => 'sometimes|required',
+            'mobile' => 'sometimes|required|numeric',
             'role' => 'sometimes|required',
             'email' => 'sometimes|email|unique:customers,email',
-            // 'hospital' => 'unique:customers,hospital_id',
+            'hospital' => 'required',
             'img' => 'image|mimes:png,jpg,jpeg,svg|max:10240',
         ];
     }

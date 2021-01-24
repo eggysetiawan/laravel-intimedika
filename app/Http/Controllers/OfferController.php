@@ -20,7 +20,6 @@ class OfferController extends Controller
     public function create()
     {
         $customers = Customer::whereHas('hospitals')
-            ->select(['id', 'name'])
             ->orderBy('name', 'asc')
             ->get();
         $attr = [
@@ -31,7 +30,7 @@ class OfferController extends Controller
         return view('offers.create', [
             'offer' => new Offer(),
             'customers' => $customers,
-            'attr' => $attr
+            'attr' => $attr,
         ]);
     }
     public function createCust()
@@ -43,7 +42,7 @@ class OfferController extends Controller
         $attr = [
             'routes' => 'offers.create',
             'icon' => 'PT',
-            'color' =>  'bg-indigo'
+            'color' =>  'bg-indigo',
         ];
         return view('offers.create', [
             'offer' => new Offer(),
