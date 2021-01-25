@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50537
 File Encoding         : 65001
 
-Date: 2021-01-21 16:45:58
+Date: 2021-01-25 15:59:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,21 +28,20 @@ CREATE TABLE `customers` (
   `role` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` longtext COLLATE utf8mb4_unicode_ci,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `customers_email_unique` (`email`),
   KEY `customers_user_id_foreign` (`user_id`),
   CONSTRAINT `customers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES ('1', '14', 'rahmat-setiawan-programmer', 'Rahmat Setiawan', '+6281290085281', 'Programmer', 'admin@intimedika.co', null, '2021-01-21 15:44:17', '2021-01-21 15:44:17');
-INSERT INTO `customers` VALUES ('2', '14', 'dimas-halim-hartanto-programmer', 'Dimas Halim Hartanto', '5235235', 'Programmer', 'rafli@intimedika.co', null, '2021-01-21 16:13:03', '2021-01-21 16:13:03');
-INSERT INTO `customers` VALUES ('3', '14', 'pt-mutiara-direktur', 'PT Mutiara', '3325235', 'Direktur', 'noemail@mail.com', null, '2021-01-21 16:38:42', '2021-01-21 16:38:42');
-INSERT INTO `customers` VALUES ('4', '14', 'sugeng-dokter', 'Sugeng', '5235235', 'Dokter', 'sugeng@mail.com', null, '2021-01-21 16:39:52', '2021-01-21 16:39:52');
+INSERT INTO `customers` VALUES ('30', '14', 'rahmat-setiawan-programmer', 'Rahmat Setiawan', '+6281290085281', 'Programmer', 'admin@intimedika.co', null, null, '2021-01-25 11:49:11', '2021-01-25 11:49:11');
+INSERT INTO `customers` VALUES ('31', '14', 'rahmat-setiawan-dokter', 'Rahmat Setiawan', '+6281290085281', 'Dokter', 'admi223n@intimedika.co', null, null, '2021-01-25 14:54:29', '2021-01-25 14:54:29');
 
 -- ----------------------------
 -- Table structure for customer_hospital
@@ -57,13 +56,12 @@ CREATE TABLE `customer_hospital` (
   KEY `customer_hospital_hospital_id_foreign` (`hospital_id`),
   CONSTRAINT `customer_hospital_hospital_id_foreign` FOREIGN KEY (`hospital_id`) REFERENCES `hospitals` (`id`),
   CONSTRAINT `customer_hospital_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of customer_hospital
 -- ----------------------------
-INSERT INTO `customer_hospital` VALUES ('1', '2', '6950');
-INSERT INTO `customer_hospital` VALUES ('2', '4', '6948');
+INSERT INTO `customer_hospital` VALUES ('1', '31', '6958');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -3000,6 +2998,65 @@ INSERT INTO `hospitals` VALUES ('6968', 'Tgk Chik Ditiro Hospital', 'Tgk-Chik-Di
 INSERT INTO `hospitals` VALUES ('6969', 'RSUD Provinsi NTB', 'RSUD-Provinsi-NTB', null, null, '(0370) 7502424', null, 'Jl. Prabu Rangkasari, Dasan Cermen, Kec. Sandubaya, Kota Mataram, Nusa Tenggara Bar. 84371', 'Mataram', null, null, null, null, '2021-01-09 14:08:58', '2021-01-09 14:08:58');
 
 -- ----------------------------
+-- Table structure for invoices
+-- ----------------------------
+DROP TABLE IF EXISTS `invoices`;
+CREATE TABLE `invoices` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `offer_id` bigint(20) unsigned NOT NULL,
+  `status` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `invoices_offer_id_foreign` (`offer_id`),
+  CONSTRAINT `invoices_offer_id_foreign` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of invoices
+-- ----------------------------
+INSERT INTO `invoices` VALUES ('5', '6', null, '2020-02-04', '2021-01-25 15:06:08', '2021-01-25 15:06:08', null);
+INSERT INTO `invoices` VALUES ('7', '8', null, '2020-11-25', '2021-01-25 15:14:50', '2021-01-25 15:14:50', null);
+INSERT INTO `invoices` VALUES ('8', '9', null, '2020-09-12', '2021-01-25 15:26:26', '2021-01-25 15:26:26', null);
+INSERT INTO `invoices` VALUES ('9', '10', null, '2020-03-12', '2021-01-25 15:35:45', '2021-01-25 15:35:45', null);
+INSERT INTO `invoices` VALUES ('10', '11', null, '2020-02-12', '2021-01-25 15:43:45', '2021-01-25 15:43:45', null);
+
+-- ----------------------------
+-- Table structure for media
+-- ----------------------------
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE `media` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) unsigned NOT NULL,
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `collection_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mime_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `disk` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `conversions_disk` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` bigint(20) unsigned NOT NULL,
+  `manipulations` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `custom_properties` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `generated_conversions` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `responsive_images` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_column` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `media_uuid_unique` (`uuid`),
+  KEY `media_model_type_model_id_index` (`model_type`,`model_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of media
+-- ----------------------------
+INSERT INTO `media` VALUES ('1', 'App\\Visit', '1', '108742f4-2259-4a78-b5f7-bcec026b4053', 'images', 'dave-pullis-36u1H_RK1Po-unsplash', 'tester-2021-01-25-14-54-29.jpg', 'image/jpeg', 'media', 'media', '1801960', '[]', '[]', '[]', '[]', '1', '2021-01-25 14:54:29', '2021-01-25 14:54:29');
+
+-- ----------------------------
 -- Table structure for migrations
 -- ----------------------------
 DROP TABLE IF EXISTS `migrations`;
@@ -3008,7 +3065,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
@@ -3039,10 +3096,14 @@ INSERT INTO `migrations` VALUES ('45', '2021_01_21_100944_create_modalities_tabl
 INSERT INTO `migrations` VALUES ('46', '2021_01_21_101751_create_visitcomments_table', '12');
 INSERT INTO `migrations` VALUES ('47', '2021_01_21_130509_remove_hospital_id_from_customers_table', '13');
 INSERT INTO `migrations` VALUES ('60', '2021_01_21_131132_create_customers_table', '14');
-INSERT INTO `migrations` VALUES ('79', '2021_01_21_131238_create_visits_table', '15');
-INSERT INTO `migrations` VALUES ('80', '2021_01_21_131418_create_visitcomments_table', '15');
-INSERT INTO `migrations` VALUES ('81', '2021_01_21_144308_create_customer_hospital_table', '15');
-INSERT INTO `migrations` VALUES ('82', '2021_01_21_160441_add_company_to_customers_table', '15');
+INSERT INTO `migrations` VALUES ('113', '2021_01_22_181551_create_medias_table', '15');
+INSERT INTO `migrations` VALUES ('180', '2021_01_21_131238_create_visits_table', '16');
+INSERT INTO `migrations` VALUES ('181', '2021_01_21_131418_create_visitcomments_table', '16');
+INSERT INTO `migrations` VALUES ('182', '2021_01_21_144308_create_customer_hospital_table', '16');
+INSERT INTO `migrations` VALUES ('183', '2021_01_22_150404_create_offers_table', '16');
+INSERT INTO `migrations` VALUES ('184', '2021_01_24_140132_create_media_table', '16');
+INSERT INTO `migrations` VALUES ('187', '2021_01_25_141232_create_invoices_table', '17');
+INSERT INTO `migrations` VALUES ('188', '2021_01_25_141434_create_orders_table', '17');
 
 -- ----------------------------
 -- Table structure for modalities
@@ -3062,7 +3123,7 @@ CREATE TABLE `modalities` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of modalities
@@ -3135,6 +3196,79 @@ INSERT INTO `modalities` VALUES ('65', 'Detector Digital Radiography (wireless) 
 INSERT INTO `modalities` VALUES ('66', 'Computed Radiography (CR) System', 'Computed-Radiography-(CR)-System', 'CR 85-X', 'AGFA', '000000', '', '0', 'modality', 'Non E-Catalogue', '2020-10-09 10:02:08', '2021-01-21 10:34:32');
 INSERT INTO `modalities` VALUES ('67', 'Film Computed Radiology with Printer', 'Film-Computed-Radiology-with-Printer', 'DX-G', 'AGFA', '0', 'Not Available', '0', 'modality', 'Non E-Catalogue', '2020-10-12 08:57:52', '2021-01-21 10:34:32');
 INSERT INTO `modalities` VALUES ('68', 'CT Injection System', 'CT-Injection-System', 'Stellant D Certegra with Pedestal - SCT 321', 'BAYER', '492000000', 'Flow Rate (range &amp; increments)		0.1 to 10 mL/sec in 0.1 mL increments\r\nVolume (range &amp; increments)		1 mL to syringe capacity in 1 mL increments\r\nProgrammable Pressure Limit (psi)		200 mL syringe: 325 psi\r\nReminders		0-300 seconds (5 minutes)\r\nPause		1-900 seconds (15 minutes)\r\nHold		Maximum HOLD time is 20 minutes\r\nSyringes (Volume capacity)		200 mL sterile disposable syringe\r\nMaximum Number of Phases		6\r\nMaximum Number of Protocols		250\r\nCertegra® Workstation :		\r\nInformatics ready platform – enables interconnectivity between		\r\nyour scanner, the MEDRAD® Stellant D Dual Head Injector, PACS,		\r\nRIS, &amp; Speech Recognition Systems (optional license)		\r\n• Snap-on / twist-off syringe design		\r\n• Automatic plunger advance and retract when attaching		\r\nand detaching syringes		\r\n• Automatic filling and priming		\r\n• Multi-phase programming (and patented Hold/Pause feature)		\r\n• Integrated saline test inject		\r\n• Programmable pressure limit	', '1', 'modality', 'Non E-Catalogue', '2020-10-28 14:10:46', '2021-01-21 10:34:32');
+INSERT INTO `modalities` VALUES ('69', 'Alat Ku444', 'alat-ku444', 'Alat Tester', 'Tester', '0', 'tester', '0', 'BHP', 'Non E-Catalogue', '2021-01-22 12:29:23', '2021-01-22 12:29:23');
+
+-- ----------------------------
+-- Table structure for offers
+-- ----------------------------
+DROP TABLE IF EXISTS `offers`;
+CREATE TABLE `offers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `offer_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `budget` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `offer_date` datetime DEFAULT NULL,
+  `price_note` longtext COLLATE utf8mb4_unicode_ci,
+  `warranty_note` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `availability_note` longtext COLLATE utf8mb4_unicode_ci,
+  `payment_note` longtext COLLATE utf8mb4_unicode_ci,
+  `note` longtext COLLATE utf8mb4_unicode_ci,
+  `approve` tinyint(1) DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `approved_at` datetime DEFAULT NULL,
+  `approved_by` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `offers_customer_id_foreign` (`customer_id`),
+  KEY `offers_user_id_foreign` (`user_id`),
+  CONSTRAINT `offers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `offers_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of offers
+-- ----------------------------
+INSERT INTO `offers` VALUES ('6', '31', '14', 'Q-/IPI//intiwid01/II/2020', 'APBN', '2021-01-25 15:06:00', 'teser', 'tester', 'tsetesr', 'tsetset', 'Harga sewaktu-waktu dapat berubah tanpa pemberitahuan..', null, null, null, null, '2021-01-25 15:06:08', '2021-01-25 15:06:08', null);
+INSERT INTO `offers` VALUES ('8', '31', '14', 'Q-/IPI//intiwid01/XI/2020', 'APBN', '2021-01-25 15:14:00', 'tester', 'tsetes', 'testse', 'testse', 'Harga sewaktu-waktu dapat berubah tanpa pemberitahuan..', null, null, null, null, '2021-01-25 15:14:50', '2021-01-25 15:14:50', null);
+INSERT INTO `offers` VALUES ('9', '31', '14', 'Q-12/IPI//intiwid01/IX/2020', 'APBN', '2021-01-25 15:26:00', 'tester', 'tester', 'tester', 'tester', 'Harga sewaktu-waktu dapat berubah tanpa pemberitahuan..', null, null, null, null, '2021-01-25 15:26:26', '2021-01-25 15:26:26', null);
+INSERT INTO `offers` VALUES ('10', '31', '14', 'Q-012/IPI//intiwid01/III/2020', 'APBN', '2021-01-25 15:35:00', 'test', 'estse', 'tsetse', 'tset', 'Harga sewaktu-waktu dapat berubah tanpa pemberitahuan..', null, null, null, null, '2021-01-25 15:35:45', '2021-01-25 15:35:45', null);
+INSERT INTO `offers` VALUES ('11', '31', '14', 'Q-044/IPI//intiwid01/II/2020', 'APBN', '2020-02-12 00:00:00', 'trstesr', 'tsetse', 'tsetset', 'setse', 'Harga sewaktu-waktu dapat berubah tanpa pemberitahuan..', null, null, null, null, '2021-01-25 15:43:45', '2021-01-25 15:43:45', null);
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `invoice_id` bigint(20) unsigned NOT NULL,
+  `modality_id` bigint(20) unsigned NOT NULL,
+  `price` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `references` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders_invoice_id_foreign` (`invoice_id`),
+  KEY `orders_modality_id_foreign` (`modality_id`),
+  CONSTRAINT `orders_modality_id_foreign` FOREIGN KEY (`modality_id`) REFERENCES `modalities` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `orders_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES ('3', '5', '10', '160000', '2', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('4', '5', '11', '150000', '3', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('5', '7', '18', '300000', '2', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('6', '7', '18', '280000', '2', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('7', '8', '41', '600000000', '1', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('8', '8', '10', '150000', '10', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('9', '9', '12', '2', '1', 'E-Catalogue', null, null, null);
+INSERT INTO `orders` VALUES ('10', '10', '10', '634634', '2', 'E-Catalogue', null, null, null);
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -3176,7 +3310,7 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('13', 'Johannes Hendrajaja', 'intimedika01', 'intiwid@intimedika.co', null, '$2y$10$EgS0rZKD0xg./uxBIINNYeJxXQ6vk/kYCFXNle3LYDAbeGJotxv0q', 'mid', '0816854312', null, '2021-01-17 15:14:59', '2021-01-17 15:14:59');
-INSERT INTO `users` VALUES ('14', 'IT Division', 'intiwid01', 'rahmat@intimedika.co', null, '$2y$10$H5j63Nl3dtAzpPvWOC5HVeT8JeGA0OaMd1A0PaTkZN2pvJ92JPlI6', 'top', '081387239119', 'jQN3WVcunMXdZ8dnE032gCqVfhX1uc4bCU4c2rWcyJmOkQjaiLyj2jAzlTXp', '2021-01-17 15:17:54', '2021-01-17 15:17:54');
+INSERT INTO `users` VALUES ('14', 'IT Division', 'intiwid01', 'rahmat@intimedika.co', null, '$2y$10$H5j63Nl3dtAzpPvWOC5HVeT8JeGA0OaMd1A0PaTkZN2pvJ92JPlI6', 'top', '081387239119', 'C2w1BQ8gWpoVvWMDeQDgZoyggBenL1Mf8jDh2hzweQbJJAbNaOMX7BVOfk50', '2021-01-17 15:17:54', '2021-01-17 15:17:54');
 INSERT INTO `users` VALUES ('15', 'Fahmi Fadli', 'fahmi_intimed', 'fahmi@intimedika.co', null, '$2y$10$R9ZrPm.cKF3qYBeW8wFLM.0xuZf1vI5EskkZPr4dEii/JHhi473ci', 'low', '087710579541', null, '2021-01-18 14:44:53', '2021-01-18 14:44:53');
 INSERT INTO `users` VALUES ('16', 'Teten Sutendi', 'teten_intimed', 'teten@intimedika.co', null, '$2y$10$q8lBgDLotjPYqoKPrE9gaeO4m.SB3fUqPHwNDYwzl/gA59eE2b4jS', 'low', '085777097607', null, '2021-01-18 14:45:51', '2021-01-18 14:45:51');
 
@@ -3211,7 +3345,6 @@ CREATE TABLE `visits` (
   `customer_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `slug` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `request` longtext COLLATE utf8mb4_unicode_ci,
   `result` longtext COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -3226,4 +3359,4 @@ CREATE TABLE `visits` (
 -- ----------------------------
 -- Records of visits
 -- ----------------------------
-INSERT INTO `visits` VALUES ('1', '2', '14', 'ini-juga-tester-ciputra-hospital-citraraya', 'images/visits/6jCaHobkOHrjyGyi1wWWYaZ0lyLSUNdC0y1R3qGT.jpeg', 'ini juga tester', 'ini juga tester', '2021-01-21 16:13:03', '2021-01-21 16:13:03');
+INSERT INTO `visits` VALUES ('1', '31', '14', 'tester-2021-01-25-14-54-29', 'tester', 'tester', '2021-01-25 14:54:29', '2021-01-25 14:54:29');
