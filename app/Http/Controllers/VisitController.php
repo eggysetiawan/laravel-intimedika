@@ -57,10 +57,6 @@ class VisitController extends Controller
         $slug = Str::slug(request('request') . ' ' . $timestamp);
         $attr['slug'] = $slug;
 
-        // image
-        // $img = request()->file('img') ? request()->file('img')->store('images/visits') : null;
-        // $attr['image'] = $img;
-
         // customer_id
         $attr['customer_id'] = request('customer');
 

@@ -9,11 +9,16 @@ class Offer extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['customer_id', 'user_id', 'offer_no', 'budget', 'reference', 'offer_date', 'price_note', 'warranty_note', 'availability_note', 'payment_note', 'note', 'approve', 'approve_at', 'approved_by'];
+    protected $fillable = ['customer_id',  'offer_no', 'budget', 'reference', 'offer_date', 'price_note',  'warranty_note', 'availability_note', 'payment_note', 'note', 'approve', 'approve_at', 'approved_by', 'offer_date'];
 
-    public function orders()
+    public function bulan($bulan)
     {
-        return $this->hasMany(Order::class);
+        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
+        $bln = $array_bln[date('n')];
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 
     public function customer()
@@ -23,6 +28,6 @@ class Offer extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

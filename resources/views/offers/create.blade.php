@@ -3,7 +3,7 @@
 
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Daftar Customer</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Daftar Penawaran</a></li>
     <li class="breadcrumb-item">Tambah</li>
 @endsection
 
@@ -19,7 +19,7 @@
                     <!-- /.card-header -->
                     <!-- form start -->
 
-                    <form role="form" method="post" action="{{ route('offers.store') }}" novalidate>
+                    <form method="POST" action="{{ route('offers.store') }}" novalidate>
                         @csrf
                         @include('offers.partials.form-control', ['submit' => 'Create'])
                     </form>
@@ -28,4 +28,35 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(function() {
+
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd-mm-yyyy', {
+                'placeholder': 'dd-mm-yyyy'
+            })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', {
+                'placeholder': 'mm/dd/yyyy'
+            })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+
+
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+
+
+        })
+
+    </script>
 @endsection

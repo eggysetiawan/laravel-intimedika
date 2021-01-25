@@ -38,6 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function gravatar($size = 150)
     {
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=mp&s=" . $size;

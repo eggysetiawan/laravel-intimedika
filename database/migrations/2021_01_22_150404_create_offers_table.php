@@ -17,9 +17,8 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('user_id')->constrained('users');
-            $table->integer('offer_no');
+            $table->string('offer_no');
             $table->string('budget', 10);
-            $table->enum('reference', ['E-Catalogue', 'Non E-Catalogue']);
             $table->dateTime('offer_date')->nullable();
             $table->longText('price_note')->nullable();
             $table->string('warranty_note', 50)->nullable();

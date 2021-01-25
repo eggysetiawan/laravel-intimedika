@@ -5,14 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Order extends Model
+class Invoice extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['invoice_id', 'modality_id', 'quantity', 'status', 'price'];
+    protected $fillable = ['offer_id', 'status', 'date'];
 
     public function offer()
     {
         return $this->belongsTo(Offer::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

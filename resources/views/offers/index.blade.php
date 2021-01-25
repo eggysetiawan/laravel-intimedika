@@ -10,10 +10,10 @@
             <div class="btn-group">
                 <button type="button" class="btn bg-maroon btn-sm" data-toggle="modal" data-target="#modal-sm">
                     Penawaran RS
-                  </button>
+                </button>
                 <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-sm2">
                     Penawaran PT
-                  </button>
+                </button>
             </div>
         </div>
     </div>
@@ -35,12 +35,16 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
+
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
                                 <th>No.</th>
-
+                                <th>No. Penawaran</th>
+                                <th>Customer</th>
+                                <th>Dana</th>
+                                <th>Sales</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,11 +53,13 @@
                             <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-
+                                    <td>{{ $offer->offer_no }}</td>
+                                    <td>{{ $offer->customer->name }}</td>
+                                    <td>{{ $offer->budget }}</td>
+                                    <td>{{ $offer->author->name }}</td>
 
                                     <td>
-                                        {{-- <a href="{{ route('offers.edit', $offer->slug) }}"
-                                            class="badge bg-gradient-light px-1">edit</a> --}}
+                                        <a href="{{ route('offers.index') }}" class="badge bg-gradient-light px-1">edit</a>
                                     </td>
 
                                 </tr>
@@ -61,7 +67,7 @@
                         @empty
                             <tbody>
                                 <tr>
-                                    <td cols="6">Tidak ada data.</td>
+                                    <td colspan="2">Tidak ada data.</td>
                                 </tr>
                             </tbody>
                         @endforelse
@@ -84,36 +90,35 @@
 
     <div class="modal fade" id="modal-sm">
         <div class="modal-dialog modal-sm">
-            <form action="{{ route('offers.create') }}" method="POST">
-                @csrf
-          <div class="modal-content">
-            <div class="modal-header bg-gradient-teal">
-              <h4 class="modal-title">Buat Penawaran</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-            <div class="form-group">
-                <label for="count">Masukan Jumlah Alat</label>
-                <select name="count" id="count" class="form-control">
-                    @for($i = 1; $i <= 10; $i++)
-                        <option value="{{ $i }}">{{ $i }} Alat</option>
-                    @endfor
-                </select>
-            </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn bg-teal">Submit</button>
-            </div>
+            <form action="{{ route('offers.create') }}" method="GET">
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-teal">
+                        <h4 class="modal-title">Buat Penawaran</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="count">Masukan Jumlah Alat</label>
+                            <select name="count" id="count" class="form-control">
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{ $i }}">{{ $i }} Alat</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-teal">Submit</button>
+                    </div>
 
-        </div>
-    </form>
-          <!-- /.modal-content -->
+                </div>
+            </form>
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
+    </div>
     </div>
 
     <div class="modal fade" id="modal-sm2">
@@ -121,34 +126,32 @@
             <form action="{{ route('offers.create-cust') }}" method="POST">
                 @csrf
 
-          <div class="modal-content">
-            <div class="modal-header bg-gradient-teal">
-              <h4 class="modal-title">Buat Penawaran</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-            <div class="form-group">
-                <label for="count">Masukan Jumlah Alat</label>
-                <select name="count" id="count" class="form-control">
-                    @for($i = 1; $i <= 10; $i++)
-                        <option value="{{ $i }}">{{ $i }} Alat</option>
-                    @endfor
-                </select>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn bg-teal">Submit</button>
-        </div>
-    </div>
-</form>
-          <!-- /.modal-content -->
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-teal">
+                        <h4 class="modal-title">Buat Penawaran</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="count">Masukan Jumlah Alat</label>
+                            <select name="count" id="count" class="form-control">
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{ $i }}">{{ $i }} Alat</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-teal">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
+    </div>
     </div>
 @endsection
-
-
