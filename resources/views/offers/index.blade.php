@@ -52,8 +52,9 @@
 
                             <tbody>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $offer->offer_no }}</td>
+                                    <td>{{ $loop->count }}</td>
+                                    <td><a href="{{ route('invoices.order', $offer->offer_no) }}">{{ $offer->offer_no }}</a>
+                                    </td>
                                     <td>{{ $offer->customer->name }}</td>
                                     <td>{{ $offer->budget }}</td>
                                     <td>{{ $offer->author->name }}</td>

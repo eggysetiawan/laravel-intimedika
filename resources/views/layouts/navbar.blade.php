@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand  navbar-light navbar-teal text-sm">
+<nav class="main-header navbar navbar-expand  navbar-dark navbar-danger text-sm">
 
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -25,8 +25,11 @@
         </div>
     </form>
 
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        {{-- <input type="checkbox" name="my-checkbox" id="dark-mode"
+            onchange="myFunction()" checked data-bootstrap-switch> --}}
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">

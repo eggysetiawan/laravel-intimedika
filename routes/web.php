@@ -49,4 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/create-cust', 'OfferController@createCust')->name('offers.create-cust');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
+
+    // invoices
+    Route::get('invoices/{offer:offer_no}', 'InvoiceController@show')->name('invoices.order');
 });

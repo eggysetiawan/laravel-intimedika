@@ -16,6 +16,10 @@
 <!-- date-range-picker -->
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 
+{{-- Bootstrap Switch --}}
+
+<script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+
 
 <!-- DataTables -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -60,6 +64,15 @@
 
 @endif
 
+{{-- dark mode --}}
+{{-- <script>
+    function myFunction() {
+        var element = document.getElementById("body");
+        element.classList.toggle("dark-mode");
+    }
+
+</script> --}}
+
 <script>
     $(function() {
         $("#example1").DataTable({
@@ -74,6 +87,10 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
+        });
+
+        $("input[data-bootstrap-switch]").each(function() {
+            $(this).bootstrapSwitch('state', $(this).prop('checked', false));
         });
     });
 

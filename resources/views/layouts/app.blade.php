@@ -19,8 +19,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('layouts.head')
 </head>
 
+{{--  --}}
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-teal">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed accent-danger" id="body">
     <div class="wrapper">
 
         <!-- Navbar -->
