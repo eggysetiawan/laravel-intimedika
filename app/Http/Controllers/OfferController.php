@@ -30,13 +30,20 @@ class OfferController extends Controller
             'icon' => 'RS',
             'color' => 'bg-maroon',
         ];
-        return view('offers.create', [
-            'offer' => new Offer(),
-            'customers' => $customers,
-            'attr' => $attr,
-            'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
-            'count' => request('count'),
-        ]);
+        if (!request('count')) :
+            $offers = Offer::with('customer', 'author')
+                ->latest()
+                ->paginate(5);
+            return view('offers.index', compact('offers'));
+        else :
+            return view('offers.create', [
+                'offer' => new Offer(),
+                'customers' => $customers,
+                'attr' => $attr,
+                'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
+                'count' => request('count'),
+            ]);
+        endif;
     }
     public function createCust()
     {
@@ -49,13 +56,21 @@ class OfferController extends Controller
             'icon' => 'PT',
             'color' =>  'bg-indigo',
         ];
-        return view('offers.create', [
-            'offer' => new Offer(),
-            'customers' => $customers,
-            'attr' => $attr,
-            'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
-            'count' => request('count'),
-        ]);
+
+        if (!request('count')) :
+            $offers = Offer::with('customer', 'author')
+                ->latest()
+                ->paginate(5);
+            return view('offers.index', compact('offers'));
+        else :
+            return view('offers.create', [
+                'offer' => new Offer(),
+                'customers' => $customers,
+                'attr' => $attr,
+                'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
+                'count' => request('count'),
+            ]);
+        endif;
     }
 
     public function store(OfferRequest $request)
@@ -64,16 +79,16 @@ class OfferController extends Controller
 
         // convert month romawi
         $attr = $request->all();
-
-
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
 
         // offer_no
         $queue = str_pad($request->queue, 3, '0', STR_PAD_LEFT);
-        $username = auth()->user()->username;
+        // acronym
+        $initial = auth()->user()->initial;
         $bln = $array_bln[date('n', strtotime($request->date))];
         $tahun = date('Y', strtotime($request->date));
-        $attr['offer_no'] = 'Q-' . $queue . '/IPI//' . $username . '/' . $bln . '/' . $tahun;
+        $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
+        $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
 
 
         $date = date('Y-m-d', strtotime($request->date));
@@ -87,7 +102,6 @@ class OfferController extends Controller
             'date' => $date,
         ]);
 
-
         foreach ($request->modality as $i => $v) {
             // to table orders
             Order::insert([
@@ -99,6 +113,8 @@ class OfferController extends Controller
             ]);
             // alert success
         }
+
+
         session()->flash('success', 'Penawaran berhasil dibuat!');
         return redirect('offers');
     }

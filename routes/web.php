@@ -51,5 +51,5 @@ Route::middleware('auth')->group(function () {
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
 
     // invoices
-    Route::get('invoices/{offer:offer_no}', 'InvoiceController@show')->name('invoices.order');
+    Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
 });

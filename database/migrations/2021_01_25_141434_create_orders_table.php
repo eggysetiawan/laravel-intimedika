@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('invoice_id')->constrained('invoices')->cascadeOnDelete();
             $table->foreignId('modality_id')->constrained('modalities')->cascadeOnDelete();
-            $table->string('price');
+            $table->double('price');
             $table->integer('quantity');
             $table->string('references', 20);
 

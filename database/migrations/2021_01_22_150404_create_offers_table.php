@@ -18,6 +18,7 @@ class CreateOffersTable extends Migration
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('user_id')->constrained('users');
             $table->string('offer_no');
+            $table->string('slug');
             $table->string('budget', 10);
             $table->dateTime('offer_date')->nullable();
             $table->longText('price_note')->nullable();
@@ -26,7 +27,6 @@ class CreateOffersTable extends Migration
             $table->longText('payment_note')->nullable();
             $table->longText('note')->nullable();
             $table->boolean('approve')->nullable();
-            $table->string('image')->nullable();
             $table->dateTime('approved_at')->nullable();
             $table->dateTime('approved_by')->nullable();
             $table->timestamps();

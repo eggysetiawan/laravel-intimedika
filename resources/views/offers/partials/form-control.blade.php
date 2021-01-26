@@ -89,11 +89,16 @@
             {{-- references --}}
             <div class="d-flex row">
                 <div class="col-md-12">
-                    <label for="references">Referensi Penawaran #{{ $i }}</label>
+                    <label for="references{{ $i }}">Referensi Penawaran #{{ $i }}</label>
                     <select name="references[]" id="references" class="form-control">
                         <option value="E-Catalogue">E-Catalogue</option>
                         <option value="Non E-Catalogue">Non E-Catalogue</option>
                     </select>
+                    @error('references.' . $i)
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
             </div>
 
@@ -103,7 +108,7 @@
                 <div class="col-sm-10">
 
                     <select name="modality[]" id="modality{{ $i }}"
-                        class="form-control select2 @error('modality') is-invalid @enderror">
+                        class="form-control select2 @error('modality.' . $i) is-invalid @enderror">
                         <option selected disabled>Pilih Alat</option>
                         @foreach ($modalities as $modality)
                             <option value="{{ $modality->id }}">
@@ -111,7 +116,7 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('modality')
+                    @error('modality.' . $i)
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
                         </span>
@@ -119,9 +124,10 @@
                 </div>
                 {{-- quantity --}}
                 <div class="col-sm-2">
-                    <input type="number" name="quantity[]" class="form-control @error('quantity') is-invalid @enderror"
-                        id="quantity" placeholder="Qty" autocomplete="off" value="{{ old('quantity') }}">
-                    @error('quantity')
+                    <input type="number" name="quantity[]"
+                        class="form-control @error('quantity.' . $i) is-invalid @enderror" id="quantity"
+                        placeholder="Qty" autocomplete="off" value="{{ old('quantity.' . $i) }}" required>
+                    @error('quantity.' . $i)
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
                         </span>
@@ -131,11 +137,11 @@
 
             <div class="d-flex row">
                 <div class="col-md-12">
-                    <label for="price">Harga Penawaran #{{ $i }}</label>
+                    <label for="price{{ $i }}">Harga Penawaran #{{ $i }}</label>
                     <input type="text" name="price[]" id="price"
-                        class="form-control @error('price') is-invalid @enderror" placeholder="cth:1000"
-                        value="{{ old('quantity') }}">
-                    @error('price')
+                        class="form-control @error('price.' . $i) is-invalid @enderror" placeholder="cth:1000"
+                        value="{{ old('price.' . $i) }}" required>
+                    @error('price.' . $i)
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
                         </span>

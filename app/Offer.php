@@ -9,13 +9,9 @@ class Offer extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['customer_id',  'offer_no', 'budget', 'reference', 'offer_date', 'price_note',  'warranty_note', 'availability_note', 'payment_note', 'note', 'approve', 'approve_at', 'approved_by', 'offer_date'];
+    protected $fillable = ['customer_id',  'offer_no', 'budget', 'reference', 'offer_date', 'price_note',  'warranty_note', 'availability_note', 'payment_note', 'note', 'approve', 'approve_at', 'approved_by', 'offer_date', 'slug'];
 
-    public function bulan($bulan)
-    {
-        $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-        $bln = $array_bln[date('n')];
-    }
+
     public function invoices()
     {
         return $this->hasMany(Invoice::class);

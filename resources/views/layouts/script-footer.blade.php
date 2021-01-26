@@ -36,7 +36,7 @@
                 fixed: true,
                 title: 'Berhasil!',
                 autohide: true,
-                delay: 3500,
+                delay: 5500,
                 // subtitle: 'Subtitle',
                 body: "{{ session()->get('success') }}"
             }).delay(200).slideUp(300).fadeIn(400);

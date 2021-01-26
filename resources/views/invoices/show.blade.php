@@ -1,166 +1,205 @@
-<div class="row">
-    <div class="col-12">
-        <div class="callout callout-info">
-            <h5><i class="fas fa-info"></i> Note:</h5>
-            This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-        </div>
+@extends('layouts.app', ['title'=> $offer->slug])
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Penawaran</a></li>
+    <li class="breadcrumb-item">{{ Str::limit($offer->slug, 15) }}</li>
+@endsection
+@section('content')
 
+    <div class="d-flex justify-content-lg-center">
+        <div class="col-8">
+            <div class="wraps">
+                <div class="card card-widget">
+                    <div class="card-header">
+                        <img style="width: 100%;" src="{{ asset('image/kopsurat2.png') }}" alt="">
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr>
 
-        <!-- Main content -->
-        <div class="invoice p-3 mb-3">
-            <!-- title row -->
-            <div class="row">
-                <div class="col-12">
-                    <h4>
-                        <i class="fas fa-globe"></i> AdminLTE, Inc.
-                        <small class="float-right">Date: 2/10/2014</small>
-                    </h4>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- info row -->
-            <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
-                    From
-                    <address>
-                        <strong>Admin, Inc.</strong><br>
-                        795 Folsom Ave, Suite 600<br>
-                        San Francisco, CA 94107<br>
-                        Phone: (804) 123-5432<br>
-                        Email: info@almasaeedstudio.com
-                    </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                    To
-                    <address>
-                        <strong>John Doe</strong><br>
-                        795 Folsom Ave, Suite 600<br>
-                        San Francisco, CA 94107<br>
-                        Phone: (555) 539-1037<br>
-                        Email: john.doe@example.com
-                    </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                    <b>Invoice #007612</b><br>
-                    <br>
-                    <b>Order ID:</b> 4F3S8J<br>
-                    <b>Payment Due:</b> 2/22/2014<br>
-                    <b>Account:</b> 968-34567
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+                                <td style="font-size: 14px">No</td>
+                                <?php for ($i = 1; $i <= 9; $i++): ?> <td
+                                    style="font-size: 14px">
+                                    &nbsp;</td>
+                                    <?php endfor; ?>
+                                    <td style="font-size: 14px">:</td>
+                                    <td style="font-size: 14px">{{ $offer->offer_no }}</td>
 
-            <!-- Table row -->
-            <div class="row">
-                <div class="col-12 table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Qty</th>
-                                <th>Product</th>
-                                <th>Serial #</th>
-                                <th>Description</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Call of Duty</td>
-                                <td>455-981-221</td>
-                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                <td>$64.50</td>
                             </tr>
                             <tr>
-                                <td>1</td>
-                                <td>Need for Speed IV</td>
-                                <td>247-925-726</td>
-                                <td>Wes Anderson umami biodiesel</td>
-                                <td>$50.00</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Monsters DVD</td>
-                                <td>735-845-642</td>
-                                <td>Terry Richardson helvetica tousled street art master</td>
-                                <td>$10.70</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Grown Ups Blue Ray</td>
-                                <td>422-568-642</td>
-                                <td>Tousled lomo letterpress</td>
-                                <td>$25.99</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+                                <td style="font-size: 14px">Perihal</td>
+                                <?php for ($i = 1; $i <= 9; $i++): ?> <td
+                                    style="font-size: 14px">
+                                    &nbsp;</td>
+                                    <?php endfor; ?>
+                                    <td style="font-size: 14px">:</td>
+                                    <td style="font-size: 14px">Penawaran</td>
 
-            <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-                    <p class="lead">Payment Methods:</p>
-                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango
-                        imeem
-                        plugg
-                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                    </p>
-                </div>
-                <!-- /.col -->
-                <div class="col-6">
-                    <p class="lead">Amount Due 2/22/2014</p>
-
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th style="width:50%">Subtotal:</th>
-                                <td>$250.30</td>
-                            </tr>
-                            <tr>
-                                <th>Tax (9.3%)</th>
-                                <td>$10.34</td>
-                            </tr>
-                            <tr>
-                                <th>Shipping:</th>
-                                <td>$5.80</td>
-                            </tr>
-                            <tr>
-                                <th>Total:</th>
-                                <td>$265.24</td>
                             </tr>
                         </table>
+
+                        <br>
+                        <table>
+                            <tr>
+                                <td style="font-size: 14px">Kepada Yth,</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;font-size: 14px">
+                                    {{ $offer->customer->hospitals->first()->name }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px">{{ $offer->customer->address }}</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;font-size: 14px">Up. Bpk/Ibu {{ $offer->customer->name }}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px">{{ $offer->customer->role }}</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px">Dengan hormat,</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 14px">ket_form</td>
+                            </tr>
+                        </table>
+                        <div class="fill">
+                            <div class="detail-table">
+                                <table class="table table-superadmin table-responsive p-0" border="1"
+                                    style="border-collapse: collapse;width:100%">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>
+                                                <center>Nama Alat</center>
+                                            </th>
+                                            <th>
+                                                <center>Qty</center>
+                                            </th>
+                                            <th>
+                                                <center>Harga Satuan</center>
+                                            </th>
+                                            <th>
+                                                <center> Harga Total</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    @foreach ($offer->invoices->first()->orders as $order)
+                                        <tr>
+                                            <td>
+                                                <center>{{ $loop->iteration }}</center>
+                                            </td>
+                                            <td>
+                                                <div style=" font-weight: bold;" class="mt-0">{{ $order->modality->name }}
+                                                </div>
+                                                <br>
+                                                Merk : {{ $order->modality->brand }}<br>
+                                                Model : {{ $order->modality->model }}
+                                                <div style="text-align: justify;text-justify:auto;justify-content">
+                                                    <pre>{{ $order->modality->spec }}</pre><br>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <center>{{ $order->quantity }}</center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    @currency($order->price)
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    @currency($order->quantity * $order->price)<br>
+                                                    images</center>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+
+                                </table>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td style="font-size: 14px">Kondisi Penawaran</td>
+                                    <td style="font-size: 14px">:</td>
+                                </tr>
+                            </table>
+                            <table>
+                                @if ($offer->price_note)
+                                    <tr>
+                                        <td style="font-size: 14px">Harga</td>
+                                        <td style="font-size: 14px">:</td>
+                                        <td style="font-size: 14px">{{ $offer->price_note }}</td>
+                                    </tr>
+                                @endif
+                                @if ($offer->availability_note)
+
+                                    <tr>
+                                        <td style="font-size: 14px">Penyerahan</td>
+                                        <td style="font-size: 14px">:</td>
+                                        <td style="font-size: 14px">{{ $offer->availability_note }}</td>
+                                    </tr>
+                                @endif
+
+                                @if ($offer->payment)
+
+                                    <tr>
+                                        <td style="font-size: 14px">Pembayaran/Penawaran</td>
+                                        <td style="font-size: 14px">:</td>
+                                        <td style="font-size: 14px">{{ $offer->payment }}</td>
+                                    </tr>
+                                @endif
+                                @if ($offer->note)
+                                    <tr>
+                                        <td style="font-size: 14px">Keterangan</td>
+                                        <td style="font-size: 14px">:</td>
+                                        <td style="font-size: 14px">{{ $offer->note }}</td>
+                                    </tr>
+                                @endif
+
+                            </table>
+                            <p style="font-size: 14px"> Demikian penawaran ini kami sampaikan, kami tunggu kabar baik
+                                selanjutnya, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</p>
+
+                            <div style="width: 100%;">
+                                <div style="float: left;">
+                                    Hormat kami,<br>
+                                    <b><label style="font-weight: bold;">PT. Intimedika Puspa Indah</label></b>
+                                    <div style="height:130px;">
+
+                                    </div>
+                                    <p style="text-decoration: underline; margin-bottom: 0px; font-weight: bold;">
+                                        {{ $offer->author->name }}
+                                    </p>
+                                    <label style="text-dec ;">Marketing</label>
+                                </div>
+                                <div style="float: right; padding-right: 3px;">
+                                    Mengetahui,<br>
+
+                                    <div style="height:130px; padding: 20px 0px 0px 0px; margin-bottom: 22px;">
+                                        qr-code
+                                    </div>
+                                    <p style="text-decoration: underline; margin-bottom: 0px; font-weight: bold;">
+                                        Johannes Hendrajaja</p>
+                                    <label style="text-dec ;">Direktur</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        print-here
                     </div>
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
 
-            <!-- this row will not appear when printing -->
-            <div class="row no-print">
-                <div class="col-12">
-                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i
-                            class="fas fa-print"></i> Print</a>
-                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                        Payment
-                    </button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                        <i class="fas fa-download"></i> Generate PDF
-                    </button>
-                </div>
+
+
             </div>
-        </div>
-        <!-- /.invoice -->
-    </div><!-- /.col -->
-</div>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+@endsection

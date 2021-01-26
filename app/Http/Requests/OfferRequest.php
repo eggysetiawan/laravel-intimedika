@@ -26,16 +26,16 @@ class OfferRequest extends FormRequest
         return [
             'customer' => 'integer|required',
             'budget' => 'required',
-            'references' => 'required',
-            'modality' => 'required',
-            'quantity' => 'required',
-            'price' => 'nullable',
             'price_note' => 'nullable',
             'warranty_note' => 'nullable',
             'availability_note' => 'nullable',
             'note' => 'nullable',
             'date' => 'date',
             'queue' => 'required',
+            'modality.*' => 'required',
+            'references.*' => 'required',
+            'quantity.*' => 'required|numeric|min:0',
+            'price.*' => 'required|numeric|min:0',
         ];
     }
 
