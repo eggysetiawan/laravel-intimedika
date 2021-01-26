@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Offer;
-use App\Order;
-use App\Invoice;
-use App\Customer;
+use App\{Offer, Order, Invoice, Customer};
 use App\Modality;
 use App\Http\Requests\OfferRequest;
+use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $offers = Offer::with('customer', 'author')
-            ->latest()
-            ->paginate(5);
+            ->get();
 
-        return view('offers.index', compact('offers'));
+        if ($request->ajax()) {
+            return datatables()->of($offers)->make(true);
+        }
+
+        return view('offers.index');
     }
 
     public function create()

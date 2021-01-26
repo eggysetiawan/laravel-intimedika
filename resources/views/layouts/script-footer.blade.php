@@ -27,6 +27,15 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
 @if (session()->has('success'))
     <script>
         $(document).ready(function() {
@@ -74,24 +83,8 @@
 </script> --}}
 
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-        });
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked', false));
-        });
+    $("input[data-bootstrap-switch]").each(function() {
+        $(this).bootstrapSwitch('state', $(this).prop('checked', false));
     });
 
 </script>
@@ -99,6 +92,38 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
+    });
+
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#offers').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('offers.index') }}",
+                type: "GET"
+            },
+            columns: [{
+                    data: 'offer_no',
+                    name: 'offer_no'
+                },
+                {
+                    data: 'customer.name',
+                    name: 'customer.name'
+                },
+                {
+                    data: 'budget',
+                    name: 'budget',
+                },
+                {
+                    data: 'author.name',
+                    name: 'author.name'
+                },
+            ]
+        });
     });
 
 </script>

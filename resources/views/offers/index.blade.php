@@ -37,55 +37,30 @@
                 <!-- /.card-header -->
 
                 <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
+                    <table class="table table-hover text-nowrap  table-responsive-sm" id="offers">
                         <thead>
                             <tr>
-                                <th>No.</th>
                                 <th>No. Penawaran</th>
                                 <th>Customer</th>
                                 <th>Dana</th>
                                 <th>Sales</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
-                        @forelse($offers as $offer)
 
-                            <tbody>
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><a href="{{ route('invoices.order', $offer->slug) }}">{{ $offer->offer_no }}</a>
-                                    </td>
-                                    <td>{{ $offer->customer->name }}</td>
-                                    <td>{{ $offer->budget }}</td>
-                                    <td>{{ $offer->author->name }}</td>
-
-                                    <td>
-                                        <a href="{{ route('offers.index') }}" class="badge bg-gradient-light px-1">edit</a>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        @empty
-                            <tbody>
-                                <tr>
-                                    <td colspan="2">Tidak ada data.</td>
-                                </tr>
-                            </tbody>
-                        @endforelse
                     </table>
-                    {{-- agar ditengah = center , kanan = end, kiri = start
-                    --}}
 
 
                 </div>
                 <!-- /.card-body -->
             </div>
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
                 {{ $offers->links() }}
-            </div>
+            </div> --}}
 
             <!-- /.card -->
         </div>
+
+
 
     </div>
 
