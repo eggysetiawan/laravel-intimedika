@@ -19,7 +19,7 @@ class OfferController extends Controller
                 ->of($offers)
                 ->addIndexColumn()
                 ->editColumn('offer_no', function ($item) {
-                    return '<a href="'.route('invoices.order', $item->slug).'">'.$item->offer_no.'</a>';
+                    return '<a href="' . route('invoices.order', $item->slug) . '">' . $item->offer_no . '</a>';
                 })
                 ->rawColumns(['action', 'time_passed', 'offer_no'])
                 ->make(true);
@@ -87,6 +87,15 @@ class OfferController extends Controller
 
         // convert month romawi
         $attr = $request->all();
+
+        $modalities = Modality::select('price')
+            ->whereIn('id', $request->modality)->get();
+
+        foreach ($modalities as $mod) {
+            $min = $mod->price;
+            dd($min);
+        }
+
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
 
         // offer_no
