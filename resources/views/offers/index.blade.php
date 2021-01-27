@@ -23,23 +23,14 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ $offers->name ?? 'Table Penawaran' }}</h3>
-
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.card-header -->
 
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive ">
                     <table class="table table-hover text-nowrap  table-responsive-sm" id="offers">
-                        <thead>
+                    <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>No. Penawaran</th>
                                 <th>Customer</th>
                                 <th>Dana</th>
@@ -130,4 +121,48 @@
         <!-- /.modal-dialog -->
     </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#offers').DataTable({
+                processing: true,
+                serverSide: true,
+                "autoWidth": false,
+                "responsive": true,
+                "info": true,
+                ajax: {
+                    url: "{{ route('offers.index') }}",
+                    type: "GET"
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'offer_no',
+                        name: 'offer_no'
+                    },
+
+                    {
+                        data: 'customer.name',
+                        name: 'customer.name'
+                    },
+                    {
+                        data: 'budget',
+                        name: 'budget',
+                    },
+                    {
+                        data: 'author.name',
+                        name: 'author.name'
+                    },
+                ],
+                order: [
+                    [1, 'asc']
+                ]
+            });
+        });
+
+    </script>
 @endsection

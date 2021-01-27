@@ -95,35 +95,3 @@
     });
 
 </script>
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#offers').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('offers.index') }}",
-                type: "GET"
-            },
-            columns: [{
-                    data: 'offer_no',
-                    name: 'offer_no'
-                },
-                {
-                    data: 'customer.name',
-                    name: 'customer.name'
-                },
-                {
-                    data: 'budget',
-                    name: 'budget',
-                },
-                {
-                    data: 'author.name',
-                    name: 'author.name'
-                },
-            ]
-        });
-    });
-
-</script>

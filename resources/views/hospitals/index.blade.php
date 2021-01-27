@@ -19,20 +19,13 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ $hospitals->name ?? 'Table Rumah Sakit' }}
                     </h3>
+                    {{-- spt nya route tombolnya ada yg typo mas, di action.blade.php --}}
 
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap" style="width: 100%;">
+                <div class="card-body table-responsive">
+                    {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id' => 'hospital-table']) !!}
+                    {{-- <table class="table table-hover text-nowrap" style="width: 100%;" id="hospitals">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -42,43 +35,10 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        @forelse($hospitals as $hospital)
-
-                            <tbody>
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $hospital->name }}</td>
-                                    <td>{{ $hospital->phone }}</td>
-                                    <td>{!! $hospital->address !!}</td>
-
-                                    <td><a href="{{ route('hospitals.edit', $hospital->slug) }}"
-                                            class="btn btn-success btn-sm">Edit</a>
-                                        <form action="{{ route('hospitals.delete', $hospital->slug) }}" class="d-inline"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah anda yakin?')">Delete</button>
-                                        </form>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        @empty
-                            <tbody>
-                                <tr>
-                                    <td cols="6">Tidak ada data.</td>
-                                </tr>
-                            </tbody>
-                        @endforelse
-                    </table>
+                    </table> --}}
                     {{-- agar ditengah = center , kanan = end, kiri = start
                     --}}
-                    <div class="d-flex justify-content-end mr-4">
-                        <div>
-                            {{ $hospitals->links() }}
-                        </div>
-                    </div>
+
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -87,4 +47,43 @@
 
 
     </div>
+@endsection
+
+@section('script')
+{!! $dataTable->scripts() !!}
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
+            $('#hospitals').DataTable({
+                processing: true,
+                serverSide: true,
+                "autoWidth": false,
+                "responsive": true,
+                ajax: {
+                    url: "{{ route('hospitals.index') }}",
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'address',
+                        name: 'address',
+                    },
+                    {
+                        data: 'slug',
+                        "searchable": false,
+                    },
+                ]
+            });
+        });
+
+    </script> --}}
 @endsection

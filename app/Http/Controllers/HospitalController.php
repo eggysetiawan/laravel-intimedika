@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\HospitalDataTable;
 use App\Hospital;
-use App\Http\Requests\HospitalRequest;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\HospitalRequest;
+use Yajra\DataTables\Services\DataTable;
 
 class HospitalController extends Controller
 {
-    public function index()
+
+    public function index(HospitalDataTable $dataTable)
     {
-        $hospitals = Hospital::where('name', '!=', '')->latest()->paginate(10);
-        return view('hospitals.index', compact('hospitals'));
+        return $dataTable->render('hospitals.index');
+        // $hospitals = Hospital::where('name', '!=', '')->latest()->get();
     }
 
     public function create()

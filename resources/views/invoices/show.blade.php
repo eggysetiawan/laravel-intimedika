@@ -71,7 +71,7 @@
                         </table>
                         <div class="fill">
                             <div class="detail-table">
-                                <table class="table table-superadmin table-responsive p-0" border="1"
+                                <table class="table table-superadmin" border="1"
                                     style="border-collapse: collapse;width:100%">
                                     <thead class="thead-dark">
                                         <tr>
@@ -192,14 +192,19 @@
                             </div>
                         </div>
                         <br>
-                        print-here
                     </div>
                 </div>
 
 
 
+
             </div>
         </div><!-- /.col -->
+        <div class="d-flex justify-content-lg-center">
+            <div class="col-md-12">
+                <a class="btn btn-info" href="print">Print</a>
+            </div>
+        </div>
     </div><!-- /.row -->
 
 @endsection

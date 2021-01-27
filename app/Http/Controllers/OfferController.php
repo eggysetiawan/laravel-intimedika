@@ -15,7 +15,14 @@ class OfferController extends Controller
             ->get();
 
         if ($request->ajax()) {
-            return datatables()->of($offers)->make(true);
+            return datatables()
+                ->of($offers)
+                ->addIndexColumn()
+                ->editColumn('offer_no', function ($item) {
+                    return '<a href="'.route('invoices.order', $item->slug).'">'.$item->offer_no.'</a>';
+                })
+                ->rawColumns(['action', 'time_passed', 'offer_no'])
+                ->make(true);
         }
 
         return view('offers.index');
