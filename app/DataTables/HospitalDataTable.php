@@ -5,7 +5,6 @@ namespace App\DataTables;
 use App\Hospital;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Contracts\DataTableHtmlBuilder;
 
 class HospitalDataTable extends DataTable
 {
@@ -42,7 +41,7 @@ class HospitalDataTable extends DataTable
             $from = $this->from;
             $to = $this->to;
         else :
-            $from = $model->select('created_at')->orderBy('id', 'asc')->first()->created_at;
+            $from = $model->select('created_at')->orderBy('created_at', 'asc')->first()->created_at;
             $to = date('Y-m-d H:i:s');
         endif;
 
@@ -64,7 +63,7 @@ class HospitalDataTable extends DataTable
             ->minifiedAjax()
             ->parameters([
                 'dom'          => 'Blfrtip',
-                'buttons'      => ['export', 'print'],
+                'buttons'      => ['export'],
                 'order'   => [[0, 'desc']],
                 'lengthMenu' => [
                     [10, 100, 1000, 5000, 10000],
@@ -102,6 +101,6 @@ class HospitalDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Hospital_' . date('YmdHis');
+        return 'IPI | Daftar Rumah Sakit _' . date('YmdHis');
     }
 }

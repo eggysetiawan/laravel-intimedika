@@ -36,14 +36,12 @@ Route::middleware('auth')->group(function () {
 
     // route hospitals
     Route::get('hospitals', 'HospitalController@index')->name('hospitals.index');
-    Route::get('hospitals-filter', 'HospitalController@filter')->name('hospitals.filter');
     Route::get('hospitals/create', 'HospitalController@create')->name('hospitals.create');
     Route::post('hospitals/store', 'HospitalController@store')->name('hospitals.store');
     Route::get('hospitals/{hospital:slug}/edit', 'HospitalController@edit')->name('hospitals.edit');
     Route::patch('hospitals/{hospital:slug}/edit', 'HospitalController@update')->name('hospitals.update');
     Route::delete('hospitals/{hospital:slug}/delete', 'HospitalController@destroy')->name('hospitals.delete');
 
-    Route::get('search/visits', 'SearchController@visit')->name('search.visits');
 
     //hospitals
     Route::get('offers', 'OfferController@index')->name('offers.index');
@@ -53,4 +51,9 @@ Route::middleware('auth')->group(function () {
 
     // invoices
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
+
+    // search
+    Route::get('search/visits', 'SearchController@visit')->name('search.visits');
+    Route::get('hospitals-filter', 'SearchController@hospital')->name('hospitals.filter');
+    Route::get('offers-filter', 'SearchController@offer')->name('offers.filter');
 });

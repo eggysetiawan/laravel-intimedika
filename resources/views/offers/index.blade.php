@@ -25,7 +25,50 @@
                     <h3 class="card-title">{{ $offers->name ?? 'Table Penawaran' }}</h3>
                 </div>
                 <!-- /.card-header -->
-
+                <div class="d-flex justify-content-end mt-3 mr-3">
+                    <form action="{{ route('offers.filter') }}" method="GET">
+                        <span class="input-group justify-content-lg-end">
+                            <div class="col-md-4">
+                                <label for="from">From</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="search" name="from" id="datemask"
+                                        class="form-control @error('date') is-invalid @enderror"
+                                        data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
+                                    @error('date')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="d-flex justify-content-start">
+                                    <label for="to">To</label>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="search" name="to" id="datemask"
+                                        class="form-control @error('date') is-invalid @enderror"
+                                        data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
+                                    @if (request()->segment(1) == 'hospitals')
+                                        <span class="input-group-append">
+                                            <button type="submit" class="btn btn-danger btn-sm">Filter</button>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </span>
+                    </form>
+                    @if (request()->segment(1) == 'hospitals-filter')
+                        <a href="{{ route('hospitals.index') }}" class="btn btn-warning btn-sm"
+                            style="margin-top:32px;">Reset</a>
+                    @endif
+                </div>
                 <div class="card-body table-responsive ">
                     {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id'
                     => 'offer-table']) !!}

@@ -15,18 +15,18 @@ class CreateHospitalsTable extends Migration
     {
         Schema::create('hospitals', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('code');
-            $table->string('mobile');
-            $table->string('phone');
-            $table->string('email')->unique();
-            $table->text('address');
-            $table->string('city');
-            $table->string('type');
-            $table->string('class');
-            $table->string('director');
-            $table->string('owner');
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('code')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('type')->nullable();
+            $table->string('class')->nullable();
+            $table->string('director')->nullable();
+            $table->string('owner')->nullable();
             $table->timestamps();
         });
     }

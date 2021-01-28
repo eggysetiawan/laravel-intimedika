@@ -22,13 +22,12 @@
                     {{-- spt nya route tombolnya ada yg typo mas, di action.blade.php
                     --}}
 
-                </div>
-                <!-- /.card-header -->
-                <form action="{{ route('hospitals.filter') }}" method="GET">
-                    {{-- @csrf --}}
-                    <div class="d-flex justify-content-end mt-3">
+                </div> <!-- /.card-header -->
+
+                <div class="d-flex justify-content-end mt-3 mr-3">
+                    <form action="{{ route('hospitals.filter') }}" method="GET">
                         <span class="input-group justify-content-lg-end">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <label for="from">From</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -44,8 +43,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="d-flex justify-content-end">
+                            <div class="col-md-5">
+                                <div class="d-flex justify-content-start">
                                     <label for="to">To</label>
                                 </div>
                                 <div class="input-group">
@@ -55,41 +54,24 @@
                                     <input type="search" name="to" id="datemask"
                                         class="form-control @error('date') is-invalid @enderror"
                                         data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
-                                    <span class="input-group-append">
-                                        <button type="submit" class="btn btn-danger btn-sm">Filter</button>
-                                    </span>
-                                    @error('date')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
+                                    @if (request()->segment(1) == 'hospitals')
+                                        <span class="input-group-append">
+                                            <button type="submit" class="btn btn-danger btn-sm">Filter</button>
                                         </span>
-                                    @enderror
+                                    @endif
                                 </div>
                             </div>
                         </span>
-
-
-
-
-
-                    </div>
-                </form>
+                    </form>
+                    @if (request()->segment(1) == 'hospitals-filter')
+                        <a href="{{ route('hospitals.index') }}" class="btn btn-warning btn-sm"
+                            style="margin-top:32px;">Reset</a>
+                    @endif
+                </div>
                 <div class="card-body table-responsive">
+
                     {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id'
                     => 'hospital-table']) !!}
-                    {{-- <table class="table table-hover text-nowrap" style="width: 100%;"
-                        id="hospitals">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Nama</th>
-                                <th>Telepon</th>
-                                <th>Alamat</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                    </table> --}}
-                    {{-- agar ditengah = center , kanan = end, kiri = start
-                    --}}
 
                 </div>
                 <!-- /.card-body -->
@@ -103,39 +85,5 @@
 
 @section('script')
     {!! $dataTable->scripts() !!}
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $('#hospitals').DataTable({
-                processing: true,
-                serverSide: true,
-                "autoWidth": false,
-                "responsive": true,
-                ajax: {
-                    url: "{{ route('hospitals.index') }}",
-                },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'address',
-                        name: 'address',
-                    },
-                    {
-                        data: 'slug',
-                        "searchable": false,
-                    },
-                ]
-            });
-        });
 
-    </script> --}}
 @endsection
