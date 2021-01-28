@@ -4,10 +4,8 @@ namespace App\DataTables;
 
 use App\Hospital;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-
+use Yajra\DataTables\Contracts\DataTableHtmlBuilder;
 
 class HospitalDataTable extends DataTable
 {
@@ -23,9 +21,11 @@ class HospitalDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->editColumn('action', function (Hospital $hospital) {
-                return view('hospitals.partials.action', [
-                    'hospital' => $hospital
-                ]);
+                if ($hospital->slug) {
+                    return view('hospitals.partials.action', [
+                        'hospital' => $hospital
+                    ]);
+                }
             })
             ->rawColumns(['action']);
     }
@@ -38,8 +38,16 @@ class HospitalDataTable extends DataTable
      */
     public function query(Hospital $model)
     {
+        if ($this->from && $this->to) :
+            $from = $this->from;
+            $to = $this->to;
+        else :
+            $from = $model->select('created_at')->orderBy('id', 'asc')->first()->created_at;
+            $to = date('Y-m-d H:i:s');
+        endif;
+
         return $model->query()
-            ->where('name' , '!=', '')
+            ->whereBetween('created_at', [$from, $to])
             ->latest();
     }
 
@@ -52,14 +60,19 @@ class HospitalDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('hospital-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->parameters([
-                        'stateSave' => true,
-                    ])
-                    ->dom('Bfrtip')
-                    ->orderBy(1);
+            ->setTableId('hospital-table')
+            ->minifiedAjax()
+            ->parameters([
+                'dom'          => 'Blfrtip',
+                'buttons'      => ['export', 'print'],
+                'order'   => [[0, 'desc']],
+                'lengthMenu' => [
+                    [10, 100, 1000, 5000, 10000],
+                    ['10', '100', '1000', '5000', '10000']
+                ],
+            ])
+            ->columns($this->getColumns())
+            ->orderBy(1);
     }
 
 

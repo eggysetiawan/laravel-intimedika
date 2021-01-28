@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\HospitalDataTable;
 use App\Hospital;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
+use App\DataTables\HospitalDataTable;
 use App\Http\Requests\HospitalRequest;
-use Yajra\DataTables\Services\DataTable;
 
 class HospitalController extends Controller
 {
@@ -15,7 +15,17 @@ class HospitalController extends Controller
     public function index(HospitalDataTable $dataTable)
     {
         return $dataTable->render('hospitals.index');
-        // $hospitals = Hospital::where('name', '!=', '')->latest()->get();
+    }
+    public function filter(HospitalDataTable $dataTable)
+    {
+        $from = date('Y-m-d', strtotime(request('from')));
+        $to = date('Y-m-d', strtotime(request('to')));
+
+        return $dataTable->with([
+            'from' => $from,
+            'to' => $to,
+        ])
+            ->render('hospitals.index');
     }
 
     public function create()

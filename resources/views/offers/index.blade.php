@@ -27,8 +27,11 @@
                 <!-- /.card-header -->
 
                 <div class="card-body table-responsive ">
-                    <table class="table table-hover text-nowrap  table-responsive-sm" id="offers">
-                    <thead>
+                    {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id'
+                    => 'offer-table']) !!}
+                    {{-- <table class="table table-hover text-nowrap  table-responsive-sm"
+                        id="offers">
+                        <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>No. Penawaran</th>
@@ -38,7 +41,7 @@
                             </tr>
                         </thead>
 
-                    </table>
+                    </table> --}}
 
 
                 </div>
@@ -123,46 +126,7 @@
     </div>
 @endsection
 
+
 @section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#offers').DataTable({
-                processing: true,
-                serverSide: true,
-                "autoWidth": false,
-                "responsive": true,
-                "info": true,
-                ajax: {
-                    url: "{{ route('offers.index') }}",
-                    type: "GET"
-                },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'offer_no',
-                        name: 'offer_no'
-                    },
-
-                    {
-                        data: 'customer.name',
-                        name: 'customer.name'
-                    },
-                    {
-                        data: 'budget',
-                        name: 'budget',
-                    },
-                    {
-                        data: 'author.name',
-                        name: 'author.name'
-                    },
-                ],
-                order: [
-                    [1, 'asc']
-                ]
-            });
-        });
-
-    </script>
+    {!! $dataTable->scripts() !!}
 @endsection

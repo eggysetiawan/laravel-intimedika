@@ -2,11 +2,8 @@
 
 namespace App\DataTables;
 
-use App\App\Offer;
-use Yajra\DataTables\Html\Button;
+use App\Offer;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class OfferDataTable extends DataTable
@@ -21,7 +18,15 @@ class OfferDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'offer.action');
+            ->addIndexColumn()
+            ->editColumn('action', function (Offer $offer) {
+                if ($offer->slug) {
+                    return view('offers.partials.action', [
+                        'offer' => $offer
+                    ]);
+                }
+            })
+            ->rawColumns(['action']);
     }
 
     /**
@@ -32,7 +37,9 @@ class OfferDataTable extends DataTable
      */
     public function query(Offer $model)
     {
-        return $model->newQuery();
+        return $model->query()
+            ->with('customer', 'author')
+            ->latest();
     }
 
     /**
@@ -44,8 +51,17 @@ class OfferDataTable extends DataTable
     {
         return $this->builder()
             ->setTableId('offer-table')
-            ->columns($this->getColumns())
             ->minifiedAjax()
+            ->parameters([
+                'dom'          => 'Blfrtip',
+                'buttons'      => ['export', 'print'],
+                'order'   => [[0, 'desc']],
+                'lengthMenu' => [
+                    [10, 100, 1000, 5000, 10000],
+                    ['10', '100', '1000', '5000', '10000']
+                ],
+            ])
+            ->columns($this->getColumns())
             ->orderBy(1);
     }
 
@@ -57,11 +73,12 @@ class OfferDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'no',
-            'offer_no',
-            'name',
-            'budget',
-            'sales'
+            Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
+            Column::computed('action'),
+            Column::make('customer.name')->title('Customer'),
+            Column::make('budget')->title('Dana'),
+            Column::make('author.name')->title('Sales'),
+
         ];
     }
 

@@ -3,29 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\{Offer, Order, Invoice, Customer};
+use App\DataTables\OfferDataTable;
 use App\Modality;
 use App\Http\Requests\OfferRequest;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
-    public function index(Request $request)
+    public function index(OfferDataTable $dataTable)
     {
-        $offers = Offer::with('customer', 'author')
-            ->get();
-
-        if ($request->ajax()) {
-            return datatables()
-                ->of($offers)
-                ->addIndexColumn()
-                ->editColumn('offer_no', function ($item) {
-                    return '<a href="' . route('invoices.order', $item->slug) . '">' . $item->offer_no . '</a>';
-                })
-                ->rawColumns(['action', 'time_passed', 'offer_no'])
-                ->make(true);
-        }
-
-        return view('offers.index');
+        return $dataTable->render('offers.index');
     }
 
     public function create()
@@ -90,11 +77,11 @@ class OfferController extends Controller
 
         $modalities = Modality::select('price')
             ->whereIn('id', $request->modality)->get();
-
+        $min = 0;
         foreach ($modalities as $mod) {
             $min = $mod->price;
-            dd($min);
         }
+        dd($min);
 
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
 

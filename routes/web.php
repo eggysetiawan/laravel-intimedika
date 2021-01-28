@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
 
     // route hospitals
     Route::get('hospitals', 'HospitalController@index')->name('hospitals.index');
+    Route::get('hospitals-filter', 'HospitalController@filter')->name('hospitals.filter');
     Route::get('hospitals/create', 'HospitalController@create')->name('hospitals.create');
     Route::post('hospitals/store', 'HospitalController@store')->name('hospitals.store');
     Route::get('hospitals/{hospital:slug}/edit', 'HospitalController@edit')->name('hospitals.edit');
