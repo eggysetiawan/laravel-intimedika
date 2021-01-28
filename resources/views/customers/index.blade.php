@@ -35,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Nama/Perusahaan</th>
+                                <th>Rumah Sakit/Perusahaan</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Jabatan</th>
@@ -49,7 +49,7 @@
                             <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $customer->name }}</td>
+                                    <td>{{ $customer->hospitals->first()->name ?? $customer->name }}</td>
                                     <td>{{ $customer->mobile }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->role }}</td>
