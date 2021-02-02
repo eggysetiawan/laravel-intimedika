@@ -104,5 +104,5 @@
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary">{{ $submit ?? 'Update' }}</button>
+    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
 </div>

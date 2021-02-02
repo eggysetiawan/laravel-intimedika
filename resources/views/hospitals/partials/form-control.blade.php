@@ -73,7 +73,8 @@
     <div class="form-group">
         <label for="address">Alamat*</label>
         <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="30"
-            rows="4" placeholder="Masukkan alamat rumah sakit..">{{ old('address') ?? $hospital->address }}</textarea>
+            rows="4"
+            placeholder="Masukkan alamat rumah sakit..">{{ old('address') ?? $hospital->address }}</textarea>
         @error('address')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}
@@ -87,5 +88,5 @@
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn btn-primary">{{ $submit ?? 'Update' }}</button>
+    <x-button-submit> {{ $submit ?? 'Update' }}</x-button-submit>
 </div>

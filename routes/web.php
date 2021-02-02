@@ -55,4 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('search/visits', 'SearchController@visit')->name('search.visits');
     Route::get('hospitals-filter', 'SearchController@hospital')->name('hospitals.filter');
     Route::get('offers-filter', 'SearchController@offer')->name('offers.filter');
+
+    // approval
+    Route::get('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
 });

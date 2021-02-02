@@ -19,6 +19,13 @@ class OfferDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
+            ->editColumn('offer_no', function (Offer $offer) {
+                if ($offer->slug) {
+                    return view('offers.partials.offer_no', [
+                        'offer' => $offer
+                    ]);
+                }
+            })
             ->editColumn('action', function (Offer $offer) {
                 if ($offer->slug) {
                     return view('offers.partials.action', [
@@ -78,7 +85,12 @@ class OfferDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
-            Column::computed('action'),
+            Column::computed('action')
+                ->searchable(false)
+                ->orderable(false)
+                ->printable(false)
+                ->exportable(false),
+            Column::make('offer_no'),
             Column::make('customer.name')->title('Customer'),
             Column::make('budget')->title('Dana'),
             Column::make('author.name')->title('Sales'),

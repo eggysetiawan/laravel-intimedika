@@ -65,6 +65,6 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->level == "top";
+        return $this->level == "top" || $this->level == "mid";
     }
 }

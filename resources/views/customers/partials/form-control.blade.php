@@ -10,7 +10,8 @@
                     @endforeach
                 </select>
                 <span class="input-group-append">
-                    <a class="btn bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}" title="Rumah Sakit tidak ditemukan? tambahkan disini.">+</a>
+                    <a class="btn bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}"
+                        title="Rumah Sakit tidak ditemukan? tambahkan disini.">+</a>
                     <a class="btn btn-danger btn-flat fa fa-times-circle" href="{{ route('customers.create-2') }}"
                         title="Hilangkan Rumah Sakit"></a>
                 </span>
@@ -83,5 +84,5 @@
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn bg-teal">{{ $submit ?? 'Update' }}</button>
+    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
 </div>

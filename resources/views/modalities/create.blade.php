@@ -7,24 +7,16 @@
 @endsection
 
 @section('content')
-    <div class="container">
-
-        <div class="d-flex justify-content-center">
-            <div class="col-md-10">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Tambah Modality</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-
-                    <form role="form" method="post" action="{{ route('modalities.store') }}" novalidate>
-                        @csrf
-                        @include('modalities.partials.form-control', ['submit' => 'Submit'])
-                    </form>
-                </div>
-                <!-- /.card -->
-            </div>
+    <x-card>
+        <div class="card-header">
+            <h3 class="card-title">Tambah Modality</h3>
         </div>
-    </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+
+        <form role="form" method="post" action="{{ route('modalities.store') }}" novalidate>
+            @csrf
+            @include('modalities.partials.form-control', ['submit' => 'Submit'])
+        </form>
+    </x-card>
 @endsection
