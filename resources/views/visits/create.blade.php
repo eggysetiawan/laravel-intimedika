@@ -7,25 +7,14 @@
 @endsection
 
 @section('content')
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card card-teal">
-                    <div class="card-header">
-                        <h3 class="card-title">Tambah Kunjungan Harian</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-
-                    <form role="form" method="post" action="{{ route('visits.store') }}" novalidate
-                        enctype="multipart/form-data">
-                        @csrf
-                        @include('visits.partials.add-form-control', ['submit' => 'Create'])
-                    </form>
-                </div>
-                <!-- /.card -->
-            </div>
+    <x-card>
+        <div class="card-header">
+            <h3 class="card-title">Tambah Kunjungan Harian</h3>
         </div>
-    </div>
+
+        <form role="form" method="post" action="{{ route('visits.store') }}" novalidate enctype="multipart/form-data">
+            @csrf
+            @include('visits.partials.add-form-control', ['submit' => 'Create'])
+        </form>
+    </x-card>
 @endsection

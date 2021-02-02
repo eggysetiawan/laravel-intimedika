@@ -19,8 +19,7 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ $hospitals->name ?? 'Table Rumah Sakit' }}
                     </h3>
-                    {{-- spt nya route tombolnya ada yg typo mas, di action.blade.php
-                    --}}
+                    {{-- spt nya route tombolnya ada yg typo mas, di action.blade.php --}}
 
                 </div> <!-- /.card-header -->
 
@@ -51,14 +50,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    <input type="search" name="to" id="datemask"
-                                        class="form-control @error('date') is-invalid @enderror"
+                                    <input type="search" name="to" id="datemask" class="form-control"
                                         data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
-                                    @if (request()->segment(1) == 'hospitals')
-                                        <span class="input-group-append">
-                                            <button type="submit" class="btn btn-danger btn-sm">Filter</button>
-                                        </span>
-                                    @endif
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-danger btn-sm">Filter</button>
+                                    </span>
                                 </div>
                             </div>
                         </span>

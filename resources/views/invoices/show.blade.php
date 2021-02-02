@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="d-flex justify-content-lg-center">
-        <div class="col-8">
+        <div class="col-md-9">
             <div class="wraps">
                 <div class="card card-widget">
                     <div class="card-header">
@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <td style="font-weight: bold;font-size: 14px">
-                                    {{ $offer->customer->hospitals->first()->name }}
+                                    {{ $offer->customer->hospitals->first()->name ?? $offer->customer->name }}
                                 </td>
                             </tr>
                             <tr>
@@ -54,7 +54,8 @@
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td style="font-weight: bold;font-size: 14px">Up. Bpk/Ibu {{ $offer->customer->name }}</td>
+                                <td style="font-weight: bold;font-size: 14px">Up. Bpk/Ibu {{ $offer->customer->name }}
+                                </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 14px">{{ $offer->customer->role }}</td>
@@ -71,7 +72,7 @@
                         </table>
                         <div class="fill">
                             <div class="detail-table">
-                                <table class="table table-superadmin" border="1"
+                                <table class="table table-responsive" border="1"
                                     style="border-collapse: collapse;width:100%">
                                     <thead class="thead-dark">
                                         <tr>

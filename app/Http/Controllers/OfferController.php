@@ -17,40 +17,9 @@ class OfferController extends Controller
 
     public function create()
     {
-        $customers = Customer::whereHas('hospitals')
+        $customers = Customer::with('hospitals')
             ->orderBy('name', 'asc')
             ->get();
-        $attr = [
-            'routes' => 'offers.create-cust',
-            'icon' => 'RS',
-            'color' => 'bg-maroon',
-        ];
-        if (!request('count')) :
-            $offers = Offer::with('customer', 'author')
-                ->latest()
-                ->paginate(5);
-            return view('offers.index', compact('offers'));
-        else :
-            return view('offers.create', [
-                'offer' => new Offer(),
-                'customers' => $customers,
-                'attr' => $attr,
-                'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
-                'count' => request('count'),
-            ]);
-        endif;
-    }
-    public function createCust()
-    {
-        $customers = Customer::doesntHave('hospitals')
-            ->select(['id', 'name'])
-            ->orderBy('name', 'asc')
-            ->get();
-        $attr = [
-            'routes' => 'offers.create',
-            'icon' => 'PT',
-            'color' =>  'bg-indigo',
-        ];
 
         if (!request('count')) :
             $offers = Offer::with('customer', 'author')
@@ -61,7 +30,6 @@ class OfferController extends Controller
             return view('offers.create', [
                 'offer' => new Offer(),
                 'customers' => $customers,
-                'attr' => $attr,
                 'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
                 'count' => request('count'),
             ]);
@@ -70,8 +38,6 @@ class OfferController extends Controller
 
     public function store(OfferRequest $request)
     {
-
-
         // convert month romawi
         $attr = $request->all();
 

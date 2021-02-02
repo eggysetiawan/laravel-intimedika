@@ -17,7 +17,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group ">
-                <a href="{{ route('visits.add') }}" class="btn bg-teal btn-sm">Kunjungan Baru</a>
+                <a href="{{ route('visits.add') }}" class="btn bg-red btn-sm">Kunjungan Baru</a>
                 <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
             </div>
         </div>
@@ -84,8 +84,7 @@
                             </tbody>
                         @endforelse
                     </table>
-                    {{-- agar ditengah = center , kanan = end, kiri = start
-                    --}}
+                    {{-- agar ditengah = center , kanan = end, kiri = start --}}
                     <div class="d-flex justify-content-end mr-4">
                         <div>
                             {{ $visits->links() }}

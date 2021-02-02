@@ -13,16 +13,13 @@ class VisitController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->level == 'top') :
-            $visits = Visit::with('customer', 'author')
-                ->latest()
-                ->paginate(10);
-        else :
-            $visits = Visit::with('customer', 'author')
-                ->latest()
-                ->where('user_id', auth()->id())
-                ->paginate(10);
-        endif;
+
+        $visits = Visit::with('customer', 'author')
+            ->latest()
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
+            ->paginate(10);
 
         return view('visits.index', [
             'visits' => $visits,
@@ -79,6 +76,7 @@ class VisitController extends Controller
             'hospitals' => Hospital::select(['id', 'name', 'city'])
                 ->orderBy('name', 'asc')
                 ->where('name', '!=', '')
+                ->take(1000)
                 ->get(),
         ]);
     }

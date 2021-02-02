@@ -37,17 +37,12 @@ class OfferDataTable extends DataTable
      */
     public function query(Offer $model)
     {
-        if ($this->from && $this->to) :
-            $from = $this->from;
-            $to = $this->to;
-        else :
-            $from = $model->select('created_at')->orderBy('created_at', 'asc')->first()->created_at;
-            $to = date('Y-m-d H:i:s');
-        endif;
 
         return $model->query()
             ->with('customer', 'author')
-            ->whereBetween('offer_date', [$from, $to])
+            ->when($this->to, function ($query) {
+                return $query->whereBetween('offer_date', [$this->from, $this->to]);
+            })
             ->latest();
     }
 

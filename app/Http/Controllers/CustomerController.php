@@ -12,17 +12,12 @@ class CustomerController extends Controller
 {
     public function index()
     {
-
-        if (auth()->user()->level == "top") :
-            $customers = Customer::with('author', 'visits', 'hospitals')
-                ->latest()
-                ->paginate(10);
-        else :
-            $customers = Customer::with('author', 'visits')
-                ->latest()
-                ->where('user_id', auth()->id())
-                ->paginate(10);
-        endif;
+        $customers = Customer::with('author', 'visits')
+            ->latest()
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
+            ->paginate(10);
 
         return view('customers.index', compact('customers'));
     }
@@ -35,7 +30,11 @@ class CustomerController extends Controller
     {
         return view('customers.create', [
             'customer' => new Customer(),
-            'hospitals' => Hospital::select('id', 'name', 'city')->orderBy('name', 'asc')->where('name', '!=', '')->get()
+            'hospitals' => Hospital::select('id', 'name', 'city')
+                ->orderBy('name', 'asc')
+                ->where('name', '!=', '')
+                ->take(1000)
+                ->get()
         ]);
     }
     public function create2()

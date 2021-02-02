@@ -8,24 +8,14 @@
 @endsection
 
 @section('content')
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card card-teal">
-                    <div class="card-header">
-                        <h3 class="card-title">Buat Penawaran</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-
-                    <form method="POST" action="{{ route('offers.store') }}">
-                        @csrf
-                        @include('offers.partials.form-control', ['submit' => 'Create'])
-                    </form>
-                </div>
-                <!-- /.card -->
-            </div>
+    <x-card>
+        <div class="card-header">
+            <h3 class="card-title">Buat Penawaran</h3>
         </div>
-    </div>
+
+        <form method="POST" action="{{ route('offers.store') }}">
+            @csrf
+            @include('offers.partials.form-control', ['submit' => 'Create'])
+        </form>
+    </x-card>
 @endsection

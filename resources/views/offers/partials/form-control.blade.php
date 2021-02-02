@@ -36,26 +36,18 @@
 
                 {{-- for edit --}}
                 @isset($offer->customer->customer_id)
-                    @php
-                    $name = (request()->segment(3) == "edit") ? $offer->customer->name :
-                    $offer->customer->hospitals->first()->name;
-                    @endphp
-                    <option value="{{ $offer->customer->id }}" selected>{{ $name }}</option>
+                    <option value="{{ $offer->customer->id }}" selected>
+                        {{ $offer->customer->hospitals->first()->name ?? $offer->customer->name }}
+                    </option>
                 @endisset
                 <option disabled selected>Pilih Customer</option>
-
-
                 @foreach ($customers as $customer)
-                    @php
-                    $name = (request()->segment(2) == 'create-cust') ? $customer->name :
-                    $customer->hospitals->first()->name. ' - '.$customer->name;
-                    @endphp
-                    <option value="{{ $customer->id }}">{{ $name }}</option>
+                    <option value="{{ $customer->id }}">
+                        {{ $customer->hospitals->first()->name ?? $customer->name }}
+                    </option>
                 @endforeach
             </select>
-            {{-- <span class="input-group-append">
-                <a class="btn {{ $attr['color'] }} btn-flat" href="{{ route($attr['routes']) }}">{{ $attr['icon'] }}</a>
-            </span> --}}
+
         </div>
         @error('customer')
             <span class="invalid-feedback" role="alert">
@@ -139,8 +131,9 @@
                 <div class="col-md-12">
                     <label for="price{{ $i }}">Harga Penawaran #{{ $i }}</label>
                     <input type="text" name="price[]" id="price"
-                        class="form-control @error('price.' . $i) is-invalid @enderror" placeholder="cth:1000"
-                        value="{{ old('price.' . $i) }}" required>
+                        class="form-control @error('price.' . $i) is-invalid @enderror"
+                        data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                        data-mask value="{{ old('price.' . $i) }}" required>
                     @error('price.' . $i)
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -185,5 +178,5 @@
 <!-- /.card-body -->
 
 <div class="card-footer">
-    <button type="submit" class="btn bg-teal">{{ $submit ?? 'Update' }}</button>
+    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
 </div>
