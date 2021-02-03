@@ -13,6 +13,7 @@
             <div class="btn-group">
                 <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
                     onclick="return confirm('apakah anda yakin?')">Approve.</button>
+                <a href="{{ route('invoices.order', $offer->slug) }}" class="btn btn-info btn-sm">Detail</a>
                 <button class="btn btn-danger btn-sm" name="approval" value="2"
                     onclick="return confirm('apakah anda yakin?')">Reject.</button>
             </div>

@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
 
     // invoices
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
+    Route::get('invoices/{offer:slug}/print', 'InvoiceController@print')->name('invoices.print');
 
     // search
     Route::get('search/visits', 'SearchController@visit')->name('search.visits');

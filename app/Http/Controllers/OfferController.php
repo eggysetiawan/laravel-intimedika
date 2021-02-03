@@ -6,7 +6,6 @@ use App\{Offer, Order, Invoice, Customer};
 use App\DataTables\OfferDataTable;
 use App\Modality;
 use App\Http\Requests\OfferRequest;
-use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
@@ -38,16 +37,17 @@ class OfferController extends Controller
 
     public function store(OfferRequest $request)
     {
+
         // convert month romawi
         $attr = $request->all();
 
-        $modalities = Modality::select('price')
-            ->whereIn('id', $request->modality)->get();
-        $min = 0;
-        foreach ($modalities as $mod) {
-            $min = $mod->price;
-        }
-        dd($min);
+        // $modalities = Modality::select('price')
+        //     ->whereIn('id', $request->modality)->get();
+        // $min = 0;
+        // foreach ($modalities as $mod) {
+        //     $min = $mod->price;
+        // }
+        // dd($min);
 
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
 
@@ -77,13 +77,12 @@ class OfferController extends Controller
             Order::insert([
                 'invoice_id' => $invoice->id,
                 'modality_id' => $request->modality[$i],
-                'price' => $request->price[$i],
+                'price' => str_replace(".", "", $request->price[$i]),
                 'quantity' => $request->quantity[$i],
                 'references' => $request->references[$i],
             ]);
             // alert success
         }
-
 
         session()->flash('success', 'Penawaran berhasil dibuat!');
         return redirect('offers');

@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                <button type="button" class="btn bg-maroon btn-sm" data-toggle="modal" data-target="#modal-sm">
+                <button type="button" class="btn bg-red btn-sm" data-toggle="modal" data-target="#modal-sm">
                     Buat Penawaran
                 </button>
             </div>
@@ -102,7 +102,7 @@
         <div class="modal-dialog modal-sm">
             <form action="{{ route('offers.create') }}" method="GET">
                 <div class="modal-content">
-                    <div class="modal-header bg-gradient-teal">
+                    <div class="modal-header bg-gradient-red">
                         <h4 class="modal-title">Buat Penawaran</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-teal">Submit</button>
+                        <button type="submit" class="btn bg-red">Submit</button>
                     </div>
 
                 </div>

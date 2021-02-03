@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApprovalRequest;
 use App\Offer;
 
 class ApprovalController extends Controller
 {
-    public function offer(Offer $offer)
+    public function offer(ApprovalRequest $request, Offer $offer)
     {
 
-        if (request('approval') == 1) :
+        $request->all();
+        if ($request->approval == 1) :
             $approval = 1;
             $message = 'Penawaran berhasil di approve!';
         else :

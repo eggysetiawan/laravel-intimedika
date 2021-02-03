@@ -7,8 +7,37 @@
 
     <div class="d-flex justify-content-lg-center">
         <div class="col-md-9">
+            <div class="form-group">
+
+
+                @switch($offer->approve)
+                    @case(1)
+                    <div class="text-success form-control-plaintext text-center">Approved!</div>
+                    <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
+                        class="btn btn-info form-control">Print</a>
+                    @break
+                    @case(2)
+                    <div class="text-danger form-control-plaintext text-center">Rejected!</div>
+                    @break
+                    @default
+                    @if (auth()
+                ->user()
+                ->isAdmin())
+                        <form action="{{ route('approval.offers', $offer->slug) }}">
+                            <div class="btn-group form-control-plaintext">
+                                <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
+                                    onclick="return confirm('apakah anda yakin?')">Approve.</button>
+                                <button class="btn btn-danger btn-sm" name="approval" value="2"
+                                    onclick="return confirm('apakah anda yakin?')">Reject.</button>
+                            </div>
+                        </form>
+                    @endif
+
+                @endswitch
+            </div>
             <div class="wraps">
                 <div class="card card-widget">
+
                     <div class="card-header">
                         <img style="width: 100%;" src="{{ asset('image/kopsurat2.png') }}" alt="">
                     </div>
@@ -97,7 +126,8 @@
                                                 <center>{{ $loop->iteration }}</center>
                                             </td>
                                             <td>
-                                                <div style=" font-weight: bold;" class="mt-0">{{ $order->modality->name }}
+                                                <div style=" font-weight: bold;" class="mt-0">
+                                                    {{ $order->modality->name }}
                                                 </div>
                                                 <br>
                                                 Merk : {{ $order->modality->brand }}<br>
@@ -184,7 +214,9 @@
                                     Mengetahui,<br>
 
                                     <div style="height:130px; padding: 20px 0px 0px 0px; margin-bottom: 22px;">
-                                        qr-code
+                                        @if ($offer->approve == 1)
+                                            {!! QrCode::generate(route('invoices.order', $offer->slug)) !!}
+                                        @endif
                                     </div>
                                     <p style="text-decoration: underline; margin-bottom: 0px; font-weight: bold;">
                                         Johannes Hendrajaja</p>
@@ -201,11 +233,6 @@
 
             </div>
         </div><!-- /.col -->
-        <div class="d-flex justify-content-lg-center">
-            <div class="col-md-12">
-                <a class="btn btn-info" href="print">Print</a>
-            </div>
-        </div>
     </div><!-- /.row -->
 
 @endsection

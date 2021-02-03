@@ -33,6 +33,15 @@ class OfferDataTable extends DataTable
                     ]);
                 }
             })
+            ->editColumn('invoices.orders.references', function (Offer $offer) {
+                return $offer->invoices->first()->orders->first()->references;
+            })
+            ->editColumn('customer.hospitals.name', function (Offer $offer) {
+                return $offer->customer->hospitals->first()->name ?? $offer->customer->name;
+            })
+            ->editColumn('offer_date', function (Offer $offer) {
+                return date('d/m/Y', strtotime($offer->offer_date));
+            })
             ->rawColumns(['action']);
     }
 
@@ -46,7 +55,7 @@ class OfferDataTable extends DataTable
     {
 
         return $model->query()
-            ->with('customer', 'author')
+            ->with('customer.hospitals', 'author', 'invoices.orders')
             ->when($this->to, function ($query) {
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
@@ -65,11 +74,11 @@ class OfferDataTable extends DataTable
             ->minifiedAjax()
             ->parameters([
                 'dom'          => 'Blfrtip',
-                'buttons'      => ['export', 'print'],
+                'buttons'      => ['excel', 'print', 'reset'],
                 'order'   => [[0, 'desc']],
                 'lengthMenu' => [
-                    [10, 100, 1000, 5000, 10000],
-                    ['10', '100', '1000', '5000', '10000']
+                    [10, 25, 50, 100],
+                    ['10', '25', '50', '100']
                 ],
             ])
             ->columns($this->getColumns())
@@ -84,19 +93,41 @@ class OfferDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
             Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
+
+            // action button (approve/reject)
             Column::computed('action')
                 ->searchable(false)
                 ->orderable(false)
                 ->printable(false)
                 ->exportable(false),
-            Column::make('offer_no'),
-            Column::make('customer.name')->title('Customer'),
-            Column::make('budget')->title('Dana'),
+
+            // no.penawaran
+            Column::make('offer_no')
+                ->title('No. Penawaran'),
+
+            // customer
+            Column::make('customer.hospitals.name')->title('Customer/Rumah Sakit'),
+            Column::make('customer.name')->title('Customer')
+                ->orderable(false)
+                ->visible(false),
+
+            // tanggal penawaran
+            Column::make('offer_date')->title('Tgl. Penawaran'),
+
+            // referensi
+            Column::make('invoices.orders.references')->title('Referensi')
+                ->searchable(true)
+                ->orderable(false),
+
+            // nama sales
             Column::make('author.name')->title('Sales'),
 
         ];
     }
+
+
 
     /**
      * Get filename for export.
