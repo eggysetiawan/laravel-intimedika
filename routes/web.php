@@ -43,10 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('hospitals/{hospital:slug}/delete', 'HospitalController@destroy')->name('hospitals.delete');
 
 
-    //hospitals
+    //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
+
+    // progress
+    Route::post('progress/{offer:slug}', 'ProgressController@progress')->name('offers.progress');
 
     // invoices
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');

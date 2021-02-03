@@ -1,6 +1,11 @@
 @switch($offer->approve)
     @case(1)
     <div class="text-success">Approved!</div>
+    @if (auth()->id() != 13)
+        <a href="{{ route('offers.progress', $offer->slug) }}"><button
+                class="btn bg-gradient-gray-dark btn-sm rounded-sm">Input
+                PO</button></a>
+    @endif
     @break
     @case(2)
     <div class="text-danger">Rejected!</div>

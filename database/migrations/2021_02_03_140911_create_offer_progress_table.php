@@ -15,13 +15,13 @@ class CreateOfferProgressTable extends Migration
     {
         Schema::create('offer_progress', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('offer_id')->constrained('offers')->cascadeOnDelete();
+            $table->foreignId('offer_id')->constrained('offers');
             $table->string('progress')->nullable();
             $table->double('price_po')->nullable();
-
             $table->date('progress_date')->nullable();
-            $table->integer('approval', 1)->nullable();
+            $table->boolean('approval', 1)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -73,6 +73,7 @@ class OfferDataTable extends DataTable
             ->setTableId('offer-table')
             ->minifiedAjax()
             ->parameters([
+                'stateSave' => true,
                 'dom'          => 'Blfrtip',
                 'buttons'      => ['excel', 'print', 'reset'],
                 'order'   => [[0, 'desc']],
