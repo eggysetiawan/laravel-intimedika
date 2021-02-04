@@ -56,7 +56,7 @@ class OfferDataTable extends DataTable
 
         return $model->query()
             ->with('customer.hospitals', 'author', 'invoices.orders')
-            ->when($this->to, function ($query) {
+            ->when($this->from && $this->to, function ($query) {
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
             ->latest();
@@ -82,8 +82,7 @@ class OfferDataTable extends DataTable
                     ['10', '25', '50', '100']
                 ],
             ])
-            ->columns($this->getColumns())
-            ->orderBy(1);
+            ->columns($this->getColumns());
     }
 
     /**
@@ -112,7 +111,9 @@ class OfferDataTable extends DataTable
             Column::make('customer.hospitals.name')->title('Customer/Rumah Sakit'),
             Column::make('customer.name')->title('Customer')
                 ->orderable(false)
-                ->visible(false),
+                ->visible(false)
+                ->printable(false)
+                ->exportable(false),
 
             // tanggal penawaran
             Column::make('offer_date')->title('Tgl. Penawaran'),

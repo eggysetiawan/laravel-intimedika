@@ -17,8 +17,13 @@
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 
 {{-- Bootstrap Switch --}}
-
 <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+<!-- Bootstrap4 Duallistbox -->
+<script src="{{ asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
 
 
 <!-- DataTables -->

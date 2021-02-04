@@ -45,3 +45,8 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+    window.addEventListener("load", window.print());
+
+</script>

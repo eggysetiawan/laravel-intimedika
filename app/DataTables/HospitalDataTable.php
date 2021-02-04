@@ -37,16 +37,12 @@ class HospitalDataTable extends DataTable
      */
     public function query(Hospital $model)
     {
-        if ($this->from && $this->to) :
-            $from = $this->from;
-            $to = $this->to;
-        else :
-            $from = $model->select('created_at')->orderBy('created_at', 'asc')->first()->created_at;
-            $to = date('Y-m-d H:i:s');
-        endif;
+
 
         return $model->query()
-            ->whereBetween('created_at', [$from, $to])
+            ->when($this->from && $this->to, function ($query) {
+                return $query->whereBetween('created_at', [$this->from, $this->to]);
+            })
             ->latest();
     }
 

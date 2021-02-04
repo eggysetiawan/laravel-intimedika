@@ -49,7 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
 
     // progress
-    Route::post('progress/{offer:slug}', 'ProgressController@progress')->name('offers.progress');
+    Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
+    Route::post('progresses/store', 'ProgressController@store')->name('progresses.store');
 
     // invoices
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
