@@ -121,6 +121,10 @@
                         <label for="status3">Hold</label>
                     </div>
 
+
+                    <div class="form-group">
+                        <textarea name="detail" id="detail"  rows="4" class="form-control" placeholder="Berikan keterangan progress.."></textarea>
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-start">
