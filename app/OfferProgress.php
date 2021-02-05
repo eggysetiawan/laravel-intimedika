@@ -14,6 +14,14 @@ class OfferProgress extends Model implements HasMedia
     protected $fillable = ['offer_id', 'progress', 'price_po', 'detail', 'status', 'progress_date', 'approval'];
     protected $table = 'offer_progress';
 
+    public function demo()
+    {
+        return $this->hasOne(Demo::class)->withDefault([
+            'date' => '',
+            'description' => '',
+        ]);
+    }
+
     public function offer()
     {
         return $this->belongsTo(Offer::class);

@@ -37,11 +37,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input name="demo_date" type="text" class="form-control" data-inputmask-alias="datetime"
+                            <input name="demo_date" type="text" class="form-control"
+                                value="{{ $offer->progress->demo->date ?? '' }}" data-inputmask-alias="datetime"
                                 data-inputmask-inputformat="dd-mm-yyyy" data-mask>
                         </div>
                         <textarea name="description" id="" cols="30" rows="10" class="form-control mt-1"
-                            placeholder="Berikan keterangan presentasi/demo"></textarea>
+                            placeholder="Berikan keterangan presentasi/demo">{{ $offer->progress->demo->description }}</textarea>
                     </div>
 
                     <div class="form-group icheck-danger">

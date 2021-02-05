@@ -15,7 +15,7 @@ class CreateDemosTable extends Migration
     {
         Schema::create('demos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('offer_id')->constrained('offers');
+            $table->foreignId('offer_progress_id')->constrained('offer_progress');
             $table->date('date');
             $table->text('description');
             $table->timestamps();

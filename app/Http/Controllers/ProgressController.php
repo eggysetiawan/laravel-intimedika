@@ -31,6 +31,8 @@ class ProgressController extends Controller
                     'progress' => request('progress'),
                     'status' => request('status'),
                 ]);
+
+
                 break;
             case (70):
                 $progress->update([
