@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Demo;
 use App\Offer;
 use App\OfferProgress;
-use Illuminate\Http\Request;
-use App\Http\Requests\OfferRequest;
+use App\Http\Requests\OfferProgressRequest;
 
 class ProgressController extends Controller
 {
@@ -20,28 +19,39 @@ class ProgressController extends Controller
 
     public function store(OfferProgress $progress, OfferProgressRequest $request)
     {
-        switch (request('progress')):
+        $attr = $request->all();
+
+        switch ($request->progress):
             case (50):
-                $progress->update([
-                    'progress' => request('progress'),
-                    'status' => request('status'),
-                ]);
-
+                $progress->update($attr);
                 Demo::create([
-                    'date' => request('demo_date'),
-                    'description' => request('description'),
+                    'offer_progress_id' => $progress->id,
+                    'date' => date('Y-m-d', strtotime($request->demo_date)),
+                    'description' => $request->description,
                 ]);
-
                 break;
 
+            case (100):
+                $progress->update($attr);
+
+                $request->validate([
+                    'img' => 'required_if:progress,100|mimes:png,jpg,jpeg',
+                ]);
+                $progress
+                    ->addMediaFromRequest('img')
+                    ->usingFileName(date('YmdHi_PO'))
+                    ->toMediaCollectionFromRemote('image_po');
+                break;
             default:
-                $progress->update([
-                    'progress' => $request->progress,
-                    'status' => $request->status,
-                    'price_po' => $request->price_po,
-                    'shipping' => $request->shipping,
-                    'detail' => $request->detail,
+                $progress->update($attr);
+
+                $request->validate([
+                    'img' => 'required_if:progress,100|mimes:png,jpg,jpeg',
                 ]);
         endswitch;
+
+        session()->flash('success', 'Progress Penawaran berhasil di update!');
+
+        return redirect('offers');
     }
 }

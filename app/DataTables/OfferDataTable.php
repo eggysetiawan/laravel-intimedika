@@ -26,6 +26,11 @@ class OfferDataTable extends DataTable
                     ]);
                 }
             })
+            ->editColumn('progressbar', function (Offer $offer) {
+                return view('progress.partials.progress', [
+                    'offer' => $offer
+                ]);
+            })
             ->editColumn('action', function (Offer $offer) {
                 if ($offer->slug) {
                     return view('offers.partials.action', [
@@ -55,7 +60,7 @@ class OfferDataTable extends DataTable
     {
 
         return $model->query()
-            ->with('customer.hospitals', 'author', 'invoices.orders')
+            ->with('customer.hospitals', 'author', 'invoices.orders', 'progress.demo')
             ->when($this->from && $this->to, function ($query) {
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
@@ -118,13 +123,32 @@ class OfferDataTable extends DataTable
             // tanggal penawaran
             Column::make('offer_date')->title('Tgl. Penawaran'),
 
-            // referensi
-            Column::make('invoices.orders.references')->title('Referensi')
+            // progress
+            Column::computed('progressbar')
+                ->title('Progress')
+                ->searchable(false)
+                ->orderable(false)
+                ->printable(false)
+                ->exportable(false),
+
+            // progress searchable
+            Column::make('progress.progress')
                 ->searchable(true)
+                ->printable(false)
+                ->exportable(false)
+                ->visible(false),
+
+            Column::make('progress.detail')
+                ->title('Keterangan')
                 ->orderable(false),
 
             // nama sales
             Column::make('author.name')->title('Sales'),
+
+            // referensi
+            Column::make('invoices.orders.references')->title('Referensi')
+                ->searchable(true)
+                ->orderable(false),
 
         ];
     }

@@ -53,8 +53,9 @@ Route::middleware('auth')->group(function () {
     Route::post('progresses/{progress:id}/store', 'ProgressController@store')->name('progresses.store');
 
     // invoices
-    Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
     Route::get('invoices/{offer:slug}/print', 'InvoiceController@print')->name('invoices.print');
+    Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
+    Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat');
 
     // search
     Route::get('search/visits', 'SearchController@visit')->name('search.visits');

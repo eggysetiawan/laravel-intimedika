@@ -3,7 +3,7 @@
     <div class="text-success">Approved!</div>
     @if (auth()->id() != 13)
         <a href="{{ route('progresses.create', $offer->slug) }}"><button
-                class="btn bg-gradient-gray-dark btn-sm rounded-sm">Input
+                class="badge bg-gradient-gray-dark badge-sm rounded-sm">Input
                 PO</button></a>
     @endif
     @break
@@ -14,7 +14,8 @@
     @if (auth()
             ->user()
             ->isAdmin())
-        <form action="{{ route('approval.offers', $offer->slug) }}">
+        <form action="{{ route('approval.offers', $offer->slug) }}" method="POST">
+            @csrf
             <div class="btn-group">
                 <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
                     onclick="return confirm('apakah anda yakin?')">Approve.</button>

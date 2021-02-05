@@ -9,7 +9,7 @@ use App\Http\Requests\OfferRequest;
 
 class OfferController extends Controller
 {
-    public function index(OfferDataTable $dataTable)
+    public function index(OfferDataTable $dataTable, Offer $offer)
     {
         return $dataTable->render('offers.index');
     }
@@ -88,6 +88,8 @@ class OfferController extends Controller
                 'price' => str_replace(".", "", $request->price[$i]),
                 'quantity' => $request->quantity[$i],
                 'references' => $request->references[$i],
+                'created_at' => $date,
+                'updated_at' => $date,
             ]);
             // alert success
         }

@@ -37,12 +37,24 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input name="demo_date" type="text" class="form-control"
+                            <input name="demo_date" type="text"
+                                class="form-control @error('demo_date') is-invalid @enderror"
                                 value="{{ $offer->progress->demo->date ?? '' }}" data-inputmask-alias="datetime"
                                 data-inputmask-inputformat="dd-mm-yyyy" data-mask>
+                            @error('demo_date')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
-                        <textarea name="description" id="" cols="30" rows="10" class="form-control mt-1"
+                        <textarea name="description" id="" cols="30" rows="10"
+                            class="form-control @error('description') is-invalid @enderror mt-1"
                             placeholder="Berikan keterangan presentasi/demo">{{ $offer->progress->demo->description }}</textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group icheck-danger">
@@ -67,7 +79,7 @@
                     </div>
 
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check6" value="100">
+                        <input type="checkbox" name="progress" id="check6" value="99">
                         <label for="check6">
                             Sudah ada PO.
                         </label>
@@ -84,6 +96,11 @@
                                     class="form-control @error('price_po') is-invalid @enderror"
                                     data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                                     data-mask value="{{ old('price_po') }}" required>
+                                @error('price_po')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
 
@@ -98,35 +115,51 @@
                                     class="form-control @error('shipping') is-invalid @enderror"
                                     data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                                     data-mask value="{{ old('shipping') }}" required>
+                                @error('shipping')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
 
                             {{-- image --}}
                             <div class="form-group">
-                                <input type="file" name="img">
+                                <input type="file" name="img" class="@error('img') is-invalid @enderror">
+                                @error('img')
+                                    <span class="invalid-feedback" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
 
                     <div class="form-group mt-5">
-                        <input type="radio" name="status" id="status1">
+                        <input type="radio" name="status" id="status1" value="Cold">
                         <label for="status1">Cold</label>
                     </div>
                     <div class="form-group">
-                        <input type="radio" name="status" checked id="status2">
+                        <input type="radio" name="status" checked id="status2" value="On Progress">
                         <label for="status2">On Progress</label>
                     </div>
                     <div class="form-group">
-                        <input type="radio" name="status" id="status3">
+                        <input type="radio" name="status" id="status3" value="Hold">
                         <label for="status3">Hold</label>
                     </div>
 
 
                     <div class="form-group">
-                        <textarea name="detail" id="detail"  rows="4" class="form-control" placeholder="Berikan keterangan progress.."></textarea>
+                        <textarea name="detail" id="detail" rows="4"
+                            class="form-control @error('detail') is-invalid @enderror"
+                            placeholder="Berikan keterangan progress..">{{ $offer->progress->detail }}</textarea>
+                        @error('detail')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                 </div>
-
                 <div class="d-flex justify-content-start">
                     <x-button-submit>Submit</x-button-submit>
                 </div>
