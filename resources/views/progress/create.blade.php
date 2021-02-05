@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Tambah Kunjungan'])
+@extends('layouts.app', ['title' => $offer->offer_no])
 
 
 @section('breadcrumb')
@@ -9,24 +9,24 @@
 @section('content')
     <x-card>
         <div class="card-header">
-            <h3 class="card-title justify-content-md-between">
+            <h3 class="card-title ">
                 <div>Progress Penawaran</div>
             </h3>
         </div>
 
-        <form role="form" method="post" action="{{ route('progresses.store') }}" novalidate enctype="multipart/form-data">
+        <form role="form" method="post" action="{{ route('progresses.store', $offer->progress->id) }}" novalidate
+            enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="h5">
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" checked id="check1" value="30">
+                        <input type="checkbox" name="progress" id="check1" value="30" @if ($offer->progress->progress >= 30) checked @endif>
                         <label for="check1">
                             Sudah ada penawaran harga.
                         </label>
                     </div>
-
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check2" value="50">
+                        <input type="checkbox" name="progress" id="check2" value="50" @if ($offer->progress->progress >= 50) checked @endif>
                         <label for="check2">
                             Presentasi dan demo produk.
                         </label>
@@ -45,21 +45,21 @@
                     </div>
 
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check3" value="70">
+                        <input type="checkbox" name="progress" id="check3" value="70" @if ($offer->progress->progress >= 70) checked @endif>
                         <label for="check3">
                             User cocok dengan spesifikasi barang.
                         </label>
                     </div>
 
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check4" value="85">
+                        <input type="checkbox" name="progress" id="check4" value="85" @if ($offer->progress->progress >= 85) checked @endif>
                         <label for="check4">
                             Sudah ada negosiasi harga dengan user/pengadaan.
                         </label>
                     </div>
 
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check5" value="90">
+                        <input type="checkbox" name="progress" id="check5" value="90" @if ($offer->progress->progress >= 90) checked @endif>
                         <label for="check5">
                             Anggaran sudah ada dan cocok.
                         </label>
@@ -99,15 +99,6 @@
                                     data-mask value="{{ old('shipping') }}" required>
                             </div>
 
-                            {{-- pph 22/23 --}}
-                            <div class="form-group">
-                                <label for="pph">Pilih PPH</label>
-                                <select name="pph" id="pph" class="form-control">
-                                    <option value="22">PPH 22</option>
-                                    <option value="23">PPH 23</option>
-                                </select>
-                            </div>
-
                             {{-- image --}}
                             <div class="form-group">
                                 <input type="file" name="img">
@@ -129,9 +120,10 @@
                         <label for="status3">Hold</label>
                     </div>
 
+                </div>
 
-
-
+                <div class="d-flex justify-content-start">
+                    <x-button-submit>Submit</x-button-submit>
                 </div>
 
             </div>

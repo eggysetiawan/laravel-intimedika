@@ -21,6 +21,15 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ $offers->name ?? 'Table Penawaran' }}</h3>
                 </div>
+
+                @if (request('from') && request('to'))
+                    <div class="d-flex justify-content-center h4">
+                        <span style="font-weight: bold">{{ request('from') }}</span>&nbsp; s/d &nbsp;
+                        <span style="font-weight: bold">{{ request('to') }}</span>
+                        <span class="text-danger text-sm"><a href="{{ route('offers.index') }}">Reset</a></span>
+                    </div>
+                @endif
+
                 <!-- /.card-header -->
                 <div class="d-flex justify-content-end mt-3 mr-3">
                     <form action="{{ route('offers.filter') }}" method="GET">
@@ -31,14 +40,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    <input type="search" name="from" id="datemask"
+                                    <input type="search" value="{{ old('from') }}" name="from" id="datemask"
                                         class="form-control @error('date') is-invalid @enderror"
                                         data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
-                                    @error('date')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -49,14 +53,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    <input type="search" name="to" id="datemask"
+                                    <input type="search" name="to" value="{{ old('to') }}" id="datemask"
                                         class="form-control @error('date') is-invalid @enderror"
                                         data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
-                                    @if (request()->segment(1) == 'hospitals')
-                                        <span class="input-group-append">
-                                            <button type="submit" class="btn btn-danger btn-sm">Filter</button>
-                                        </span>
-                                    @endif
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-danger btn-sm">Filter</button>
+                                    </span>
                                 </div>
                             </div>
                         </span>

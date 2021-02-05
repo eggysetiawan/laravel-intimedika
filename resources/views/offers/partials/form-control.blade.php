@@ -116,9 +116,14 @@
                 </div>
                 {{-- quantity --}}
                 <div class="col-sm-2">
-                    <input type="number" name="quantity[]"
-                        class="form-control @error('quantity.' . $i) is-invalid @enderror" id="quantity"
-                        placeholder="Qty" autocomplete="off" value="{{ old('quantity.' . $i) }}" required>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Qty</span>
+                        </div>
+                        <input type="number" name="quantity[]"
+                            class="form-control @error('quantity.' . $i) is-invalid @enderror" id="quantity"
+                            placeholder="unit" autocomplete="off" value="{{ old('quantity.' . $i) }}" required>
+                    </div>
                     @error('quantity.' . $i)
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -130,10 +135,16 @@
             <div class="d-flex row">
                 <div class="col-md-12">
                     <label for="price{{ $i }}">Harga Penawaran #{{ $i }}</label>
-                    <input type="text" name="price[]" id="price"
-                        class="form-control @error('price.' . $i) is-invalid @enderror"
-                        data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
-                        data-mask value="{{ old('price.' . $i) }}" required>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp</span>
+                        </div>
+                        <input type="text" name="price[]" id="price"
+                            class="form-control @error('price.' . $i) is-invalid @enderror"
+                            data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                            data-mask value="{{ old('price.' . $i) }}" required>
+                    </div>
+
                     @error('price.' . $i)
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}

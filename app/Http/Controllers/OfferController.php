@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Offer, Order, Invoice, Customer};
+use App\{Offer, Order, Invoice, Customer, OfferProgress};
 use App\DataTables\OfferDataTable;
 use App\Modality;
 use App\Http\Requests\OfferRequest;
@@ -57,6 +57,7 @@ class OfferController extends Controller
         $initial = auth()->user()->initial;
         $bln = $array_bln[date('n', strtotime($request->date))];
         $tahun = date('Y', strtotime($request->date));
+
         $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
         $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
 
@@ -66,10 +67,17 @@ class OfferController extends Controller
         $attr['customer_id'] = request('customer');
         $offer = auth()->user()->offers()->create($attr);
 
-        // to table invoices
+        // to invoices table
         $invoice = Invoice::create([
             'offer_id' => $offer->id,
             'date' => $date,
+        ]);
+
+        // to offer_progress table
+        OfferProgress::create([
+            'offer_id' => $offer->id,
+            'progress' => 30,
+            'progress_date' => $date,
         ]);
 
         foreach ($request->modality as $i => $v) {

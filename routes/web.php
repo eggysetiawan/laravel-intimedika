@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
     // progress
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
-    Route::post('progresses/store', 'ProgressController@store')->name('progresses.store');
+    Route::post('progresses/{progress:id}/store', 'ProgressController@store')->name('progresses.store');
 
     // invoices
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
