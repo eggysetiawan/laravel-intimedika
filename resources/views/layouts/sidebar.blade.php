@@ -1,8 +1,8 @@
 <aside class="main-sidebar  sidebar-dark-danger elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link navbar-danger text-sm">
-        <img src="{{ asset('image/ipi2.png') }}" alt="Intimedika Puspa Indah" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
+        <img src="{{ asset('image/ipi2.png') }}" alt="Intimedika Puspa Indah"
+            class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
     </a>
 
@@ -55,13 +55,13 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview"> --}}
-                        {{-- <li class="nav-item">
+                {{-- <li class="nav-item">
                             <a href="#" class="nav-link {{ 'kunjungan' == request()->path() ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Inactive Page</p>
                             </a>
                         </li> --}}
-                        {{-- </ul>
+                {{-- </ul>
                 </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('modalities.index') }}"
@@ -88,7 +88,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('offers.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'offers' ? ' active' : '' }}">
+                        class="nav-link {{ request()->segment(1) == 'offers' || 'invoices' ? ' active' : '' }}">
                         <i class="fab fa-buffer nav-icon"></i>
                         <p>Penawaran</p>
                     </a>
