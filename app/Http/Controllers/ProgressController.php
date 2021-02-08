@@ -31,23 +31,27 @@ class ProgressController extends Controller
                 ]);
                 break;
 
-            case (100):
+            case (99):
                 $progress->update($attr);
 
                 $request->validate([
-                    'img' => 'required_if:progress,100|mimes:png,jpg,jpeg',
+                    'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
                 ]);
+                $imgName = date('YmdHi') . '.' . request()->file('img')->extension();
                 $progress
                     ->addMediaFromRequest('img')
-                    ->usingFileName(date('YmdHi_PO'))
-                    ->toMediaCollectionFromRemote('image_po');
+                    ->usingFileName($imgName)
+                    ->toMediaCollection('image_po');
                 break;
+
+
             default:
+                $request->validate([
+                    'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
+                ]);
                 $progress->update($attr);
 
-                $request->validate([
-                    'img' => 'required_if:progress,100|mimes:png,jpg,jpeg',
-                ]);
+
         endswitch;
 
         session()->flash('success', 'Progress Penawaran berhasil di update!');

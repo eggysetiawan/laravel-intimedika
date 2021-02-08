@@ -13,7 +13,7 @@
             <h3 class="card-title">Kunjungan Baru</h3>
         </div>
 
-        <form role="form" method="post" action="/visits/addStore" enctype="multipart/form-data">
+        <form role="form" method="post" action="{{ route('visits.addStore') }}" enctype="multipart/form-data">
             @csrf
             @include('visits.partials.form-control2', ['submit' => 'Create'])
         </form>

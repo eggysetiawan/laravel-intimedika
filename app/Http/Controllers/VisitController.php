@@ -14,14 +14,12 @@ class VisitController extends Controller
     public function index()
     {
 
-        $visits = cache()->remember('index-visits', 60 * 60 * 24, function () {
-            return  Visit::with('customer', 'author')
-                ->latest()
-                ->when(!auth()->user()->isAdmin(), function ($query) {
-                    return $query->where('user_id', auth()->id());
-                })
-                ->paginate(10);
-        });
+        $visits = Visit::with('customer', 'author')
+            ->latest()
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
+            ->paginate(10);
 
         return view('visits.index', [
             'visits' => $visits,

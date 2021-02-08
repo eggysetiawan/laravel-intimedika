@@ -9,7 +9,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-edit"></i>
-                Vertical Tabs Examples
+                Detail Penawaran
             </h3>
         </div>
         <div class="card-body">
@@ -39,11 +39,14 @@
                                     <div class="text-success form-control-plaintext text-center">Approved!</div>
                                     <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
                                         class="btn btn-info form-control">Print</a>
-                                    <form action="{{ route('invoices.repeat', $offer->invoices->first()->id) }}" method="post"
-                                        class="form-group">
-                                        @csrf
-                                        <button type="submit" class="btn bg-olive form-control-plaintext">Repeat Order</button>
-                                    </form>
+                                    @if ($offer->progress->approval == 1)
+                                        <form action="{{ route('invoices.repeat', $offer->invoices->first()->id) }}"
+                                            method="post" class="form-group">
+                                            @csrf
+                                            <button type="submit" class="btn bg-olive form-control-plaintext">Repeat
+                                                Order</button>
+                                        </form>
+                                    @endif
                                     @break
                                     @case(2)
                                     <div class="text-danger form-control-plaintext text-center">Rejected!</div>

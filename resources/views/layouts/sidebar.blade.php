@@ -88,7 +88,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('offers.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'offers' || 'invoices' ? ' active' : '' }}">
+                        class="nav-link {{ request()->segment(1) == 'offers' || request()->segment(1) == 'invoices' ? ' active' : '' }}">
                         <i class="fab fa-buffer nav-icon"></i>
                         <p>Penawaran</p>
                     </a>

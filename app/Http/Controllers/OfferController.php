@@ -97,4 +97,13 @@ class OfferController extends Controller
         session()->flash('success', 'Penawaran berhasil dibuat!');
         return redirect('offers');
     }
+
+    public function destroy(Offer $offer)
+    {
+        $this->authorize('delete', $offer);
+        $offer->delete();
+
+        session()->flash('success', 'data berhasil di hapus!');
+        return redirect('offers');
+    }
 }

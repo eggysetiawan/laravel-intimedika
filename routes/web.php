@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('offers', 'OfferController@index')->name('offers.index');
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
+    Route::delete('offers/{offer:slug}/delete', 'OfferController@destroy')->name('offers.delete');
 
     // progress
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
@@ -63,5 +64,5 @@ Route::middleware('auth')->group(function () {
     Route::get('offers-filter', 'SearchController@offer')->name('offers.filter');
 
     // approval
-    Route::get('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
+    Route::post('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
 });

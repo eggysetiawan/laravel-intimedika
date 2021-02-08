@@ -9,7 +9,6 @@ class ApprovalController extends Controller
 {
     public function offer(ApprovalRequest $request, Offer $offer)
     {
-
         $request->all();
         if ($request->approval == 1) :
             $approval = 1;

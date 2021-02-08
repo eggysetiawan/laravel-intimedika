@@ -64,6 +64,9 @@ class OfferDataTable extends DataTable
             ->when($this->from && $this->to, function ($query) {
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
             ->latest();
     }
 

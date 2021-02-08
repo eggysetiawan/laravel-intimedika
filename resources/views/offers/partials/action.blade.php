@@ -1,29 +1,76 @@
 @switch($offer->approve)
     @case(1)
-    <div class="text-success">Approved!</div>
-    @if (auth()->id() != 13)
-        <a href="{{ route('progresses.create', $offer->slug) }}"><button
-                class="badge bg-gradient-gray-dark badge-sm rounded-sm">Input
-                PO</button></a>
-    @endif
+    <div class="dropright text-center">
+        <a href="#" class="text-dark h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+        </a>
+        <div class="dropdown-menu">
+            @can('view', $offer)
+                <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
+                    Detail</a>
+            @endcan
+            @if (auth()->id() != 13)
+
+                <a href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
+                        class="far fa-edit"></i>Update PO</a>
+            @endif
+
+        </div>
+    </div>
     @break
     @case(2)
-    <div class="text-danger">Rejected!</div>
+    <div class="dropright text-center">
+        <a href="#" class="text-dark h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+        </a>
+        <div class="dropdown-menu">
+            @can('view', $offer)
+                <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
+                    Detail</a>
+            @endcan
+        </div>
+    </div>
     @break
     @default
-    @if (auth()
+
+
+    <!-- Default dropright button -->
+    <div class="dropright text-center">
+        <a href="#" class="text-dark h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+        </a>
+        <div class="dropdown-menu">
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
+                Detail</a>
+
+
+            @can('view', $offer)
+                <form action="{{ route('offers.delete', $offer->slug) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button class="dropdown-item" name="approval" type="submit"
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-trash-alt"></i>
+                        Delete</button>
+                </form>
+            @endcan
+
+            @if (auth()
             ->user()
             ->isAdmin())
-        <form action="{{ route('approval.offers', $offer->slug) }}" method="POST">
-            @csrf
-            <div class="btn-group">
-                <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
-                    onclick="return confirm('apakah anda yakin?')">Approve.</button>
-                <a href="{{ route('invoices.order', $offer->slug) }}" class="btn btn-info btn-sm">Detail</a>
-                <button class="btn btn-danger btn-sm" name="approval" value="2"
-                    onclick="return confirm('apakah anda yakin?')">Reject.</button>
-            </div>
-        </form>
-    @endif
+                <form action="{{ route('approval.offers', $offer->slug) }}" method="POST" class=" justify-content-center">
+                    @csrf
+                    <button class="dropdown-item" name="approval" type="submit" value="1"
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle"></i>
+                        Approve.</button>
+                    <button class="dropdown-item" name="approval" value="2"
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-times-circle"></i>
+                        Reject.</button>
+            @endif
+
+            </form>
+
+        </div>
+    </div>
+
 
 @endswitch
