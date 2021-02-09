@@ -14,9 +14,10 @@
             </h3>
         </div>
 
-        <form role="form" method="post" action="{{ route('progresses.store', $offer->progress->id) }}" novalidate
+        <form role="form" method="post" action="{{ route('progresses.update', $offer->slug) }}" novalidate
             enctype="multipart/form-data">
             @csrf
+            @method('patch')
             <div class="card-body">
                 <div class="h5">
                     <div class="form-group icheck-danger">

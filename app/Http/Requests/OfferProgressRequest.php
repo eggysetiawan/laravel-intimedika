@@ -27,11 +27,18 @@ class OfferProgressRequest extends FormRequest
             'progress' => 'nullable|required',
             'status' => 'string|required',
             'detail' => 'string|required',
-            'demo_date' => 'required_if:progress,99',
+            'demo_date' => 'required_if:progress,50',
             'description' => 'required_if:progress,50',
             'price_po' => 'required_if:progress,99',
             'shipping' => 'required_if:progress,99',
-            'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'price_po.required_if' => "Harga Pre-Order wajib diisi!",
+            'shipping.required_if' => "Ongkos kirim wajib diisi!"
         ];
     }
 }

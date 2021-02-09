@@ -2,14 +2,12 @@
 
 namespace App;
 
-use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OfferProgress extends Model implements HasMedia
+class OfferProgress extends Model
 {
-    use SoftDeletes, InteractsWithMedia;
+    use SoftDeletes;
 
     protected $fillable = ['offer_id', 'progress', 'price_po', 'detail', 'status', 'progress_date', 'approval'];
     protected $table = 'offer_progress';

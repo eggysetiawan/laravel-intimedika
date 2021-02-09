@@ -4,23 +4,23 @@ switch ($offer->progress->progress) {
         $bar = 'bg-danger';
         break;
     case 50:
-        $bar = 'bg-warning';
+        $bar = 'bg-danger';
         break;
     case 70:
-        $bar = 'bg-blue';
+        $bar = 'bg-warning';
         break;
     case 85:
-        $bar = 'bg-primary';
+        $bar = 'bg-warning';
         break;
     case 90:
-        $bar = 'bg-olive';
+        $bar = 'bg-success';
         break;
     case 99:
-        $bar = 'bg-olive';
+        $bar = 'bg-success';
         break;
 
     default:
-        $bar = 'bg-success';
+        $bar = 'bg-primary';
 
         break;
 }

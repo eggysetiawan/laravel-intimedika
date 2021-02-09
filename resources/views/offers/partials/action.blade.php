@@ -5,15 +5,32 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            @can('view', $offer)
-                <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
-                    Detail</a>
-            @endcan
-            @if (auth()->id() != 13)
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
+                Detail</a>
 
+            @if ($offer->progress->progress == 99 &&
+        auth()
+            ->user()
+            ->isAdmin())
+                <form action="{{ route('approval.progress', $offer->progress->id) }}" method="POST"
+                    class=" justify-content-center">
+                    @csrf
+                    @method('patch')
+                    <button class="dropdown-item" name="approval" type="submit" value="1"
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle"></i>
+                        Approve PO.</button>
+                    <button class="dropdown-item" name="approval" value="2"
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-times-circle"></i>
+                        Reject PO.</button>
+                </form>
+            @endif
+
+
+            @if (auth()->id() != 13)
                 <a href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
                         class="far fa-edit"></i>Update PO</a>
             @endif
+
 
         </div>
     </div>
@@ -59,15 +76,16 @@
             ->isAdmin())
                 <form action="{{ route('approval.offers', $offer->slug) }}" method="POST" class=" justify-content-center">
                     @csrf
+                    @method('patch')
                     <button class="dropdown-item" name="approval" type="submit" value="1"
                         onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle"></i>
                         Approve.</button>
                     <button class="dropdown-item" name="approval" value="2"
                         onclick="return confirm('apakah anda yakin?')"><i class="far fa-times-circle"></i>
                         Reject.</button>
+                </form>
             @endif
 
-            </form>
 
         </div>
     </div>

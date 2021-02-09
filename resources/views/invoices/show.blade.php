@@ -367,22 +367,18 @@
                                     <div class="row">
                                         <!-- accepted payments column -->
                                         <div class="col-6">
-                                            <p class="lead">Payment Methods:</p>
-                                            <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                            <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                                            <dt>Foto Pre-Order</dt>
 
-                                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning
-                                                heekya handango imeem
-                                                plugg
-                                                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                            </p>
+                                            <a href="{{ asset($offer->progress->getFirstMediaUrl('image_po')) }}"
+                                                data-toggle="lightbox" data-title="PO {{ $offer->offer_no }}"
+                                                data-gallery="gallery">
+                                                <img src="{{ asset($offer->progress->getFirstMediaUrl('image_po')) }}"
+                                                    class="img-fluid mb-2" alt="white sample" width="150px" />
+                                            </a>
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-6">
-                                            <p class="lead">Amount Due 2/22/2014</p>
+                                            <p class="lead">{{ date('d/m/Y', strtotime($invoice->date)) }}</p>
 
                                             <div class="table-responsive">
                                                 <table class="table">

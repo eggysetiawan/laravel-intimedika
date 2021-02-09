@@ -123,9 +123,6 @@ class OfferDataTable extends DataTable
                 ->printable(false)
                 ->exportable(false),
 
-            // tanggal penawaran
-            Column::make('offer_date')->title('Tgl. Penawaran'),
-
             // progress
             Column::computed('progressbar')
                 ->title('Progress')
@@ -133,6 +130,10 @@ class OfferDataTable extends DataTable
                 ->orderable(false)
                 ->printable(false)
                 ->exportable(false),
+
+
+            // tanggal penawaran
+            Column::make('offer_date')->title('Tgl. Penawaran'),
 
             // progress searchable
             Column::make('progress.progress')

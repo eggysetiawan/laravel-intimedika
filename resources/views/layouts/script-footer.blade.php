@@ -9,6 +9,9 @@
 {{-- select2 --}}
 <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
+<!-- Ekko Lightbox -->
+<script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+
 <!-- InputMask -->
 <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
@@ -82,6 +85,26 @@
     }
 
 </script> --}}
+
+<script>
+    $(function() {
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox({
+                alwaysShowClose: true
+            });
+        });
+
+        $('.filter-container').filterizr({
+            gutterPixels: 3
+        });
+        $('.btn[data-filter]').on('click', function() {
+            $('.btn[data-filter]').removeClass('active');
+            $(this).addClass('active');
+        });
+    })
+
+</script>
 
 <script>
     $("input[data-bootstrap-switch]").each(function() {
