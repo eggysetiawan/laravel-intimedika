@@ -8,7 +8,8 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     // approval
     Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
-    Route::patch('approve/{progress:id}/progress', 'ApprovalController@progress')->name('approval.progress');
+    Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
+
 
     // route customers
     Route::get('customers', 'CustomerController@index')->name('customers.index');
@@ -28,10 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('hospitals/{hospital:slug}/edit', 'HospitalController@update')->name('hospitals.update');
     Route::delete('hospitals/{hospital:slug}/delete', 'HospitalController@destroy')->name('hospitals.delete');
 
+
     // invoices
     Route::get('invoices/{offer:slug}/print', 'InvoiceController@print')->name('invoices.print');
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
     Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat');
+
 
     // modalities
     Route::get('modalities', 'ModalityController@index')->name('modalities.index');
@@ -41,20 +44,24 @@ Route::middleware('auth')->group(function () {
     Route::patch('modalities/{modality:slug}/edit', 'ModalityController@update')->name('modalities.update');
     Route::get('modalities/{modality:slug}', 'ModalityController@show')->name('modalities.show');
 
+
     //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
     Route::delete('offers/{offer:slug}/delete', 'OfferController@destroy')->name('offers.delete');
 
+
     // progress
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
     Route::patch('progresses/{offer:slug}/update', 'ProgressController@update')->name('progresses.update');
+
 
     // search
     Route::get('search/visits', 'SearchController@visit')->name('search.visits');
     Route::get('hospitals-filter', 'SearchController@hospital')->name('hospitals.filter');
     Route::get('offers-filter', 'SearchController@offer')->name('offers.filter');
+
 
     // visits
     Route::get('/', 'HomeController@index')->name('home');

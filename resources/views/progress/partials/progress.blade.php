@@ -1,5 +1,6 @@
 @php
-switch ($offer->progress->progress) {
+$progress = $offer->progress->progress;
+switch ($progress) {
     case 30:
         $bar = 'bg-danger';
         break;
@@ -28,20 +29,26 @@ switch ($offer->progress->progress) {
 
 @switch($offer->approve)
     @case(1)
-    <small>
-        <div class="justify-content-center">
-            <small class="text-secondary">On Progress</small>
-        </div>
-    </small>
+    @if ($progress <= 99)
+        <small>
+            <div class="justify-content-center">
+                <small class="text-secondary">{{ $offer->progress->status }}</small>
+            </div>
+        </small>
+    @endif
     <div class="project_progress">
         <div class="progress progress-sm">
-            <div class="progress-bar {{ $bar }}" role="progressbar"
-                aria-volumenow="{{ $offer->progress->progress }}" aria-volumemin="0" aria-volumemax="100"
-                style="width: {{ $offer->progress->progress }}%">
+            <div class="progress-bar {{ $bar }}" role="progressbar" aria-volumenow="{{ $progress }}"
+                aria-volumemin="0" aria-volumemax="100" style="width: {{ $progress }}%">
             </div>
         </div>
         <small>
-            {{ $offer->progress->progress }}% Complete
+            {{ $progress }}% Complete
+
+            @if ($progress == 99)
+                <a href="{{ route('invoices.order', $offer->slug) }}"> <small class="text-primary">Ready to
+                        Approve</small></a>
+            @endif
         </small>
     </div>
     @break

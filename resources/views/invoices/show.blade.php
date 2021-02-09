@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-    <div class="card card-primary card-outline">
+    <div class="card card-danger card-outline">
         <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-edit"></i>
@@ -20,10 +20,10 @@
                         aria-orientation="vertical">
                         <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home"
                             role="tab" aria-controls="vert-tabs-home" aria-selected="true">Penawaran</a>
-                        <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile"
-                            role="tab" aria-controls="vert-tabs-profile" aria-selected="false">Order</a>
-                        {{-- <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile"
-                            role="tab" aria-controls="vert-tabs-profile" aria-selected="false">additional tab</a> --}}
+                        <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"
+                            aria-controls="vert-tabs-order" aria-selected="false">Order</a>
+                        {{-- <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order"
+                            role="tab" aria-controls="vert-tabs-order" aria-selected="false">additional tab</a> --}}
 
                     </div>
                 </div>
@@ -36,22 +36,26 @@
 
                                 @switch($offer->approve)
                                     @case(1)
-                                    <div class="text-success form-control-plaintext text-center">Approved!</div>
+
+
+
+                                    {{-- print --}}
                                     <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
                                         class="btn btn-info form-control">Print</a>
+
+                                    {{-- repeat order --}}
                                     @if ($offer->progress->approval == 1)
-                                        <form action="{{ route('invoices.repeat', $offer->invoices->first()->id) }}"
-                                            method="post" class="form-group">
-                                            @csrf
-                                            <button type="submit" class="btn bg-olive form-control-plaintext">Repeat
-                                                Order</button>
-                                        </form>
+                                        <button type="button" class="btn bg-olive form-control-plaintext" data-toggle="modal"
+                                            data-target="#repeatOrder">
+                                            Repeat Order
+                                        </button>
                                     @endif
                                     @break
                                     @case(2)
                                     <div class="text-danger form-control-plaintext text-center">Rejected!</div>
                                     @break
                                     @default
+                                    {{-- approve penawaran --}}
                                     @if (auth()
                 ->user()
                 ->isAdmin())
@@ -272,8 +276,20 @@
 
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel"
-                            aria-labelledby="vert-tabs-profile-tab">
+                        <div class="tab-pane fade" id="vert-tabs-order" role="tabpanel"
+                            aria-labelledby="vert-tabs-order-tab">
+                            @if ($offer->progress->progress == 99)
+                                <form action="{{ route('approval.progress', $offer->slug) }}" method="POST">
+                                    @csrf
+                                    @method('patch')
+                                    <div class="btn-group form-control-plaintext">
+                                        <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
+                                            onclick="return confirm('apakah anda yakin?')">Approve PO.</button>
+                                        <button class="btn btn-danger btn-sm" name="approval" value="2"
+                                            onclick="return confirm('apakah anda yakin?')">Reject PO.</button>
+                                    </div>
+                                </form>
+                            @endif
                             <div class="callout callout-info">
                                 <h5><i class="fas fa-info"></i>
                                     <div class="d-flex justify-content-between">Order History
@@ -367,14 +383,17 @@
                                     <div class="row">
                                         <!-- accepted payments column -->
                                         <div class="col-6">
-                                            <dt>Foto Pre-Order</dt>
+                                            @if ($invoice->getFirstMediaUrl('image_po'))
+                                                <dt>Foto Pre-Order</dt>
 
-                                            <a href="{{ asset($offer->progress->getFirstMediaUrl('image_po')) }}"
-                                                data-toggle="lightbox" data-title="PO {{ $offer->offer_no }}"
-                                                data-gallery="gallery">
-                                                <img src="{{ asset($offer->progress->getFirstMediaUrl('image_po')) }}"
-                                                    class="img-fluid mb-2" alt="white sample" width="150px" />
-                                            </a>
+                                                <a href="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                    data-toggle="lightbox" data-title="PO {{ $offer->offer_no }}"
+                                                    data-gallery="gallery">
+                                                    <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                        class="img-fluid mb-2" alt="PO {{ $offer->slug }}"
+                                                        width="150px" />
+                                                </a>
+                                            @endif
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-6">
@@ -438,17 +457,40 @@
         <!-- /.card -->
     </div>
 
-    <div class="d-flex justify-content-lg-center">
 
-        <div class="col-md-3">
-            <div class="justify-content-center">
+    {{-- repeat order --}}
+    <!-- Modal -->
+    <div class="modal fade" id="repeatOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-red">
+                    <h5 class="modal-title" id="exampleModalLabel">Repeat Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('invoices.repeat', $offer->invoices->first()->id) }}" method="post"
+                    class="form-group" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="img">Masukan bukti PO</label><br>
+                            <input type="file" name="img" id="img" class="@error('img') is-invalid @enderror">
+                            @error('img')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Repeat</button>
+                    </div>
+                </form>
 
             </div>
         </div>
-        <div class="col-md-9">
-
-
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
+    </div>
 @endsection

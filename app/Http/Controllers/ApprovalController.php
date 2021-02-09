@@ -9,7 +9,7 @@ use App\OfferProgress;
 class ApprovalController extends Controller
 {
 
-    public function progress(ApprovalRequest $request, OfferProgress $progress)
+    public function progress(ApprovalRequest $request, Offer $offer)
     {
         $request->all();
         if ($request->approval == 1) :
@@ -20,8 +20,9 @@ class ApprovalController extends Controller
             $message = 'PO berhasil di reject!';
         endif;
         $approved_by = auth()->id();
-        $progress->update([
-            'approve' => $approval,
+        $offer->progress->update([
+            'progress' => 100,
+            'approval' => $approval,
             'approved_by' => $approved_by,
             'approved_at' => now()
         ]);

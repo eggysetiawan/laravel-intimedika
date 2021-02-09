@@ -41,14 +41,6 @@ class OfferController extends Controller
         // convert month romawi
         $attr = $request->all();
 
-        // $modalities = Modality::select('price')
-        //     ->whereIn('id', $request->modality)->get();
-        // $min = 0;
-        // foreach ($modalities as $mod) {
-        //     $min = $mod->price;
-        // }
-        // dd($min);
-
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
 
         // offer_no
@@ -78,6 +70,7 @@ class OfferController extends Controller
             'offer_id' => $offer->id,
             'progress' => 30,
             'progress_date' => $date,
+            'status' => 'On Progress',
         ]);
 
         foreach ($request->modality as $i => $v) {

@@ -12,7 +12,7 @@
         auth()
             ->user()
             ->isAdmin())
-                <form action="{{ route('approval.progress', $offer->progress->id) }}" method="POST"
+                <form action="{{ route('approval.progress', $offer->slug) }}" method="POST"
                     class=" justify-content-center">
                     @csrf
                     @method('patch')
@@ -25,10 +25,10 @@
                 </form>
             @endif
 
-
-            @if (auth()->id() != 13)
-                <a href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
-                        class="far fa-edit"></i>Update PO</a>
+            @if ($offer->progress->progress < 99)
+                @if (auth()->id() != 13) <a
+                href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
+                class="far fa-edit"></i>Update PO </a> @endif
             @endif
 
 
