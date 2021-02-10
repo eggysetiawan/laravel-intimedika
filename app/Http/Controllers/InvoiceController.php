@@ -28,23 +28,35 @@ class InvoiceController extends Controller
             ->toMediaCollection('image_po');
 
         // get order
-        $orders = Order::where('invoice_id', $invoice->id)
-            ->get();
+        $orders = Order::whereIn('id', $request->id_order);
 
-        // insert order repeat
-        foreach ($orders as $order) {
-            Order::insert([
+        $orders->each(function ($order, $i) use ($invoice_create, $request) {
+            $order->insert([
                 'invoice_id' => $invoice_create->id,
                 'modality_id' => $order->modality_id,
                 'price' => $order->price,
-                'quantity' => $order->quantity,
+                'quantity' => $request->qty[$i],
                 'references' => $order->references,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-        }
+        });
+
+
+        // insert order repeat
+        // foreach ($orders as $i => $order) {
+        //     $order->insert([
+        //         'invoice_id' => $invoice_create->id,
+        //         'modality_id' => $order->modality_id,
+        //         'price' => $order->price,
+        //         'quantity' => $request->qty[$i],
+        //         'references' => $order->references,
+        //         'created_at' => now(),
+        //         'updated_at' => now(),
+        //     ]);
+        // }
         session()->flash('success', 'Repeat order berhasil!');
-        return redirect('offers');
+        return back();
     }
 
     public function show(Offer $offer)

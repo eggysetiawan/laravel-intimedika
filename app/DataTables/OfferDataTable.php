@@ -38,9 +38,6 @@ class OfferDataTable extends DataTable
                     ]);
                 }
             })
-            ->editColumn('invoices.orders.references', function (Offer $offer) {
-                return $offer->invoices->first()->orders->first()->references;
-            })
             ->editColumn('customer.hospitals.name', function (Offer $offer) {
                 return $offer->customer->hospitals->first()->name ?? $offer->customer->name;
             })
@@ -149,10 +146,10 @@ class OfferDataTable extends DataTable
             // nama sales
             Column::make('author.name')->title('Sales'),
 
-            // referensi
-            Column::make('invoices.orders.references')->title('Referensi')
-                ->searchable(true)
-                ->orderable(false),
+            // // referensi
+            // Column::make('invoices.orders.references')->title('Referensi')
+            //     ->searchable(true)
+            //     ->orderable(false),
 
         ];
     }

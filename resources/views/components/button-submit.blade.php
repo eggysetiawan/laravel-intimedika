@@ -1,1 +1,1 @@
-<button type="submit" class="btn bg-red">{{ $slot }}</button>
+<button type="submit" class="btn bg-teal">{{ $slot }}</button>

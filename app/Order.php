@@ -11,6 +11,11 @@ class Order extends Model
 
     protected $fillable = ['invoice_id', 'modality_id', 'quantity', 'status', 'price'];
 
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+
     public function modality()
     {
         return $this->belongsTo(Modality::class);

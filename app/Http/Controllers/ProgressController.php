@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Demo;
 use App\Offer;
-use App\OfferProgress;
 use App\Http\Requests\OfferProgressRequest;
-use App\Invoice;
 
 class ProgressController extends Controller
 {
@@ -38,10 +36,10 @@ class ProgressController extends Controller
                 $orders = $offer->invoices->first()->orders
                     ->whereIn('id', $request->id_order);
 
-                foreach ($orders as $order => $v) {
+                foreach ($orders as $i => $order) {
                     $order->update([
-                        'price' => str_replace(".", "", $request->price[$order]),
-                        'quantity' => str_replace(".", "", $request->qty[$order]),
+                        'price' => str_replace(".", "", $request->price[$i]),
+                        'quantity' => str_replace(".", "", $request->qty[$i]),
                     ]);
                 }
 

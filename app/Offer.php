@@ -25,7 +25,7 @@ class Offer extends Model implements HasMedia
 
     public function invoices()
     {
-        return $this->hasMany(Invoice::class)->orderBy('date', 'desc');
+        return $this->hasMany(Invoice::class)->latest();
     }
 
     public function customer()

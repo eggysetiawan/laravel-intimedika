@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                <button type="button" class="btn bg-red btn-sm" data-toggle="modal" data-target="#modal-sm">
+                <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-sm">
                     Buat Penawaran
                 </button>
             </div>
@@ -38,7 +38,7 @@
                                 <label for="from">From</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="input-group-text bg-teal"><i class="far fa-calendar-alt"></i></span>
                                     </div>
                                     <input type="search" value="{{ old('from') }}" name="from" id="datemask"
                                         class="form-control @error('date') is-invalid @enderror"
@@ -51,13 +51,13 @@
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="input-group-text bg-teal"><i class="far fa-calendar-alt"></i></span>
                                     </div>
                                     <input type="search" name="to" value="{{ old('to') }}" id="datemask"
                                         class="form-control @error('date') is-invalid @enderror"
                                         data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
                                     <span class="input-group-append">
-                                        <button type="submit" class="btn btn-danger btn-sm">Filter</button>
+                                        <button type="submit" class="btn bg-teal btn-sm">Filter</button>
                                     </span>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
         <div class="modal-dialog modal-sm">
             <form action="{{ route('offers.create') }}" method="GET">
                 <div class="modal-content">
-                    <div class="modal-header bg-gradient-red">
+                    <div class="modal-header bg-gradient-teal">
                         <h4 class="modal-title">Buat Penawaran</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

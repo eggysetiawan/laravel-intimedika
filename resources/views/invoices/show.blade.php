@@ -156,7 +156,7 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    @foreach ($offer->invoices->first()->orders as $order)
+                                                    @foreach ($offer->invoices->last()->orders as $order)
                                                         <tr>
                                                             <td>
                                                                 <center>{{ $loop->iteration }}</center>
@@ -286,6 +286,13 @@
                                     </div>
                                 </form>
                             @endif
+                            {{-- repeat order --}}
+                            @if ($offer->progress->approval == 1)
+                                <button type="button" class="btn bg-olive form-control-plaintext mb-2" data-toggle="modal"
+                                    data-target="#repeatOrder">
+                                    <i class="fas fa-redo"></i> Repeat Order
+                                </button>
+                            @endif
                             <div class="callout callout-info">
                                 <h5><i class="fas fa-info"></i>
                                     <div class="d-flex justify-content-between">Order History
@@ -294,9 +301,9 @@
                                 </h5>
 
                             </div>
-                            @if ($offer->progress->progress == 99)
+                            @if ($offer->progress->progress >= 99)
                                 @foreach ($offer->invoices as $invoice)
-
+                                    {{ $invoice->id }}
                                     <!-- Main content -->
                                     <div class="invoice p-3 mb-3">
                                         <!-- title row -->
@@ -360,9 +367,9 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($invoice->orders as $order)
+                                                        @foreach ($invoice->orders->whereNotNull('quantity') as $order)
                                                             <tr>
-                                                                <td>{{ $order->qty }}</td>
+                                                                <td>{{ $order->quantity }}</td>
                                                                 <td>{{ $order->modality->name }}</td>
                                                                 <td>{{ $order->modality->spec }}</td>
                                                                 <td>@currency($order->modality->price)</td>
@@ -459,18 +466,70 @@
     {{-- repeat order --}}
     <!-- Modal -->
     <div class="modal fade" id="repeatOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-gradient-red">
+                <div class="modal-header bg-gradient-teal">
                     <h5 class="modal-title" id="exampleModalLabel">Repeat Order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form action="{{ route('invoices.repeat', $offer->invoices->first()->id) }}" method="post"
-                    class="form-group" enctype="multipart/form-data">
+                    class="form-group" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="modal-body">
+                        <div class="form-group">
+                            <dt>Pilih Modality yang ingin di order.</dt>
+                            @foreach ($offer->invoices->last()->orders as $order)
+                                <div class="d-flex justify-content-center">
+
+                                    <div class="col-md-6">
+                                        {{-- price_po --}}
+                                        <div class="row" style="margin-top: 30px">
+
+                                            <div class="col-md-2">
+                                                <input type="checkbox" name="id_order[]" value="{{ $order->id }}">
+                                            </div>
+                                            <div class="col-md-10">
+
+                                                <input type="text" disabled id="disabled"
+                                                    class="form-control @error('disabled') is-invalid @enderror"
+                                                    value="{{ $order->modality->name }}">
+                                                @error('disabled')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        {{-- price_po --}}
+                                        @if ($loop->first)
+                                            <label for="shipping">Qty</label>
+                                        @else
+                                            <label for="shipping">&nbsp;</label>
+                                        @endif
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Qty</span>
+                                            </div>
+                                            <input type="text" name="qty[]" id="qty"
+                                                class="form-control @error('qty') is-invalid @enderror" placeholder="unit"
+                                                required>
+                                            @error('qty')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        </div>
+
                         <div class="form-group">
                             <label for="img">Masukan bukti PO</label><br>
                             <input type="file" name="img" id="img" class="@error('img') is-invalid @enderror">
@@ -484,7 +543,7 @@
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Repeat</button>
+                        <button type="submit" class="btn bg-teal">Repeat</button>
                     </div>
                 </form>
 
