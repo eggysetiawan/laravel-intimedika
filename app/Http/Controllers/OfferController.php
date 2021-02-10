@@ -79,7 +79,6 @@ class OfferController extends Controller
                 'invoice_id' => $invoice->id,
                 'modality_id' => $request->modality[$i],
                 'price' => str_replace(".", "", $request->price[$i]),
-                'quantity' => $request->quantity[$i],
                 'references' => $request->references[$i],
                 'created_at' => $date,
                 'updated_at' => $date,

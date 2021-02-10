@@ -29,8 +29,9 @@ class OfferProgressRequest extends FormRequest
             'detail' => 'string|required',
             'demo_date' => 'required_if:progress,50',
             'description' => 'required_if:progress,50',
-            'price_po' => 'required_if:progress,99',
-            'shipping' => 'required_if:progress,99',
+            'shipping' => 'nullable',
+            'price.*' => 'nullable',
+            'qty.*' => 'nullable',
         ];
     }
 

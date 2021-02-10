@@ -87,22 +87,77 @@
 
                         <div id="img">
 
-                            {{-- price_po --}}
-                            <label for="shipping">Harga Pre-Order</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Rp</span>
+                            @foreach ($offer->invoices->first()->orders as $order)
+                                <div class="d-flex justify-content-center">
+
+                                    <div class="col-md-6">
+                                        {{-- price_po --}}
+                                        <div class="row" style="margin-top: 30px">
+
+                                            <div class="col-md-2">
+                                                <input type="checkbox" name="id_order[]" value="{{ $order->id }}">
+                                            </div>
+                                            <div class="col-md-10">
+
+                                                <input type="text" disabled id="disabled"
+                                                    class="form-control @error('disabled') is-invalid @enderror"
+                                                    value="{{ $order->modality->name }}">
+                                                @error('disabled')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{-- price_po --}}
+                                        @if ($loop->first)
+                                            <label for="shipping">Harga Pre-Order</label>
+                                        @else
+                                            <label for="shipping">&nbsp;</label>
+                                        @endif
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp</span>
+                                            </div>
+                                            <input type="text" name="price[]" id="price"
+                                                class="form-control @error('price') is-invalid @enderror" value="" required
+                                                data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                                                data-mask>
+                                            @error('price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        {{-- price_po --}}
+                                        @if ($loop->first)
+                                            <label for="shipping">Qty</label>
+                                        @else
+                                            <label for="shipping">&nbsp;</label>
+                                        @endif
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Qty</span>
+                                            </div>
+                                            <input type="text" name="qty[]" id="qty"
+                                                class="form-control @error('qty') is-invalid @enderror" placeholder="unit"
+                                                required>
+                                            @error('qty')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <input type="text" name="price_po" id="price_po"
-                                    class="form-control @error('price_po') is-invalid @enderror"
-                                    data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
-                                    data-mask value="{{ old('price_po') }}" required>
-                                @error('price_po')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
+                            @endforeach
+
+
 
 
 

@@ -34,7 +34,6 @@ class OfferRequest extends FormRequest
             'queue' => 'required',
             'modality.*' => 'nullable',
             'references.*' => 'nullable',
-            'quantity.*' => 'nullable',
             'price.*' => 'nullable',
         ];
     }

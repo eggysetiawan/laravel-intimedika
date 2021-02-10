@@ -92,7 +92,9 @@
                         <i class="fab fa-buffer nav-icon"></i>
                         <p>Penawaran</p>
                     </a>
+
                 </li>
+
                 <li class="nav-item">
                     <a href="{{ route('hospitals.index') }}"
                         class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">

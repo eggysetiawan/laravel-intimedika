@@ -102,12 +102,14 @@ class VisitController extends Controller
         $attr['customer_id'] = $customer->id;
         $visit = auth()->user()->visits()->create($attr);
 
-        $imgSlug = $slug . '.' . request()->file('img')->extension();
+        if (request('img')) :
+            $imgSlug = $slug . '.' . request()->file('img')->extension();
 
-        $visit
-            ->addMediaFromRequest('img')
-            ->usingFileName($imgSlug)
-            ->toMediaCollection('images');
+            $visit
+                ->addMediaFromRequest('img')
+                ->usingFileName($imgSlug)
+                ->toMediaCollection('images');
+        endif;
 
         // alert success
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');

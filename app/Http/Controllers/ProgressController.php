@@ -33,10 +33,22 @@ class ProgressController extends Controller
                 break;
 
             case (99):
+
+
+                $orders = $offer->invoices->first()->orders
+                    ->whereIn('id', $request->id_order);
+
+                foreach ($orders as $order => $v) {
+                    $order->update([
+                        'price' => str_replace(".", "", $request->price[$order]),
+                        'quantity' => str_replace(".", "", $request->qty[$order]),
+                    ]);
+                }
+
+
                 $request->validate([
                     'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
                 ]);
-                $attr['price_po'] = str_replace(".", "", request('price_po'));
                 $attr['shipping'] = str_replace(".", "", request('shipping'));
                 $offer->progress->update($attr);
                 $imgName = date('YmdHi') . '.' . request()->file('img')->extension();
@@ -45,6 +57,13 @@ class ProgressController extends Controller
                     ->addMediaFromRequest('img')
                     ->usingFileName($imgName)
                     ->toMediaCollection('image_po');
+
+
+
+
+                // to taxes table
+                // $price_po = $attr['price_po'];
+
                 break;
 
 

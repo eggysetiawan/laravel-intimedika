@@ -59,7 +59,9 @@
                                     @if (auth()
                 ->user()
                 ->isAdmin())
-                                        <form action="{{ route('approval.offers', $offer->slug) }}">
+                                        <form action="{{ route('approval.offers', $offer->slug) }}" method="POST">
+                                            @csrf
+                                            @method('patch')
                                             <div class="btn-group form-control-plaintext">
                                                 <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
                                                     onclick="return confirm('apakah anda yakin?')">Approve.</button>
@@ -147,9 +149,6 @@
                                                                 <center>Nama Alat</center>
                                                             </th>
                                                             <th>
-                                                                <center>Qty</center>
-                                                            </th>
-                                                            <th>
                                                                 <center>Harga Satuan</center>
                                                             </th>
                                                             <th>
@@ -173,9 +172,6 @@
                                                                     style="text-align: justify;text-justify:auto;justify-content">
                                                                     <pre>{{ $order->modality->spec }}</pre><br>
                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                <center>{{ $order->quantity }}</center>
                                                             </td>
                                                             <td>
                                                                 <center>
@@ -278,7 +274,7 @@
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-order" role="tabpanel"
                             aria-labelledby="vert-tabs-order-tab">
-                            @if ($offer->progress->progress == 99)
+                            @if ($offer->progress->progress == 99 && auth()->user()->level == 'top')
                                 <form action="{{ route('approval.progress', $offer->slug) }}" method="POST">
                                     @csrf
                                     @method('patch')
@@ -298,149 +294,151 @@
                                 </h5>
 
                             </div>
-                            @foreach ($offer->invoices as $invoice)
+                            @if ($offer->progress->progress == 99)
+                                @foreach ($offer->invoices as $invoice)
 
-                                <!-- Main content -->
-                                <div class="invoice p-3 mb-3">
-                                    <!-- title row -->
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h4>
-                                                <i class="fas fa-globe"></i>
-                                                {{ $invoice->offer->customer->hospitals->first()->name ?? $invoice->offer->customer->name }}
-                                                <small class="float-right">Date:
-                                                    {{ date('d/m/Y', strtotime($invoice->date)) }}</small>
-                                            </h4>
+                                    <!-- Main content -->
+                                    <div class="invoice p-3 mb-3">
+                                        <!-- title row -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4>
+                                                    <i class="fas fa-globe"></i>
+                                                    {{ $invoice->offer->customer->hospitals->first()->name ?? $invoice->offer->customer->name }}
+                                                    <small class="float-right">Date:
+                                                        {{ date('d/m/Y', strtotime($invoice->date)) }}</small>
+                                                </h4>
+                                            </div>
+                                            <!-- /.col -->
                                         </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- info row -->
-                                    <div class="row invoice-info">
-                                        <div class="col-sm-4 invoice-col">
-                                            From
-                                            <address>
-                                                <strong>{{ $invoice->offer->author->name }}</strong><br>
-                                                {{ $invoice->offer->author->address }}<br>
-                                                {{ $invoice->offer->author->city }}<br>
-                                                Phone: {{ $invoice->offer->author->phone }}<br>
-                                                Email: {{ $invoice->offer->author->email }}
-                                            </address>
+                                        <!-- info row -->
+                                        <div class="row invoice-info">
+                                            <div class="col-sm-4 invoice-col">
+                                                From
+                                                <address>
+                                                    <strong>{{ $invoice->offer->author->name }}</strong><br>
+                                                    {{ $invoice->offer->author->address }}<br>
+                                                    {{ $invoice->offer->author->city }}<br>
+                                                    Phone: {{ $invoice->offer->author->phone }}<br>
+                                                    Email: {{ $invoice->offer->author->email }}
+                                                </address>
+                                            </div>
+                                            <!-- /.col -->
+                                            <div class="col-sm-4 invoice-col">
+                                                To
+                                                <address>
+                                                    <strong>{{ $invoice->offer->customer->hospitals->first()->name ?? $invoice->offer->customer->name }}</strong><br>
+                                                    {{ $invoice->offer->customer->address }}<br>
+                                                    {{ $invoice->offer->customer->city }}<br>
+                                                    Phone: {{ $invoice->offer->customer->mobile }}<br>
+                                                    Email: {{ $invoice->offer->customer->email }}
+                                                </address>
+                                            </div>
+                                            <!-- /.col -->
+                                            <div class="col-sm-4 invoice-col">
+                                                <b>Invoice #007612</b><br>
+                                                <br>
+                                                <b>Order ID:</b> 4F3S8J<br>
+                                                <b>Payment Due:</b> 2/22/2014<br>
+                                                <b>Account:</b> 968-34567
+                                            </div>
+                                            <!-- /.col -->
                                         </div>
-                                        <!-- /.col -->
-                                        <div class="col-sm-4 invoice-col">
-                                            To
-                                            <address>
-                                                <strong>{{ $invoice->offer->customer->hospitals->first()->name ?? $invoice->offer->customer->name }}</strong><br>
-                                                {{ $invoice->offer->customer->address }}<br>
-                                                {{ $invoice->offer->customer->city }}<br>
-                                                Phone: {{ $invoice->offer->customer->mobile }}<br>
-                                                Email: {{ $invoice->offer->customer->email }}
-                                            </address>
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-sm-4 invoice-col">
-                                            <b>Invoice #007612</b><br>
-                                            <br>
-                                            <b>Order ID:</b> 4F3S8J<br>
-                                            <b>Payment Due:</b> 2/22/2014<br>
-                                            <b>Account:</b> 968-34567
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
+                                        <!-- /.row -->
 
-                                    <!-- Table row -->
-                                    <div class="row">
-                                        <div class="col-12 table-responsive">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Qty</th>
-                                                        <th>Alat</th>
-                                                        <th>Spesifikasi</th>
-                                                        <th>Price List</th>
-                                                        <th>Harga Penawaran</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($invoice->orders as $order)
+                                        <!-- Table row -->
+                                        <div class="row">
+                                            <div class="col-12 table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
                                                         <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $order->modality->name }}</td>
-                                                            <td>{{ $order->modality->spec }}</td>
-                                                            <td>@currency($order->modality->price)</td>
-                                                            <td>@currency($order->price)</td>
+                                                            <th>Qty</th>
+                                                            <th>Alat</th>
+                                                            <th>Spesifikasi</th>
+                                                            <th>Price List</th>
+                                                            <th>Harga Penawaran</th>
                                                         </tr>
-                                                    @endforeach
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($invoice->orders as $order)
+                                                            <tr>
+                                                                <td>{{ $order->qty }}</td>
+                                                                <td>{{ $order->modality->name }}</td>
+                                                                <td>{{ $order->modality->spec }}</td>
+                                                                <td>@currency($order->modality->price)</td>
+                                                                <td>@currency($order->price)</td>
+                                                            </tr>
+                                                        @endforeach
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
-
-                                    <div class="row">
-                                        <!-- accepted payments column -->
-                                        <div class="col-6">
-                                            @if ($invoice->getFirstMediaUrl('image_po'))
-                                                <dt>Foto Pre-Order</dt>
-
-                                                <a href="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
-                                                    data-toggle="lightbox" data-title="PO {{ $offer->offer_no }}"
-                                                    data-gallery="gallery">
-                                                    <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
-                                                        class="img-fluid mb-2" alt="PO {{ $offer->slug }}"
-                                                        width="150px" />
-                                                </a>
-                                            @endif
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-6">
-                                            <p class="lead">{{ date('d/m/Y', strtotime($invoice->date)) }}</p>
-
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <th style="width:50%">Subtotal:</th>
-                                                        <td>$250.30</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Tax (9.3%)</th>
-                                                        <td>$10.34</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Shipping:</th>
-                                                        <td>$5.80</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Total:</th>
-                                                        <td>$265.24</td>
-                                                    </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
+                                            <!-- /.col -->
                                         </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
+                                        <!-- /.row -->
 
-                                    <!-- this row will not appear when printing -->
-                                    <div class="row no-print">
-                                        <div class="col-12">
-                                            <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
-                                                    class="fas fa-print"></i> Print</a>
-                                            <button type="button" class="btn btn-success float-right"><i
-                                                    class="far fa-credit-card"></i> Submit
-                                                Payment
-                                            </button>
-                                            <button type="button" class="btn btn-primary float-right"
-                                                style="margin-right: 5px;">
-                                                <i class="fas fa-download"></i> Generate PDF
-                                            </button>
+                                        <div class="row">
+                                            <!-- accepted payments column -->
+                                            <div class="col-6">
+                                                @if ($invoice->getFirstMediaUrl('image_po'))
+                                                    <dt>Foto Pre-Order</dt>
+
+                                                    <a href="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                        data-toggle="lightbox" data-title="PO {{ $offer->offer_no }}"
+                                                        data-gallery="gallery">
+                                                        <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                            class="img-fluid mb-2" alt="PO {{ $offer->slug }}"
+                                                            width="150px" />
+                                                    </a>
+                                                @endif
+                                            </div>
+                                            <!-- /.col -->
+                                            <div class="col-6">
+                                                <p class="lead">{{ date('d/m/Y', strtotime($invoice->date)) }}</p>
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th style="width:50%">Subtotal:</th>
+                                                            <td>$250.30</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tax (9.3%)</th>
+                                                            <td>$10.34</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Shipping:</th>
+                                                            <td>$5.80</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Total:</th>
+                                                            <td>$265.24</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+
+                                        <!-- this row will not appear when printing -->
+                                        <div class="row no-print">
+                                            <div class="col-12">
+                                                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
+                                                        class="fas fa-print"></i> Print</a>
+                                                <button type="button" class="btn btn-success float-right"><i
+                                                        class="far fa-credit-card"></i> Submit
+                                                    Payment
+                                                </button>
+                                                <button type="button" class="btn btn-primary float-right"
+                                                    style="margin-right: 5px;">
+                                                    <i class="fas fa-download"></i> Generate PDF
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
 
 
                         </div>

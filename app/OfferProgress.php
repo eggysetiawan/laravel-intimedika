@@ -12,6 +12,7 @@ class OfferProgress extends Model
     protected $fillable = ['offer_id', 'progress', 'price_po', 'detail', 'status', 'progress_date', 'approval', 'approved_at', 'approved_by'];
     protected $table = 'offer_progress';
 
+
     public function demo()
     {
         return $this->hasOne(Demo::class)->withDefault([

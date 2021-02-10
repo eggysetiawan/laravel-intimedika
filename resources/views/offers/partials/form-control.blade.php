@@ -97,7 +97,7 @@
             <label for="modality{{ $i }}">Alat Kesehatan #{{ $i }}</label>
             <div class="d-flex row">
                 {{-- modality --}}
-                <div class="col-sm-10">
+                <div class="col-md-12">
 
                     <select name="modality[]" id="modality{{ $i }}"
                         class="form-control select2 @error('modality.' . $i) is-invalid @enderror">
@@ -114,22 +114,7 @@
                         </span>
                     @enderror
                 </div>
-                {{-- quantity --}}
-                <div class="col-sm-2">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Qty</span>
-                        </div>
-                        <input type="number" name="quantity[]"
-                            class="form-control @error('quantity.' . $i) is-invalid @enderror" id="quantity"
-                            placeholder="unit" autocomplete="off" value="{{ old('quantity.' . $i) }}" required>
-                    </div>
-                    @error('quantity.' . $i)
-                        <span class="invalid-feedback" role="alert">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
+
             </div>
 
             <div class="d-flex row">
