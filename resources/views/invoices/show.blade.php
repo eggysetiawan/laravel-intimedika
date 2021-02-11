@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-    <div class="card card-danger card-outline">
+    <div class="card card-teal card-outline">
         <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-edit"></i>
@@ -16,8 +16,8 @@
             <h4>Menu</h4>
             <div class="row">
                 <div class="col-5 col-sm-3">
-                    <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
-                        aria-orientation="vertical">
+                    <div class="nav flex-column nav-tabs h-100 " id="vert-tabs-tab" role="tablist"
+                        aria-orientation="vertical" style="">
                         <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home"
                             role="tab" aria-controls="vert-tabs-home" aria-selected="true">Penawaran</a>
                         <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"
@@ -27,7 +27,7 @@
 
                     </div>
                 </div>
-                <div class="col-7 col-sm-9">
+                <div class="col-7 col-sm-9" style="overflow-y:scroll;height:100vh;">
                     <div class="tab-content" id="vert-tabs-tabContent">
                         <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel"
                             aria-labelledby="vert-tabs-home-tab">
@@ -295,7 +295,6 @@
                             </div>
                             @if ($offer->progress->progress >= 99)
                                 @foreach ($offer->invoices as $invoice)
-                                    {{ $invoice->id }}
                                     <!-- Main content -->
                                     <div class="invoice p-3 mb-3">
                                         <!-- title row -->
@@ -380,10 +379,10 @@
                                             <!-- accepted payments column -->
                                             <div class="col-6">
                                                 @if ($invoice->getFirstMediaUrl('image_po'))
-                                                    <dt>Foto Pre-Order</dt>
+                                                    <dt>Foto Purchase-Order</dt>
 
                                                     <a href="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
-                                                        data-toggle="lightbox" data-title="PO {{ $offer->offer_no }}"
+                                                        data-toggle="lightbox" data-title="Purhcase Order : {{ $offer->offer_no }}"
                                                         data-gallery="gallery">
                                                         <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
                                                             class="img-fluid mb-2" alt="PO {{ $offer->slug }}"
@@ -541,7 +540,7 @@
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-teal">Repeat</button>
+                        <x-button-submit>Repeat</x-button-submit>
                     </div>
                 </form>
 

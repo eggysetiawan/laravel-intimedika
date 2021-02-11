@@ -122,7 +122,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-red">Submit</button>
+                        <x-button-submit>Submit</x-button-submit>
                     </div>
 
                 </div>

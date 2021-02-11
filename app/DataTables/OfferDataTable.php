@@ -41,6 +41,14 @@ class OfferDataTable extends DataTable
             ->editColumn('customer.hospitals.name', function (Offer $offer) {
                 return $offer->customer->hospitals->first()->name ?? $offer->customer->name;
             })
+            ->editColumn('invoices.orders.references', function (Offer $offer) {
+                $orders = $offer->invoices->last()->orders;
+                $references = array();
+                foreach ($orders as $order) :
+                    $references[] = $order->references;
+                endforeach;
+                return join(" - ", array_unique($references));
+            })
             ->editColumn('offer_date', function (Offer $offer) {
                 return date('d/m/Y', strtotime($offer->offer_date));
             })
@@ -147,9 +155,9 @@ class OfferDataTable extends DataTable
             Column::make('author.name')->title('Sales'),
 
             // // referensi
-            // Column::make('invoices.orders.references')->title('Referensi')
-            //     ->searchable(true)
-            //     ->orderable(false),
+            Column::make('invoices.orders.references')->title('Referensi')
+                ->searchable(true)
+                ->orderable(false),
 
         ];
     }

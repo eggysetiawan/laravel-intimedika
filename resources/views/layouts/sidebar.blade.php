@@ -1,4 +1,4 @@
-<aside class="main-sidebar  sidebar-dark-teal elevation-4">
+<aside class="main-sidebar sidebar-dark-teal elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link navbar-teal text-sm">
         <img src="{{ asset('image/ipi2.png') }}" alt="Intimedika Puspa Indah"
@@ -7,7 +7,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar ">
+    <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
