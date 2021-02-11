@@ -113,7 +113,7 @@
                                     <div class="col-md-3">
                                         {{-- price_po --}}
                                         @if ($loop->first)
-                                            <label for="shipping">Harga Pre-Order</label>
+                                            <label for="shipping">Harga Purchase-Order</label>
                                         @else
                                             <label for="shipping">&nbsp;</label>
                                         @endif

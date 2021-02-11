@@ -37,8 +37,6 @@
                                 @switch($offer->approve)
                                     @case(1)
 
-
-
                                     {{-- print --}}
                                     <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
                                         class="btn btn-info form-control">Print</a>
@@ -151,9 +149,7 @@
                                                             <th>
                                                                 <center>Harga Satuan</center>
                                                             </th>
-                                                            <th>
-                                                                <center> Harga Total</center>
-                                                            </th>
+
                                                         </tr>
                                                     </thead>
                                                     @foreach ($offer->invoices->last()->orders as $order)
@@ -178,11 +174,7 @@
                                                                     @currency($order->price)
                                                                 </center>
                                                             </td>
-                                                            <td>
-                                                                <center>
-                                                                    @currency($order->quantity * $order->price)<br>
-                                                                    images</center>
-                                                            </td>
+
                                                         </tr>
                                                     @endforeach
 
@@ -363,7 +355,7 @@
                                                             <th>Alat</th>
                                                             <th>Spesifikasi</th>
                                                             <th>Price List</th>
-                                                            <th>Harga Penawaran</th>
+                                                            <th>Harga Purchase-Order</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -445,6 +437,11 @@
                                         </div>
                                     </div>
                                 @endforeach
+
+                            @else
+                                <div class="justify-content-center text-center">
+                                    <h5 class="badge badge-info">There is no order approved.</h5>
+                                </div>
                             @endif
 
 
@@ -481,6 +478,7 @@
                         <div class="form-group">
                             <dt>Pilih Modality yang ingin di order.</dt>
                             @foreach ($offer->invoices->last()->orders as $order)
+
                                 <div class="d-flex justify-content-center">
 
                                     <div class="col-md-6">
@@ -515,7 +513,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Qty</span>
                                             </div>
-                                            <input type="text" name="qty[]" id="qty"
+                                            <input type="text" name="qty[{{ $order->id }}]" id="qty"
                                                 class="form-control @error('qty') is-invalid @enderror" placeholder="unit"
                                                 required>
                                             @error('qty')

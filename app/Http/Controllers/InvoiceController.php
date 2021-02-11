@@ -29,18 +29,22 @@ class InvoiceController extends Controller
 
         // get order
         $orders = Order::whereIn('id', $request->id_order);
-
         $orders->each(function ($order, $i) use ($invoice_create, $request) {
             $order->insert([
                 'invoice_id' => $invoice_create->id,
                 'modality_id' => $order->modality_id,
                 'price' => $order->price,
-                'quantity' => $request->qty[$i],
+                'quantity' => $request->qty[$order->id],
                 'references' => $order->references,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => now()->format('Y-m-d H:i:s'),
+                'updated_at' => now()->format('Y-m-d H:i:s'),
             ]);
         });
+
+
+
+
+
 
 
         // insert order repeat
