@@ -9,9 +9,18 @@ use App\Http\Requests\OfferRequest;
 
 class OfferController extends Controller
 {
-    public function index(OfferDataTable $dataTable, Offer $offer)
+    public function index(OfferDataTable $dataTable)
     {
         return $dataTable->render('offers.index');
+    }
+
+    public function completed(OfferDataTable $dataTable)
+    {
+        return $dataTable
+            ->with([
+                'complete' => true,
+            ])
+            ->render('offers.index');
     }
 
     public function create()

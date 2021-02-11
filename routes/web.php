@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
+    Route::get('offers/complete', 'OfferController@completed')->name('offers.complete');
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
     Route::delete('offers/{offer:slug}/delete', 'OfferController@destroy')->name('offers.delete');

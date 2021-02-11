@@ -65,12 +65,17 @@ class OfferDataTable extends DataTable
     {
 
         return $model->query()
-            ->with('customer.hospitals', 'author', 'invoices.orders', 'progress.demo')
+            ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'progress'])
             ->when($this->from && $this->to, function ($query) {
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
+            })
+            ->when($this->complete, function ($query) {
+                return $query->whereHas('progress', function ($query) {
+                    return $query->where('progress', 100);
+                });
             })
             ->latest();
     }

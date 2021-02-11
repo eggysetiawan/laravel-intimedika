@@ -11521,7 +11521,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini)
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item.menu-open > .nav-link,
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item:hover > .nav-link,
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item > .nav-link:focus {
-    background-color: rgba(255, 255, 255, 0.1);
+    /* background-color: rgba(255, 255, 255, 0.1); */
     color: #fff;
 }
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item > .nav-link.active {

@@ -86,15 +86,39 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('offers.index') }}"
                         class="nav-link {{ request()->segment(1) == 'offers' || request()->segment(1) == 'invoices' ? ' active' : '' }}">
                         <i class="fab fa-buffer nav-icon"></i>
                         <p>Penawaran</p>
                     </a>
+                </li> --}}
 
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#!" class="nav-link">
+                        <i class="fab fa-buffer nav-icon"></i>
+                        <p>
+                            Penawaran
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('offers.index') }}"
+                                class="nav-link {{ request()->segment(1) == 'offers' && !request()->segment(2) ? ' active' : '' }}">
+                                <i class="fas fa-list-ul"></i>
+                                <p>Semua Penawaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('offers.complete') }}"
+                                class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
+                                <i class="far fa-check-circle"></i>
+                                <p>Penawaran Berhasil</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-
                 <li class="nav-item">
                     <a href="{{ route('hospitals.index') }}"
                         class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">
