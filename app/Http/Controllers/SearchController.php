@@ -42,4 +42,16 @@ class SearchController extends Controller
         ])
             ->render('offers.index');
     }
+    public function offerCompleted(OfferDataTable $dataTable)
+    {
+        $from = date('Y-m-d', strtotime(request('from')));
+        $to = date('Y-m-d', strtotime(request('to')));
+
+        return $dataTable->with([
+            'from' => $from,
+            'to' => $to,
+            'complete' => true,
+        ])
+            ->render('offers.index');
+    }
 }

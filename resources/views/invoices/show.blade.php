@@ -27,7 +27,7 @@
 
                     </div>
                 </div>
-                <div class="col-7 col-sm-9" style="overflow-y:scroll;height:100vh;">
+                <div class="col-7 col-sm-9 scroll-less">
                     <div class="tab-content" id="vert-tabs-tabContent">
                         <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel"
                             aria-labelledby="vert-tabs-home-tab">
@@ -382,7 +382,8 @@
                                                     <dt>Foto Purchase-Order</dt>
 
                                                     <a href="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
-                                                        data-toggle="lightbox" data-title="Purhcase Order : {{ $offer->offer_no }}"
+                                                        data-toggle="lightbox"
+                                                        data-title="Purhcase Order : {{ $offer->offer_no }}"
                                                         data-gallery="gallery">
                                                         <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
                                                             class="img-fluid mb-2" alt="PO {{ $offer->slug }}"

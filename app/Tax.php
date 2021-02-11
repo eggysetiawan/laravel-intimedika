@@ -9,10 +9,10 @@ class Tax extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['offer_id', 'dpp', 'pph', 'komisi', 'nett', 'shipping', 'bank_admin'];
+    protected $fillable = ['invoice_id', 'price_po', 'dpp', 'pph', 'komisi', 'nett', 'shipping', 'bank_admin', 'ppn'];
 
-    public function offer()
+    public function invoice()
     {
-        return $this->belongsTo(Offer::class);
+        return $this->belongsTo(Invoice::class);
     }
 }

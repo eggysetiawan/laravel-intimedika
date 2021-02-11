@@ -1662,6 +1662,7 @@ pre code {
         margin-left: 91.666667%;
     }
 }
+
 .table {
     width: 100%;
     margin-bottom: 1rem;
@@ -22467,6 +22468,21 @@ select.form-control-sm
     .select2-container--default.select2-container--focus
     .select2-selection--multiple {
     border-color: #7eeaca;
+}
+
+.scroll-less {
+    overflow-y: scroll;
+    height: 150vh; /* Add the ability to scroll */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scroll-less::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll-less {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 .select2-cyan
     + .select2-container--default.select2-container--open

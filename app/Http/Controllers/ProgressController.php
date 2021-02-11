@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Demo;
 use App\Offer;
 use App\Http\Requests\OfferProgressRequest;
+use App\Tax;
 
 class ProgressController extends Controller
 {
@@ -31,17 +32,30 @@ class ProgressController extends Controller
                 break;
 
             case (99):
-
-
                 $orders = $offer->invoices->first()->orders
                     ->whereIn('id', $request->id_order);
-
+                $price_po = 0;
                 foreach ($orders as $i => $order) {
                     $order->update([
                         'price' => str_replace(".", "", $request->price[$i]),
-                        'quantity' => str_replace(".", "", $request->qty[$i]),
+                        'quantity' => $request->qty[$i],
                     ]);
+
+
+                    $price_po += str_replace(".", "", $request->price[$i]) * $request->qty[$i];
                 }
+
+                $find_ppn = ($price_po * (10 / 100));
+                $ppn = $find_ppn + $price_po;
+
+                Tax::create([
+                    'invoice_id' => $offer->invoices->first()->id,
+                    'price_po' => $price_po,
+                    'dpp' => $price_po,
+                    'ppn' => $ppn,
+                    'nett' => $price_po,
+                    'shipping' => str_replace(".", "", $request->shipping),
+                ]);
 
 
                 $request->validate([

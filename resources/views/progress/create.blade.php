@@ -113,7 +113,7 @@
                                     <div class="col-md-3">
                                         {{-- price_po --}}
                                         @if ($loop->first)
-                                            <label for="shipping">Harga Purchase-Order</label>
+                                            <label for="shipping">Purchase-Order</label>
                                         @else
                                             <label for="shipping">&nbsp;</label>
                                         @endif
@@ -121,6 +121,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp</span>
                                             </div>
+                                            <input type="hidden" name="references[]" value="{{ $order->references }}">
                                             <input type="text" name="price[]" id="price"
                                                 class="form-control @error('price') is-invalid @enderror" value="" required
                                                 data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"

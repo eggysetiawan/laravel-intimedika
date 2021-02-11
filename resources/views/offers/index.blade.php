@@ -32,7 +32,9 @@
 
                 <!-- /.card-header -->
                 <div class="d-flex justify-content-end mt-3 mr-3">
-                    <form action="{{ route('offers.filter') }}" method="GET">
+                    <form
+                        action="{{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? route('offers.filter-completed') : route('offers.filter') }}"
+                        method="GET">
                         <span class="input-group justify-content-lg-end">
                             <div class="col-md-4">
                                 <label for="from">From</label>

@@ -106,7 +106,7 @@
                         <li class="nav-item">
                             <a href="{{ route('offers.index') }}"
                                 class="nav-link {{ request()->segment(1) == 'offers' && !request()->segment(2) ? ' active' : '' }}">
-                                <i class="fas fa-list-ul"></i>
+                                <i class="fas fa-clipboard-list"></i>
                                 <p>Semua Penawaran</p>
                             </a>
                         </li>
