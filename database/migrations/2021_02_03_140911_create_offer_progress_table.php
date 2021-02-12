@@ -22,6 +22,8 @@ class CreateOfferProgressTable extends Migration
             $table->string('status', 50)->nullable();
             $table->date('progress_date')->nullable();
             $table->boolean('approval', 1)->nullable();
+            $table->dateTime('approved_at')->nullable();
+            $table->unsignedBigInteger('approved_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

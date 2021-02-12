@@ -20,7 +20,9 @@ class OfferController extends Controller
             ->with([
                 'complete' => true,
             ])
-            ->render('offers.index');
+            ->render('offers.index', [
+                'tableHeader' => 'Penawaran Berhasil',
+            ]);
     }
 
     public function create()

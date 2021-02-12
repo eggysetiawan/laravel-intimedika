@@ -65,7 +65,7 @@ class OfferDataTable extends DataTable
     {
 
         return $model->query()
-            ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'progress'])
+            ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
             ->when($this->from && $this->to, function ($query) {
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })

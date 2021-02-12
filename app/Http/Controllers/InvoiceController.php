@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tax;
 use App\Offer;
 use App\Order;
 use App\Invoice;
@@ -29,7 +30,8 @@ class InvoiceController extends Controller
 
         // get order
         $orders = Order::whereIn('id', $request->id_order);
-        $orders->each(function ($order, $i) use ($invoice_create, $request) {
+        $price_po = 0;
+        $orders->each(function ($order, $i) use ($invoice_create, $request, $price_po) {
             $order->insert([
                 'invoice_id' => $invoice_create->id,
                 'modality_id' => $order->modality_id,
@@ -39,26 +41,22 @@ class InvoiceController extends Controller
                 'created_at' => now()->format('Y-m-d H:i:s'),
                 'updated_at' => now()->format('Y-m-d H:i:s'),
             ]);
+            $price_po += $order->price;
         });
+        $find_ppn = ($price_po * (10 / 100));
+        $ppn = $find_ppn + $price_po;
+
+        Tax::create([
+            'invoice_id' => $invoice_create->id,
+            'price_po' => $price_po,
+            'dpp' => $price_po,
+            'ppn' => $ppn,
+            'nett' => $price_po,
+            'shipping' => $invoice->tax->shipping,
+        ]);
 
 
 
-
-
-
-
-        // insert order repeat
-        // foreach ($orders as $i => $order) {
-        //     $order->insert([
-        //         'invoice_id' => $invoice_create->id,
-        //         'modality_id' => $order->modality_id,
-        //         'price' => $order->price,
-        //         'quantity' => $request->qty[$i],
-        //         'references' => $order->references,
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
         session()->flash('success', 'Repeat order berhasil!');
         return back();
     }

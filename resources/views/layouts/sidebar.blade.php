@@ -105,15 +105,15 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('offers.index') }}"
-                                class="nav-link {{ request()->segment(1) == 'offers' && !request()->segment(2) ? ' active' : '' }}">
-                                <i class="fas fa-clipboard-list"></i>
+                                class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Semua Penawaran</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('offers.complete') }}"
                                 class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
-                                <i class="far fa-check-circle"></i>
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Penawaran Berhasil</p>
                             </a>
                         </li>

@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ $offers->name ?? 'Table Penawaran' }}</h3>
+                    <h3 class="card-title">{{ $tableHeader ?? 'Semua Penawaran' }}</h3>
                 </div>
 
                 @if (request('from') && request('to'))

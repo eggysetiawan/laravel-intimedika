@@ -9,7 +9,7 @@ class OfferProgress extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['offer_id', 'progress', 'price_po', 'detail', 'status', 'progress_date', 'approval', 'approved_at', 'approved_by'];
+    protected $fillable = ['offer_id', 'progress', 'detail', 'status', 'progress_date', 'approval', 'approved_at', 'approved_by'];
     protected $table = 'offer_progress';
 
 

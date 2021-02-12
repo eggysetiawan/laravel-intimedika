@@ -40,8 +40,6 @@ class ProgressController extends Controller
                         'price' => str_replace(".", "", $request->price[$i]),
                         'quantity' => $request->qty[$i],
                     ]);
-
-
                     $price_po += str_replace(".", "", $request->price[$i]) * $request->qty[$i];
                 }
 
@@ -58,24 +56,17 @@ class ProgressController extends Controller
                 ]);
 
 
+                $offer->progress->update($attr);
+
+                // insert image to media table
                 $request->validate([
                     'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
                 ]);
-                $attr['shipping'] = str_replace(".", "", request('shipping'));
-                $offer->progress->update($attr);
                 $imgName = date('YmdHi') . '.' . request()->file('img')->extension();
-
                 $offer->invoices->first()
                     ->addMediaFromRequest('img')
                     ->usingFileName($imgName)
                     ->toMediaCollection('image_po');
-
-
-
-
-                // to taxes table
-                // $price_po = $attr['price_po'];
-
                 break;
 
 

@@ -13,13 +13,17 @@ class ApprovalController extends Controller
     {
         $request->all();
         if ($request->approval == 1) :
+            // get approved
             $approval = 1;
-            $message = 'PO berhasil di approve!';
+            $message = 'Purchase Order berhasil di approve!';
         else :
+            // get rejected
             $approval = 2;
-            $message = 'PO berhasil di reject!';
+            $message = 'Purchse Order berhasil di reject!';
         endif;
         $approved_by = auth()->id();
+
+
         $offer->progress->update([
             'progress' => 100,
             'approval' => $approval,

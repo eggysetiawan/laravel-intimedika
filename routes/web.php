@@ -61,8 +61,8 @@ Route::middleware('auth')->group(function () {
     // search
     Route::get('search/visits', 'SearchController@visit')->name('search.visits');
     Route::get('hospitals-filter', 'SearchController@hospital')->name('hospitals.filter');
-    Route::get('offers-filter', 'SearchController@offer')->name('offers.filter');
-    Route::get('offers-filter/complete', 'SearchController@offerCompleted')->name('offers.filter-completed');
+    Route::get('offers/filter', 'SearchController@offer')->name('offers.filter');
+    Route::get('offers/complete/filter', 'SearchController@offerCompleted')->name('offers.filter-completed');
 
 
     // visits
