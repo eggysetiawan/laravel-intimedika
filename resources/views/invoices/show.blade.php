@@ -399,19 +399,19 @@
                                                     <table class="table">
                                                         <tr>
                                                             <th style="width:50%">Subtotal:</th>
-                                                            <td>$250.30</td>
+                                                            <td>@currency($invoice->tax->dpp)</td>
                                                         </tr>
                                                         <tr>
-                                                            <th>Tax (9.3%)</th>
-                                                            <td>$10.34</td>
+                                                            <th>PPN (10%)</th>
+                                                            <td>@currency($invoice->tax->ppn)</td>
                                                         </tr>
                                                         <tr>
-                                                            <th>Shipping:</th>
-                                                            <td>$5.80</td>
+                                                            <th>Ongkos Kirim:</th>
+                                                            <td>@currency($invoice->tax->shipping)</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Total:</th>
-                                                            <td>$265.24</td>
+                                                            <td>@currency($invoice->tax->price_po + $invoice->tax->ppn)</td>
                                                         </tr>
                                                     </table>
                                                 </div>

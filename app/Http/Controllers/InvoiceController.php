@@ -31,7 +31,7 @@ class InvoiceController extends Controller
         // get order
         $orders = Order::whereIn('id', $request->id_order);
         $price_po = 0;
-        $orders->each(function ($order, $i) use ($invoice_create, $request, $price_po) {
+        $orders->each(function ($order, $i) use ($invoice_create, $request, &$price_po) {
             $order->insert([
                 'invoice_id' => $invoice_create->id,
                 'modality_id' => $order->modality_id,
@@ -41,10 +41,12 @@ class InvoiceController extends Controller
                 'created_at' => now()->format('Y-m-d H:i:s'),
                 'updated_at' => now()->format('Y-m-d H:i:s'),
             ]);
-            $price_po += $order->price;
+            // price_po yang dibawah ini mau dipakai diluar
+            $price_po += $order->price * $request->qty[$order->id];
         });
-        $find_ppn = ($price_po * (10 / 100));
-        $ppn = $find_ppn + $price_po;
+
+        // disini
+        $ppn = ($price_po * (10 / 100));
 
         Tax::create([
             'invoice_id' => $invoice_create->id,

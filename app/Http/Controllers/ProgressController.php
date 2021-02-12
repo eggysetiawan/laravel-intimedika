@@ -43,8 +43,7 @@ class ProgressController extends Controller
                     $price_po += str_replace(".", "", $request->price[$i]) * $request->qty[$i];
                 }
 
-                $find_ppn = ($price_po * (10 / 100));
-                $ppn = $find_ppn + $price_po;
+                $ppn = ($price_po * (10 / 100));
 
                 Tax::create([
                     'invoice_id' => $offer->invoices->first()->id,
