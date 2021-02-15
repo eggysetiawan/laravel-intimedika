@@ -30,7 +30,7 @@
                                 <label for="from">From</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="input-group-text bg-teal"><i class="far fa-calendar-alt"></i></span>
                                     </div>
                                     <input type="search" name="from" id="datemask"
                                         class="form-control @error('date') is-invalid @enderror"
@@ -48,12 +48,12 @@
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-danger"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="input-group-text bg-teal"><i class="far fa-calendar-alt"></i></span>
                                     </div>
                                     <input type="search" name="to" id="datemask" class="form-control"
                                         data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
                                     <span class="input-group-append">
-                                        <button type="submit" class="btn btn-danger btn-sm">Filter</button>
+                                        <button type="submit" class="btn bg-teal btn-sm">Filter</button>
                                     </span>
                                 </div>
                             </div>

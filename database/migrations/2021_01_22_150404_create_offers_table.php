@@ -26,7 +26,7 @@ class CreateOffersTable extends Migration
             $table->longText('availability_note')->nullable();
             $table->longText('payment_note')->nullable();
             $table->longText('note')->nullable();
-            $table->boolean('approve')->nullable();
+            $table->boolean('is_approved', 1)->nullable();
             $table->dateTime('approved_at')->nullable();
             $table->unsignedBigInteger('approved_by')->nullable();
             $table->timestamps();

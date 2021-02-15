@@ -34,7 +34,7 @@
                             <div class="form-group">
 
 
-                                @switch($offer->approve)
+                                @switch($offer->is_approved)
                                     @case(1)
 
                                     {{-- print --}}
@@ -244,7 +244,7 @@
 
                                                     <div
                                                         style="height:130px; padding: 20px 0px 0px 0px; margin-bottom: 22px;">
-                                                        @if ($offer->approve == 1)
+                                                        @if ($offer->is_approved == 1)
                                                             {!! QrCode::generate(route('invoices.order', $offer->slug)) !!}
                                                         @endif
                                                     </div>

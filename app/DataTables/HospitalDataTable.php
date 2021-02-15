@@ -59,11 +59,11 @@ class HospitalDataTable extends DataTable
             ->minifiedAjax()
             ->parameters([
                 'dom'          => 'Blfrtip',
-                'buttons'      => ['export'],
+                'buttons'      => ['excel', 'print', 'reset'],
                 'order'   => [[0, 'desc']],
                 'lengthMenu' => [
-                    [10, 100, 1000, 5000, 10000],
-                    ['10', '100', '1000', '5000', '10000']
+                    [10, 25, 50, 100, 1000],
+                    ['10', '25', '50', '100', '1000']
                 ],
             ])
             ->columns($this->getColumns())

@@ -20,8 +20,6 @@ class CreateOrdersTable extends Migration
             $table->double('price')->nullable();
             $table->integer('quantity');
             $table->string('references', 20);
-
-
             $table->timestamps();
             $table->softDeletes();
         });

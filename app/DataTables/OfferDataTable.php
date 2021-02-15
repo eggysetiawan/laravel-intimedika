@@ -159,7 +159,7 @@ class OfferDataTable extends DataTable
             // nama sales
             Column::make('author.name')->title('Sales'),
 
-            // // referensi
+            // referensi
             Column::make('invoices.orders.references')->title('Referensi')
                 ->searchable(true)
                 ->orderable(false),

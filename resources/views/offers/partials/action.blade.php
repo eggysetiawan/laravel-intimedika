@@ -60,17 +60,6 @@
             <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
                 Detail</a>
 
-
-            @can('view', $offer)
-                <form action="{{ route('offers.delete', $offer->slug) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button class="dropdown-item" name="approval" type="submit"
-                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-trash-alt"></i>
-                        Delete</button>
-                </form>
-            @endcan
-
             @if (auth()
             ->user()
             ->isAdmin())
@@ -86,7 +75,15 @@
                 </form>
             @endif
 
-
+            @can('view', $offer)
+                <form action="{{ route('offers.delete', $offer->slug) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button class="dropdown-item" name="approval" type="submit"
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-trash-alt"></i>
+                        Delete</button>
+                </form>
+            @endcan
         </div>
     </div>
 

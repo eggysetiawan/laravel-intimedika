@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApprovalRequest;
 use App\Offer;
-use App\OfferProgress;
 
 class ApprovalController extends Controller
 {
@@ -12,7 +11,7 @@ class ApprovalController extends Controller
     public function progress(ApprovalRequest $request, Offer $offer)
     {
         $request->all();
-        if ($request->approval == 1) :
+        if ($request->is_approved == 1) :
             // get approved
             $approval = 1;
             $message = 'Purchase Order berhasil di approve!';
@@ -26,7 +25,7 @@ class ApprovalController extends Controller
 
         $offer->progress->update([
             'progress' => 100,
-            'approval' => $approval,
+            'is_approved' => $approval,
             'approved_by' => $approved_by,
             'approved_at' => now()
         ]);
@@ -39,7 +38,7 @@ class ApprovalController extends Controller
     public function offer(ApprovalRequest $request, Offer $offer)
     {
         $request->all();
-        if ($request->approval == 1) :
+        if ($request->is_approved == 1) :
             $approval = 1;
             $message = 'Penawaran berhasil di approve!';
         else :
@@ -49,7 +48,7 @@ class ApprovalController extends Controller
         $approved_by = auth()->id();
 
         $offer->update([
-            'approve' => $approval,
+            'is_approved' => $approval,
             'approved_by' => $approved_by,
             'approved_at' => now()
         ]);
