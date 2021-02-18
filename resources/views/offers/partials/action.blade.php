@@ -1,4 +1,4 @@
-@switch($offer->approve)
+@switch($offer->is_approved)
     @case(1)
     <div class="dropright text-center">
         <a href="#" class="text-dark h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

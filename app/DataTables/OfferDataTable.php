@@ -52,6 +52,15 @@ class OfferDataTable extends DataTable
             ->editColumn('offer_date', function (Offer $offer) {
                 return date('d/m/Y', strtotime($offer->offer_date));
             })
+            ->editColumn('invoices.tax.price_po', function (Offer $offer) {
+                return $offer->invoices->last()->tax->price_po ?? '';
+            })
+            ->editColumn('invoices.tax.dpp', function (Offer $offer) {
+                return $offer->invoices->last()->tax->dpp ?? '';
+            })
+            ->editColumn('invoices.tax.ppn', function (Offer $offer) {
+                return $offer->invoices->last()->tax->ppn ?? '';
+            })
             ->rawColumns(['action']);
     }
 
@@ -126,7 +135,9 @@ class OfferDataTable extends DataTable
                 ->title('No. Penawaran'),
 
             // customer
-            Column::make('customer.hospitals.name')->title('Customer/Rumah Sakit'),
+            Column::make('customer.hospitals.name')
+                ->title('Customer/Rumah Sakit')
+                ->orderable(false),
             Column::make('customer.name')->title('Customer')
                 ->orderable(false)
                 ->visible(false)
@@ -164,6 +175,17 @@ class OfferDataTable extends DataTable
                 ->searchable(true)
                 ->orderable(false),
 
+            // harga purchase order (PO)
+            Column::make('invoices.tax.price_po')
+                ->title('Nilai Kontrak'),
+
+            // dpp
+            Column::make('invoices.tax.dpp')
+                ->title('DPP'),
+
+            // dpp
+            Column::make('invoices.tax.ppn')
+                ->title('PPN')
         ];
     }
 

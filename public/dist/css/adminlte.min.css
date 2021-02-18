@@ -22484,6 +22484,24 @@ select.form-control-sm
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #20c997;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgb(124, 241, 212);
+}
 .select2-cyan
     + .select2-container--default.select2-container--open
     .select2-selection--single {

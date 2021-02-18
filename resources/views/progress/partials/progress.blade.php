@@ -27,7 +27,7 @@ switch ($progress) {
 }
 @endphp
 
-@switch($offer->approve)
+@switch($offer->is_approved)
     @case(1)
     @if ($progress <= 99)
         <small>
@@ -46,16 +46,17 @@ switch ($progress) {
             {{ $progress }}% Complete
 
             @if ($progress == 99)
-                <a href="{{ route('invoices.order', $offer->slug) }}"> <small class="text-primary">Ready to
+                <a href="{{ route('invoices.order', $offer->slug) }}"> <small class="badge badge-warning text-white">Ready
+                        to
                         Approve</small></a>
             @endif
         </small>
     </div>
     @break
     @case(2)
-    <span class="text-danger">has been rejected.</span>
+    <span class="badge badge-danger text-white">has been rejected.</span>
 
     @break
     @default
-    <span class="text-primary">Ready to Approve.</span>
+    <span class="badge badge-warning text-white">Ready to Approve.</span>
 @endswitch
