@@ -22,9 +22,10 @@
                             role="tab" aria-controls="vert-tabs-home" aria-selected="true">Penawaran</a>
                         <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"
                             aria-controls="vert-tabs-order" aria-selected="false">Order</a>
-                        {{-- <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order"
-                            role="tab" aria-controls="vert-tabs-order" aria-selected="false">additional tab</a> --}}
-
+                        @if ($offer->progress->demo->date)
+                            <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-demo"
+                                role="tab" aria-controls="vert-tabs-demo" aria-selected="false">Demo</a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-7 col-sm-9">
@@ -37,20 +38,23 @@
                                 @switch($offer->is_approved)
                                     @case(1)
 
-                                    {{-- print --}}
-                                    <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
-                                        class="btn btn-info form-control">Print</a>
+                                    <div class="d-flex justify-content-end">
+                                        {{-- print --}}
+                                        <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
+                                            class="btn btn-info mr-2"><i class="fas fa-print"></i></a>
 
-                                    {{-- repeat order --}}
-                                    @if ($offer->progress->approval == 1)
-                                        <button type="button" class="btn bg-olive form-control-plaintext" data-toggle="modal"
-                                            data-target="#repeatOrder">
-                                            Repeat Order
-                                        </button>
-                                    @endif
+                                        {{-- repeat order --}}
+                                        @if ($offer->progress->is_approved == 1)
+                                            <button type="button" class="btn bg-olive" data-toggle="modal"
+                                                data-target="#repeatOrder">
+                                                Repeat Order
+                                            </button>
+                                        @endif
+                                    </div>
+
                                     @break
                                     @case(2)
-                                    <div class="text-danger form-control-plaintext text-center">Rejected!</div>
+                                    <div class="btn btn-danger form-control-plaintext text-center">Rejected!</div>
                                     @break
                                     @default
                                     {{-- approve penawaran --}}
@@ -264,15 +268,15 @@
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-order" role="tabpanel"
                             aria-labelledby="vert-tabs-order-tab">
-                            @if ($offer->progress->progress == 99 && auth()->user()->level == 'top')
+                            @if ($offer->progress->progress == 99 && auth()->user()->isAdmin)
                                 <form action="{{ route('approval.progress', $offer->slug) }}" method="POST">
                                     @csrf
                                     @method('patch')
                                     <div class="btn-group form-control-plaintext">
                                         <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
-                                            onclick="return confirm('apakah anda yakin?')">Approve PO.</button>
+                                            onclick="return confirm('apakah anda yakin?')">Approve Purchase Order.</button>
                                         <button class="btn btn-danger btn-sm" name="approval" value="2"
-                                            onclick="return confirm('apakah anda yakin?')">Reject PO.</button>
+                                            onclick="return confirm('apakah anda yakin?')">Reject Purchase Order.</button>
                                     </div>
                                 </form>
                             @endif
@@ -440,17 +444,35 @@
 
                                 @else
                                     <div class="justify-content-center text-center">
-                                        <h5 class="badge badge-info">There is no order approved.</h5>
+                                        <h5 class="badge badge-info">There is no approved order.</h5>
                                     </div>
                                 @endif
                             </div>
 
 
                         </div>
-                        {{-- <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel"
-                            aria-labelledby="vert-tabs-messages-tab"> --}}
-                        {{-- new tab --}}
-                        {{-- </div> --}}
+                        <div class="tab-pane fade" id="vert-tabs-demo" role="tabpanel" aria-labelledby="vert-tabs-demo-tab">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <dt>Keterangan</dt>
+                                    </td>
+                                    <td>:</td>
+                                    <td>
+                                        <p>
+                                            {{ $offer->progress->demo->description }}
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <dt>Tanggal</dt>
+                                    </td>
+                                    <td>:</td>
+                                    <td>{{ $offer->progress->demo->date }}</td>
+                                </tr>
+                            </table>
+                        </div>
 
                     </div>
                 </div>
@@ -487,7 +509,8 @@
                                         <div class="row" style="margin-top: 30px">
 
                                             <div class="col-md-2">
-                                                <input type="checkbox" name="id_order[]" value="{{ $order->id }}">
+                                                <input style="padding: 10px; width: 54px; height: 38px;" type="checkbox"
+                                                    name="id_order[]" value="{{ $order->id }}">
                                             </div>
                                             <div class="col-md-10">
 

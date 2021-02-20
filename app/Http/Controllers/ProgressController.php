@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Tax;
 use App\Demo;
 use App\Offer;
+use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferProgressRequest;
-use App\Tax;
 
 class ProgressController extends Controller
 {
+
+    public function approval(OfferDataTable $dataTable)
+    {
+        return $dataTable
+            ->with([
+                'approval_po' => true,
+            ])
+            ->render('offers.index', [
+                'tableHeader' => 'Purchase Order is Ready to Approve',
+            ]);
+    }
 
     public function create(Offer $offer)
     {

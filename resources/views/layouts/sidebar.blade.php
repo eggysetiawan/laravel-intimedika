@@ -1,3 +1,6 @@
+@php
+use App\Offer;
+@endphp
 <aside class="main-sidebar sidebar-dark-teal elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link navbar-teal text-sm">
@@ -108,6 +111,28 @@
                                 class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Semua Penawaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('offers.approval') }}"
+                                class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Approve Penawaran</p>
+                                @if (Offer::whereNull('is_approved')->count() > 0)
+                                    <span
+                                        class="badge badge-warning">{{ Offer::whereNull('is_approved')->count() }}</span>
+                                @endif
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('progresses.approval') }}"
+                                class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Approve PO</p>
+                                @if (Offer::whereHas('progressApproval')->count() > 0)
+                                    <span
+                                        class="badge badge-warning">{{ Offer::whereHas('progressApproval')->count() }}</span>
+                                @endif
                             </a>
                         </li>
                         <li class="nav-item">

@@ -19,3 +19,4 @@
 
 <!-- Ekko Lightbox -->
 <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
+<link rel="stylesheet" href="{{ asset('dist/css/style_master.css') }}">

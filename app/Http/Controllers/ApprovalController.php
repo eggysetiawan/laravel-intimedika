@@ -11,7 +11,7 @@ class ApprovalController extends Controller
     public function progress(ApprovalRequest $request, Offer $offer)
     {
         $request->all();
-        if ($request->is_approved == 1) :
+        if ($request->approval == 1) :
             // get approved
             $approval = 1;
             $message = 'Purchase Order berhasil di approve!';
@@ -38,7 +38,7 @@ class ApprovalController extends Controller
     public function offer(ApprovalRequest $request, Offer $offer)
     {
         $request->all();
-        if ($request->is_approved == 1) :
+        if ($request->approval == 1) :
             $approval = 1;
             $message = 'Penawaran berhasil di approve!';
         else :

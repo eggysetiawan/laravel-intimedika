@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
+    Route::get('offers/approval', 'OfferController@approval')->name('offers.approval');
     Route::get('offers/complete', 'OfferController@completed')->name('offers.complete');
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
 
 
     // progress
+    Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
     Route::patch('progresses/{offer:slug}/update', 'ProgressController@update')->name('progresses.update');
 

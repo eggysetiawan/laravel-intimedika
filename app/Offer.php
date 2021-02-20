@@ -23,6 +23,11 @@ class Offer extends Model implements HasMedia
         return $this->hasOne(OfferProgress::class);
     }
 
+    public function progressApproval()
+    {
+        return $this->hasOne(OfferProgress::class)->where('progress', 99);
+    }
+
     public function invoices()
     {
         return $this->hasMany(Invoice::class)->latest();

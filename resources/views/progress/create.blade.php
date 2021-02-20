@@ -40,8 +40,8 @@
                             </div>
                             <input name="demo_date" type="text"
                                 class="form-control @error('demo_date') is-invalid @enderror"
-                                value="{{ $offer->progress->demo->date ?? '' }}" data-inputmask-alias="datetime"
-                                data-inputmask-inputformat="dd-mm-yyyy" data-mask>
+                                value="{{ $offer->progress->demo->date ?? old('demo_date') }}"
+                                data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask>
                             @error('demo_date')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
@@ -50,7 +50,7 @@
                         </div>
                         <textarea name="description" id="" cols="30" rows="10"
                             class="form-control @error('description') is-invalid @enderror mt-1"
-                            placeholder="Berikan keterangan presentasi/demo">{{ $offer->progress->demo->description }}</textarea>
+                            placeholder="Berikan keterangan presentasi/demo">{{ $offer->progress->demo->description ?? old('description') }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 {{ $message }}

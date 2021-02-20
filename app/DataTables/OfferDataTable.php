@@ -26,6 +26,13 @@ class OfferDataTable extends DataTable
                     ]);
                 }
             })
+            ->editColumn('demo.description', function (Offer $offer) {
+                if ($offer->slug) {
+                    return view('offers.partials.demodescription', [
+                        'offer' => $offer
+                    ]);
+                }
+            })
             ->editColumn('progressbar', function (Offer $offer) {
                 return view('progress.partials.progress', [
                     'offer' => $offer
@@ -86,6 +93,14 @@ class OfferDataTable extends DataTable
                     return $query->where('progress', 100);
                 });
             })
+            ->when($this->approval, function ($query) {
+                return $query->whereNull('offers.is_approved');
+            })
+            ->when($this->approval_po, function ($query) {
+                return $query->whereHas('progress', function ($query) {
+                    return $query->where('progress', 99);
+                });
+            })
             ->latest();
     }
 
@@ -108,6 +123,14 @@ class OfferDataTable extends DataTable
                     [10, 25, 50, 100],
                     ['10', '25', '50', '100']
                 ],
+            ])
+            ->language([
+                'processing' => '<div class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>'
             ])
             ->columns($this->getColumns());
     }
@@ -185,7 +208,12 @@ class OfferDataTable extends DataTable
 
             // dpp
             Column::make('invoices.tax.ppn')
-                ->title('PPN')
+                ->title('PPN'),
+
+            Column::computed('demo.description')
+                ->title('Demo')
+                ->orderable(false)
+                ->searchable(false),
         ];
     }
 

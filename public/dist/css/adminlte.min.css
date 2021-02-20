@@ -22500,7 +22500,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background: rgb(124, 241, 212);
+    background: rgb(255, 231, 17);
 }
 .select2-cyan
     + .select2-container--default.select2-container--open

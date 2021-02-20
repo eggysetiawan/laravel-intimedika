@@ -26,7 +26,7 @@ class OfferProgressRequest extends FormRequest
         return [
             'progress' => 'nullable|required',
             'status' => 'string|required',
-            'detail' => 'string|required',
+            'detail' => 'required_unless:progress,50',
             'demo_date' => 'required_if:progress,50',
             'description' => 'required_if:progress,50',
             'shipping' => 'nullable',
@@ -39,7 +39,8 @@ class OfferProgressRequest extends FormRequest
     {
         return [
             'price_po.required_if' => "Harga Pre-Order wajib diisi!",
-            'shipping.required_if' => "Ongkos kirim wajib diisi!"
+            'shipping.required_if' => "Ongkos kirim wajib diisi!",
+            'detail.required' => "Silahkan isi keterangan progress!"
         ];
     }
 }

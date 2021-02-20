@@ -24,6 +24,16 @@ class OfferController extends Controller
                 'tableHeader' => 'Penawaran Berhasil',
             ]);
     }
+    public function approval(OfferDataTable $dataTable)
+    {
+        return $dataTable
+            ->with([
+                'approval' => true,
+            ])
+            ->render('offers.index', [
+                'tableHeader' => 'Ready to Approve',
+            ]);
+    }
 
     public function create()
     {
