@@ -20,7 +20,9 @@ class ProgressController extends Controller
             ])
             ->render('offers.index', [
                 'tableHeader' => 'Purchase Order is Ready to Approve',
-                'approval' => OfferProgress::whereNull('is_approved')->count(),
+                'approval' => OfferProgress::whereNull('is_approved')
+                    ->where('progress', 99)
+                    ->count(),
             ]);
     }
 

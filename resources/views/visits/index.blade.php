@@ -16,9 +16,11 @@
 
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
-            <div class="btn-group ">
-                <x-button-create href="{{ route('visits.add') }}">Kunjungan Baru</x-button-create>
-                <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
+            <div class="btn-group">
+                @can('visits')
+                    <x-button-create href="{{ route('visits.add') }}">Kunjungan Baru</x-button-create>
+                    <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
+                @endcan
             </div>
         </div>
     </div>

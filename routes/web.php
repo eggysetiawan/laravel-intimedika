@@ -6,12 +6,21 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    // approval
-    Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
-    Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
-    Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
-    Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
+    // view approval penawaran & po
+    Route::middleware(['role:director|superadmin'])->group(function () {
+        Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
+        Route::get('offers/approval', 'OfferController@approval')->name('offers.approval');
+    });
 
+
+    // approval
+    Route::middleware(['permission:approval'])->group(function () {
+
+        Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
+        Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
+        Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
+        Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
+    });
 
     // route customers
     Route::get('customers', 'CustomerController@index')->name('customers.index');
@@ -49,7 +58,6 @@ Route::middleware('auth')->group(function () {
 
     //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
-    Route::get('offers/approval', 'OfferController@approval')->name('offers.approval');
     Route::get('offers/complete', 'OfferController@completed')->name('offers.complete');
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
@@ -57,9 +65,11 @@ Route::middleware('auth')->group(function () {
 
 
     // progress
-    Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
+
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
     Route::patch('progresses/{offer:slug}/update', 'ProgressController@update')->name('progresses.update');
+
+
 
 
     // search

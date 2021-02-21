@@ -33,11 +33,8 @@
                         <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel"
                             aria-labelledby="vert-tabs-home-tab">
                             <div class="form-group">
-
-
                                 @switch($offer->is_approved)
                                     @case(1)
-
                                     <div class="d-flex justify-content-end">
                                         {{-- print --}}
                                         <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"

@@ -32,9 +32,9 @@
                     @include('offers.partials.filter')
                 @endif
 
-                @if ($approval > 1 && request()->segment(1) == 'offers')
+                @if ($approval > 0 && request()->segment(1) == 'offers')
                     @include('offers.partials.approval')
-                @elseif($approval > 1 && request()->segment(1) == 'progresses')
+                @elseif($approval > 0 && request()->segment(1) == 'progresses')
                     @include('offers.partials.approval')
                 @endif
 

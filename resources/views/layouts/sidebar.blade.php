@@ -37,23 +37,10 @@ use App\Offer;
                         <p>Home</p>
                     </a>
                 </li>
-                {{-- <li class="nav-item has-treeview menu-open">
-                    <a href="#!" class="nav-link{{ request()->is('artikel') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-bookmark"></i>
-                        <p>
-                            Resource
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview"> --}}
-                {{-- <li class="nav-item">
-                            <a href="#" class="nav-link {{ 'kunjungan' == request()->path() ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
-                            </a>
-                        </li> --}}
-                {{-- </ul>
-                </li> --}}
+
+                {{-- resource --}}
+                <li class="nav-header">Resource</li>
+
                 <li class="nav-item">
                     <a href="{{ route('modalities.index') }}"
                         class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">
@@ -86,6 +73,7 @@ use App\Offer;
 
                 {{-- penawaran --}}
                 <li class="nav-header">Penawaran</li>
+
                 <li class="nav-item">
                     <a href="{{ route('offers.index') }}"
                         class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">
@@ -93,93 +81,38 @@ use App\Offer;
                         <p>Semua Penawaran</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('offers.approval') }}"
-                        class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-                        <i class="fas fa-exclamation nav-icon"></i>
-                        <p>Approve Penawaran</p>
-                        @if (Offer::whereNull('is_approved')->count() > 0)
-                            <span class="badge badge-warning">{{ Offer::whereNull('is_approved')->count() }}</span>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('progresses.approval') }}"
-                        class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-                        <i class="fas fa-exclamation nav-icon"></i>
-                        <p>Approve Purchase-Order</p>
-                        @if (Offer::whereHas('progressApproval')->count() > 0)
-                            <span
-                                class="badge badge-warning">{{ Offer::whereHas('progressApproval')->count() }}</span>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('offers.complete') }}"
-                        class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
-                        <i class="far fa-check-circle nav-icon"></i>
-                        <p>Penawaran Berhasil</p>
-                    </a>
-                </li>
+                @can('approval')
 
-                {{-- <li class="nav-item has-treeview menu-open">
-                    <a href="#!" class="nav-link">
-                        <i class="fab fa-buffer nav-icon"></i>
-                        <p>
-                            Penawaran
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('offers.index') }}"
-                                class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Semua Penawaran</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('offers.approval') }}"
-                                class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Approve Penawaran</p>
-                                @if (Offer::whereNull('is_approved')->count() > 0)
-                                    <span
-                                        class="badge badge-warning">{{ Offer::whereNull('is_approved')->count() }}</span>
-                                @endif
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('progresses.approval') }}"
-                                class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Approve PO</p>
-                                @if (Offer::whereHas('progressApproval')->count() > 0)
-                                    <span
-                                        class="badge badge-warning">{{ Offer::whereHas('progressApproval')->count() }}</span>
-                                @endif
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('offers.complete') }}"
-                                class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Penawaran Berhasil</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+                    <li class="nav-item">
+                        <a href="{{ route('offers.approval') }}"
+                            class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+                            <i class="fas fa-exclamation nav-icon"></i>
+                            <p>Approve Penawaran</p>
+                            @if (Offer::whereNull('is_approved')->count() > 0)
+                                <span class="badge badge-warning">{{ Offer::whereNull('is_approved')->count() }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('progresses.approval') }}"
+                            class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+                            <i class="fas fa-exclamation nav-icon"></i>
+                            <p>Approve Purchase-Order</p>
+                            @if (Offer::whereHas('progressApproval')->count() > 0)
+                                <span
+                                    class="badge badge-warning">{{ Offer::whereHas('progressApproval')->count() }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('offers.complete') }}"
+                            class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
+                            <i class="far fa-check-circle nav-icon"></i>
+                            <p>Penawaran Berhasil</p>
+                        </a>
+                    </li>
+                @endcan
 
-
-                {{-- <li class="nav-item">
-                    <a href="/kunjungan" class="nav-link {{ 'kunjungan' == request()->path() ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Kunjungan Harian
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
-                </li> --}}
 
 
             </ul>
