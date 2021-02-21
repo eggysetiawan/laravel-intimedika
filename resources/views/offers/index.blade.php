@@ -31,7 +31,12 @@
                 @elseif(request()->segment(1) == 'offers' && !request()->segment(2))
                     @include('offers.partials.filter')
                 @endif
-                {{-- filter --}}
+
+                @if ($approval > 1 && request()->segment(1) == 'offers')
+                    @include('offers.partials.approval')
+                @elseif($approval > 1 && request()->segment(1) == 'progresses')
+                    @include('offers.partials.approval')
+                @endif
 
                 <div class="card-body table-responsive ">
                     {!! $dataTable->table([

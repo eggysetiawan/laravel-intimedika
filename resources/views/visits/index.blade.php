@@ -17,7 +17,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group ">
-                <a href="{{ route('visits.add') }}" class="btn bg-red btn-sm">Kunjungan Baru</a>
+                <x-button-create href="{{ route('visits.add') }}">Kunjungan Baru</x-button-create>
                 <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
             </div>
         </div>
@@ -59,11 +59,10 @@
                         </thead>
 
                         @forelse($visits as $visit)
-
                             <tbody>
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $visit->customer->hospitals->first()->name }}</td>
+                                    <td>{{ $visit->customer->hospitals->first()->name ?? $visit->customer->name }}</td>
                                     <td>{{ $visit->customer->name }}</td>
                                     <td>{{ $visit->customer->mobile }}</td>
                                     <td>{{ $visit->customer->email }}</td>

@@ -11,7 +11,9 @@ class OfferController extends Controller
 {
     public function index(OfferDataTable $dataTable)
     {
-        return $dataTable->render('offers.index');
+        return $dataTable->render('offers.index', [
+            'approval' => 0
+        ]);
     }
 
     public function completed(OfferDataTable $dataTable)
@@ -22,6 +24,7 @@ class OfferController extends Controller
             ])
             ->render('offers.index', [
                 'tableHeader' => 'Penawaran Berhasil',
+                'approval' => 0
             ]);
     }
     public function approval(OfferDataTable $dataTable)
@@ -32,6 +35,7 @@ class OfferController extends Controller
             ])
             ->render('offers.index', [
                 'tableHeader' => 'Ready to Approve',
+                'approval' => Offer::whereNull('is_approved')->count(),
             ]);
     }
 

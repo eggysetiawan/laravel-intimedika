@@ -7,6 +7,8 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     // approval
+    Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
+    Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
     Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
     Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
 

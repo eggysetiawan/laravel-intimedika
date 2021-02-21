@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tax;
 use App\Demo;
 use App\Offer;
+use App\OfferProgress;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferProgressRequest;
 
@@ -19,6 +20,7 @@ class ProgressController extends Controller
             ])
             ->render('offers.index', [
                 'tableHeader' => 'Purchase Order is Ready to Approve',
+                'approval' => OfferProgress::whereNull('is_approved')->count(),
             ]);
     }
 

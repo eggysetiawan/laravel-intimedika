@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                <a href="{{ route('customers.create') }}" class="btn bg-red btn-sm">Tambah Customer</a>
+                <x-button-create href="{{ route('customers.create') }}">Tambah Customer</x-button-create>
             </div>
         </div>
     </div>

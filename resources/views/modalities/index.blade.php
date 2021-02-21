@@ -8,12 +8,13 @@
 @section('content')
     <div class="col-md-12">
         <div class="d-flex justify-content-end">
-            <a href="{{ route('modalities.create') }}" class="btn bg-teal mb-2 px-1"><i class="fa fa-plus"
-                    aria-hidden="true"></i> Tambah Alat</a>
+            <div class="btn-group">
+                <x-button-create href="{{ route('modalities.create') }}">Tambah Alat</x-button-create>
+            </div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-2">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -73,8 +74,7 @@
                             </tbody>
                         @endforelse
                     </table>
-                    {{-- agar ditengah = center , kanan = end, kiri = start
-                    --}}
+                    {{-- agar ditengah = center , kanan = end, kiri = start --}}
                     <div class="d-flex justify-content-end mr-4">
                         <div>
                             {{ $modalities->links() }}

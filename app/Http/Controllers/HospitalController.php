@@ -16,7 +16,12 @@ class HospitalController extends Controller
         return $dataTable->render('hospitals.index');
     }
 
-
+    public function create()
+    {
+        return view('hospitals.create', [
+            'hospital' => new Hospital(),
+        ]);
+    }
 
     public function store(HospitalRequest $request)
     {

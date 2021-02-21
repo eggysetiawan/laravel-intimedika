@@ -8,8 +8,9 @@
 @section('content')
     <div class="col-md-12">
         <div class="d-flex justify-content-end">
-            <a href="{{ route('hospitals.create') }}" class="btn bg-teal mb-2 p-1"><i class="fa fa-plus"
-                    aria-hidden="true"></i> Tambah Rumah Sakit</a>
+            <div class="btn-group">
+                <x-button-create href="{{ route('hospitals.create') }}">Tambah Rumah Sakit</x-button-create>
+            </div>
         </div>
     </div>
 

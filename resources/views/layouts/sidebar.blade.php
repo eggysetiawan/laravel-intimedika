@@ -31,23 +31,11 @@ use App\Offer;
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-{{ request()->is('/') ? 'open' : 'close' }}">
+                <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link{{ request()->is('/') ? ' active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                        <i class="fas fa-home nav-icon"></i>
+                        <p>Home</p>
                     </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a href="{{ route('home') }}" class="nav-link{{ request()->is('/') ? ' active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Home</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 {{-- <li class="nav-item has-treeview menu-open">
                     <a href="#!" class="nav-link{{ request()->is('artikel') ? ' active' : '' }}">
@@ -88,16 +76,53 @@ use App\Offer;
                         <p>Kunjungan</p>
                     </a>
                 </li>
-
-                {{-- <li class="nav-item">
-                    <a href="{{ route('offers.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'offers' || request()->segment(1) == 'invoices' ? ' active' : '' }}">
-                        <i class="fab fa-buffer nav-icon"></i>
-                        <p>Penawaran</p>
+                <li class="nav-item">
+                    <a href="{{ route('hospitals.index') }}"
+                        class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">
+                        <i class="fas fa-hospital nav-icon"></i>
+                        <p>Rumah Sakit</p>
                     </a>
-                </li> --}}
+                </li>
 
-                <li class="nav-item has-treeview menu-open">
+                {{-- penawaran --}}
+                <li class="nav-header">Penawaran</li>
+                <li class="nav-item">
+                    <a href="{{ route('offers.index') }}"
+                        class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">
+                        <i class="fab fa-buffer nav-icon"></i>
+                        <p>Semua Penawaran</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('offers.approval') }}"
+                        class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+                        <i class="fas fa-exclamation nav-icon"></i>
+                        <p>Approve Penawaran</p>
+                        @if (Offer::whereNull('is_approved')->count() > 0)
+                            <span class="badge badge-warning">{{ Offer::whereNull('is_approved')->count() }}</span>
+                        @endif
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('progresses.approval') }}"
+                        class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+                        <i class="fas fa-exclamation nav-icon"></i>
+                        <p>Approve Purchase-Order</p>
+                        @if (Offer::whereHas('progressApproval')->count() > 0)
+                            <span
+                                class="badge badge-warning">{{ Offer::whereHas('progressApproval')->count() }}</span>
+                        @endif
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('offers.complete') }}"
+                        class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
+                        <i class="far fa-check-circle nav-icon"></i>
+                        <p>Penawaran Berhasil</p>
+                    </a>
+                </li>
+
+                {{-- <li class="nav-item has-treeview menu-open">
                     <a href="#!" class="nav-link">
                         <i class="fab fa-buffer nav-icon"></i>
                         <p>
@@ -143,14 +168,8 @@ use App\Offer;
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('hospitals.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">
-                        <i class="fas fa-hospital nav-icon"></i>
-                        <p>Rumah Sakit</p>
-                    </a>
-                </li>
+                </li> --}}
+
 
                 {{-- <li class="nav-item">
                     <a href="/kunjungan" class="nav-link {{ 'kunjungan' == request()->path() ? 'active' : '' }}">
