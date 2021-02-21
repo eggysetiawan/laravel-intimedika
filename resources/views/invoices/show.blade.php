@@ -55,9 +55,7 @@
                                     @break
                                     @default
                                     {{-- approve penawaran --}}
-                                    @if (auth()
-                ->user()
-                ->isAdmin())
+                                    @can('approval')
                                         <form action="{{ route('approval.offers', $offer->slug) }}" method="POST">
                                             @csrf
                                             @method('patch')
@@ -68,7 +66,7 @@
                                                     onclick="return confirm('apakah anda yakin?')">Reject.</button>
                                             </div>
                                         </form>
-                                    @endif
+                                    @endcan
 
                                 @endswitch
                             </div>
@@ -139,9 +137,9 @@
                                         </table>
                                         <div class="fill">
                                             <div class="detail-table">
-                                                <table class="table table-responsive" border="1"
+                                                <table class="table table-responsive " border="1"
                                                     style="border-collapse: collapse;width:100%">
-                                                    <thead class="thead-dark">
+                                                    <thead class="thead-dark ">
                                                         <tr>
                                                             <th>No.</th>
                                                             <th>
@@ -265,25 +263,30 @@
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-order" role="tabpanel"
                             aria-labelledby="vert-tabs-order-tab">
-                            @if ($offer->progress->progress == 99 && auth()->user()->isAdmin)
-                                <form action="{{ route('approval.progress', $offer->slug) }}" method="POST">
-                                    @csrf
-                                    @method('patch')
-                                    <div class="btn-group form-control-plaintext">
-                                        <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
-                                            onclick="return confirm('apakah anda yakin?')">Approve Purchase Order.</button>
-                                        <button class="btn btn-danger btn-sm" name="approval" value="2"
-                                            onclick="return confirm('apakah anda yakin?')">Reject Purchase Order.</button>
-                                    </div>
-                                </form>
+                            @if ($offer->progress->progress == 99)
+                                @can('approval')
+                                    <form action="{{ route('approval.progress', $offer->slug) }}" method="POST">
+                                        @csrf
+                                        @method('patch')
+                                        <div class="btn-group form-control-plaintext">
+                                            <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
+                                                onclick="return confirm('apakah anda yakin?')">Approve Purchase Order.</button>
+                                            <button class="btn btn-danger btn-sm" name="approval" value="2"
+                                                onclick="return confirm('apakah anda yakin?')">Reject Purchase Order.</button>
+                                        </div>
+                                    </form>
+                                @endcan
                             @endif
                             {{-- repeat order --}}
-                            @if ($offer->progress->approval == 1)
-                                <button type="button" class="btn bg-olive form-control-plaintext mb-2" data-toggle="modal"
-                                    data-target="#repeatOrder">
-                                    <i class="fas fa-redo"></i> Repeat Order
-                                </button>
-                            @endif
+                            @can('repeat order')
+                                @if ($offer->progress->approval == 1)
+                                    <button type="button" class="btn bg-olive form-control-plaintext mb-2" data-toggle="modal"
+                                        data-target="#repeatOrder">
+                                        <i class="fas fa-redo"></i> Repeat Order
+                                    </button>
+                                @endif
+                            @endcan
+
                             <div class="callout callout-info">
                                 <h5><i class="fas fa-info"></i>
                                     <div class="d-flex justify-content-between">Order History
@@ -498,7 +501,6 @@
                         <div class="form-group">
                             <dt>Pilih Modality yang ingin di order.</dt>
                             @foreach ($offer->invoices->last()->orders as $order)
-
                                 <div class="d-flex justify-content-center">
 
                                     <div class="col-md-6">
@@ -515,6 +517,28 @@
                                                     class="form-control @error('disabled') is-invalid @enderror"
                                                     value="{{ $order->modality->name }}">
                                                 @error('disabled')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="row" style="margin-top: 30px;">
+                                            <div class="input-group mb-3">
+                                                @isset($order->quantity)
+                                                    <input type="text" value="@currency($order->price)"
+                                                        class="form-control text-right" disabled>
+                                                @else
+                                                    <input type="text" name="price[{{ $order->id }}]" id="price"
+                                                        class="form-control @error('price') is-invalid @enderror" required
+                                                        data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                                                        data-mask>
+                                                @endisset
+
+                                                @error('price')
                                                     <span class="invalid-feedback" role="alert">
                                                         {{ $message }}
                                                     </span>

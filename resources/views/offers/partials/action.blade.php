@@ -9,7 +9,6 @@
                 Detail</a>
 
             @can('approval')
-
                 @if ($offer->progress->progress == 99)
                     <form action="{{ route('approval.progress', $offer->slug) }}" method="POST"
                         class=" justify-content-center">

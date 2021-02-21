@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
     // view approval penawaran & po
     Route::middleware(['role:director|superadmin'])->group(function () {
         Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
@@ -24,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
     // route customers
     Route::get('customers', 'CustomerController@index')->name('customers.index');
-    Route::get('customers/create', 'CustomerController@create')->name('customers.create');
+    Route::get('customers/create', 'CustomerController@create')->name('customers.create')->middleware(['role:sales|superadmin']);
     Route::get('customers/create-2', 'CustomerController@create2')->name('customers.create-2');
     Route::post('customers/store', 'CustomerController@store')->name('customers.store');
     Route::get('customers/{customer:slug}/edit', 'CustomerController@edit')->name('customers.edit');
@@ -44,7 +45,7 @@ Route::middleware('auth')->group(function () {
     // invoices
     Route::get('invoices/{offer:slug}/print', 'InvoiceController@print')->name('invoices.print');
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
-    Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat');
+    Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat')->middleware(['role:sales|superadmin']);
 
 
     // modalities
@@ -80,10 +81,9 @@ Route::middleware('auth')->group(function () {
 
 
     // visits
-    Route::get('/', 'HomeController@index')->name('home');
     Route::get('visits', 'VisitController@index')->name('visits.index');
-    Route::get('visits/create', 'VisitController@create')->name('visits.create');
-    Route::get('visits/add', 'VisitController@add')->name('visits.add');
+    Route::get('visits/create', 'VisitController@create')->name('visits.create')->middleware(['role:sales|superadmin']);
+    Route::get('visits/add', 'VisitController@add')->name('visits.add')->middleware(['role:sales|superadmin']);
     Route::post('visits/store', 'VisitController@store')->name('visits.store');
     Route::post('visits/addStore', 'VisitController@addStore')->name('visits.addStore');
     Route::get('visits/{visit:slug}/edit', 'VisitController@edit')->name('visits.edit');

@@ -13,6 +13,8 @@ class Invoice extends Model implements HasMedia
 
     protected $fillable = ['offer_id', 'status', 'date'];
 
+
+
     public function tax()
     {
         return $this->hasOne(Tax::class);

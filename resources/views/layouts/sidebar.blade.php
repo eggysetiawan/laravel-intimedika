@@ -89,7 +89,8 @@ use App\Offer;
                             <i class="fas fa-exclamation nav-icon"></i>
                             <p>Approve Penawaran</p>
                             @if (Offer::whereNull('is_approved')->count() > 0)
-                                <span class="badge badge-warning">{{ Offer::whereNull('is_approved')->count() }}</span>
+                                <span
+                                    class="badge badge-danger rounded-circle ml-2">{{ Offer::whereNull('is_approved')->count() }}</span>
                             @endif
                         </a>
                     </li>
@@ -100,7 +101,7 @@ use App\Offer;
                             <p>Approve Purchase-Order</p>
                             @if (Offer::whereHas('progressApproval')->count() > 0)
                                 <span
-                                    class="badge badge-warning">{{ Offer::whereHas('progressApproval')->count() }}</span>
+                                    class="badge badge-danger rounded-circle">{{ Offer::whereHas('progressApproval')->count() }}</span>
                             @endif
                         </a>
                     </li>

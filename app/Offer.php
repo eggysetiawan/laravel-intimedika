@@ -33,6 +33,7 @@ class Offer extends Model implements HasMedia
         return $this->hasMany(Invoice::class)->latest();
     }
 
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

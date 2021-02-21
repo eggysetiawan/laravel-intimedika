@@ -30,11 +30,11 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('login') }}" method="post" novalidate>
                     @csrf
                     <div class="input-group mb-3">
-                        <input class="form-control" placeholder="username" id="username" type="text"
-                            class="form-control @error('username') is-invalid @enderror" name="username"
+                        <input placeholder="username" id="username" type="text"
+                            class="form-control  @error('username') is-invalid @enderror" name="username"
                             value="{{ old('username') }}" required autocomplete="username" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -48,7 +48,7 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control" placeholder="Password" id="password" type="password"
+                        <input placeholder="Password" id="password" type="password"
                             class="form-control @error('password') is-invalid @enderror" name="password" required
                             autocomplete="current-password">
                         <div class="input-group-append">
