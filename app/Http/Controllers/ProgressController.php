@@ -60,6 +60,7 @@ class ProgressController extends Controller
                 }
 
                 $ppn = ($price_po * (10 / 100));
+                $shipping = isset($request->shipping) ? $request->shipping : 0;
 
                 Tax::create([
                     'invoice_id' => $offer->invoices->first()->id,
@@ -67,7 +68,7 @@ class ProgressController extends Controller
                     'dpp' => $price_po,
                     'ppn' => $ppn,
                     'nett' => $price_po,
-                    'shipping' => str_replace(".", "", $request->shipping),
+                    'shipping' => str_replace(".", "", $shipping),
                 ]);
 
 

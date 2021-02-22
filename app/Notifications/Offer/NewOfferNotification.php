@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Offer;
 
+use App\Offer;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class NewOfferNotification extends Notification
 {
@@ -16,9 +17,9 @@ class NewOfferNotification extends Notification
      *
      * @return void
      */
-    public function __construct($admin)
+    public function __construct(Offer $offer)
     {
-        //
+        $this->offer = $offer;
     }
 
     /**
@@ -42,7 +43,8 @@ class NewOfferNotification extends Notification
     {
         return (new MailMessage)
             ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
+            ->subject('Penawaran baru telah dibuat!')
+            ->action('Lihat Penawaran', route('invoices.order', $this->offer->slug))
             ->line('Thank you for using our application!');
     }
 

@@ -53,13 +53,15 @@ class InvoiceController extends Controller
         // disini
         $ppn = ($price_po * (10 / 100));
 
+        $shipping = isset($request->shipping) ? $request->shipping : 0;
+
         Tax::create([
             'invoice_id' => $invoice_create->id,
             'price_po' => $price_po,
             'dpp' => $price_po,
             'ppn' => $ppn,
             'nett' => $price_po,
-            'shipping' => str_replace(".", "", $request->shipping),
+            'shipping' => str_replace(".", "", $shipping),
         ]);
 
 

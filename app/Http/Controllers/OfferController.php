@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Modality;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
+use App\Mail\Offer\CreateOfferEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\NewOfferNotification;
 use App\{Offer, Order, Invoice, Customer, OfferProgress};
+use App\Notifications\CreateOffer;
+use App\Notifications\Offer\NewOfferNotification as OfferNewOfferNotification;
 
 class OfferController extends Controller
 {
@@ -125,6 +129,9 @@ class OfferController extends Controller
             ]);
             // alert success
         }
+        // Mail::to("setiawaneggy@gmail.com")->send(new CreateOfferEmail($offer));
+        $admin = User::where('id', 13)->first();
+        $admin->notify(new OfferNewOfferNotification($offer));
 
         session()->flash('success', 'Penawaran berhasil dibuat!');
         return redirect('offers');
