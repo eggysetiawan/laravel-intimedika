@@ -5,7 +5,8 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
+                    class="far fa-eye nav-icon"></i>
                 Detail</a>
 
             @can('approval')
@@ -15,10 +16,10 @@
                         @csrf
                         @method('patch')
                         <button class="dropdown-item" name="approval" type="submit" value="1"
-                            onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle"></i>
+                            onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle nav-icon"></i>
                             Approve PO.</button>
                         <button class="dropdown-item" name="approval" value="2"
-                            onclick="return confirm('apakah anda yakin?')"><i class="far fa-times-circle"></i>
+                            onclick="return confirm('apakah anda yakin?')"><i class="far fa-times-circle nav-icon"></i>
                             Reject PO.</button>
                     </form>
                 @endif
@@ -27,7 +28,7 @@
             @if ($offer->progress->progress < 99)
                 @if (auth()->id() != 13) <a
                 href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
-                class="far fa-edit"></i>Update PO </a> @endif
+                class="far fa-edit nav-icon"></i>Update PO </a> @endif
             @endif
 
 
@@ -40,10 +41,9 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            @can('view', $offer)
-                <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
-                    Detail</a>
-            @endcan
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
+                    class="far fa-eye nav-icon"></i>
+                Detail</a>
         </div>
     </div>
     @break
@@ -56,7 +56,8 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i class="far fa-eye"></i>
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
+                    class="far fa-eye nav-icon"></i>
                 Detail</a>
 
             @can('approval')
@@ -64,10 +65,10 @@
                     @csrf
                     @method('patch')
                     <button class="dropdown-item" name="approval" type="submit" value="1"
-                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle"></i>
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle nav-icon"></i>
                         Approve.</button>
                     <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"><i
-                            class="far fa-times-circle"></i>
+                            class="far fa-times-circle nav-icon"></i>
                         Reject.</button>
                 </form>
             @endcan
@@ -78,7 +79,7 @@
                     @csrf
                     @method('delete')
                     <button class="dropdown-item" name="approval" type="submit"
-                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-trash-alt"></i>
+                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-trash-alt nav-icon"></i>
                         Delete</button>
                 </form>
             @endcan

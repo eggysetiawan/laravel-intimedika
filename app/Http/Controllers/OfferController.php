@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\{Offer, Order, Invoice, Customer, OfferProgress};
-use App\DataTables\OfferDataTable;
 use App\Modality;
+use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Notifications\NewOfferNotification;
+use App\{Offer, Order, Invoice, Customer, OfferProgress};
 
 class OfferController extends Controller
 {
@@ -38,6 +40,16 @@ class OfferController extends Controller
                 'approval' => Offer::whereNull('is_approved')->count(),
             ]);
     }
+    public function trash(OfferDataTable $dataTable)
+    {
+        return $dataTable->with([
+            'trash' => true,
+        ])
+            ->render('offers.index', [
+                'approval' => 0,
+                'tableHeader' => 'Penawaran (Dihapus)',
+            ]);
+    }
 
     public function create()
     {
@@ -59,6 +71,8 @@ class OfferController extends Controller
             ]);
         endif;
     }
+
+
 
     public function store(OfferRequest $request)
     {
@@ -83,6 +97,7 @@ class OfferController extends Controller
         $attr['offer_date'] = $date;
         $attr['customer_id'] = request('customer');
         $offer = auth()->user()->offers()->create($attr);
+
 
         // to invoices table
         $invoice = Invoice::create([

@@ -53,6 +53,7 @@
                                     @case(2)
                                     <div class="btn btn-danger form-control-plaintext text-center">Rejected!</div>
                                     @break
+
                                     @default
                                     {{-- approve penawaran --}}
                                     @can('approval')
@@ -388,9 +389,10 @@
                                                             data-toggle="lightbox"
                                                             data-title="Purhcase Order : {{ $offer->offer_no }}"
                                                             data-gallery="gallery">
-                                                            <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
-                                                                class="img-fluid mb-2" alt="PO {{ $offer->slug }}"
-                                                                width="150px" />
+                                                            <div class="product-image-thumb">
+                                                                <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                                    class="img-fluid" alt="PO {{ $offer->slug }}" />
+                                                            </div>
                                                         </a>
                                                     @endif
                                                 </div>
@@ -572,7 +574,27 @@
                                 </div>
                             @endforeach
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="img">Ongkos Kirim</label><br>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp</span>
+                                        </div>
+                                        <input type="text" name="shipping" id="shipping"
+                                            class="form-control @error('shipping') is-invalid @enderror" value="" required
+                                            data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                                            data-mask>
+                                        @error('shipping')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="img">Masukan bukti PO</label><br>
                             <input type="file" name="img" id="img" class="@error('img') is-invalid @enderror">

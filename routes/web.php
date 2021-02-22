@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
     Route::get('offers/complete', 'OfferController@completed')->name('offers.complete');
+    Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
     Route::delete('offers/{offer:slug}/delete', 'OfferController@destroy')->name('offers.delete');
@@ -80,8 +81,11 @@ Route::middleware('auth')->group(function () {
     Route::get('offers/complete/filter', 'SearchController@offerCompleted')->name('offers.filter-completed');
 
 
+    // visits restore
+    Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);
     // visits
     Route::get('visits', 'VisitController@index')->name('visits.index');
+
     Route::get('visits/create', 'VisitController@create')->name('visits.create')->middleware(['role:sales|superadmin']);
     Route::get('visits/add', 'VisitController@add')->name('visits.add')->middleware(['role:sales|superadmin']);
     Route::post('visits/store', 'VisitController@store')->name('visits.store');
@@ -89,5 +93,6 @@ Route::middleware('auth')->group(function () {
     Route::get('visits/{visit:slug}/edit', 'VisitController@edit')->name('visits.edit');
     Route::patch('visits/{visit:slug}/edit', 'VisitController@update')->name('visits.edit');
     Route::delete('visits/{visit:slug}/delete', 'VisitController@destroy')->name('visits.delete');
+    Route::get('visits/{visit:slug}/restore', 'VisitController@restore')->name('visits.restore')->middleware(['role:superadmin', 'permission:restore']);
     Route::get('visits/{visit:slug}', 'VisitController@show')->name('visits.show');
 });

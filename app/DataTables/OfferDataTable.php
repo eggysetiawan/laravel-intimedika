@@ -61,6 +61,9 @@ class OfferDataTable extends DataTable
             })
             ->editColumn('invoices.tax.price_po', function (Offer $offer) {
                 return $offer->invoices->last()->tax->price_po ?? '';
+                // return view('offers.partials.po', [
+                //     'offer' => $offer
+                // ]);
             })
             ->editColumn('invoices.tax.dpp', function (Offer $offer) {
                 return $offer->invoices->last()->tax->dpp ?? '';
@@ -100,6 +103,9 @@ class OfferDataTable extends DataTable
                 return $query->whereHas('progress', function ($query) {
                     return $query->where('progress', 99);
                 });
+            })
+            ->when($this->trash, function ($query) {
+                return $query->onlyTrashed();
             })
             ->latest();
     }

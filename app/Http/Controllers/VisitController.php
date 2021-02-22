@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visit;
 use App\Customer;
+use App\DataTables\VisitDataTable;
 use App\Hospital;
 use Illuminate\Support\Str;
 use App\Http\Requests\VisitRequest;
@@ -11,24 +12,16 @@ use Illuminate\Support\Facades\Storage;
 
 class VisitController extends Controller
 {
-    public function index()
+    public function index(VisitDataTable $dataTable)
     {
-
-        $visits = Visit::with('customer', 'author')
-            ->latest()
-            ->when(!auth()->user()->isAdmin(), function ($query) {
-                return $query->where('user_id', auth()->id());
-            })
-            ->paginate(10);
-
-        return view('visits.index', [
-            'visits' => $visits,
-        ]);
+        return $dataTable->render('visits.index');
     }
 
     public function show(Visit $visit)
     {
-        return view('visits.show', compact('visit'));
+        return view('visits.show', [
+            'visit' => $visit,
+        ]);
     }
 
     public function create()
@@ -151,5 +144,23 @@ class VisitController extends Controller
         $visit->delete();
         session()->flash('success', 'data berhasil di hapus!');
         return redirect('visits');
+    }
+
+    public function trash(VisitDataTable $dataTable)
+    {
+        return $dataTable->with(['trash' => true,])
+            ->render('visits.index', [
+                'tableHeader' => 'Table Kunjungan (Dihapus)',
+            ]);
+    }
+
+    public function restore(Visit $visit)
+    {
+        if ($visit->trashed()) {
+            $visit->restore();
+        }
+        session()->flash('success', 'data berhasil di restore!');
+
+        return back();
     }
 }

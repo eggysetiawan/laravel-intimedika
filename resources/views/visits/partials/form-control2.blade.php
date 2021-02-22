@@ -42,7 +42,7 @@
 
     <div class="form-group">
         <label for="mobile">Hp Kunjungan</label>
-        <input type="text" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile"
+        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile"
             placeholder="Masukan Nomor Hp" value="{{ old('mobile') ?? $customer->mobile }}">
         @error('mobile')
             <span class="invalid-feedback" role="alert">

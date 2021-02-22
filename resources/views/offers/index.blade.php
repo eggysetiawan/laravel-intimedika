@@ -2,7 +2,11 @@
 'caption'=> 'Penawaran'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Penawaran</li>
+    @if (request()->segment(2) == 'trash')
+        <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Penawaran</a></li>
+    @else
+        <li class="breadcrumb-item">Penawaran</li>
+    @endif
 @endsection
 @section('content')
     <div class="col-md-12">
@@ -11,6 +15,13 @@
                 <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-sm">
                     Buat Penawaran
                 </button>
+                @if (request()->segment(2) == 'trash')
+                    <a href="{{ route('offers.index') }}" class="btn btn-primary btn-sm"><i
+                            class="fas fa-table nav-icon"></i> Semua Penawaran</a>
+                @else
+                    <a href="{{ route('offers.trash') }}" class="btn btn-warning btn-sm"><i
+                            class="fas fa-recycle nav-icon"></i> Recyle Bin</a>
+                @endif
             </div>
         </div>
     </div>

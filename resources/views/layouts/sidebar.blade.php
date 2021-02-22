@@ -99,9 +99,11 @@ use App\Offer;
                             class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-exclamation nav-icon"></i>
                             <p>Approve Purchase-Order</p>
-                            @if (Offer::whereHas('progressApproval')->count() > 0)
+                            @if (Offer::with('progressApproval')
+            ->whereHas('progressApproval')
+            ->count() > 0)
                                 <span
-                                    class="badge badge-danger rounded-circle">{{ Offer::whereHas('progressApproval')->count() }}</span>
+                                    class="badge badge-danger rounded-circle">{{ Offer::with('progressApproval')->whereHas('progressApproval')->count() }}</span>
                             @endif
                         </a>
                     </li>

@@ -59,7 +59,7 @@ class InvoiceController extends Controller
             'dpp' => $price_po,
             'ppn' => $ppn,
             'nett' => $price_po,
-            'shipping' => $invoice->tax->shipping,
+            'shipping' => str_replace(".", "", $request->shipping),
         ]);
 
 
@@ -70,7 +70,9 @@ class InvoiceController extends Controller
 
     public function show(Offer $offer)
     {
-        return view('invoices.show', compact('offer'));
+        return view('invoices.show', [
+            'offer' => $offer,
+        ]);
     }
     public function print(Offer $offer)
     {

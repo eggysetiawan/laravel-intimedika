@@ -14,8 +14,11 @@
                 <div class="card-header">
                     <div class="user-block">
                         <img class="img-circle" src="{{ $visit->customer->gravatar() }}" alt="User Image">
-                        <span class="username"><a href="#">{{ $visit->customer->hospitals->first()->name }}</a></span>
-                        <span class="description">{{ $visit->customer->hospitals->first()->name }} -
+                        <span class="username"><a
+                                href="#">{{ $visit->customer->hospitals->first()->name ?? $visit->customer->name }}</a></span>
+                        <span
+                            class="description">{{ $visit->customer->hospitals->first()->name ?? $visit->customer->name }}
+                            -
                             {{ $visit->created_at->diffForHumans() }}</span>
                     </div>
                     <!-- /.user-block -->

@@ -20,6 +20,16 @@
                 @can('visits')
                     <x-button-create href="{{ route('visits.add') }}">Kunjungan Baru</x-button-create>
                     <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
+
+                    @can('restore')
+                        @if (request()->segment(2) == 'trash')
+                            <a href="{{ route('visits.index') }}" class="btn btn-primary btn-sm"><i
+                                    class="fas fa-table nav-icon"></i> Semua Kunjungan</a>
+                        @else
+                            <a href="{{ route('visits.trash') }}" class="btn btn-warning btn-sm"><i
+                                    class="fas fa-recycle nav-icon"></i>Restore</a>
+                        @endif
+                    @endcan
                 @endcan
             </div>
         </div>
@@ -28,7 +38,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ $customer->name ?? 'Table Kunjungan' }}</h3>
+                    <h3 class="card-title">{{ $tableHeader ?? 'Table Kunjungan' }}</h3>
 
                     <div class="card-tools">
                         <form action="{{ route('search.visits') }}" method="GET">
@@ -43,55 +53,15 @@
                     </div>
                 </div>
 
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap table-responsive-sm">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Rumah Sakit</th>
-                                <th>Nama</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
-                                <th>Jabatan</th>
-                                <th>Request</th>
-                                <th>Hasil Kunjungan</th>
-                                <th>Nama Sales</th>
-                            </tr>
-                        </thead>
-
-                        @forelse($visits as $visit)
-                            <tbody>
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $visit->customer->hospitals->first()->name ?? $visit->customer->name }}</td>
-                                    <td>{{ $visit->customer->name }}</td>
-                                    <td>{{ $visit->customer->mobile }}</td>
-                                    <td>{{ $visit->customer->email }}</td>
-                                    <td>{{ $visit->customer->role }}</td>
-                                    <td>{{ $visit->request }}</td>
-                                    <td>
-                                        {{ Str::limit($visit->result, 50) }}
-                                        <div><a href="{{ route('visits.show', $visit->slug, '...') }}">Read More</a></div>
-                                    </td>
-                                    <td>{{ $visit->author->name }}</td>
-                                </tr>
-                            </tbody>
-                        @empty
-                            <tbody>
-                                <tr>
-                                    <td cols="6">Tidak ada data.</td>
-                                </tr>
-                            </tbody>
-                        @endforelse
-                    </table>
-                    {{-- agar ditengah = center , kanan = end, kiri = start --}}
-                    <div class="d-flex justify-content-end mr-4">
-                        <div>
-                            {{ $visits->links() }}
-                        </div>
-                    </div>
+                <div class="card-body table-responsive ">
+                    {!! $dataTable->table([
+                    'class' => 'table table-centered table-striped dt-responsive
+                    nowrap w-100',
+                    'id' => 'visit-table',
+                    ]) !!}
                 </div>
+                <!-- /.card-header -->
+
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -102,4 +72,7 @@
 
 
 
+@endsection
+@section('script')
+    {!! $dataTable->scripts() !!}
 @endsection
