@@ -8,6 +8,8 @@ use App\Offer;
 use App\OfferProgress;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferProgressRequest;
+use App\Notifications\Progress\PurchaseOrderNotification;
+use App\User;
 
 class ProgressController extends Controller
 {
@@ -70,8 +72,6 @@ class ProgressController extends Controller
                     'nett' => $price_po,
                     'shipping' => str_replace(".", "", $shipping),
                 ]);
-
-
                 $offer->progress->update($attr);
 
                 // insert image to media table
@@ -83,6 +83,11 @@ class ProgressController extends Controller
                     ->addMediaFromRequest('img')
                     ->usingFileName($imgName)
                     ->toMediaCollection('image_po');
+
+                // send email
+                $admin = User::where('id', 13)->first();
+                $admin->notify(new PurchaseOrderNotification($offer));
+
                 break;
 
 

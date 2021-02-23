@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     // invoices
     Route::get('invoices/{offer:slug}/print', 'InvoiceController@print')->name('invoices.print');
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
+    Route::get('invoices/{offer:slug}/order', 'InvoiceController@toOrder')->name('invoices.toOrder');
     Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat')->middleware(['role:sales|superadmin']);
 
 

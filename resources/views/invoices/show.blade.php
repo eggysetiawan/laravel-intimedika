@@ -616,3 +616,16 @@
         </div>
     </div>
 @endsection
+
+@if (@$tab)
+    @section('script')
+        <script>
+            function activaTab(tab) {
+                $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+            };
+
+            activaTab('vert-tabs-order');
+
+        </script>
+    @endsection
+@endif

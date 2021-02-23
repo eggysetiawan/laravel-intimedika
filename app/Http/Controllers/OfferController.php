@@ -129,9 +129,10 @@ class OfferController extends Controller
             ]);
             // alert success
         }
+
         // Mail::to("setiawaneggy@gmail.com")->send(new CreateOfferEmail($offer));
-        $admin = User::where('id', 13)->first();
-        $admin->notify(new OfferNewOfferNotification($offer));
+        // $admin = User::where('id', 13)->first();
+        // $admin->notify(new OfferNewOfferNotification($offer));
 
         session()->flash('success', 'Penawaran berhasil dibuat!');
         return redirect('offers');

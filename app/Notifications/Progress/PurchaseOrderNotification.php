@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Notifications\Offer;
+namespace App\Notifications\Progress;
 
 use App\Offer;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class NewOfferNotification extends Notification
+class PurchaseOrderNotification extends Notification
 {
     use Queueable;
 
@@ -43,10 +43,10 @@ class NewOfferNotification extends Notification
     {
         return (new MailMessage)
             ->from('portal@intimedika.co', 'IPI Portal')
-            ->greeting($this->offer->author->name . ' telah membuat penawaran!')
-            ->line('Segera berikan tanggapan berupa persetujuan/pembatalan untuk Penawaran yang dibuat!')
-            ->subject('Penawaran baru telah dibuat!')
-            ->action('Lihat Penawaran', route('invoices.order', $this->offer->slug))
+            ->greeting('Purchase Order telah dibuat oleh ' . $this->offer->author->name)
+            ->line('Segera berikan tanggapan berupa persetujuan/pembatalan untuk Purchse Order yang dibuat!')
+            ->subject('Pengajuan Purchase Order!')
+            ->action('Lihat detail order', route('invoices.toOrder', $this->offer->slug))
             ->line('Terimakasih sudah menggunakan aplikasi kami!');
     }
 

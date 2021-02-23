@@ -76,6 +76,13 @@ class InvoiceController extends Controller
             'offer' => $offer,
         ]);
     }
+    public function toOrder(Offer $offer)
+    {
+        return view('invoices.show', [
+            'offer' => $offer,
+            'tab' => true
+        ]);
+    }
     public function print(Offer $offer)
     {
         return view('invoices.print', compact('offer'));

@@ -2,6 +2,9 @@
 
 namespace App\Observers;
 
+use App\Notifications\Offer\NewOfferNotification as OfferNewOfferNotification;
+
+use App\User;
 use App\Offer;
 
 class OfferObserver
@@ -14,11 +17,8 @@ class OfferObserver
      */
     public function created(Offer $offer)
     {
-        OfferProgress::create([
-            'offer_id' => $offer->id,
-            'progress' => 30,
-            'progress_date' => $date,
-        ]);
+        $admin = User::where('id', 13)->first();
+        $admin->notify(new OfferNewOfferNotification($offer));
     }
 
     /**

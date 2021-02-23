@@ -82,7 +82,6 @@ use App\Offer;
                     </a>
                 </li>
                 @can('approval')
-
                     <li class="nav-item">
                         <a href="{{ route('offers.approval') }}"
                             class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
