@@ -19,7 +19,7 @@ use App\Offer;
             <div class="info">
                 <a href="#" class="d-block">
                     @auth
-                        {{ Auth::user()->name }}
+                        {{ auth()->user()->name }}
                     @endauth
                 </a>
             </div>
@@ -27,8 +27,7 @@ use App\Offer;
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
                 <li class="nav-item">
@@ -86,11 +85,12 @@ use App\Offer;
                         <a href="{{ route('offers.approval') }}"
                             class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-exclamation nav-icon"></i>
-                            <p>Approve Penawaran</p>
-                            @if (Offer::whereNull('is_approved')->count() > 0)
-                                <span
-                                    class="badge badge-danger rounded-circle ml-2">{{ Offer::whereNull('is_approved')->count() }}</span>
-                            @endif
+                            <p>Approve Penawaran @if (Offer::whereNull('is_approved')->count() > 0)
+                                    <span
+                                        class="badge badge-danger right">{{ Offer::whereNull('is_approved')->count() }}</span>
+                                @endif
+                            </p>
+
                         </a>
                     </li>
                     <li class="nav-item">
@@ -102,8 +102,9 @@ use App\Offer;
             ->whereHas('progressApproval')
             ->count() > 0)
                                 <span
-                                    class="badge badge-danger rounded-circle">{{ Offer::with('progressApproval')->whereHas('progressApproval')->count() }}</span>
+                                    class="badge badge-danger ">{{ Offer::with('progressApproval')->whereHas('progressApproval')->count() }}</span>
                             @endif
+
                         </a>
                     </li>
                     <li class="nav-item">

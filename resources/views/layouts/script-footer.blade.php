@@ -44,7 +44,7 @@
     <script>
         $(document).ready(function() {
             $(document).Toasts('create', {
-                class: 'bg-success bot-left',
+                class: 'bg-success bot-left h5',
                 position: 'bottomLeft',
                 fixed: true,
                 title: 'Berhasil!',

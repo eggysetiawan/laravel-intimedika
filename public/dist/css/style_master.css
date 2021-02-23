@@ -155,3 +155,9 @@ input[type="checkbox"] {
         transform: rotateX(0) rotateY(0);
     }
 }
+
+.bot-left {
+    position: fixed;
+    bottom: 55px;
+    left: 35px;
+}

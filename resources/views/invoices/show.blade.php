@@ -456,21 +456,17 @@
                         <div class="tab-pane fade" id="vert-tabs-demo" role="tabpanel" aria-labelledby="vert-tabs-demo-tab">
                             <table>
                                 <tr>
-                                    <td>
-                                        <dt>Keterangan</dt>
-                                    </td>
-                                    <td>:</td>
-                                    <td>
-                                        <p>
-                                            {{ $offer->progress->demo->description }}
-                                        </p>
-                                    </td>
+                                    <td><dt>Keterangan &nbsp;:&nbsp;</dt></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ $offer->progress->demo->description }}</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <dt>Tanggal</dt>
+                                        <dt>Tanggal &nbsp;:&nbsp;</dt>
                                     </td>
-                                    <td>:</td>
+                                </tr>
+                                <tr>
                                     <td>{{ $offer->progress->demo->date }}</td>
                                 </tr>
                             </table>

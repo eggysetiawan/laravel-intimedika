@@ -16,10 +16,12 @@ class ApprovalController extends Controller
             // get approved
             $approval = 1;
             $message = 'Pruchase Order berhasil di approve!';
+            $progress = 100;
         else :
             // get rejected
             $approval = 2;
             $message = 'Purchase Order berhasil di reject!';
+            $progress = 0;
         endif;
         $approved_by = auth()->id();
         OfferProgress::whereNull('is_approved')
@@ -27,7 +29,7 @@ class ApprovalController extends Controller
                 'is_approved' => $approval,
                 'approved_by' => $approved_by,
                 'approved_at' => now(),
-                'progress' => 100
+                'progress' => $progress,
             ]);
 
         session()->flash('success', $message);

@@ -8,10 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PurchaseOrderNotification extends Notification
+class PurchaseOrderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
+    public $offer;
     /**
      * Create a new notification instance.
      *
@@ -41,10 +41,11 @@ class PurchaseOrderNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $customer_name = @$this->offer->customer->hospitals->first()->name ?  $this->offer->customer->hospitals->first()->name : $this->offer->customer->name;
         return (new MailMessage)
             ->from('portal@intimedika.co', 'IPI Portal')
-            ->greeting('Purchase Order telah dibuat oleh ' . $this->offer->author->name)
-            ->line('Segera berikan tanggapan berupa persetujuan/pembatalan untuk Purchse Order yang dibuat!')
+            ->greeting('Purchase Order telah dibuat oleh ' . $customer_name)
+            ->line('Segera berikan tanggapan berupa persetujuan/pembatalan untuk Purchase Order yang dibuat!')
             ->subject('Pengajuan Purchase Order!')
             ->action('Lihat detail order', route('invoices.toOrder', $this->offer->slug))
             ->line('Terimakasih sudah menggunakan aplikasi kami!');
