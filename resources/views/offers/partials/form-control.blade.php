@@ -9,16 +9,16 @@
 
             <div class="col-md-6">
                 <input type="number" name="queue" class="form-control @error('queue') is-invalid @enderror" id="queue"
-                    value="{{ old('queue') }}" placeholder="Nomor Penawaran">
+                    value="{{ old('queue') }}" placeholder="Nomor Penawaran" max="999">
             </div>
             <div class="col-md-6">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                     </div>
-                    <input type="text" name="date" id="datemask"
+                    <input type="date" name="date" id="datemask"
                         class="form-control @error('date') is-invalid @enderror" data-inputmask-alias="datetime"
-                        data-inputmask-inputformat="dd-mm-yyyy" data-mask>
+                        data-inputmask-inputformat="dd-mm-yyyy" data-mask max="2021-01-01">
                     @error('date')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
@@ -124,7 +124,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rp</span>
                         </div>
-                        <input type="text" name="price[]" id="price"
+                        <input type="number" name="price[]" id="price"
                             class="form-control @error('price.' . $i) is-invalid @enderror"
                             data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                             data-mask value="{{ old('price.' . $i) }}" required>

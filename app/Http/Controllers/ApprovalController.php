@@ -15,12 +15,12 @@ class ApprovalController extends Controller
         if ($request->approval == 1) :
             // get approved
             $approval = 1;
-            $message = 'Pruchase Order berhasil di approve!';
+            $message = 'Pruchase Order telah berhasil di approve!';
             $progress = 100;
         else :
             // get rejected
             $approval = 2;
-            $message = 'Purchase Order berhasil di reject!';
+            $message = 'Purchase Order telah berhasil di reject!';
             $progress = 0;
         endif;
         $approved_by = auth()->id();
@@ -41,11 +41,11 @@ class ApprovalController extends Controller
         if ($request->approval == 1) :
             // get approved
             $approval = 1;
-            $message = 'Penawaran berhasil di approve!';
+            $message = 'Semua Penawaran telah berhasil di approve!';
         else :
             // get rejected
             $approval = 2;
-            $message = 'Penawaran berhasil di reject!';
+            $message = 'Semua Penawaran telah berhasil di reject!';
         endif;
         $approved_by = auth()->id();
         Offer::whereNull('is_approved')
@@ -65,11 +65,11 @@ class ApprovalController extends Controller
         if ($request->approval == 1) :
             // get approved
             $approval = 1;
-            $message = 'Purchase Order berhasil di approve!';
+            $message = 'Purchase Order telah berhasil di approve!';
         else :
             // get rejected
             $approval = 2;
-            $message = 'Purchse Order berhasil di reject!';
+            $message = 'Purchse Order telah berhasil di reject!';
         endif;
         $approved_by = auth()->id();
 
@@ -91,10 +91,10 @@ class ApprovalController extends Controller
         $request->all();
         if ($request->approval == 1) :
             $approval = 1;
-            $message = 'Penawaran berhasil di approve!';
+            $message = 'Penawaran telah berhasil di approve!';
         else :
             $approval = 2;
-            $message = 'Penawaran berhasil di reject!';
+            $message = 'Penawaran telah berhasil di reject!';
         endif;
         $approved_by = auth()->id();
 

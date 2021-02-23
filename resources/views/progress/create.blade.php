@@ -122,7 +122,7 @@
                                                 <span class="input-group-text">Rp</span>
                                             </div>
                                             <input type="hidden" name="references[]" value="{{ $order->references }}">
-                                            <input type="text" name="price[]" id="price"
+                                            <input type="number" name="price[]" id="price"
                                                 class="form-control @error('price') is-invalid @enderror" value="" required
                                                 data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                                                 data-mask>
@@ -144,7 +144,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Qty</span>
                                             </div>
-                                            <input type="text" name="qty[]" id="qty"
+                                            <input type="number" name="qty[]" id="qty"
                                                 class="form-control @error('qty') is-invalid @enderror" placeholder="unit"
                                                 required>
                                             @error('qty')
@@ -164,7 +164,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
                                 </div>
-                                <input type="text" name="shipping" id="shipping"
+                                <input type="number" name="shipping" id="shipping"
                                     class="form-control @error('shipping') is-invalid @enderror"
                                     data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                                     data-mask value="{{ old('shipping') }}" required>

@@ -78,6 +78,10 @@
                                         <img style="width: 100%;" src="{{ asset('image/kopsurat2.png') }}" alt="">
                                     </div>
                                     <div class="card-body">
+                                        @isset($offer->is_approved)
+                                            <label style="font-size: 14px; float:right">Jakarta,
+                                                {{ date('d F Y', strtotime($offer->approved_at)) }}</label>
+                                        @endisset
                                         <table>
                                             <tr>
 
@@ -429,25 +433,43 @@
                                             <!-- this row will not appear when printing -->
                                             <div class="row no-print">
                                                 <div class="col-12">
-                                                    <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
-                                                            class="fas fa-print"></i> Print</a>
-                                                    <button type="button" class="btn btn-success float-right"><i
-                                                            class="far fa-credit-card"></i> Submit
-                                                        Payment
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary float-right"
-                                                        style="margin-right: 5px;">
-                                                        <i class="fas fa-download"></i> Generate PDF
-                                                    </button>
+                                                    @if ($offer->progress->progress == 99)
+                                                        @can('approval')
+                                                            <form class="inline"
+                                                                action="{{ route('approval.progress', $offer->slug) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <button class="btn btn-success float-right" name="approval"
+                                                                    type="submit" value="1"
+                                                                    onclick="return confirm('apakah anda yakin?')"><i
+                                                                        class="far fa-credit-card"></i>
+                                                                    Approve Purchase
+                                                                </button>
+                                                                <button class="btn btn-danger float-right"
+                                                                    style="margin-right: 5px;" name="approval" value="2"
+                                                                    onclick="return confirm('apakah anda yakin?')">
+                                                                    <i class="fas fa-download"></i> Reject Purchase
+                                                                </button>
+                                                            </form>
+                                                        @endcan
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
 
                                 @else
-                                    <div class="justify-content-center text-center">
-                                        <h5 class="badge badge-info">There is no approved order.</h5>
-                                    </div>
+
+                                    @if ($offer->is_approved)
+                                        <a href="{{ route('progresses.create', $offer->slug) }}"
+                                            class="btn btn-outline-success form-control-plaintext">Update Progress
+                                            Penawaran</a>
+                                    @else
+                                        <div class="justify-content-center text-center">
+                                            <h5 class="badge badge-info">There is no approved order.</h5>
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
 
@@ -456,7 +478,9 @@
                         <div class="tab-pane fade" id="vert-tabs-demo" role="tabpanel" aria-labelledby="vert-tabs-demo-tab">
                             <table>
                                 <tr>
-                                    <td><dt>Keterangan &nbsp;:&nbsp;</dt></td>
+                                    <td>
+                                        <dt>Keterangan &nbsp;:&nbsp;</dt>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>{{ $offer->progress->demo->description }}</td>

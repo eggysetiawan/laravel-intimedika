@@ -134,7 +134,7 @@ class OfferController extends Controller
         // $admin = User::where('id', 13)->first();
         // $admin->notify(new OfferNewOfferNotification($offer));
 
-        session()->flash('success', 'Penawaran berhasil dibuat!');
+        session()->flash('success', 'Penawaran telah berhasil dibuat!');
         return redirect('offers');
     }
 
@@ -143,7 +143,7 @@ class OfferController extends Controller
         $this->authorize('delete', $offer);
         $offer->delete();
 
-        session()->flash('success', 'data berhasil di hapus!');
+        session()->flash('success', 'data telah berhasil di hapus!');
         return redirect('offers');
     }
 }

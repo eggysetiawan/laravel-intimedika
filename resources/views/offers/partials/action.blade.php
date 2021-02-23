@@ -28,7 +28,7 @@
             @if ($offer->progress->progress < 99)
                 @if (auth()->id() != 13) <a
                 href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
-                class="far fa-edit nav-icon"></i>Update PO </a> @endif
+                class="far fa-edit nav-icon"></i> Update Purchase </a> @endif
             @endif
 
 
@@ -42,8 +42,7 @@
         </a>
         <div class="dropdown-menu">
             <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
-                    class="far fa-eye nav-icon"></i>
-                Detail</a>
+                    class="far fa-eye nav-icon"></i> Detail</a>
         </div>
     </div>
     @break

@@ -40,8 +40,20 @@
 <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 
+
+
 @if (session()->has('success'))
+
     <script>
+        $(document).ready(function() {
+
+            setTimeout(function() {
+                toastr.success("{{ session()->get('success') }}")
+            }, 550);
+        });
+
+    </script>
+    {{-- <script>
         $(document).ready(function() {
             $(document).Toasts('create', {
                 class: 'bg-success bot-left h5',
@@ -55,7 +67,7 @@
             }).delay(200).slideUp(300).fadeIn(400);
         });
 
-    </script>
+    </script> --}}
 @endif
 
 @if (session()->has('error'))

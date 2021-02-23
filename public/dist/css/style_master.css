@@ -159,5 +159,6 @@ input[type="checkbox"] {
 .bot-left {
     position: fixed;
     bottom: 55px;
-    left: 35px;
+    left: 40px;
+    font-size: 17px;
 }
