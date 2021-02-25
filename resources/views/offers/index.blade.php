@@ -9,7 +9,7 @@
     @endif
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container-fluid">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
                 <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-sm">
@@ -26,8 +26,9 @@
         </div>
     </div>
 
+
     <div class="d-flex justify-content-center">
-        <div class="col-md-12">
+        <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ $tableHeader ?? 'Semua Penawaran' }}</h3>

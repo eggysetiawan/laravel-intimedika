@@ -34,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Offer::observe(OfferObserver::class);
+
+        config(['app.locale' => 'id']);
+        \Carbon\Carbon::setLocale('id');
     }
 }

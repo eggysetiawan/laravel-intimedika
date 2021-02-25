@@ -15,10 +15,14 @@ use App\Notifications\Offer\NewOfferNotification as OfferNewOfferNotification;
 
 class OfferController extends Controller
 {
-    public function index(OfferDataTable $dataTable)
+    public function index(OfferDataTable $dataTable, Offer $offer)
     {
         return $dataTable->render('offers.index', [
-            'approval' => 0
+            'approval' => 0,
+            'offer_approval_count' => $offer
+                ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
+                ->whereNull('is_approved')
+                ->count(),
         ]);
     }
 

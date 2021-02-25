@@ -443,13 +443,13 @@
                                                                 <button class="btn btn-success float-right" name="approval"
                                                                     type="submit" value="1"
                                                                     onclick="return confirm('apakah anda yakin?')"><i
-                                                                        class="far fa-credit-card"></i>
+                                                                        class="fas fa-check-circle"></i>
                                                                     Approve Purchase
                                                                 </button>
                                                                 <button class="btn btn-danger float-right"
                                                                     style="margin-right: 5px;" name="approval" value="2"
                                                                     onclick="return confirm('apakah anda yakin?')">
-                                                                    <i class="fas fa-download"></i> Reject Purchase
+                                                                    <i class="fas fa-times-circle"></i> Reject Purchase
                                                                 </button>
                                                             </form>
                                                         @endcan

@@ -86,9 +86,11 @@ Route::middleware('auth')->group(function () {
     Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);
     // visits
     Route::get('visits', 'VisitController@index')->name('visits.index');
+    Route::get('visits/plan', 'VisitController@plan')->name('visits.plan');
 
-    Route::get('visits/create', 'VisitController@create')->name('visits.create')->middleware(['role:sales|superadmin']);
-    Route::get('visits/add', 'VisitController@add')->name('visits.add')->middleware(['role:sales|superadmin']);
+    Route::get('visits/create', 'VisitController@create')->name('visits.create');
+    Route::get('visits/add', 'VisitController@add')->name('visits.add');
+    Route::get('visits/plan/add', 'VisitController@addPlan')->name('visits.add-plan');
     Route::post('visits/store', 'VisitController@store')->name('visits.store');
     Route::post('visits/addStore', 'VisitController@addStore')->name('visits.addStore');
     Route::get('visits/{visit:slug}/edit', 'VisitController@edit')->name('visits.edit');

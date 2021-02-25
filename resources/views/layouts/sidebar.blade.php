@@ -27,9 +27,10 @@ use App\Offer;
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-       with font-awesome or any other icon font library -->
+            <ul class="nav nav-pills nav-sidebar flex-column text-sm" data-widget="treeview" role="menu"
+                data-accordion="false">
+
+                <li class="nav-header">Dashboard</li>
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link{{ request()->is('/') ? ' active' : '' }}">
                         <i class="fas fa-home nav-icon"></i>
@@ -37,9 +38,25 @@ use App\Offer;
                     </a>
                 </li>
 
+                {{-- kunjungan/visits --}}
+                <li class="nav-header">Kunjungan Harian</li>
+                <li class="nav-item">
+                    <a href="{{ route('visits.plan') }}"
+                        class="nav-link{{ request()->segment(1) == 'visits' && request()->segment(2) == 'plan' ? ' active' : '' }}">
+                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <p>Rencana Kunjungan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('visits.index') }}"
+                        class="nav-link{{ request()->segment(1) == 'visits' && !request()->segment(2) ? ' active' : '' }}">
+                        <i class="fas fa-route nav-icon"></i>
+                        <p>Kunjungan</p>
+                    </a>
+                </li>
+
                 {{-- resource --}}
                 <li class="nav-header">Resource</li>
-
                 <li class="nav-item">
                     <a href="{{ route('modalities.index') }}"
                         class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">
@@ -55,13 +72,7 @@ use App\Offer;
                         <p>Customer</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('visits.index') }}"
-                        class="nav-link{{ request()->segment(1) == 'visits' ? ' active' : '' }}">
-                        <i class="fas fa-route nav-icon"></i>
-                        <p>Kunjungan</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('hospitals.index') }}"
                         class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">
@@ -72,7 +83,6 @@ use App\Offer;
 
                 {{-- penawaran --}}
                 <li class="nav-header">Penawaran</li>
-
                 <li class="nav-item">
                     <a href="{{ route('offers.index') }}"
                         class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">

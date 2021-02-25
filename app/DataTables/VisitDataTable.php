@@ -3,10 +3,7 @@
 namespace App\DataTables;
 
 use App\Visit;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class VisitDataTable extends DataTable
@@ -17,6 +14,7 @@ class VisitDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
+
     public function dataTable($query)
     {
         return datatables()
@@ -24,6 +22,12 @@ class VisitDataTable extends DataTable
             ->addIndexColumn()
             ->editColumn('customer.hospitals.name', function (Visit $visit) {
                 return $visit->customer->hospitals->first()->name ?? '';
+            })
+            ->editColumn('plans.date', function (Visit $visit) {
+                return $visit->last()->date ?? '';
+            })
+            ->editColumn('plans.description', function (Visit $visit) {
+                return $visit->last()->description ?? '';
             })
             ->editColumn('result', function (Visit $visit) {
                 if ($visit->slug) {
@@ -49,7 +53,7 @@ class VisitDataTable extends DataTable
     public function query(Visit $model)
     {
         return $model->newQuery()
-            ->with('customer.hospitals', 'author')
+            ->with('customer.hospitals', 'author', 'plans')
             ->latest()
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
@@ -97,6 +101,15 @@ class VisitDataTable extends DataTable
      */
     protected function getColumns()
     {
+        if ($this->plan) :
+            return $this->visitplan();
+        else :
+            return $this->visits();
+        endif;
+    }
+
+    protected function visits()
+    {
         return [
             // No.
             Column::make('DT_RowIndex')
@@ -114,6 +127,7 @@ class VisitDataTable extends DataTable
             Column::make('customer.hospitals.name')
                 ->title('Rumah Sakit')
                 ->orderable(false),
+
             // nama customer
             Column::make('customer.name')
                 ->title('Nama Customer')
@@ -158,11 +172,46 @@ class VisitDataTable extends DataTable
             Column::make('author.name')
                 ->title('Sales')
                 ->orderable(false),
+        ];
+    }
+    protected function visitplan()
+    {
+        return [
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false),
 
+            Column::computed('action')
+                ->searchable(false)
+                ->orderable(false)
+                ->printable(false)
+                ->exportable(false),
+
+            // hospital
+            Column::make('customer.hospitals.name')
+                ->title('Rumah Sakit')
+                ->orderable(false),
+
+            // sales
+            Column::make('author.name')
+                ->title('Sales')
+                ->orderable(false),
+
+            // tanggal
+            Column::make('plans.date')
+                ->title('Tanggal'),
+
+            // keterangan
+            Column::make('plans.description')
+                ->title('Keterangan')
+                ->orderable(false),
 
 
         ];
     }
+
 
     /**
      * Get filename for export.

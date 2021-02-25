@@ -8,6 +8,7 @@ use App\DataTables\VisitDataTable;
 use App\Hospital;
 use Illuminate\Support\Str;
 use App\Http\Requests\VisitRequest;
+use App\VisitPlan;
 use Illuminate\Support\Facades\Storage;
 
 class VisitController extends Controller
@@ -15,6 +16,17 @@ class VisitController extends Controller
     public function index(VisitDataTable $dataTable)
     {
         return $dataTable->render('visits.index');
+    }
+    public function plan(VisitDataTable $dataTable)
+    {
+        return $dataTable
+            ->with([
+                'plan' => true,
+            ])
+            ->render('visits.index', [
+                'tableHeader' => 'Table Rencana Kunjungan',
+                'caption' => 'Rencana Kunjungan',
+            ]);
     }
 
     public function show(Visit $visit)
@@ -69,8 +81,20 @@ class VisitController extends Controller
             'hospitals' => Hospital::select(['id', 'name', 'city'])
                 ->orderBy('name', 'asc')
                 ->where('name', '!=', '')
-                ->take(1000)
                 ->get(),
+        ]);
+    }
+
+    public function addPlan()
+    {
+        return view('visits.add', [
+            'hospitals' => Hospital::select(['id', 'name', 'city'])
+                ->orderBy('name', 'asc')
+                ->where('name', '!=', '')
+                ->get(),
+
+            'visitplan' => new VisitPlan(),
+            'cardHeader' => 'Buat Rencana Kunjungan',
         ]);
     }
 

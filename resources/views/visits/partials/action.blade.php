@@ -3,8 +3,11 @@
         <i class="fas fa-ellipsis-v"></i>
     </a>
     <div class="dropdown-menu">
-        <a href="{{ route('visits.show', $visit->slug) }}" class="dropdown-item"><i class="far fa-eye nav-icon"></i>
-            Detail</a>
+        @if (!request()->segment(2))
+            <a href="{{ route('visits.show', $visit->slug) }}" class="dropdown-item"><i
+                    class="far fa-eye nav-icon"></i>
+                Detail</a>
+        @endif
         @if (!$visit->deleted_at)
             <form action="{{ route('visits.delete', $visit->slug) }}" method="POST">
                 @csrf

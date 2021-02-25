@@ -1,6 +1,6 @@
 @extends('layouts.app',[
 'title' => 'Kunjungan Harian',
-'caption'=> 'Kunjungan Harian'
+'caption'=> $caption ?? 'Kunjungan Harian' ,
 ])
 
 @section('breadcrumb')
@@ -8,16 +8,25 @@
         <li class="breadcrumb-item"><a href="{{ route('visits') }}">Kunjungan Harian</a></li>
         <li class="breadcrumb-item">{{ $customer->name }}</li>
     @else
-        <li class="breadcrumb-item">Kunjungan Harian</li>
+        @if (!request()->segment(2))
+            <li class="breadcrumb-item">Kunjungan Harian</li>
+        @else
+            <li class="breadcrumb-item">Rencana Kunjungan</li>
+        @endif
     @endisset
 @endsection
 
 @section('content')
 
-    <div class="col-md-12">
+    <div class="container-fluid">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                @can('visits')
+                @switch(request()->segment(2))
+                    @case('plan')
+                    <x-button-create href="{{ route('visits.add-plan') }}">Buat Rencana Kunjungan</x-button-create>
+                    @break
+                    @default
+
                     <x-button-create href="{{ route('visits.add') }}">Kunjungan Baru</x-button-create>
                     <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
 
@@ -30,12 +39,13 @@
                                     class="fas fa-recycle nav-icon"></i>Restore</a>
                         @endif
                     @endcan
-                @endcan
+                @endswitch
+
             </div>
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <div class="col-md-12">
+        <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ $tableHeader ?? 'Table Kunjungan' }}</h3>
@@ -55,10 +65,10 @@
 
                 <div class="card-body table-responsive ">
                     {!! $dataTable->table([
-                    'class' => 'table table-centered table-striped dt-responsive
+    'class' => 'table table-centered table-striped dt-responsive
                     nowrap w-100',
-                    'id' => 'visit-table',
-                    ]) !!}
+    'id' => 'visit-table',
+]) !!}
                 </div>
                 <!-- /.card-header -->
 
