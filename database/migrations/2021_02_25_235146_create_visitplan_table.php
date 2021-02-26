@@ -20,7 +20,6 @@ class CreateVisitplanTable extends Migration
             $table->text('description');
             $table->string('area', 150)->nullable();
             $table->string('territory', 150)->nullable();
-            $table->tinyInteger('is_visited')->default(0);
             $table->timestamps();
         });
     }

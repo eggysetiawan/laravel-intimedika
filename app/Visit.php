@@ -14,7 +14,7 @@ class Visit extends Model implements HasMedia
 
     use InteractsWithMedia, SoftDeletes;
 
-    protected $fillable = ['request', 'slug', 'result', 'customer_id'];
+    protected $fillable = ['request', 'slug', 'result', 'customer_id', 'is_visited'];
 
     public function plans()
     {

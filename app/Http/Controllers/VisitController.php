@@ -62,6 +62,7 @@ class VisitController extends Controller
 
         // customer_id
         $attr['customer_id'] = request('customer');
+        $attr['is_visited'] = 1;
 
         // insert
         auth()
@@ -115,7 +116,7 @@ class VisitController extends Controller
         // alert success
         session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
 
-        return redirect('visits');
+        return redirect()->route('visits.plan');
     }
 
     public function addStore(VisitRequest $request)
@@ -137,6 +138,7 @@ class VisitController extends Controller
 
         $attr['slug'] = $slug;
         $attr['customer_id'] = $customer->id;
+        $attr['is_visited'] = 1;
         $visit = auth()->user()->visits()->create($attr);
 
         if (request('img')) :

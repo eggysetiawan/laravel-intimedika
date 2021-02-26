@@ -55,7 +55,9 @@ class VisitDataTable extends DataTable
     {
         return $model->newQuery()
             ->with(['customer.hospitals', 'author', 'plans'])
-            ->where('is_visited', 1)
+            ->when(!$this->plan, function ($query) {
+                return $query->where('is_visited', 1);
+            })
             ->when($this->plan, function ($query) {
                 return $query->where('is_visited', 0);
             })
