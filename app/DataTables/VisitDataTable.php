@@ -8,6 +8,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class VisitDataTable extends DataTable
 {
+
     /**
      * Build DataTable class.
      *
@@ -24,10 +25,10 @@ class VisitDataTable extends DataTable
                 return $visit->customer->hospitals->first()->name ?? '';
             })
             ->editColumn('plans.date', function (Visit $visit) {
-                return $visit->last()->date ?? '';
+                return $visit->plans->last()->date ?? '';
             })
             ->editColumn('plans.description', function (Visit $visit) {
-                return $visit->last()->description ?? '';
+                return $visit->plans->last()->description ?? '';
             })
             ->editColumn('result', function (Visit $visit) {
                 if ($visit->slug) {
@@ -53,14 +54,18 @@ class VisitDataTable extends DataTable
     public function query(Visit $model)
     {
         return $model->newQuery()
-            ->with('customer.hospitals', 'author', 'plans')
-            ->latest()
+            ->with(['customer.hospitals', 'author', 'plans'])
+            ->where('is_visited', 1)
+            ->when($this->plan, function ($query) {
+                return $query->where('is_visited', 0);
+            })
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
             })
             ->when($this->trash, function ($query) {
                 return $query->onlyTrashed();
-            });
+            })
+            ->latest();
     }
 
     /**
@@ -206,6 +211,17 @@ class VisitDataTable extends DataTable
             // keterangan
             Column::make('plans.description')
                 ->title('Keterangan')
+                ->orderable(false),
+
+            // nama customer
+            Column::make('customer.name')
+                ->title('Nama Customer')
+                ->orderable(false),
+
+
+            // hp customer
+            Column::make('customer.mobile')
+                ->title('Hp/Telepon')
                 ->orderable(false),
 
 

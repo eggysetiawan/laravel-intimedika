@@ -91,6 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::get('visits/create', 'VisitController@create')->name('visits.create');
     Route::get('visits/add', 'VisitController@add')->name('visits.add');
     Route::get('visits/plan/add', 'VisitController@addPlan')->name('visits.add-plan');
+    Route::post('visits/plan/store', 'VisitController@storePlan')->name('visits.storePlan');
     Route::post('visits/store', 'VisitController@store')->name('visits.store');
     Route::post('visits/addStore', 'VisitController@addStore')->name('visits.addStore');
     Route::get('visits/{visit:slug}/edit', 'VisitController@edit')->name('visits.edit');

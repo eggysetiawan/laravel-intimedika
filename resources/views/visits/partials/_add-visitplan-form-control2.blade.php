@@ -10,7 +10,29 @@
 </div>
 
 <div class="form-group">
-    <label for="description">Keterangan Rencana Kunjungan</label>
+    <label for="area">Area</label>
+    <input type="text" name="area" id="area" class="form-control @error('area') is-invalid @enderror"
+        placeholder="Input area rencana kunjungan.." {{ old('area') ?? $visitplan->area }}>
+    @error('area')
+        <span class="invalid-feedback" role="alert">
+            {{ $message }}
+        </span>
+    @enderror
+</div>
+<div class="form-group">
+    <label for="territory">Ruangan/Bagian</label>
+    <input type="text" name="territory" id="territory" class="form-control @error('territory') is-invalid @enderror"
+        placeholder="Input ruangan/bagian.." value="{{ old('territory') ?? $visitplan->territory }}">
+    @error('territory')
+        <span class="invalid-feedback" role="alert">
+            {{ $message }}
+        </span>
+    @enderror
+</div>
+
+
+<div class="form-group">
+    <label for="description">Aktifitas Rencana Kunjungan</label>
     <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror"
         cols="30" rows="4"
         placeholder="Berikan keterangan rencana kunjungan..">{{ old('description') ?? $visitplan->description }}</textarea>

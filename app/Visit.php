@@ -21,6 +21,7 @@ class Visit extends Model implements HasMedia
         return $this->hasMany(VisitPlan::class);
     }
 
+
     public static function last()
     {
         return static::all()->last();

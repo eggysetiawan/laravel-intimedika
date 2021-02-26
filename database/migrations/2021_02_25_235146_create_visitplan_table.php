@@ -16,9 +16,11 @@ class CreateVisitplanTable extends Migration
         Schema::create('visitplan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('visit_id')->constrained('visits')->cascadeOnDelete();
-            $table->dateTime('date');
-            $table->dateTime('description');
-            $table->tinyInteger('is_visited')->after('description')->default(0);
+            $table->date('date');
+            $table->text('description');
+            $table->string('area', 150)->nullable();
+            $table->string('territory', 150)->nullable();
+            $table->tinyInteger('is_visited')->default(0);
             $table->timestamps();
         });
     }

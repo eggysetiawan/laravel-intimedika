@@ -6,6 +6,7 @@ use App\Visit;
 use App\Customer;
 use App\DataTables\VisitDataTable;
 use App\Hospital;
+use App\Http\Requests\VisitPlanRequest;
 use Illuminate\Support\Str;
 use App\Http\Requests\VisitRequest;
 use App\VisitPlan;
@@ -87,15 +88,34 @@ class VisitController extends Controller
 
     public function addPlan()
     {
-        return view('visits.add', [
+        return view('visits.add-plan', [
             'hospitals' => Hospital::select(['id', 'name', 'city'])
                 ->orderBy('name', 'asc')
                 ->where('name', '!=', '')
                 ->get(),
 
             'visitplan' => new VisitPlan(),
+            'customer' => new Customer(),
             'cardHeader' => 'Buat Rencana Kunjungan',
         ]);
+    }
+
+    public function storePlan(VisitPlanRequest $request)
+    {
+        $attr = $request->all();
+        $attr['slug'] = Str::slug(request('name') . '_' . date('Y-m-d H:i:s'));
+        $customer = auth()->user()->customers()->create($attr);
+        $customer->hospitals()->attach(request('hospital'));
+
+        $attr['customer_id'] = $customer->id;
+
+        $visit = auth()->user()->visits()->create($attr);
+
+        $visit->plans()->create($attr);
+        // alert success
+        session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
+
+        return redirect('visits');
     }
 
     public function addStore(VisitRequest $request)

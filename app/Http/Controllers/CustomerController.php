@@ -12,7 +12,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::with('author', 'visits')
+        $customers = Customer::with('author', 'visits', 'hospitals')
             ->latest()
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
