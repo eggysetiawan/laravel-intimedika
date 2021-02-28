@@ -95,6 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::post('visits/store', 'VisitController@store')->name('visits.store');
     Route::post('visits/addStore', 'VisitController@addStore')->name('visits.addStore');
     Route::get('visits/{visit:slug}/edit', 'VisitController@edit')->name('visits.edit');
+    Route::get('visits/{visit:slug}/update', 'VisitController@editPlan')->name('visitplan.edit');
+    Route::patch('visits/{visit:slug}/update', 'VisitController@updatePlan')->name('visitplan.edit');
     Route::patch('visits/{visit:slug}/edit', 'VisitController@update')->name('visits.edit');
     Route::delete('visits/{visit:slug}/delete', 'VisitController@destroy')->name('visits.delete');
     Route::get('visits/{visit:slug}/restore', 'VisitController@restore')->name('visits.restore')->middleware(['role:superadmin', 'permission:restore']);

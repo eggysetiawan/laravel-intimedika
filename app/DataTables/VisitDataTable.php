@@ -30,6 +30,12 @@ class VisitDataTable extends DataTable
             ->editColumn('plans.description', function (Visit $visit) {
                 return $visit->plans->last()->description ?? '';
             })
+            ->editColumn('plans.territory', function (Visit $visit) {
+                return $visit->plans->last()->territory ?? '';
+            })
+            ->editColumn('plans.area', function (Visit $visit) {
+                return $visit->plans->last()->area ?? '';
+            })
             ->editColumn('result', function (Visit $visit) {
                 if ($visit->slug) {
                     return view('visits.partials.result', [
@@ -201,29 +207,39 @@ class VisitDataTable extends DataTable
                 ->title('Rumah Sakit')
                 ->orderable(false),
 
-            // sales
-            Column::make('author.name')
-                ->title('Sales')
-                ->orderable(false),
+
 
             // tanggal
             Column::make('plans.date')
-                ->title('Tanggal'),
-
-            // keterangan
-            Column::make('plans.description')
-                ->title('Keterangan')
-                ->orderable(false),
+                ->title('Dijadwalkan'),
 
             // nama customer
             Column::make('customer.name')
-                ->title('Nama Customer')
+                ->title('Customer')
                 ->orderable(false),
-
 
             // hp customer
             Column::make('customer.mobile')
                 ->title('Hp/Telepon')
+                ->orderable(false),
+            // aktivitas
+            Column::make('plans.description')
+                ->title('Aktivitas')
+                ->orderable(false),
+
+            // area
+            Column::make('plans.area')
+                ->title('Area')
+                ->orderable(false),
+
+            // area
+            Column::make('plans.territory')
+                ->title('Ruang/Bagian')
+                ->orderable(false),
+
+            // sales
+            Column::make('author.name')
+                ->title('Sales')
                 ->orderable(false),
 
 
@@ -238,6 +254,12 @@ class VisitDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'IPI_Kunjungan_' . date('YmdHis');
+        if ($this->plan) :
+            $filename = 'IPI_Rencana_Kunjungan_Sales_' . date('Y_m_d_His');
+        else :
+            $filename = 'IPI_Kunjungan_Sales_' . date('Y_m_d_His');
+        endif;
+
+        return $filename;
     }
 }

@@ -2,6 +2,7 @@
     <a href="#" class="text-dark h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-ellipsis-v"></i>
     </a>
+
     <div class="dropdown-menu">
         @if (!request()->segment(2))
             <a href="{{ route('visits.show', $visit->slug) }}" class="dropdown-item"><i
@@ -20,7 +21,12 @@
             <a href="{{ route('visits.restore', $visit->slug) }}" class="dropdown-item"
                 onclick="return confirm('apakah anda yakin?')"><i class="fas fa-trash-restore nav-icon"></i>
                 Restore</a>
-
+        @endif
+        @if (request()->segment(2) == 'plan')
+            <a href="{{ route('visitplan.edit', $visit->slug) }}" class="dropdown-item"><i
+                    class="fas fa-plane nav-icon"></i>
+                Update Kunjungan</a>
         @endif
     </div>
+
 </div>
