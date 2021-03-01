@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\VisitDataTable;
 use App\Http\Requests\VisitPlanRequest;
+use App\Http\Requests\VisitRequest;
+use App\Visit;
 
 class VisitPlanController extends Controller
 {
@@ -29,11 +31,7 @@ class VisitPlanController extends Controller
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('visitplan.create', [
@@ -48,12 +46,7 @@ class VisitPlanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(VisitPlanRequest $request)
     {
         $attr = $request->all();
@@ -72,12 +65,7 @@ class VisitPlanController extends Controller
         return redirect()->route('visitplan.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
@@ -89,9 +77,14 @@ class VisitPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Visit $visit)
     {
-        //
+        $customer = $visit->customer;
+        $hospitals = Hospital::select(['id', 'name', 'city'])
+            ->orderBy('name', 'asc')
+            ->where('name', '!=', '')
+            ->get();
+        return view('visitplan.edit', compact('visit', 'customer', 'hospitals'));
     }
 
     /**
@@ -101,9 +94,10 @@ class VisitPlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VisitRequest $request, Visit $visit)
     {
-        //
+        $attr = $request->all();
+        $visit->update($attr);
     }
 
     /**

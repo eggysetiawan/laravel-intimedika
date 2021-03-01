@@ -4,10 +4,17 @@
     </a>
 
     <div class="dropdown-menu">
-        @if (!request()->segment(2))
+        @if (request()->segment(1) == "visits")
             <a href="{{ route('visits.show', $visit->slug) }}" class="dropdown-item"><i
                     class="far fa-eye nav-icon"></i>
                 Detail</a>
+        @endif
+
+        @if (request()->segment(1) == 'visitplan')
+            <a href="{{ route('visitplan.update', $visit->slug) }}" class="dropdown-item"><i class="fas fa-plane-departure nav-icon"></i>
+                Update Kunjungan</a>
+            <a href="{{ route('visitplan.edit', $visit->slug) }}" class="dropdown-item"><i class="fas fa-edit nav-icon"></i>
+                Edit</a>
         @endif
         @if (!$visit->deleted_at)
             <form action="{{ route('visits.delete', $visit->slug) }}" method="POST">
@@ -21,11 +28,6 @@
             <a href="{{ route('visits.restore', $visit->slug) }}" class="dropdown-item"
                 onclick="return confirm('apakah anda yakin?')"><i class="fas fa-trash-restore nav-icon"></i>
                 Restore</a>
-        @endif
-        @if (request()->segment(2) == 'plan')
-            <a href="{{ route('visitplan.edit', $visit->slug) }}" class="dropdown-item"><i
-                    class="fas fa-plane nav-icon"></i>
-                Update Kunjungan</a>
         @endif
     </div>
 

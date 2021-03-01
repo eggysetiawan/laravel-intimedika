@@ -30,7 +30,7 @@ class VisitRequest extends FormRequest
             'mobile' => 'sometimes|required|numeric',
             'role' => 'sometimes|required',
             'email' => 'sometimes|email|unique:customers,email',
-            'hospital' => 'required',
+            'hospital' => 'sometimes',
             'img' => 'image|mimes:png,jpg,jpeg,svg|max:10240',
         ];
     }

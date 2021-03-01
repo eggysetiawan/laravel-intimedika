@@ -83,9 +83,11 @@ Route::middleware('auth')->group(function () {
 
 
     // visitplan
-    Route::resource('visitplan', 'VisitPlanController');
-    Route::get('visitplan/plan/{visit:slug}/update', 'VisitPlanController@planEdit')->name('visitplan.update');
-    Route::patch('visitplan/plan/{visit:slug}/update', 'VisitPlanController@planUpdate')->name('visitplan.update');
+    Route::resource('visitplan', 'VisitPlanController')->parameters([
+        'visitplan' => 'visit:slug',
+    ]);
+    Route::get('visitplan/{visit:slug}/visiting', 'VisitPlanController@planEdit')->name('visitplan.visiting');
+    Route::patch('visitplan/{visit:slug}/updateVisiting', 'VisitPlanController@planUpdate')->name('visitplan.visitingUpdate');
 
     // visits restore
     Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);

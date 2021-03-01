@@ -2,8 +2,12 @@
     <div class="form-group">
         <label for="hospital">Pilih Rumah Sakit</label>
         <div class="input-group">
-            <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
-                <option selected disabled>Pilih Rumah Sakit</option>
+            @if($customer->hospitals->first()->name)
+                <input type="text" disabled value="{{ $customer->hospitals->first()->name }}" class="form-control">
+                @else
+
+                  <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
+                  <option selected disabled>Pilih Rumah Sakit</option>
                 @foreach ($hospitals as $hospital)
                     <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
                 @endforeach
@@ -16,6 +20,7 @@
                     {{ $message }}
                 </span>
             @enderror
+            @endif
 
         </div>
     </div>

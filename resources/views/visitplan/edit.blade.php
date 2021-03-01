@@ -1,12 +1,8 @@
-@extends('layouts.app' ,['title' => 'Buat Kunjungan Harian'])
+@extends('layouts.app' ,['title' => 'Edit Rencana Kunjungan Harian'])
 
 @section('breadcrumb')
-    @if (!request()->segment(2))
-        <li class="breadcrumb-item"><a href="{{ route('visits.index') }}">Kunjungan Harian</a></li>
-    @else
-        <li class="breadcrumb-item"><a href="{{ route('visits.plan') }}">Rencana Kunjungan</a></li>
-    @endif
-    <li class="breadcrumb-item">Update </li>
+        <li class="breadcrumb-item"><a href="{{ route('visitplan.index') }}">Rencana Kunjungan</a></li>
+    <li class="breadcrumb-item">Edit</li>
 @endsection
 
 @section('content')
@@ -15,9 +11,10 @@
             <h3 class="card-title">{{ $cardHeader ?? 'Buat Kunjungan Baru' }}</h3>
         </div>
 
-        <form role="form" method="post" action="{{ route('visitplan.edit') }}" enctype="multipart/form-data">
+        <form role="form" method="post" action="{{ route('visitplan.update', $visit->slug) }}" enctype="multipart/form-data">
+            @method('patch')
             @csrf
-            @include('visits.partials.form-control2', ['submit' => 'Update'])
+            @include('visits.partials.form-control2', ['submit' => 'Edit'])
         </form>
     </x-card>
 @endsection
