@@ -41,8 +41,8 @@ use App\Offer;
                 {{-- kunjungan/visits --}}
                 <li class="nav-header">Kunjungan Harian</li>
                 <li class="nav-item">
-                    <a href="{{ route('visits.plan') }}"
-                        class="nav-link{{ request()->segment(1) == 'visits' && request()->segment(2) == 'plan' ? ' active' : '' }}">
+                    <a href="{{ route('visitplan.index') }}"
+                        class="nav-link{{ request()->segment(1) == 'visitplan'  ? ' active' : '' }}">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
                         <p>Rencana Kunjungan</p>
                     </a>

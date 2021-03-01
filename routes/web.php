@@ -82,23 +82,23 @@ Route::middleware('auth')->group(function () {
     Route::get('offers/complete/filter', 'SearchController@offerCompleted')->name('offers.filter-completed');
 
 
+    // visitplan
+    Route::resource('visitplan', 'VisitPlanController');
+    Route::get('visitplan/plan/{visit:slug}/update', 'VisitPlanController@planEdit')->name('visitplan.update');
+    Route::patch('visitplan/plan/{visit:slug}/update', 'VisitPlanController@planUpdate')->name('visitplan.update');
+
     // visits restore
     Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);
     // visits
     Route::get('visits', 'VisitController@index')->name('visits.index');
-    Route::get('visits/plan', 'VisitController@plan')->name('visits.plan');
-
     Route::get('visits/create', 'VisitController@create')->name('visits.create');
     Route::get('visits/add', 'VisitController@add')->name('visits.add');
-    Route::get('visits/plan/add', 'VisitController@addPlan')->name('visits.add-plan');
-    Route::post('visits/plan/store', 'VisitController@storePlan')->name('visits.storePlan');
     Route::post('visits/store', 'VisitController@store')->name('visits.store');
     Route::post('visits/addStore', 'VisitController@addStore')->name('visits.addStore');
     Route::get('visits/{visit:slug}/edit', 'VisitController@edit')->name('visits.edit');
-    Route::get('visits/{visit:slug}/update', 'VisitController@editPlan')->name('visitplan.edit');
-    Route::patch('visits/{visit:slug}/update', 'VisitController@updatePlan')->name('visitplan.edit');
+
     Route::patch('visits/{visit:slug}/edit', 'VisitController@update')->name('visits.edit');
     Route::delete('visits/{visit:slug}/delete', 'VisitController@destroy')->name('visits.delete');
-    Route::get('visits/{visit:slug}/restore', 'VisitController@restore')->name('visits.restore')->middleware(['role:superadmin', 'permission:restore']);
+    Route::get('visits/{visit:slug}/restore', 'VisitController@restore')->name('visits.restore')->middleware(['role:superadmin']);
     Route::get('visits/{visit:slug}', 'VisitController@show')->name('visits.show');
 });

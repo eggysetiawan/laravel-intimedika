@@ -18,17 +18,6 @@ class VisitController extends Controller
     {
         return $dataTable->render('visits.index');
     }
-    public function plan(VisitDataTable $dataTable)
-    {
-        return $dataTable
-            ->with([
-                'plan' => true,
-            ])
-            ->render('visits.index', [
-                'tableHeader' => 'Table Rencana Kunjungan',
-                'caption' => 'Rencana Kunjungan',
-            ]);
-    }
 
     public function show(Visit $visit)
     {
@@ -87,19 +76,7 @@ class VisitController extends Controller
         ]);
     }
 
-    public function addPlan()
-    {
-        return view('visits.add-plan', [
-            'hospitals' => Hospital::select(['id', 'name', 'city'])
-                ->orderBy('name', 'asc')
-                ->where('name', '!=', '')
-                ->get(),
 
-            'visitplan' => new VisitPlan(),
-            'customer' => new Customer(),
-            'cardHeader' => 'Buat Rencana Kunjungan',
-        ]);
-    }
 
     public function storePlan(VisitPlanRequest $request)
     {

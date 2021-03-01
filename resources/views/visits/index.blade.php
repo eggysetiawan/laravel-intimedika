@@ -21,9 +21,9 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
-                @switch(request()->segment(2))
-                    @case('plan')
-                    <x-button-create href="{{ route('visits.add-plan') }}">Buat Rencana Kunjungan</x-button-create>
+                @switch(request()->segment(1))
+                    @case('visitplan')
+                    <x-button-create href="{{ route('visitplan.create') }}">Buat Rencana Kunjungan</x-button-create>
                     @break
                     @default
 

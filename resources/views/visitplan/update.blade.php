@@ -1,8 +1,9 @@
-@extends('layouts.app', ['title' => 'Edit Kunjungan Harian',])
+@extends('layouts.app', ['title' => 'Update Rencana Kunjungan',])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('visits') }}">Kunjungan Harian</a></li>
-    <li class="breadcrumb-item">Edit Kunjungan</li>
+    <li class="breadcrumb-item"><a href="{{ route('visits.index') }}">Kunjungan Harian</a></li>
+    {{-- <li class="breadcrumb-item"><a href="/visits/{{ $visit->slug }}">{{ Str::limit($visit->slug, 15, '...') }}</a></li> --}}
+    <li class="breadcrumb-item">Update Kunjungan</li>
 @endsection
 
 @section('content')
@@ -13,7 +14,7 @@
             <div class="col-md-10">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Kunjungan {{ $visit->customer->name }}</h3>
+                        <h3 class="card-title">Update Kunjungan {{$visit->customer->hospitals->first()->name ?? $visit->customer->name  }}</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->

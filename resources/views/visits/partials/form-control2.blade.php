@@ -52,7 +52,7 @@
         @enderror
     </div>
 
-    @if (request()->segment(2) == 'plan' || request()->segment(3) == 'update')
+    @if (request()->segment(1) == 'visitplan')
         @include('visits.partials._add-visitplan-form-control2')
     @else
         @include('visits.partials._add-visit-form-control2')
