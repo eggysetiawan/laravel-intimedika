@@ -25,7 +25,7 @@ class VisitDataTable extends DataTable
                 return $visit->customer->hospitals->first()->name ?? '';
             })
             ->editColumn('plans.date', function (Visit $visit) {
-                return $visit->plans->last()->date ?? '';
+                return date('d-m-Y', strtotime($visit->plans->last()->date)) ?? '';
             })
             ->editColumn('plans.description', function (Visit $visit) {
                 return $visit->plans->last()->description ?? '';
