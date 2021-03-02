@@ -102,7 +102,7 @@
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="{{ route('visits.delete', $visit->slug) }}" method="POST">
+                    <form action="{{ route('visits.destroy', $visit->slug) }}" method="POST">
                         @csrf
                         @method('delete')
                         <div class="modal-content">

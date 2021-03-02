@@ -65,16 +65,7 @@ class VisitController extends Controller
         return redirect('visits');
     }
 
-    public function add()
-    {
-        return view('visits.add', [
-            'customer' => new Customer(),
-            'hospitals' => Hospital::select(['id', 'name', 'city'])
-                ->orderBy('name', 'asc')
-                ->where('name', '!=', '')
-                ->get(),
-        ]);
-    }
+
 
 
 
@@ -96,42 +87,7 @@ class VisitController extends Controller
         return redirect()->route('visits.plan');
     }
 
-    public function addStore(VisitRequest $request)
-    {
-        // validate input
-        $attr = $request->all();
 
-        // assignt name to slug
-        $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
-
-        $attr['user_id'] = auth()->id();
-        $customer = Customer::create($attr);
-        $customer->hospitals()->attach(request('hospital'));
-
-
-        // assign to slug (slug = name-hospitalname)
-        $timestamp = date('Y-m-d-H-i-s');
-        $slug = Str::slug(request('request') . ' ' . $timestamp);
-
-        $attr['slug'] = $slug;
-        $attr['customer_id'] = $customer->id;
-        $attr['is_visited'] = 1;
-        $visit = auth()->user()->visits()->create($attr);
-
-        if (request('img')) :
-            $imgSlug = $slug . '.' . request()->file('img')->extension();
-
-            $visit
-                ->addMediaFromRequest('img')
-                ->usingFileName($imgSlug)
-                ->toMediaCollection('images');
-        endif;
-
-        // alert success
-        session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
-
-        return redirect('visits');
-    }
 
     public function edit(Visit $visit)
     {

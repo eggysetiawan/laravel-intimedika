@@ -27,7 +27,7 @@
                     @break
                     @default
 
-                    <x-button-create href="{{ route('visits.add') }}">Kunjungan Baru</x-button-create>
+                    <x-button-create href="{{ route('visitadd.create') }}">Kunjungan Baru</x-button-create>
                     <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
 
                     @can('restore')
@@ -35,8 +35,8 @@
                             <a href="{{ route('visits.index') }}" class="btn btn-primary btn-sm"><i
                                     class="fas fa-table nav-icon"></i> Semua Kunjungan</a>
                         @else
-                            <a href="{{ route('visits.trash') }}" class="btn btn-warning btn-sm"><i
-                                    class="fas fa-recycle nav-icon"></i>Restore</a>
+                            {{-- <a href="{{ route('visits.trash') }}" class="btn btn-warning btn-sm"><i
+                                    class="fas fa-recycle nav-icon"></i>Restore</a> --}}
                         @endif
                     @endcan
                 @endswitch

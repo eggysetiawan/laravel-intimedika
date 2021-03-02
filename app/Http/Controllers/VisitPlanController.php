@@ -6,7 +6,6 @@ use App\Customer;
 use App\Hospital;
 use App\VisitPlan;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\DataTables\VisitDataTable;
 use App\Http\Requests\VisitPlanRequest;
 use App\Http\Requests\VisitRequest;
@@ -37,9 +36,10 @@ class VisitPlanController extends Controller
         return view('visitplan.create', [
             'hospitals' => Hospital::select(['id', 'name', 'city'])
                 ->orderBy('name', 'asc')
-                ->where('name', '!=', '')
+                ->whereNotNull('name')
                 ->get(),
 
+            'visit' => new Visit(),
             'visitplan' => new VisitPlan(),
             'customer' => new Customer(),
             'cardHeader' => 'Buat Rencana Kunjungan',
@@ -58,7 +58,7 @@ class VisitPlanController extends Controller
 
         $visit = auth()->user()->visits()->create($attr);
 
-        $visit->plans()->create($attr);
+        $visit->plan()->create($attr);
         // alert success
         session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
 
@@ -80,32 +80,24 @@ class VisitPlanController extends Controller
     public function edit(Visit $visit)
     {
         $customer = $visit->customer;
-        $hospitals = Hospital::select(['id', 'name', 'city'])
-            ->orderBy('name', 'asc')
-            ->where('name', '!=', '')
-            ->get();
-        return view('visitplan.edit', compact('visit', 'customer', 'hospitals'));
+        $visitplan = $visit->plan;
+
+        return view('visitplan.edit', compact('visit', 'visitplan', 'customer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(VisitRequest $request, Visit $visit)
+
+    public function update(VisitPlanRequest $request, Visit $visit)
     {
         $attr = $request->all();
-        $visit->update($attr);
+        $visit->customer()->update($attr);
+        $visit->plan()->update($attr);
+        // alert success
+        session()->flash('success', 'Rencana Kunjungan telah berhasil di edit!');
+
+        return redirect()->route('visitplan.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

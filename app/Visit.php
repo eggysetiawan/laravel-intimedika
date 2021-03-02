@@ -16,9 +16,11 @@ class Visit extends Model implements HasMedia
 
     protected $fillable = ['request', 'slug', 'result', 'customer_id', 'is_visited'];
 
-    public function plans()
+
+
+    public function plan()
     {
-        return $this->hasMany(VisitPlan::class);
+        return $this->hasOne(VisitPlan::class)->orderBy('date', 'desc');
     }
 
 

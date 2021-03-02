@@ -24,17 +24,17 @@ class VisitDataTable extends DataTable
             ->editColumn('customer.hospitals.name', function (Visit $visit) {
                 return $visit->customer->hospitals->first()->name ?? '';
             })
-            ->editColumn('plans.date', function (Visit $visit) {
-                return date('d-m-Y', strtotime($visit->plans->last()->date)) ?? '';
+            ->editColumn('plan.date', function (Visit $visit) {
+                return $visit->plan->date ?? '';
             })
-            ->editColumn('plans.description', function (Visit $visit) {
-                return $visit->plans->last()->description ?? '';
+            ->editColumn('plan.description', function (Visit $visit) {
+                return $visit->plan->description ?? '';
             })
-            ->editColumn('plans.territory', function (Visit $visit) {
-                return $visit->plans->last()->territory ?? '';
+            ->editColumn('plan.territory', function (Visit $visit) {
+                return $visit->plan->territory ?? '';
             })
-            ->editColumn('plans.area', function (Visit $visit) {
-                return $visit->plans->last()->area ?? '';
+            ->editColumn('plan.area', function (Visit $visit) {
+                return $visit->plan->area ?? '';
             })
             ->editColumn('result', function (Visit $visit) {
                 if ($visit->slug) {
@@ -51,21 +51,16 @@ class VisitDataTable extends DataTable
             ->rawColumns(['action']);
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\App\Visit $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
+
     public function query(Visit $model)
     {
         return $model->newQuery()
-            ->with(['customer.hospitals', 'author', 'plans'])
+            ->with(['customer.hospitals', 'author', 'plan'])
             ->when(!$this->plan, function ($query) {
                 return $query->where('is_visited', 1);
             })
             ->when($this->plan, function ($query) {
-                return $query->where('is_visited', 0);
+                return $query->whereHas('plan');
             })
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
@@ -210,8 +205,9 @@ class VisitDataTable extends DataTable
 
 
             // tanggal
-            Column::make('plans.date')
-                ->title('Dijadwalkan'),
+            Column::make('plan.date')
+                ->title('Dijadwalkan')
+                ->orderable(false),
 
             // nama customer
             Column::make('customer.name')
@@ -223,17 +219,17 @@ class VisitDataTable extends DataTable
                 ->title('Hp/Telepon')
                 ->orderable(false),
             // aktivitas
-            Column::make('plans.description')
+            Column::make('plan.description')
                 ->title('Aktivitas')
                 ->orderable(false),
 
             // area
-            Column::make('plans.area')
+            Column::make('plan.area')
                 ->title('Area')
                 ->orderable(false),
 
             // area
-            Column::make('plans.territory')
+            Column::make('plan.territory')
                 ->title('Ruang/Bagian')
                 ->orderable(false),
 

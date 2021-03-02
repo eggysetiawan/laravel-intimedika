@@ -2,24 +2,26 @@
     <div class="form-group">
         <label for="hospital">Pilih Rumah Sakit</label>
         <div class="input-group">
-            @if($customer->hospitals->first()->name)
+            @if (@$customer->hospitals->first()->name)
                 <input type="text" disabled value="{{ $customer->hospitals->first()->name }}" class="form-control">
-                @else
+            @else
 
-                  <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
-                  <option selected disabled>Pilih Rumah Sakit</option>
-                @foreach ($hospitals as $hospital)
-                    <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
-                @endforeach
-            </select>
-            <span class="input-group-append">
-                <a class="btn btn-teal bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}">+</a>
-            </span>
-            @error('hospital')
-                <span class="invalid-feedback" role="alert">
-                    {{ $message }}
+                <select name="hospital" id="hospital"
+                    class="form-control @error('hospital') is-invalid @enderror select2">
+                    <option selected disabled>Pilih Rumah Sakit</option>
+                    @foreach ($hospitals as $hospital)
+                        <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
+                    @endforeach
+                </select>
+                <span class="input-group-append">
+                    <a class="btn btn-teal bg-teal btn-flat" target="_blank"
+                        href="{{ route('hospitals.create') }}">+</a>
                 </span>
-            @enderror
+                @error('hospital')
+                    <span class="invalid-feedback" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
             @endif
 
         </div>
