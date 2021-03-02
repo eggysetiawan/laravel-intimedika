@@ -54,8 +54,7 @@ class VisitController extends Controller
         $attr['is_visited'] = 1;
 
         // insert
-        auth()
-            ->user()
+        auth()->user()
             ->visits()
             ->create($attr);
 
@@ -64,30 +63,6 @@ class VisitController extends Controller
 
         return redirect('visits');
     }
-
-
-
-
-
-    public function storePlan(VisitPlanRequest $request)
-    {
-        $attr = $request->all();
-        $attr['slug'] = Str::slug(request('name') . '_' . date('Y-m-d H:i:s'));
-        $customer = auth()->user()->customers()->create($attr);
-        $customer->hospitals()->attach(request('hospital'));
-
-        $attr['customer_id'] = $customer->id;
-
-        $visit = auth()->user()->visits()->create($attr);
-
-        $visit->plans()->create($attr);
-        // alert success
-        session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
-
-        return redirect()->route('visits.plan');
-    }
-
-
 
     public function edit(Visit $visit)
     {

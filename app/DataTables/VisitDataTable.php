@@ -48,6 +48,14 @@ class VisitDataTable extends DataTable
                     'visit' => $visit
                 ]);
             })
+            ->editColumn('status', function (Visit $visit) {
+                return view('visits.partials.status', [
+                    'visit' => $visit
+                ]);
+            })
+            ->editColumn('updated_at', function (Visit $visit) {
+                return $visit->updated_at->format('d-m-Y');
+            })
             ->rawColumns(['action']);
     }
 
@@ -60,15 +68,16 @@ class VisitDataTable extends DataTable
                 return $query->where('is_visited', 1);
             })
             ->when($this->plan, function ($query) {
-                return $query->whereHas('plan');
+                return $query->whereHas('plan', function ($query) {
+                    return $query->orderBy('date', 'asc');
+                });
             })
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
             })
             ->when($this->trash, function ($query) {
                 return $query->onlyTrashed();
-            })
-            ->latest();
+            });
     }
 
     /**
@@ -135,6 +144,10 @@ class VisitDataTable extends DataTable
             Column::make('customer.hospitals.name')
                 ->title('Rumah Sakit')
                 ->orderable(false),
+
+            // tanggal kunjungan
+            Column::make('updated_at')
+                ->title('Tanggal'),
 
             // nama customer
             Column::make('customer.name')
@@ -222,6 +235,12 @@ class VisitDataTable extends DataTable
             Column::make('plan.description')
                 ->title('Aktivitas')
                 ->orderable(false),
+            // aktivitas
+            Column::computed('status')
+                ->title('Status')
+                ->orderable(false)
+                ->printable(false)
+                ->searchable(false),
 
             // area
             Column::make('plan.area')

@@ -14,8 +14,8 @@
                     @endforeach
                 </select>
                 <span class="input-group-append">
-                    <a class="btn btn-teal bg-teal btn-flat" target="_blank"
-                        href="{{ route('hospitals.create') }}">+</a>
+                    <a class="btn btn-teal bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}"
+                        title="Rumah Sakit belum ada dalam daftar? klik disini untuk menambahkan.">+</a>
                 </span>
                 @error('hospital')
                     <span class="invalid-feedback" role="alert">

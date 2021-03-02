@@ -11,9 +11,9 @@
         @endif
 
         @if (request()->segment(1) == 'visitplan')
-            <a href="{{ route('visitplan.update', $visit->slug) }}" class="dropdown-item"><i
+            <a href="{{ route('arrival.edit', $visit->slug) }}" class="dropdown-item"><i
                     class="fas fa-plane-departure nav-icon"></i>
-                Update Kunjungan</a>
+                Lakukan Kunjungan</a>
             <a href="{{ route('visitplan.edit', $visit->slug) }}" class="dropdown-item"><i
                     class="fas fa-edit nav-icon"></i>
                 Edit</a>

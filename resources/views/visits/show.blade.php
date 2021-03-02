@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title'=> $visit->request])
+@extends('layouts.app', ['title'=> $visit->customer->hospitals->first()->name ?? $visit->customer->name])
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('visits.index') }}">Kunjungan Harian</a></li>

@@ -21,6 +21,10 @@ Route::middleware('auth')->group(function () {
         Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
         Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
     });
+    // arrived
+    Route::resource('arrival', 'ArrivalController')->parameters([
+        'arrival' => 'visit:slug',
+    ]);
     // route customers
     Route::get('customers/create-2', 'CustomerController@create2')->name('customers.create-2');
     Route::resource('customers', 'CustomerController')->parameters([

@@ -20,7 +20,7 @@ class Visit extends Model implements HasMedia
 
     public function plan()
     {
-        return $this->hasOne(VisitPlan::class)->orderBy('date', 'desc');
+        return $this->hasOne(VisitPlan::class);
     }
 
 
