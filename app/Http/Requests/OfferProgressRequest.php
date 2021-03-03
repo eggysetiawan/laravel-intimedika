@@ -32,6 +32,7 @@ class OfferProgressRequest extends FormRequest
             'shipping' => 'nullable',
             'price.*' => 'nullable',
             'qty.*' => 'nullable',
+            'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
         ];
     }
 
@@ -40,7 +41,9 @@ class OfferProgressRequest extends FormRequest
         return [
             'price_po.required_if' => "Harga Pre-Order wajib diisi!",
             'shipping.required_if' => "Ongkos kirim wajib diisi!",
-            'detail.required' => "Silahkan isi keterangan progress!"
+            'detail.required' => "Silahkan isi keterangan progress!",
+            'detail.required_unless' => "Silahkan isi keterangan progress!",
+            'img.required_if' => "Bukti PO wajib di upload",
         ];
     }
 }

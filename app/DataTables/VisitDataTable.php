@@ -94,7 +94,7 @@ class VisitDataTable extends DataTable
                 'stateSave' => true,
                 'dom'          => 'Blfrtip',
                 'buttons'      => ['excel', 'print', 'reset'],
-                'order'   => [[0, 'desc']],
+                'order'   => [1, 'desc'],
                 'lengthMenu' => [
                     [10, 25, 50, 100],
                     ['10', '25', '50', '100']

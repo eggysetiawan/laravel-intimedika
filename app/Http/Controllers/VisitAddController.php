@@ -35,15 +35,17 @@ class VisitAddController extends Controller
         $customer->hospitals()->attach(request('hospital'));
 
 
-        // assign to slug (slug = name-hospitalname)
+        // assign to slug
         $timestamp = date('Y-m-d-H-i-s');
         $slug = Str::slug(request('request') . ' ' . $timestamp);
-
         $attr['slug'] = $slug;
+
+        // insert into table visits
         $attr['customer_id'] = $customer->id;
         $attr['is_visited'] = 1;
         $visit = auth()->user()->visits()->create($attr);
 
+        // if any image, upload image to media table
         if (request('img')) :
             $imgSlug = $slug . '.' . request()->file('img')->extension();
 
@@ -55,7 +57,7 @@ class VisitAddController extends Controller
 
         // alert success
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
-
+        // redirect to index visits
         return redirect('visits');
     }
 }
