@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Funnel;
 use Illuminate\Http\Request;
 use App\DataTables\FunnelDataTable;
+use App\Modality;
+use App\Offer;
 
 class FunnelController extends Controller
 {
@@ -23,9 +26,23 @@ class FunnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(FunnelDataTable $dataTable)
     {
-        //
+        $customers = Customer::with('hospitals')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        if (!request('count')) :
+            return $dataTable->render('funnels.index');
+        else :
+            return view('funnels.create', [
+                'offer' => new Offer(),
+                'funnel' => new Funnel,
+                'customers' => $customers,
+                'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
+                'count' => request('count'),
+            ]);
+        endif;
     }
 
     /**
