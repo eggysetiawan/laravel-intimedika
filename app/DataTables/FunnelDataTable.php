@@ -70,7 +70,8 @@ class FunnelDataTable extends DataTable
                 ->addClass('text-center'),
             Column::make('id'),
             Column::make('add your columns'),
-            Column::make('created_at'),
+            Column::make('created_at')
+                ->width(50),
             Column::make('updated_at'),
         ];
     }

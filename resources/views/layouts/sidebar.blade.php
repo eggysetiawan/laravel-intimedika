@@ -87,7 +87,7 @@ use App\Offer;
                     <a href="{{ route('funnels.index') }}"
                         class="nav-link{{ request()->is('funnels') ? ' active' : '' }}">
                         <i class="fab fa-buffer nav-icon"></i>
-                        <p>Semua Penawaran</p>
+                        <p>Sales Funnel</p>
                     </a>
                 </li>
 
