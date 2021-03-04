@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\OfferDataTable;
 use App\Http\Requests\ApprovalRequest;
 use App\Offer;
 use App\OfferProgress;
 
 class ApprovalController extends Controller
 {
+
+    public function index(OfferDataTable $dataTable)
+    {
+        return $dataTable
+            ->with([
+                'approval' => true,
+            ])
+            ->render('offers.index', [
+                'tableHeader' => 'Ready to Approve',
+                'approval' => Offer::whereNull('is_approved')->count(),
+            ]);
+    }
 
     public function allPurchase(ApprovalRequest $request)
     {

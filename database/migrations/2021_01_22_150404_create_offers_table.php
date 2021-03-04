@@ -17,9 +17,9 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('user_id')->constrained('users');
-            $table->string('offer_no');
-            $table->string('slug');
-            $table->string('budget', 10);
+            $table->string('offer_no')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('budget', 10)->nullable();
             $table->dateTime('offer_date')->nullable();
             $table->longText('price_note')->nullable();
             $table->string('warranty_note', 50)->nullable();

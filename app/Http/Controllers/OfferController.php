@@ -2,16 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Modality;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
-use App\Mail\Offer\CreateOfferEmail;
-use Illuminate\Support\Facades\Mail;
-use App\Notifications\NewOfferNotification;
 use App\{Offer, Order, Invoice, Customer, OfferProgress};
-use App\Notifications\CreateOffer;
-use App\Notifications\Offer\NewOfferNotification as OfferNewOfferNotification;
 
 class OfferController extends Controller
 {
@@ -26,28 +20,6 @@ class OfferController extends Controller
         ]);
     }
 
-    public function completed(OfferDataTable $dataTable)
-    {
-        return $dataTable
-            ->with([
-                'complete' => true,
-            ])
-            ->render('offers.index', [
-                'tableHeader' => 'Penawaran Berhasil',
-                'approval' => 0
-            ]);
-    }
-    public function approval(OfferDataTable $dataTable)
-    {
-        return $dataTable
-            ->with([
-                'approval' => true,
-            ])
-            ->render('offers.index', [
-                'tableHeader' => 'Ready to Approve',
-                'approval' => Offer::whereNull('is_approved')->count(),
-            ]);
-    }
     public function trash(OfferDataTable $dataTable)
     {
         return $dataTable->with([

@@ -107,6 +107,7 @@ class OfferDataTable extends DataTable
             ->when($this->trash, function ($query) {
                 return $query->onlyTrashed();
             })
+            ->whereNotNull('offer_no')
             ->latest();
     }
 

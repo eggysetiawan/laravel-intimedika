@@ -42,7 +42,7 @@ use App\Offer;
                 <li class="nav-header">Kunjungan Harian</li>
                 <li class="nav-item">
                     <a href="{{ route('visitplan.index') }}"
-                        class="nav-link{{ request()->segment(1) == 'visitplan'  ? ' active' : '' }}">
+                        class="nav-link{{ request()->segment(1) == 'visitplan' ? ' active' : '' }}">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
                         <p>Rencana Kunjungan</p>
                     </a>
@@ -78,6 +78,16 @@ use App\Offer;
                         class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">
                         <i class="fas fa-hospital nav-icon"></i>
                         <p>Rumah Sakit</p>
+                    </a>
+                </li>
+
+                {{-- funnels --}}
+                <li class="nav-header">Funnel</li>
+                <li class="nav-item">
+                    <a href="{{ route('funnels.index') }}"
+                        class="nav-link{{ request()->is('funnels') ? ' active' : '' }}">
+                        <i class="fab fa-buffer nav-icon"></i>
+                        <p>Semua Penawaran</p>
                     </a>
                 </li>
 

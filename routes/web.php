@@ -10,7 +10,7 @@ Route::middleware('auth')->group(function () {
     // view approval penawaran & po
     Route::middleware(['role:director|superadmin'])->group(function () {
         Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
-        Route::get('offers/approval', 'OfferController@approval')->name('offers.approval');
+        Route::get('offers/approval', 'ApprovalController@index')->name('offers.approval');
     });
 
 
@@ -30,6 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('customers', 'CustomerController')->parameters([
         'customers' => 'customer:slug',
     ]);
+
+    // route funnels
+    Route::resource('funnels', 'FunnelController');
+
     //  hospitals
     Route::resource('hospitals', 'HospitalController')->parameters([
         'hospitals' => 'hospital:slug',
@@ -45,7 +49,7 @@ Route::middleware('auth')->group(function () {
     ]);
     //offers
     Route::get('offers', 'OfferController@index')->name('offers.index');
-    Route::get('offers/complete', 'OfferController@completed')->name('offers.complete');
+    Route::get('offers/completed', 'OfferCompletedController')->name('offers.complete');
     Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
     Route::get('offers/create', 'OfferController@create')->name('offers.create');
     Route::post('offers/store', 'OfferController@store')->name('offers.store');
