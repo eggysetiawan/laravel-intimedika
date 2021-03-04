@@ -72,8 +72,14 @@ class InvoiceController extends Controller
 
     public function show(Offer $offer)
     {
+        $prices = array();
+
+        $order_first[] = $offer->invoices->first()->orders;
+
         return view('invoices.show', [
             'offer' => $offer,
+            'prices' => $prices,
+            'order_first' => $order_first,
         ]);
     }
     public function toOrder(Offer $offer)

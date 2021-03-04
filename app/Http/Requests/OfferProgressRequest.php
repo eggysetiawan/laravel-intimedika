@@ -41,9 +41,9 @@ class OfferProgressRequest extends FormRequest
         return [
             'price_po.required_if' => "Harga Pre-Order wajib diisi!",
             'shipping.required_if' => "Ongkos kirim wajib diisi!",
-            'detail.required' => "Silahkan isi keterangan progress!",
-            'detail.required_unless' => "Silahkan isi keterangan progress!",
-            'img.required_if' => "Bukti PO wajib di upload",
+            'detail.required' => "Keterangan wajib diisi!",
+            'detail.required_unless' => "Keterangan wajib diisi!",
+            'img.required_if' => "Bukti Purhcase Order wajib di upload!",
         ];
     }
 }

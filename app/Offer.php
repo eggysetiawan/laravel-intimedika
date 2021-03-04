@@ -34,6 +34,14 @@ class Offer extends Model implements HasMedia
         return $this->hasMany(Invoice::class)->latest();
     }
 
+    public function repeats()
+    {
+        return $this->hasMany(Invoice::class)->whereHas('orders', function ($query) {
+            return $query->whereNotNull('quantitiy');
+        })
+            ->latest();
+    }
+
 
     public function customer()
     {
