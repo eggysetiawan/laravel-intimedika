@@ -53,6 +53,13 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <label for="description">Keterangan</label>
+        <textarea name="description" id="description" cols="30"
+            class="form-control @error('description')is-invalid @enderror"
+            rows="4">{{ old('description') ?? $funnel->description }}</textarea>
+    </div>
+
     @for ($i = 1; $i <= $count; $i++)
         <div class="form-group my-4">
             {{-- references --}}

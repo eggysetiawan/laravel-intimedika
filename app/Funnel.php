@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Funnel extends Model
 {
+    protected $fillable = ['slug', 'progress', 'date', 'description'];
 
     public function offer()
     {

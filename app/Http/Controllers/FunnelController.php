@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
+use App\Offer;
 use App\Funnel;
+use App\Customer;
+use App\Modality;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\FunnelDataTable;
-use App\Modality;
-use App\Offer;
+use App\Http\Requests\FunnelRequest;
 
 class FunnelController extends Controller
 {
@@ -51,9 +53,21 @@ class FunnelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FunnelRequest $request)
     {
-        //
+        $attr = $request->all();
+        // insert into offer table
+        $attr['customer_id'] = $request->customer;
+        $offer = auth()->user()->offers()->create($attr);
+
+        // assign to funnel slug
+        $attr['slug'] = Str::slug($request->description . ' ' . date('YmdHis'));
+        // insert into funnels table
+        $offer->funnel()->create($attr);
+
+        session()->flash('success', 'Funnel telah berhasil dibuat!');
+
+        return redirect('funnels');
     }
 
     /**

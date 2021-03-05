@@ -1,7 +1,7 @@
 @php
 use App\Offer;
 @endphp
-<aside class="main-sidebar sidebar-dark-teal elevation-4">
+<aside class="main-sidebar sidebar-dark-teal  elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link navbar-teal text-sm">
         <img src="{{ asset('image/ipi2.png') }}" alt="Intimedika Puspa Indah"
@@ -105,12 +105,11 @@ use App\Offer;
                         <a href="{{ route('offers.approval') }}"
                             class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-exclamation nav-icon"></i>
-                            <p>Approve Penawaran @if (Offer::whereNull('is_approved')->count() > 0)
-                                    <span
-                                        class="badge badge-danger right">{{ Offer::whereNull('is_approved')->count() }}</span>
-                                @endif
-                            </p>
-
+                            <p>Approve Penawaran </p>
+                            @if (Offer::whereNull('is_approved')->count() > 0)
+                                <span
+                                    class="badge badge-danger right">{{ Offer::whereNull('is_approved')->count() }}</span>
+                            @endif
                         </a>
                     </li>
                     <li class="nav-item">
@@ -122,7 +121,7 @@ use App\Offer;
             ->whereHas('progressApproval')
             ->count() > 0)
                                 <span
-                                    class="badge badge-danger ">{{ Offer::with('progressApproval')->whereHas('progressApproval')->count() }}</span>
+                                    class="badge badge-danger right">{{ Offer::with('progressApproval')->whereHas('progressApproval')->count() }}</span>
                             @endif
 
                         </a>
