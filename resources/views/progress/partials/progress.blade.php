@@ -38,8 +38,9 @@ switch ($progress) {
     @endif
     <div class="project_progress">
         <div class="progress progress-sm">
-            <div class="progress-bar {{ $bar }}" role="progressbar" aria-volumenow="{{ $progress }}"
-                aria-volumemin="0" aria-volumemax="100" style="width: {{ $progress }}%">
+            <div class="progress-bar {{ $bar }} progress-bar-striped" role="progressbar"
+                aria-volumenow="{{ $progress }}" aria-volumemin="0" aria-volumemax="100"
+                style="width: {{ $progress }}%">
             </div>
         </div>
         <small>

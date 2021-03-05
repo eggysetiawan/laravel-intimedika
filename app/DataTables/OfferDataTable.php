@@ -158,7 +158,8 @@ class OfferDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false)
                 ->printable(false)
-                ->exportable(false),
+                ->exportable(false)
+                ->width(50),
 
             // no.penawaran
             Column::make('offer_no')

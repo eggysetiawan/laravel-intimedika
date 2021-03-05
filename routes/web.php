@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // route funnels
-    Route::resource('funnels', 'FunnelController');
+    Route::resource('funnels', 'FunnelController')->parameters([
+        'funnels' => 'funnel:slug',
+    ]);
 
     //  hospitals
     Route::resource('hospitals', 'HospitalController')->parameters([
