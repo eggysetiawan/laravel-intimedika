@@ -7,6 +7,7 @@ use App\Demo;
 use App\Offer;
 use App\OfferProgress;
 use App\DataTables\OfferDataTable;
+use App\Events\PurchaseOrderCreated;
 use App\Http\Requests\OfferProgressRequest;
 use App\Notifications\Progress\PurchaseOrderNotification;
 use App\User;
@@ -85,9 +86,9 @@ class ProgressController extends Controller
                     ->toMediaCollection('image_po');
 
                 // send email
-                $admin = User::where('id', 13)->first();
-                $admin->notify(new PurchaseOrderNotification($offer));
-
+                // $admin = User::where('id', 13)->first();
+                // $admin->notify(new PurchaseOrderNotification($offer));
+                event(new PurchaseOrderCreated($offer));
                 break;
 
 

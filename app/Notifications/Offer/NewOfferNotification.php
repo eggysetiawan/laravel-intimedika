@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewOfferNotification extends Notification implements ShouldQueue
+class NewOfferNotification extends Notification
 {
     use Queueable;
     public $offer;

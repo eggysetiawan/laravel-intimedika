@@ -120,8 +120,8 @@
 
     @endfor
 
-    <div class="card-footer">
-        <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
-    </div>
+</div>
 
+<div class="card-footer">
+    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
 </div>

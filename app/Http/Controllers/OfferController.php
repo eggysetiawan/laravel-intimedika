@@ -6,6 +6,7 @@ use App\Modality;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
 use App\{Offer, Order, Invoice, Customer, OfferProgress};
+use App\Events\OfferCreated;
 
 class OfferController extends Controller
 {
@@ -48,6 +49,8 @@ class OfferController extends Controller
                 'customers' => $customers,
                 'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
                 'count' => request('count'),
+                'max' => Offer::where('year', date('Y'))
+                    ->max('offer_no'),
             ]);
         endif;
     }
@@ -69,6 +72,7 @@ class OfferController extends Controller
         $bln = $array_bln[date('n', strtotime($request->date))];
         $tahun = date('Y', strtotime($request->date));
 
+        $attr['year'] = $tahun;
         $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
         $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
 
@@ -106,9 +110,9 @@ class OfferController extends Controller
             // alert success
         }
 
-        // Mail::to("setiawaneggy@gmail.com")->send(new CreateOfferEmail($offer));
-        // $admin = User::where('id', 13)->first();
-        // $admin->notify(new OfferNewOfferNotification($offer));
+        // send mail to admin
+        event(new OfferCreated($offer));
+
 
         session()->flash('success', 'Penawaran telah berhasil dibuat!');
         return redirect('offers');

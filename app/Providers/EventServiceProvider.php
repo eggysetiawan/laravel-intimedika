@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\OfferCreated;
+use App\Events\PurchaseOrderCreated;
+use App\Listeners\ProcessOfferCreated;
+use App\Listeners\ProcessPurchaseOrderCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,8 +22,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        Offer::class => [
-            SendNewOfferNotification::class,
+        OfferCreated::class => [
+            ProcessOfferCreated::class,
+        ],
+        PurchaseOrderCreated::class => [
+            ProcessPurchaseOrderCreated::class,
         ],
     ];
 

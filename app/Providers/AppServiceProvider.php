@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             return "Rp <?php echo number_format($expression, 0, ',', '.'); ?>";
         });
 
-        Offer::observe(OfferObserver::class);
+        // Offer::observe(OfferObserver::class);
 
         config(['app.locale' => 'id']);
         \Carbon\Carbon::setLocale('id');
