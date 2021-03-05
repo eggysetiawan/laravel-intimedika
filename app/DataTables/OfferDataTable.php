@@ -54,16 +54,13 @@ class OfferDataTable extends DataTable
                 foreach ($orders as $order) :
                     $references[] = $order->references;
                 endforeach;
-                return join(" - ", array_unique($references));
+                return join(" & ", array_unique($references));
             })
             ->editColumn('offer_date', function (Offer $offer) {
-                return date('d/m/Y', strtotime($offer->offer_date));
+                return date('d-m-Y', strtotime($offer->offer_date));
             })
             ->editColumn('invoices.tax.price_po', function (Offer $offer) {
                 return $offer->invoices->last()->tax->price_po ?? '';
-                // return view('offers.partials.po', [
-                //     'offer' => $offer
-                // ]);
             })
             ->editColumn('invoices.tax.dpp', function (Offer $offer) {
                 return $offer->invoices->last()->tax->dpp ?? '';
@@ -85,30 +82,30 @@ class OfferDataTable extends DataTable
 
         return $model->query()
             ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
-            ->when($this->from && $this->to, function ($query) {
+            ->when($this->from && $this->to, function ($query) { //query untuk filter periode from ~ to.
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
-            ->when(!auth()->user()->isAdmin(), function ($query) {
+            ->when(!auth()->user()->isAdmin(), function ($query) { //jika bukan admin, tampilkan hanya penawaran milik masing2 sales.
                 return $query->where('user_id', auth()->id());
             })
-            ->when($this->complete, function ($query) {
+            ->when($this->complete, function ($query) { // menu penawaran berhasil.
                 return $query->whereHas('progress', function ($query) {
                     return $query->where('progress', 100);
                 });
             })
-            ->when($this->approval, function ($query) {
+            ->when($this->approval, function ($query) { //menu approve penawaran.
                 return $query->whereNull('offers.is_approved');
             })
-            ->when($this->approval_po, function ($query) {
+            ->when($this->approval_po, function ($query) { //menu approval purchase order.
                 return $query->whereHas('progress', function ($query) {
                     return $query->where('progress', 99);
                 });
             })
-            ->when($this->trash, function ($query) {
+            ->when($this->trash, function ($query) { //menu restore.
                 return $query->onlyTrashed();
             })
-            ->whereNotNull('offer_no')
-            ->latest();
+            ->whereNotNull('offer_no') //hanya tampilkan penawaran resmi, bukan funnel plan.
+            ->latest(); //order berdasarkan data terbaru.
     }
 
     /**
@@ -137,7 +134,13 @@ class OfferDataTable extends DataTable
       <div></div>
       <div></div>
       <div></div>
-    </div>'
+    </div>',
+                'loadingRecords' => '<div class="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>',
             ])
             ->columns($this->getColumns());
     }
@@ -185,7 +188,9 @@ class OfferDataTable extends DataTable
 
 
             // tanggal penawaran
-            Column::make('offer_date')->title('Tgl. Penawaran'),
+            Column::make('offer_date')
+                ->title('Tgl. Penawaran')
+                ->width(50),
 
             // progress searchable
             Column::make('progress.progress')
@@ -199,7 +204,8 @@ class OfferDataTable extends DataTable
                 ->orderable(false),
 
             // nama sales
-            Column::make('author.name')->title('Sales'),
+            Column::make('author.name')->title('Sales')
+                ->orderable(false),
 
             // referensi
             Column::make('invoices.orders.references')->title('Referensi')

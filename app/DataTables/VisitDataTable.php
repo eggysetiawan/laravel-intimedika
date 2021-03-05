@@ -138,7 +138,8 @@ class VisitDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false)
                 ->printable(false)
-                ->exportable(false),
+                ->exportable(false)
+                ->width(50),
 
             // hospital
             Column::make('customer.hospitals.name')
@@ -208,7 +209,8 @@ class VisitDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false)
                 ->printable(false)
-                ->exportable(false),
+                ->exportable(false)
+                ->width(50),
 
             // hospital
             Column::make('customer.hospitals.name')
