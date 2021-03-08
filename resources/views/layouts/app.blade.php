@@ -15,11 +15,7 @@
     @include('layouts.head')
 </head>
 
-{{--  --}}
-
-
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse accent-teal">
-    <!-- trigger the demo -->
 
     <div class="wrapper">
 

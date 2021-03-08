@@ -244,6 +244,6 @@ class OfferDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Offer_' . date('YmdHis');
+        return 'IPI_Penawaran_' . date('YmdHis');
     }
 }
