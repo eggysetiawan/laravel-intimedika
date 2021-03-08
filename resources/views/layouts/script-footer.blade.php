@@ -17,6 +17,8 @@
 
 <!-- date-range-picker -->
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+{{-- fast click --}}
+<script src="{{ asset('plugins/fastclick/fastclick.js') }}"></script>
 
 {{-- Bootstrap Switch --}}
 <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>

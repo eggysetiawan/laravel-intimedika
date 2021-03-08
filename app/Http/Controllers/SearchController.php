@@ -40,7 +40,9 @@ class SearchController extends Controller
             'from' => $from,
             'to' => $to,
         ])
-            ->render('offers.index');
+            ->render('offers.index', [
+                'approval' => '',
+            ]);
     }
     public function offerCompleted(OfferDataTable $dataTable)
     {

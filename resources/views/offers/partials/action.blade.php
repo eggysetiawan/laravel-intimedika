@@ -5,7 +5,7 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item" title="Lihat detail penawaran."><i
                     class="far fa-eye nav-icon"></i>
                 Detail</a>
 
@@ -16,18 +16,20 @@
                         @csrf
                         @method('patch')
                         <button class="dropdown-item" name="approval" type="submit" value="1"
-                            onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle nav-icon"></i>
+                            onclick="return confirm('apakah anda yakin?')" title="Setujui PO"><i
+                                class="far fa-check-circle nav-icon"></i>
                             Approve PO.</button>
-                        <button class="dropdown-item" name="approval" value="2"
-                            onclick="return confirm('apakah anda yakin?')"><i class="far fa-times-circle nav-icon"></i>
+                        <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"
+                            title="Tolak PO"><i class="far fa-times-circle nav-icon"></i>
                             Reject PO.</button>
                     </form>
                 @endif
             @endcan
 
-            @if ($offer->progress->progress < 99)
+            @if ($offer->progress->progress <= 99)
                 @if (auth()->id() != 13) <a
-                href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"><i
+                href="{{ route('progresses.create', $offer->slug) }}" class="dropdown-item"
+                title="Update Purchase Order"><i
                 class="far fa-edit nav-icon"></i> Update Purchase </a> @endif
             @endif
 
@@ -41,7 +43,7 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item" title="Lihat detail penawaran."><i
                     class="far fa-eye nav-icon"></i> Detail</a>
         </div>
     </div>
@@ -55,7 +57,7 @@
             <i class="fas fa-ellipsis-v"></i>
         </a>
         <div class="dropdown-menu">
-            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"><i
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item" title="Lihat detail penawaran."><i
                     class="far fa-eye nav-icon"></i>
                 Detail</a>
 
@@ -64,10 +66,11 @@
                     @csrf
                     @method('patch')
                     <button class="dropdown-item" name="approval" type="submit" value="1"
-                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-check-circle nav-icon"></i>
+                        onclick="return confirm('apakah anda yakin?')" title="Setujui Penawaran."><i
+                            class="far fa-check-circle nav-icon"></i>
                         Approve.</button>
-                    <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"><i
-                            class="far fa-times-circle nav-icon"></i>
+                    <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"
+                        title="Tolak penawaran."><i class="far fa-times-circle nav-icon"></i>
                         Reject.</button>
                 </form>
             @endcan
@@ -77,8 +80,8 @@
                 <form action="{{ route('offers.delete', $offer->slug) }}" method="POST">
                     @csrf
                     @method('delete')
-                    <button class="dropdown-item" name="approval" type="submit"
-                        onclick="return confirm('apakah anda yakin?')"><i class="far fa-trash-alt nav-icon"></i>
+                    <button class="dropdown-item" name="approval" type="submit" onclick="return confirm('apakah anda yakin?')"
+                        title="Hapus Penawaran."><i class="far fa-trash-alt nav-icon"></i>
                         Delete</button>
                 </form>
             @endcan

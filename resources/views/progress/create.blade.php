@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check6" value="99">
+                        <input type="checkbox" name="progress" id="check6" value="99" @if ($offer->progress->progress == 99) checked @endif>
                         <label for="check6">
                             Sudah ada PO.
                         </label>
@@ -242,6 +242,9 @@
         $(document).ready(function() {
             $("#check6").click(function() {
                 if ($(this).is(":checked")) {
+                    $("#img").show(300);
+                }
+                elseif({{ $offer->progress->progress == 99 }}) {
                     $("#img").show(300);
                 } else {
                     $("#img").hide(200);

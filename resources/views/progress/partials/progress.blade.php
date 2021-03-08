@@ -47,8 +47,8 @@ switch ($progress) {
             {{ $progress }}% Complete
 
             @if ($progress == 99)
-                <a href="{{ route('invoices.toOrder', $offer->slug) }}"> <small
-                        class="badge badge-warning text-white">Ready
+                <a href="{{ route('invoices.toOrder', $offer->slug) }}"> <small class="badge badge-warning text-white"
+                        title="Approve Penawaran">Ready
                         to
                         Approve</small></a>
             @endif

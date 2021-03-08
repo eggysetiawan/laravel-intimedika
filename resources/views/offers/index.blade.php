@@ -38,9 +38,11 @@
                     </div>
                 </div>
 
-                @if (request()->segment(1) == 'offers' && request()->segment(2) == 'complete')
+                @if (request()->segment(1) == 'offers' && request()->segment(2) == 'completed')
                     @include('offers.partials.filter')
-                @elseif(request()->segment(1) == 'offers' && !request()->segment(2))
+                @elseif(request()->segment(1) == 'offers' && request()->segment(2)=="filter")
+                    @include('offers.partials.filter')
+                @elseif(request()->segment(1) == "offers" && !request()->segment(2))
                     @include('offers.partials.filter')
                 @endif
 
@@ -52,10 +54,10 @@
 
                 <div class="card-body table-responsive ">
                     {!! $dataTable->table([
-                    'class' => 'table table-centered table-striped dt-responsive
+    'class' => 'table table-centered table-striped dt-responsive
                     nowrap w-100',
-                    'id' => 'offer-table',
-                    ]) !!}
+    'id' => 'offer-table',
+]) !!}
                 </div>
             </div>
 

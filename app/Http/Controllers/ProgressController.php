@@ -15,6 +15,7 @@ use App\User;
 class ProgressController extends Controller
 {
 
+
     public function approval(OfferDataTable $dataTable)
     {
         return $dataTable
@@ -31,9 +32,13 @@ class ProgressController extends Controller
 
     public function create(Offer $offer)
     {
-        return view('progress.create', [
-            'offer' => $offer,
-        ]);
+        if ($offer->progress->progress <= 99) :
+            return view('progress.create', [
+                'offer' => $offer,
+            ]);
+        else :
+            abort(403, "Unauthorized action.");
+        endif;
     }
 
     public function update(Offer $offer, OfferProgressRequest $request)

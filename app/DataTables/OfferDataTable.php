@@ -154,7 +154,11 @@ class OfferDataTable extends DataTable
     {
         return [
             // No.
-            Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false)
+                ->width(20),
 
             // action button (approve/reject)
             Column::computed('action')
@@ -162,7 +166,7 @@ class OfferDataTable extends DataTable
                 ->orderable(false)
                 ->printable(false)
                 ->exportable(false)
-                ->width(50),
+                ->width(20),
 
             // no.penawaran
             Column::make('offer_no')
