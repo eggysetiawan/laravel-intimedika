@@ -56,7 +56,6 @@ class CustomerController extends Controller
 
         if ($nohospital) :
             auth()->user()->customers()->create($attr);
-
         else :
             $customer = auth()->user()->customers()->create($attr);
             $customer->hospitals()->attach(request('hospital'));

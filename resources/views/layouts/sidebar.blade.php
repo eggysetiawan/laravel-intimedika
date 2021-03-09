@@ -86,7 +86,7 @@ use App\Offer;
                 <li class="nav-item">
                     <a href="{{ route('funnels.index') }}"
                         class="nav-link{{ request()->is('funnels') ? ' active' : '' }}">
-                        <i class="fas fa-business-time nav-icon"></i>
+                        <i class="fas fa-funnel-dollar nav-icon"></i>
                         <p>Sales Funnel</p>
                     </a>
                 </li>
@@ -115,7 +115,7 @@ use App\Offer;
                     <li class="nav-item">
                         <a href="{{ route('progresses.approval') }}"
                             class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-                            <i class="fas fa-exclamation nav-icon"></i>
+                            <i class="fas fa-hand-holding-usd nav-icon"></i>
                             <p>Approve Purchase-Order</p>
                             @if (Offer::with('progressApproval')
             ->whereHas('progressApproval')

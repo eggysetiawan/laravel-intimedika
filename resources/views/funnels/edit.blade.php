@@ -4,7 +4,8 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('funnels.index') }}">Daftar Funnel</a></li>
-    <li class="breadcrumb-item">{{ Str::limit($offer->customer->hospitals->first()->name, 15, '...') }}</li>
+    <li class="breadcrumb-item">
+        {{ Str::limit($offer->customer->hospitals->first()->name ?? $offer->customer->name, 15, '...') }}</li>
 @endsection
 
 @section('content')
