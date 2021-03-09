@@ -50,12 +50,13 @@ Route::middleware('auth')->group(function () {
         'modalities' => 'modality:slug',
     ]);
     //offers
-    Route::get('offers', 'OfferController@index')->name('offers.index');
+    Route::resource('offers', 'OfferController')->parameters([
+        'offers' => 'offer:slug',
+    ]);
     Route::get('offers/completed', 'OfferCompletedController')->name('offers.complete');
     Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
-    Route::get('offers/create', 'OfferController@create')->name('offers.create');
-    Route::post('offers/store', 'OfferController@store')->name('offers.store');
-    Route::delete('offers/{offer:slug}/delete', 'OfferController@destroy')->name('offers.delete');
+
+
     // progress
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
     Route::patch('progresses/{offer:slug}/update', 'ProgressController@update')->name('progresses.update');

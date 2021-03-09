@@ -106,7 +106,7 @@ use App\Offer;
                             class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-exclamation nav-icon"></i>
                             <p>Approve Penawaran </p>
-                            @if (Offer::whereNull('is_approved')->count() > 0)
+                            @if (Offer::whereNull('is_approved')->whereNotNull('offer_no')->count() > 0)
                                 <span
                                     class="badge badge-danger right">{{ Offer::whereNull('is_approved')->count() }}</span>
                             @endif

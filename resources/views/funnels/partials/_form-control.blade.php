@@ -40,10 +40,18 @@
             {{-- progress --}}
             <div class="div col-md-6">
                 <label for="progress">Progress</label>
-                <select name="progress" id="progress" class="form-control @error('progress') is-invalid @enderror">
-                    @for ($i = 10; $i <= 100; $i += 10)
-                        <option value="{{ $i }}">{{ $i . ' %' }}</option>
-                    @endfor
+                <select name="progress" id="progress"
+                    class="form-control @error('progress') is-invalid @enderror select2">
+                    @isset($funnel->progress)
+                        <option value="{{ $funnel->progress }}">{{ $funnel->progress }} %</option>
+                        @for ($i = 10; $i <= 100; $i += 10)
+                            <option value="{{ $i }}">{{ $i . ' %' }}</option>
+                        @endfor
+                    @else
+                        @for ($i = 10; $i <= 100; $i += 10)
+                            <option value="{{ $i }}">{{ $i . ' %' }}</option>
+                        @endfor
+                    @endisset
                 </select>
                 @error('progress')
                     <span class="invalid-feedback" role="alert">

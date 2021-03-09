@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Modality;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
-use App\{Offer, Order, Invoice, Customer, OfferProgress};
+use App\{Offer, Order, Customer};
 use App\Events\OfferCreated;
+use App\Http\Requests\UpdateOfferRequest;
 
 class OfferController extends Controller
 {
@@ -49,7 +50,10 @@ class OfferController extends Controller
                 'customers' => $customers,
                 'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
                 'count' => request('count'),
-                'max' => Offer::where('year', date('Y'))
+                'max' => Offer::where(function ($query) {
+                    $maxYear = $query->max('offer_date');
+                    return $query->where('offer_date', $maxYear);
+                })
                     ->max('offer_no'),
             ]);
         endif;
@@ -82,7 +86,6 @@ class OfferController extends Controller
         $attr['customer_id'] = request('customer');
         $offer = auth()->user()->offers()->create($attr);
 
-
         // to invoices table
         $invoice = $offer->invoices()->create([
             'date' => $date,
@@ -114,6 +117,16 @@ class OfferController extends Controller
 
         session()->flash('success', 'Penawaran telah berhasil dibuat!');
         return redirect('offers');
+    }
+
+    public function edit(Offer $offer)
+    {
+        $customers = Customer::with('hospitals')
+            ->orderBy('name', 'asc')
+            ->get();
+        $modalities = Modality::orderBy('name', 'asc', 'price')->get();
+
+        return view('offers.edit', compact('offer', 'customers', 'modalities'));
     }
 
     public function destroy(Offer $offer)

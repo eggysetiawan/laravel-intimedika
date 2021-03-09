@@ -14,9 +14,10 @@
             <h3 class="card-title">Buat Funnel</h3>
         </div>
 
-        <form method="POST" action="{{ route('funnels.store') }}">
+        <form method="POST" action="{{ route('funnels.update', $funnel->slug) }}">
             @csrf
-            @include('funnels.partials._form-control', ['submit' => 'Create'])
+            @method('patch')
+            @include('funnels.partials._form-control', ['submit' => 'Update'])
         </form>
     </x-card>
 @endsection

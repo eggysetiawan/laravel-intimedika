@@ -9,8 +9,7 @@ use App\OfferProgress;
 use App\DataTables\OfferDataTable;
 use App\Events\PurchaseOrderCreated;
 use App\Http\Requests\OfferProgressRequest;
-use App\Notifications\Progress\PurchaseOrderNotification;
-use App\User;
+
 
 class ProgressController extends Controller
 {

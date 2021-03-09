@@ -34,6 +34,8 @@
             @endif
 
 
+
+
         </div>
     </div>
     @break
@@ -60,6 +62,8 @@
             <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item" title="Lihat detail penawaran."><i
                     class="far fa-eye nav-icon"></i>
                 Detail</a>
+            <a href="{{ route('offers.edit', $offer->slug) }}" class="dropdown-item" title="Edit Penawaran"><i
+                    class="fas fa-edit nav-icon"></i> Edit</a>
 
             @can('approval')
                 <form action="{{ route('approval.offers', $offer->slug) }}" method="POST" class=" justify-content-center">
@@ -77,7 +81,7 @@
 
 
             @can('view', $offer)
-                <form action="{{ route('offers.delete', $offer->slug) }}" method="POST">
+                <form action="{{ route('offers.destroy', $offer->slug) }}" method="POST">
                     @csrf
                     @method('delete')
                     <button class="dropdown-item" name="approval" type="submit" onclick="return confirm('apakah anda yakin?')"

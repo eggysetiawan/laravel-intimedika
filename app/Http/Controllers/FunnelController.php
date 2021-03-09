@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\FunnelDataTable;
 use App\Http\Requests\FunnelRequest;
+use App\Http\Requests\FunnelUpdateRequest;
 use App\Order;
 
 class FunnelController extends Controller
@@ -102,7 +103,7 @@ class FunnelController extends Controller
      */
     public function show(Funnel $funnel)
     {
-        //
+        return view('funnels.show', compact('funnel'));
     }
 
     /**
@@ -127,9 +128,29 @@ class FunnelController extends Controller
      * @param  \App\Funnel  $funnel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Funnel $funnel)
+    public function update(FunnelUpdateRequest $request, Funnel $funnel)
     {
-        //
+        $attr = $request->all();
+
+        foreach ($funnel->offer->invoices->last()->orders as $i => $order) {
+            // to table orders
+            $order->update([
+                'modality_id' => $request->modality[$i],
+                'price' => str_replace(".", "", $request->price[$i]),
+                'references' => $request->references[$i],
+                'updated_at' => now()->toDateTimeString(),
+            ]);
+        }
+
+        // assign to funnel slug
+        // insert into funnels table
+        $funnel->update($attr);
+
+
+        // alert success
+        session()->flash('success', 'Funnel telah berhasil di update!');
+
+        return redirect('funnels');
     }
 
     /**
