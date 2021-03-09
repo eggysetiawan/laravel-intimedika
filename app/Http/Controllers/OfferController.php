@@ -84,14 +84,12 @@ class OfferController extends Controller
 
 
         // to invoices table
-        $invoice = Invoice::create([
-            'offer_id' => $offer->id,
+        $invoice = $offer->invoices()->create([
             'date' => $date,
         ]);
 
         // to offer_progress table
-        OfferProgress::create([
-            'offer_id' => $offer->id,
+        $offer->progress()->create([
             'progress' => 30,
             'progress_date' => $date,
             'status' => 'On Progress',
@@ -110,7 +108,7 @@ class OfferController extends Controller
             // alert success
         }
 
-        // send mail to admin
+        // send mail to admin via event & listener
         event(new OfferCreated($offer));
 
 

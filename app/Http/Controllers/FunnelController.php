@@ -89,7 +89,8 @@ class FunnelController extends Controller
      */
     public function edit(Funnel $funnel)
     {
-        //
+        $offer = $funnel->offer;
+        return view('funnels.edit', compact('offer', 'funnel'));
     }
 
     /**

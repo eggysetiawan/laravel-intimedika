@@ -1,27 +1,36 @@
 @php
 $progress = $funnel->progress;
 switch ($progress) {
-    case 30:
+    case 10:
         $bar = 'bg-danger';
         break;
-    case 50:
+    case 20:
         $bar = 'bg-danger';
+        break;
+    case 30:
+        $bar = 'bg-orange';
+        break;
+    case 40:
+        $bar = 'bg-orange';
+        break;
+    case 50:
+        $bar = 'bg-orange';
+        break;
+    case 60:
+        $bar = 'bg-warning';
         break;
     case 70:
         $bar = 'bg-warning';
         break;
-    case 85:
-        $bar = 'bg-warning';
+    case 80:
+        $bar = 'bg-primary';
         break;
     case 90:
-        $bar = 'bg-success';
-        break;
-    case 99:
-        $bar = 'bg-success';
+        $bar = 'bg-primary';
         break;
 
     default:
-        $bar = 'bg-primary';
+        $bar = 'bg-success';
 
         break;
 }

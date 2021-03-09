@@ -62,8 +62,6 @@ class CustomerController extends Controller
             $customer->hospitals()->attach(request('hospital'));
         endif;
 
-
-
         // alert success
         session()->flash('success', 'Customer Baru Berhasil di Buat!');
 

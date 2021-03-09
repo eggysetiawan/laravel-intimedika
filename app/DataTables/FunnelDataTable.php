@@ -31,6 +31,14 @@ class FunnelDataTable extends DataTable
                     'funnel' => $funnel
                 ]);
             })
+            ->editColumn('date', function (Funnel $funnel) {
+                return date('d-m-Y', strtotime($funnel->date));
+            })
+            ->editColumn('description', function (Funnel $funnel) {
+                return view('funnels.partials.description', [
+                    'funnel' => $funnel
+                ]);
+            })
             ->editColumn('offer.customer.hospitals.name', function (Funnel $funnel) {
                 return $funnel->offer->customer->hospitals->first()->name ?? $funnel->offer->customer->name;
             });
@@ -91,7 +99,11 @@ class FunnelDataTable extends DataTable
     {
         return [
             // No.
-            Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false)
+                ->width(10),
 
             // action button (approve/reject)
             Column::computed('action')
@@ -120,6 +132,11 @@ class FunnelDataTable extends DataTable
                 ->exportable(false),
             // tanggal penawaran
             Column::make('date')->title('Tanggal'),
+
+            // keterangan
+            Column::computed('description')
+                ->title('Keterangan')
+                ->orderable(false),
 
         ];
     }

@@ -5,7 +5,7 @@ switch ($progress) {
         $bar = 'bg-danger';
         break;
     case 50:
-        $bar = 'bg-danger';
+        $bar = 'bg-orange';
         break;
     case 70:
         $bar = 'bg-warning';
@@ -14,14 +14,14 @@ switch ($progress) {
         $bar = 'bg-warning';
         break;
     case 90:
-        $bar = 'bg-success';
+        $bar = 'bg-primary';
         break;
     case 99:
-        $bar = 'bg-success';
+        $bar = 'bg-primary';
         break;
 
     default:
-        $bar = 'bg-primary';
+        $bar = 'bg-success';
 
         break;
 }
@@ -44,7 +44,7 @@ switch ($progress) {
             </div>
         </div>
         <small>
-            {{ $progress }}% Complete
+            {{ $progress }}% Completed.
 
             @if ($progress == 99)
                 <a href="{{ route('invoices.toOrder', $offer->slug) }}"> <small class="badge badge-warning text-white"

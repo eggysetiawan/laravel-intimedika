@@ -11,7 +11,7 @@ class Invoice extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = ['offer_id', 'status', 'date'];
+    protected $fillable = ['status', 'date'];
 
 
 

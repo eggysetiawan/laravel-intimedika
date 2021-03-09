@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="col-md-12">
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
                 <x-button-create href="{{ route('hospitals.create') }}">Tambah Rumah Sakit</x-button-create>
             </div>
@@ -67,8 +67,7 @@
                 </div>
                 <div class="card-body table-responsive">
 
-                    {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id'
-                    => 'hospital-table']) !!}
+                    {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id' => 'hospital-table']) !!}
 
                 </div>
                 <!-- /.card-body -->
