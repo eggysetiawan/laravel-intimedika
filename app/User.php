@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->level == "top" || $this->id == 13;
     }
+
+    public function director()
+    {
+        return $this->where('id', 13)->first()->name;
+    }
 }

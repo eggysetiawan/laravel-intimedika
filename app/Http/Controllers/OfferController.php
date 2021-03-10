@@ -7,6 +7,7 @@ use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
 use App\{Offer, Order, Customer};
 use App\Events\OfferCreated;
+use App\Events\OfferUpdated;
 use App\Http\Requests\UpdateOfferRequest;
 
 class OfferController extends Controller
@@ -76,7 +77,6 @@ class OfferController extends Controller
         $bln = $array_bln[date('n', strtotime($request->date))];
         $tahun = date('Y', strtotime($request->date));
 
-        $attr['year'] = $tahun;
         $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
         $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
 
@@ -105,16 +105,15 @@ class OfferController extends Controller
                 'modality_id' => $request->modality[$i],
                 'price' => str_replace(".", "", $request->price[$i]),
                 'references' => $request->references[$i],
-                'created_at' => $date,
-                'updated_at' => $date,
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
             ]);
-            // alert success
         }
 
         // send mail to admin via event & listener
         event(new OfferCreated($offer));
 
-
+        // alert success
         session()->flash('success', 'Penawaran telah berhasil dibuat!');
         return redirect('offers');
     }
@@ -127,6 +126,31 @@ class OfferController extends Controller
         $modalities = Modality::orderBy('name', 'asc', 'price')->get();
 
         return view('offers.edit', compact('offer', 'customers', 'modalities'));
+    }
+
+    public function update(UpdateOfferRequest $request, Offer $offer)
+    {
+        $attr = $request->all();
+
+        foreach ($offer->invoices->last()->orders as $i => $order) {
+            // to table orders
+            $order->update([
+                'modality_id' => $request->modality[$i],
+                'price' => str_replace(".", "", $request->price[$i]),
+                'references' => $request->references[$i],
+                'updated_at' => now()->toDateTimeString(),
+            ]);
+        }
+
+        $offer->update($attr);
+
+
+        // send mail to admin via event & listener
+        event(new OfferUpdated($offer));
+
+        // alert success
+        session()->flash('success', 'Penawaran telah berhasil di update!');
+        return redirect('offers');
     }
 
     public function destroy(Offer $offer)

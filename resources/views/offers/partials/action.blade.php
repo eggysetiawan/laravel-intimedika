@@ -50,10 +50,9 @@
         </div>
     </div>
     @break
+
+
     @default
-
-
-    <!-- Default dropright button -->
     <div class="dropright text-center">
         <a href="#" class="text-dark h5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-v"></i>
@@ -73,6 +72,14 @@
                         onclick="return confirm('apakah anda yakin?')" title="Setujui Penawaran."><i
                             class="far fa-check-circle nav-icon"></i>
                         Approve.</button>
+
+                    @if ($offer->is_approved != 3)
+                        {{-- 3 = On Hold --}}
+                        <a href="{{ route('revisions.edit', $offer->slug) }}" class="dropdown-item">
+                            <i class="far fa-pause-circle nav-icon"></i>
+                            Hold.</a>
+                    @endif
+
                     <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"
                         title="Tolak penawaran."><i class="far fa-times-circle nav-icon"></i>
                         Reject.</button>

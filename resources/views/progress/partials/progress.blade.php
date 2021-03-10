@@ -55,10 +55,16 @@ switch ($progress) {
         </small>
     </div>
     @break
+
     @case(2)
     <span class="badge badge-danger text-white">has been rejected.</span>
+    @break
+
+    @case(3)
+    <span class="badge badge-secondary text-white">On Hold.</span>
 
     @break
+
     @default
     <span class="badge badge-warning text-white">Ready to Approve.</span>
 @endswitch

@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Daftar Penawaran</a></li>
-    <li class="breadcrumb-item">{{ Str::limit($offer->offer_no, 25, '...') }}</li>
+    <li class="breadcrumb-item">{{ $offer->offer_no }}</li>
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @php
 $i = 0;
 @endphp
-@foreach ($offer->invoices->last()->orders as $order)
+@foreach ($offer->invoices->first()->orders as $order)
     @php
         $i++;
     @endphp
@@ -54,7 +54,7 @@ $i = 0;
                     </div>
                     <input type="number" name="price[]" id="price"
                         class="form-control @error('price.' . $i) is-invalid @enderror"
-                        value="{{ old('price.' . $i) ?? $order->modality->price }}" required>
+                        value="{{ old('price.' . $i) ?? $order->price }}" required>
                 </div>
 
                 @error('price.' . $i)

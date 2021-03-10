@@ -66,6 +66,14 @@ Route::middleware('auth')->group(function () {
     Route::get('offers/filter', 'SearchController@offer')->name('offers.filter');
     Route::get('offers/complete/filter', 'SearchController@offerCompleted')->name('offers.filter-completed');
 
+    // revision
+    Route::get('revisions/{offer:slug}/edit', 'RevisionController@edit')
+        ->middleware(['role:director|superadmin'])
+        ->name('revisions.edit');
+    Route::patch('revisions/{offer:slug}', 'RevisionController@update')
+        ->middleware(['role:director|superadmin'])
+        ->name('revisions.update');
+
     // visit trash
     Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);
 
