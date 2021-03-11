@@ -132,6 +132,8 @@
                     {{ __('Sign Out') }}
                 </a>
 
+                <a class="dropdown-item" href="{{ route('pins.create') }}">Setup Pin</a>
+
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>

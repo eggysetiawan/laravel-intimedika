@@ -73,21 +73,7 @@
         });
 
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            $(document).Toasts('create', {
-                class: 'bg-success bot-left h5',
-                position: 'bottomLeft',
-                fixed: true,
-                title: 'Berhasil!',
-                autohide: true,
-                delay: 5500,
-                // subtitle: 'Subtitle',
-                body: "{{ session()->get('success') }}"
-            }).delay(200).slideUp(300).fadeIn(400);
-        });
 
-    </script> --}}
 @endif
 
 @if (session()->has('error'))
@@ -117,6 +103,31 @@
     }
 
 </script> --}}
+
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("pin");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+</script>
+
+<script>
+    function myFunctionConfirm() {
+        var x = document.getElementById("pin_confirmation");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+</script>
 
 <script>
     $(function() {

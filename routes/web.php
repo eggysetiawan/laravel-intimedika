@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('arrival', 'ArrivalController')->parameters([
         'arrival' => 'visit:slug',
     ]);
+
     // route customers
     Route::get('customers/create-2', 'CustomerController@create2')->name('customers.create-2');
     Route::resource('customers', 'CustomerController')->parameters([
@@ -56,6 +57,10 @@ Route::middleware('auth')->group(function () {
     Route::get('offers/completed', 'OfferCompletedController')->name('offers.complete');
     Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
 
+    // pin setup
+    // Route::resource('pins', 'RegisterPinController');
+    Route::get('pins/create', 'RegisterPinController@create')->name('pins.create');
+    Route::patch('pins/update', 'RegisterPinController@update')->name('pins.update');
 
     // progress
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
