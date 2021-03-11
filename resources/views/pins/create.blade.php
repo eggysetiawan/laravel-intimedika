@@ -37,8 +37,11 @@
                         @csrf
                         @method('patch')
                         <div class="card-body">
-
-                            
+                            @isset(auth()->user()->pin)
+                                @include('pins.partials.change')
+                            @else
+                                @include('pins.partials.new')
+                            @endisset
                             {{-- /card-body --}}
                         </div>
                         <div class="card-footer">
