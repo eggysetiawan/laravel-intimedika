@@ -17,6 +17,7 @@ class RevisionController extends Controller
     {
         $attr = $request->all();
         $attr['is_called'] = $request->has('is_called');
+        $attr['revision_by'] = auth()->id();
         $offer->revision()->create($attr);
 
         $offer->update([

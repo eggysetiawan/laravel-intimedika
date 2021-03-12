@@ -65,25 +65,22 @@
                     class="fas fa-edit nav-icon"></i> Edit</a>
 
             @can('approval')
-                <form action="{{ route('approval.offers', $offer->slug) }}" method="POST" class=" justify-content-center">
-                    @csrf
-                    @method('patch')
-                    <button class="dropdown-item" name="approval" type="submit" value="1"
-                        onclick="return confirm('apakah anda yakin?')" title="Setujui Penawaran."><i
-                            class="far fa-check-circle nav-icon"></i>
-                        Approve.</button>
-
-                    @if ($offer->is_approved != 3)
-                        {{-- 3 = On Hold --}}
-                        <a href="{{ route('revisions.edit', $offer->slug) }}" class="dropdown-item">
-                            <i class="far fa-pause-circle nav-icon"></i>
-                            Hold.</a>
-                    @endif
-
-                    <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"
-                        title="Tolak penawaran."><i class="far fa-times-circle nav-icon"></i>
-                        Reject.</button>
-                </form>
+                {{-- approve button --}}
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#approveModal{{ $offer->id }}">
+                    <i class="far fa-check-circle nav-icon"></i>
+                    Approve.
+                </button>
+                {{-- hold button --}}
+                @if ($offer->is_approved != 3)
+                    {{-- 3 = On Hold --}}
+                    <a href="{{ route('revisions.edit', $offer->slug) }}" class="dropdown-item">
+                        <i class="far fa-pause-circle nav-icon"></i>
+                        Hold.</a>
+                @endif
+                {{-- reject --}}
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#rejectModal{{ $offer->id }}">
+                    <i class="far fa-times-circle nav-icon"></i>
+                    Reject.</button>
             @endcan
 
 
@@ -101,3 +98,5 @@
 
 
 @endswitch
+
+@include('offers.modals.pin')

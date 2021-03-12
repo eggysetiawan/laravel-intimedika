@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PinApproval;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ApprovalRequest extends FormRequest
@@ -25,6 +26,7 @@ class ApprovalRequest extends FormRequest
     {
         return [
             'approval' => 'integer|required',
+            'pin' => new PinApproval,
         ];
     }
 }

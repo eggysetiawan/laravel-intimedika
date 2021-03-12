@@ -41,19 +41,19 @@ class RevisionOfferNotification extends Notification
     public function toMail($notifiable)
     {
         if ($this->offer->revision->is_called == 1) :
-            $called = 'Anda diminta untuk menemui Direktur untuk melakukan diskusi lebih lanjut';
+            $called = 'Anda diminta untuk menemui ' . $this->offer->revision->author->name . ' untuk melakukan diskusi lebih lanjut';
         else :
             $called = '';
         endif;
         if (strlen($this->offer->revision->reason) > 1) :
-            $reason = 'Pesan Direktur : "' . $this->offer->revision->reason . '"';
+            $reason = 'Pesan ' . $this->offer->revision->author->name . ' : "' . $this->offer->revision->reason . '"';
         else :
             $reason = '';
         endif;
 
         return (new MailMessage)
             ->from('portal@intimedika.co', 'IPI Portal')
-            ->greeting('Direktur meminta penawaran di revisi!')
+            ->greeting($this->offer->revision->author->name . ' meminta penawaran di revisi!')
             ->line($reason)
             ->line($called)
             ->subject('Revisi Penawaran!')

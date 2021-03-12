@@ -6,6 +6,7 @@ use App\DataTables\OfferDataTable;
 use App\Http\Requests\ApprovalRequest;
 use App\Offer;
 use App\OfferProgress;
+use App\Rules\PinApproval;
 
 class ApprovalController extends Controller
 {
@@ -102,6 +103,7 @@ class ApprovalController extends Controller
     public function offer(ApprovalRequest $request, Offer $offer)
     {
         $request->all();
+
         if ($request->approval == 1) :
             $approval = 1;
             $message = 'Penawaran telah berhasil di approve!';

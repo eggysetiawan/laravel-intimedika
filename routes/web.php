@@ -51,11 +51,12 @@ Route::middleware('auth')->group(function () {
         'modalities' => 'modality:slug',
     ]);
     //offers
+    Route::get('offers/completed', 'OfferCompletedController')->name('offers.complete');
+    Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
     Route::resource('offers', 'OfferController')->parameters([
         'offers' => 'offer:slug',
     ]);
-    Route::get('offers/completed', 'OfferCompletedController')->name('offers.complete');
-    Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
+
 
     // pin setup
     // Route::resource('pins', 'RegisterPinController');

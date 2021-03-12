@@ -30,6 +30,7 @@
 <script src="{{ asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
 
 <!-- DataTables -->
@@ -104,6 +105,19 @@
 
 </script> --}}
 
+@error('pin')
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pin yang anda masukkan salah!',
+            })
+        });
+
+    </script>
+
+@enderror
 
 <script>
     function myFunction() {
