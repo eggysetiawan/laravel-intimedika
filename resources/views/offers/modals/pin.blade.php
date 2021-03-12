@@ -14,6 +14,10 @@
                 @method('patch')
                 <div class="modal-body">
                     <div class="form-group">
+
+                        <a href="{{ route('pins.create') }}" class="btn btn-success form-control-plaintext">Setup
+                            Pin</a>
+
                         <label for="pin">Masukkan Pin</label>
                         <input type="password" size="4" maxlength="4" name="pin"
                             class="form-control @error('pin') is-invalid @enderror">
