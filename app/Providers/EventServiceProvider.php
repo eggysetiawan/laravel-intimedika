@@ -7,11 +7,13 @@ use App\Events\OfferUpdateCreated;
 use App\Events\OfferUpdated;
 use App\Events\PurchaseOrderCreated;
 use App\Events\RevisionCreated;
+use App\Listeners\LoginListener;
 use App\Listeners\ProcessOfferCreated;
 use App\Listeners\ProcessOfferUpdated;
 use App\Listeners\ProcessPurchaseOrderCreated;
 use App\Listeners\ProcessRevisionCreated;
 use App\Listeners\ProcessUpdateOfferCreated;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -39,6 +41,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         RevisionCreated::class => [
             ProcessRevisionCreated::class,
+        ],
+        Login::class => [
+            LoginListener::class,
         ],
     ];
 
