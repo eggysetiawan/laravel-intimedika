@@ -26,23 +26,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                Apakah anda yakin ingin menyetujui semua penawaran?
-            </div>
-            <div class="modal-footer">
-                <form action="@if (request()->segment(1) == 'offers') {{ route('approval.all-offers') }}
-                @else
-                    {{ route('approval.all-purchase') }} @endif
-                    " method="POST" class="inline">
-                    @csrf
-                    @method('patch')
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-                    <button class="btn btn-success" type="submit" name="approval" value="1">Setujui.</button>
-                </form>
-            </div>
+            <form action="@if (request()->segment(1) == 'offers') {{ route('approval.all-offers') }}
+            @else
+                {{ route('approval.all-purchase') }} @endif
+                " method="POST" class=" justify-content-center">
+                @csrf
+                @method('patch')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="pin">Masukkan Pin</label>
+                        <input type="password" size="4" maxlength="4" name="pin" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="approval" class="btn bg-teal" value="1">Approve All</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+
+
 <!-- Reject Modal -->
 <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -59,20 +65,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                Apakah anda yakin ingin membatalkan semua penawaran?
-            </div>
-            <div class="modal-footer">
-                <form action="@if (request()->segment(1) == 'offers') {{ route('approval.all-offers') }}
-                @else
-                    {{ route('approval.all-purchase') }} @endif
-                    " method="POST" class="inline">
-                    @csrf
-                    @method('patch')
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-                    <button class="btn btn-success" type="submit" name="approval" value="2">Ya.</button>
-                </form>
-            </div>
+            <form action="@if (request()->segment(1) == 'offers') {{ route('approval.all-offers') }}
+            @else
+                {{ route('approval.all-purchase') }} @endif
+                " method="POST" class=" justify-content-center">
+                @csrf
+                @method('patch')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="pin">Masukkan Pin</label>
+                        <input type="password" size="4" maxlength="4" name="pin" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="approval" class="btn btn-danger" value="2">Reject All</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
