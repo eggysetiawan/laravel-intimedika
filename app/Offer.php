@@ -30,6 +30,15 @@ class Offer extends Model implements HasMedia
         'slug'
     ];
 
+    public function scopeMaxOfferNo()
+    {
+        return $this->where(function ($query) {
+            $maxYear = $query->max('offer_date');
+            return $query->where('offer_date', $maxYear);
+        })
+            ->max('offer_no');
+    }
+
     public function scopeReadytoPurchaseCount()
     {
         return $this->with('progressApproval')
