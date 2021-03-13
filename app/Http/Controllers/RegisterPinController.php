@@ -10,7 +10,8 @@ class RegisterPinController extends Controller
 {
     public function create()
     {
-        return view('pins.create');
+        $title = isset(auth()->user()->pin) ? 'Setup Pin' : 'Ubah Pin';
+        return view('pins.create', compact('title'));
     }
 
     public function update(PinRequest $request)

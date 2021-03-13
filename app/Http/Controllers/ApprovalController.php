@@ -6,7 +6,6 @@ use App\DataTables\OfferDataTable;
 use App\Http\Requests\ApprovalRequest;
 use App\Offer;
 use App\OfferProgress;
-use App\Rules\PinApproval;
 
 class ApprovalController extends Controller
 {
@@ -25,6 +24,7 @@ class ApprovalController extends Controller
 
     public function allPurchase(ApprovalRequest $request)
     {
+        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
         $request->all();
         if ($request->approval == 1) :
             // get approved
@@ -51,6 +51,8 @@ class ApprovalController extends Controller
     }
     public function allOffer(ApprovalRequest $request)
     {
+        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
+
         $request->all();
         if ($request->approval == 1) :
             // get approved
@@ -75,6 +77,7 @@ class ApprovalController extends Controller
 
     public function progress(ApprovalRequest $request, Offer $offer)
     {
+        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
         $request->all();
         if ($request->approval == 1) :
             // get approved
@@ -102,6 +105,7 @@ class ApprovalController extends Controller
 
     public function offer(ApprovalRequest $request, Offer $offer)
     {
+        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
         $request->all();
 
         if ($request->approval == 1) :

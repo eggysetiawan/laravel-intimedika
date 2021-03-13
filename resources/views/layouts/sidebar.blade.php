@@ -106,11 +106,8 @@ use App\Offer;
                             class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-exclamation nav-icon"></i>
                             <p>Approve Penawaran </p>
-                            @if (Offer::whereNull('is_approved')
-            ->whereNotNull('offer_no')
-            ->count() > 0)
-                                <span
-                                    class="badge badge-danger right">{{ Offer::whereNull('is_approved')->whereNotNull('offer_no')->count() }}</span>
+                            @if (Offer::readyToApproveCount() > 0)
+                                <span class="badge badge-danger right">{{ Offer::readyToApproveCount() }}</span>
                             @endif
                         </a>
                     </li>
@@ -119,11 +116,8 @@ use App\Offer;
                             class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-hand-holding-usd nav-icon"></i>
                             <p>Approve Purchase-Order</p>
-                            @if (Offer::with('progressApproval')
-            ->whereHas('progressApproval')
-            ->count() > 0)
-                                <span
-                                    class="badge badge-danger right">{{ Offer::with('progressApproval')->whereHas('progressApproval')->count() }}</span>
+                            @if (Offer::readyToPurchaseCount() > 0)
+                                <span class="badge badge-danger right">{{ Offer::readyToPurchaseCount() }}</span>
                             @endif
 
                         </a>

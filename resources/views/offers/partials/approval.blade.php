@@ -34,13 +34,28 @@
                 @method('patch')
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="pin">Masukkan Pin</label>
-                        <input type="password" size="4" maxlength="4" name="pin" class="form-control">
+                        @empty(auth()->user()->pin)
+
+                            <a href="{{ route('pins.create') }}" class="btn btn-success form-control-plaintext">Setup
+                                Pin</a>
+                        @else
+                            <label for="pin">Masukkan Pin</label>
+                            <input type="password" size="4" maxlength="4" name="pin"
+                                class="form-control @error('pin') is-invalid @enderror">
+                            @error('pin')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        @endempty
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="approval" class="btn bg-teal" value="1">Approve All</button>
+                    <button type="submit" name="approval" class="btn bg-teal" value="1" @empty(auth()->user()->pin)
+                            disabled
+                        @endempty>Approve All</button>
                 </div>
             </form>
         </div>

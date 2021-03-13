@@ -1,9 +1,9 @@
-@extends('layouts.app', ['title'=>'Setup Baru'])
+@extends('layouts.app', ['title'=> $title])
 
 
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Setup Pin</li>
+    <li class="breadcrumb-item">{{ $title }}</li>
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
             <div class="col-md-3">
                 <div class="card card-teal">
                     <div class="card-header">
-                        <h3 class="card-title">Setup Pin</h3>
+                        <h3 class="card-title">{{ $title }}</h3>
                     </div>
 
                     <form method="POST" action="{{ route('pins.update') }}" autocomplete="off">
