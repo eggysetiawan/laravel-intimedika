@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Log in</title>
+    <title>IPI Portal | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page accent-orange">
     <div class="login-box">
         <div class="login-logo">
             <a href="/"><b>{{ config('app.name', 'Laravel') }}</a>
@@ -35,7 +35,7 @@
                     <div class="input-group mb-3">
                         <input placeholder="username" id="username" type="text"
                             class="form-control  @error('username') is-invalid @enderror" name="username"
-                            value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            value="{{ old('username') }}" autocomplete="username" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -76,21 +76,19 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn bg-orange btn-block">Sign In</button>
                         </div>
                         <!-- /.col -->
                     </div>
+
+                    <div class="social-auth-links text-center mb-3">
+                        <p>- OR -</p>
+                        <button type="submit" name="submit" value="magic-link" class="btn btn-block btn-secondary"><i
+                                class="fas fa-at mr-2"></i>
+                            {{ __('Sign in using Email') }}</button>
+                    </div>
                 </form>
 
-                {{-- <div class="social-auth-links text-center mb-3">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>
-                </div> --}}
                 <!-- /.social-auth-links -->
 
                 <p class="mb-1">
