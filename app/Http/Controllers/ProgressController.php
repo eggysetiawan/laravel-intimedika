@@ -36,7 +36,7 @@ class ProgressController extends Controller
                 'offer' => $offer,
             ]);
         else :
-            abort(403, "Unauthorized action.");
+            return redirect('offers');
         endif;
     }
 

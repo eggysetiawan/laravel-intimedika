@@ -35,29 +35,19 @@ class OfferController extends Controller
             ]);
     }
 
-    public function create(OfferDataTable $dataTable, Offer $offer)
+    public function create()
     {
         $customers = Customer::with('hospitals')
             ->orderBy('name', 'asc')
             ->get();
 
-        if (!request('count')) :
-            return $dataTable->render('offers.index', [
-                'approval' => 0,
-                'offer_approval_count' => $offer
-                    ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
-                    ->whereNull('is_approved')
-                    ->count(),
-            ]);
-        else :
-            return view('offers.create', [
-                'offer' => new Offer(),
-                'customers' => $customers,
-                'modalities' => Modality::orderBy('name', 'asc')->get(),
-                'count' => request('count'),
-                'max' => Offer::maxOfferNo(),
-            ]);
-        endif;
+        return view('offers.create', [
+            'offer' => new Offer(),
+            'customers' => $customers,
+            'modalities' => Modality::orderBy('name', 'asc')->get(),
+            'count' => request('count'),
+            'max' => Offer::maxOfferNo(),
+        ]);
     }
 
 
