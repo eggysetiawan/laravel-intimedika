@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Login\LoginMagicLinkNotification;
 use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -41,14 +43,17 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if ($request->input('submit') == 'magic-link') :
-            $user = $this->loginViaMagicLink($request);
-            if (!$user) {
-                return redirect()->route('login')
-                    ->withErrors(['email' => 'User tidak ditemukan.',])
+
+        if ($request->submit == 'magic-link') :
+            $this->loginViaMagicLink($request);
+            $userEmail = User::where('email', $request->email)->first();
+            if (!$userEmail) {
+                return redirect()->route('login.email')
+                    ->withErrors(['email' => 'User tidak ditemukan.'])
                     ->withInput();
+            } else {
+                return redirect()->route('login.resend');
             }
-            return redirect()->route('login')->withMessage('Link telah dikirim ke email ' . $user->email);
         endif;
 
         $this->validateLogin($request);
@@ -80,5 +85,13 @@ class LoginController extends Controller
     public function username()
     {
         return 'username';
+    }
+
+    private function loginViaMagicLink(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user) :
+            $user->notify(new LoginMagicLinkNotification());
+        endif;
     }
 }

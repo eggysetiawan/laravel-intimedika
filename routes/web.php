@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+Route::get('login/email', 'LoginEmailController')->name('login.email');
+Route::get('email/success', 'ResendEmailController')->name('login.resend');
+
 Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     // view approval penawaran & po
