@@ -15,7 +15,7 @@
             <div class="col-md-10">
                 <div class="callout callout-success">
                     <h5>No. Penawaran Terakhir</h5>
-                    <p>{{ $max }}</p>
+                    <p>{{ $max ?? 'Belum ada penawaran yang di buat.' }}</p>
                 </div>
             </div>
         </div>

@@ -8,6 +8,13 @@ class Customer extends Model
 {
     protected $fillable = ['slug', 'name', 'mobile', 'role', 'email',  'user_id'];
 
+    public function scopeSelectCustomer()
+    {
+        return $this->with('hospitals')
+            ->orderBy('name', 'asc')
+            ->get();
+    }
+
     public function gravatar($size = 150)
     {
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim("$this->email"))) . "?d=mp&s=" . $size;

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Hospital;
-use Illuminate\Support\Str;
 use App\Http\Requests\VisitRequest;
+use App\Services\VisitAddService;
 
 class VisitAddController extends Controller
 {
@@ -14,47 +14,17 @@ class VisitAddController extends Controller
     {
         return view('visits.add', [
             'customer' => new Customer(),
-            'hospitals' => Hospital::select(['id', 'name', 'city'])
-                ->orderBy('name', 'asc')
-                ->where('name', '!=', '')
-                ->get(),
+            'hospitals' => Hospital::selectHospital(),
         ]);
     }
 
 
-    public function store(VisitRequest $request)
+    public function store(VisitRequest $request, VisitAddService $visitAddService)
     {
-        // validate input
-        $attr = $request->all();
-
-        // assignt name to slug
-        $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
-
-        $attr['user_id'] = auth()->id();
-        $customer = Customer::create($attr);
-        $customer->hospitals()->attach(request('hospital'));
-
-
-        // assign to slug
-        $timestamp = date('Y-m-d-H-i-s');
-        $slug = Str::slug(request('request') . ' ' . $timestamp);
-        $attr['slug'] = $slug;
-
-        // insert into table visits
-        $attr['customer_id'] = $customer->id;
-        $attr['is_visited'] = 1;
-        $visit = auth()->user()->visits()->create($attr);
-
-        // if any image, upload image to media table
-        if (request('img')) :
-            $imgSlug = $slug . '.' . request()->file('img')->extension();
-
-            $visit
-                ->addMediaFromRequest('img')
-                ->usingFileName($imgSlug)
-                ->toMediaCollection('images');
-        endif;
-
+        $visitAddService->createCustomer($request);
+        $visitAddService->attachHospital();
+        $visitAddService->addVisit($request);
+        $visitAddService->uploadImage();
         // alert success
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
         // redirect to index visits

@@ -35,33 +35,27 @@ class OfferController extends Controller
             ]);
     }
 
-    public function create()
+    public function create(OfferService $offerService)
     {
-        $customers = Customer::with('hospitals')
-            ->orderBy('name', 'asc')
-            ->get();
-
         return view('offers.create', [
             'offer' => new Offer(),
-            'customers' => $customers,
-            'modalities' => Modality::orderBy('name', 'asc')->get(),
+            'customers' => Customer::selectCustomer(),
+            'modalities' => Modality::selectModality(),
             'count' => request('count'),
-            'max' => Offer::maxOfferNo(),
+            'max' => $offerService->maxOfferNo(),
         ]);
     }
-
-
 
     public function store(OfferRequest $request, OfferService $offerService)
     {
         // to offers table
-        $offer = $offerService->insertOffer($request);
+        $offer = $offerService->createOffer($request);
         // to invoices table
-        $invoice = $offerService->insertInvoice($offer, $request);
+        $offerService->createInvoice($request);
         // to offer_progress table
-        $offerService->insertProgress($offer, $request);
+        $offerService->createProgress($request);
         // to orders table
-        $offerService->insertOrder($request, $invoice);
+        $offerService->insertOrder($request);
         // send mail to admin via event & listener
         event(new OfferCreated($offer));
         // alert success
@@ -82,16 +76,12 @@ class OfferController extends Controller
     public function update(UpdateOfferRequest $request, Offer $offer, OfferService $offerService)
     {
         $attr = $request->all();
-
         // update orders table
         $offerService->updateOrder($offer, $request);
-
         // update offer table
         $offer->update($attr);
-
         // send mail to admin via event & listener
         event(new OfferUpdated($offer));
-
         // alert success
         session()->flash('success', 'Penawaran telah berhasil di update!');
         return redirect('offers');
@@ -101,7 +91,6 @@ class OfferController extends Controller
     {
         $this->authorize('delete', $offer);
         $offer->delete();
-
         session()->flash('success', 'data telah berhasil di hapus!');
         return redirect('offers');
     }

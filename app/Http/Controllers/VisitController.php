@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Visit;
 use App\Customer;
 use App\DataTables\VisitDataTable;
-use App\Hospital;
-use App\Http\Requests\VisitPlanRequest;
 use Illuminate\Support\Str;
 use App\Http\Requests\VisitRequest;
-use App\VisitPlan;
-use Illuminate\Support\Facades\Storage;
+use App\Services\VisitService;
 
 class VisitController extends Controller
 {
@@ -39,28 +36,11 @@ class VisitController extends Controller
         ]);
     }
 
-    public function store(VisitRequest $request)
+    public function store(VisitRequest $request, VisitService $visitService)
     {
-        // validate input
-        $attr = $request->all();
-
-        // assign to slug
-        $timestamp = date('Y-m-d-H-i-s');
-        $slug = Str::slug(request('request') . ' ' . $timestamp);
-        $attr['slug'] = $slug;
-
-        // customer_id
-        $attr['customer_id'] = request('customer');
-        $attr['is_visited'] = 1;
-
-        // insert
-        auth()->user()
-            ->visits()
-            ->create($attr);
-
+        $visitService->create($request);
         // alert success
         session()->flash('success', 'Kunjungan Berhasil di Buat!');
-
         return redirect('visits');
     }
 
@@ -69,26 +49,12 @@ class VisitController extends Controller
         return view('visits.edit', compact('visit'));
     }
 
-    public function update(VisitRequest $request, Visit $visit)
+    public function update(VisitRequest $request, Visit $visit, VisitService $visitService)
     {
         $this->authorize('update', $visit);
-
-        if (request()->file('img')) :
-            Storage::delete($visit->image);
-            $img = request()
-                ->file('img')
-                ->store('images/visits');
-        else :
-            $img = $visit->image;
-        endif;
-
-        $attr = $request->all();
-        $attr['image'] = $img;
-        $visit->update($attr);
-
+        $visitService->update($request, $visit);
         // alert success
         session()->flash('success', 'Kunjungan Berhasil di Update!');
-
         return redirect('visits');
     }
 

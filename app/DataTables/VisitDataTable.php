@@ -63,6 +63,7 @@ class VisitDataTable extends DataTable
     public function query(Visit $model)
     {
         return $model->newQuery()
+            ->latest()
             ->with(['customer.hospitals', 'author', 'plan'])
             ->when(!$this->plan, function ($query) {
                 return $query->where('is_visited', 1);

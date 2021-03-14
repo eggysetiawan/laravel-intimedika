@@ -20,7 +20,7 @@ class CreateOffersTable extends Migration
             $table->string('offer_no')->nullable();
             $table->string('slug')->nullable();
             $table->string('budget', 10)->nullable();
-            $table->dateTime('offer_date')->nullable();
+            $table->date('offer_date')->nullable();
             $table->longText('price_note')->nullable();
             $table->string('warranty_note', 50)->nullable();
             $table->longText('availability_note')->nullable();
