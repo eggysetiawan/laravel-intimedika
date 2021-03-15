@@ -30,61 +30,24 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Rumah Sakit/Perusahaan</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
-                                <th>Jabatan</th>
-                                <th>Kunjungan</th>
-                                <th>Sales</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        @forelse($customers as $customer)
-
-                            <tbody>
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $customer->hospitals->first()->name ?? $customer->name }}</td>
-                                    <td>{{ $customer->mobile }}</td>
-                                    <td>{{ $customer->email }}</td>
-                                    <td>{{ $customer->role }}</td>
-                                    <td>
-                                        <a
-                                            href="{{ route('customers.show', $customer->slug) }}">{{ $customer->visits->count() }}</a>
-                                    </td>
-                                    <td>{{ $customer->author->name }}</td>
-                                    <td>
-                                        <a href="{{ route('customers.edit', $customer->slug) }}"
-                                            class="badge bg-gradient-light px-1">edit</a>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        @empty
-                            <tbody>
-                                <tr>
-                                    <td cols="6">Tidak ada data.</td>
-                                </tr>
-                            </tbody>
-                        @endforelse
-                    </table>
-                    {{-- agar ditengah = center , kanan = end, kiri = start --}}
-
-
+                <div class="card-body table-responsive ">
+                    {!! $dataTable->table([
+    'class' => 'table table-centered table-striped dt-responsive
+                    nowrap w-100',
+    'id' => 'customer-table',
+]) !!}
                 </div>
+
                 <!-- /.card-body -->
             </div>
-            <div class="d-flex justify-content-center">
-                {{ $customers->links() }}
-            </div>
+
 
             <!-- /.card -->
         </div>
 
     </div>
+@endsection
+
+@section('script')
+    {!! $dataTable->scripts() !!}
 @endsection

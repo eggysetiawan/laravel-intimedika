@@ -45,7 +45,7 @@ class LoginMagicLinkNotification extends Notification
         $url = $generator->generate();
 
         return (new MailMessage)
-            ->subject('Intimedika Portal Login Link')
+            ->subject('IPI Portal Login Link')
             ->line('Klik disini untuk melakukan login.')
             ->action('Login', $url)
             ->line('Thank you for using our application!');

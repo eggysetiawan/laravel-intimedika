@@ -77,7 +77,8 @@
 
     <div class="form-group">
         <label for="address">Alamat</label>
-        <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" rows="5">{{ old('address') ?? $customer->address }}</textarea>
+        <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror"
+            rows="5">{{ old('address') ?? $customer->address }}</textarea>
     </div>
 
 

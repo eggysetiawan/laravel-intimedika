@@ -6,12 +6,10 @@ use App\Offer;
 use App\Funnel;
 use App\Customer;
 use App\Modality;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\DataTables\FunnelDataTable;
 use App\Http\Requests\FunnelRequest;
 use App\Http\Requests\FunnelUpdateRequest;
-use App\Order;
+use App\Services\FunnelService;
 
 class FunnelController extends Controller
 {
@@ -30,23 +28,15 @@ class FunnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(FunnelDataTable $dataTable)
+    public function create()
     {
-        $customers = Customer::with('hospitals')
-            ->orderBy('name', 'asc')
-            ->get();
-
-        if (!request('count')) :
-            return $dataTable->render('funnels.index');
-        else :
-            return view('funnels.create', [
-                'offer' => new Offer(),
-                'funnel' => new Funnel,
-                'customers' => $customers,
-                'modalities' => Modality::orderBy('name', 'asc', 'price')->get(),
-                'count' => request('count'),
-            ]);
-        endif;
+        return view('funnels.create', [
+            'offer' => new Offer(),
+            'funnel' => new Funnel(),
+            'customers' => Customer::selectCustomer(),
+            'modalities' => Modality::selectModality(),
+            'count' => request('count'),
+        ]);
     }
 
     /**
@@ -55,43 +45,21 @@ class FunnelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FunnelRequest $request)
+    public function store(FunnelRequest $request, FunnelService $funnelService)
     {
-        $attr = $request->all();
-        // insert into offer table
-        $attr['customer_id'] = $request->customer;
-        $offer = auth()->user()->offers()->create($attr);
-
+        // to offers table
+        $funnelService->createOffer($request);
         // to invoices table
-        $invoice = $offer->invoices()->create();
-
+        $funnelService->createInvoice();
         // to offer_progress table
-        $offer->progress()->create([
-            'progress' => $request->progress,
-            'status' => 'Funnel',
-        ]);
-
-        foreach ($request->modality as $i => $v) {
-            // to table orders
-            Order::insert([
-                'invoice_id' => $invoice->id,
-                'modality_id' => $request->modality[$i],
-                'price' => str_replace(".", "", $request->price[$i]),
-                'references' => $request->references[$i],
-                'created_at' => now()->toDateTimeString(),
-                'updated_at' => now()->toDateTimeString(),
-            ]);
-        }
-
-        // assign to funnel slug
-        $attr['slug'] = Str::slug($request->description . ' ' . date('YmdHis'));
-        // insert into funnels table
-        $offer->funnel()->create($attr);
-
+        $funnelService->createProgress($request);
+        // to orders table
+        $funnelService->insertOrder($request);
+        // to funnels table
+        $funnelService->createFunnel($request);
 
         // alert success
         session()->flash('success', 'Funnel telah berhasil dibuat!');
-
         return redirect('funnels');
     }
 
@@ -116,7 +84,7 @@ class FunnelController extends Controller
     {
         $offer = $funnel->offer;
         $count = $offer->invoices()->first()->orders()->count();
-        $modalities = Modality::orderBy('name', 'asc', 'price')->get();
+        $modalities = Modality::selectModality();
 
         return view('funnels.edit', compact('offer', 'funnel', 'count', 'modalities'));
     }
@@ -128,28 +96,13 @@ class FunnelController extends Controller
      * @param  \App\Funnel  $funnel
      * @return \Illuminate\Http\Response
      */
-    public function update(FunnelUpdateRequest $request, Funnel $funnel)
+    public function update(FunnelUpdateRequest $request, Funnel $funnel, FunnelService $funnelService)
     {
         $attr = $request->all();
-
-        foreach ($funnel->offer->invoices->last()->orders as $i => $order) {
-            // to table orders
-            $order->update([
-                'modality_id' => $request->modality[$i],
-                'price' => str_replace(".", "", $request->price[$i]),
-                'references' => $request->references[$i],
-                'updated_at' => now()->toDateTimeString(),
-            ]);
-        }
-
-        // assign to funnel slug
-        // insert into funnels table
+        $funnelService->updateOrder($request, $funnel);
         $funnel->update($attr);
-
-
         // alert success
         session()->flash('success', 'Funnel telah berhasil di update!');
-
         return redirect('funnels');
     }
 

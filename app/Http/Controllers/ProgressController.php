@@ -9,7 +9,7 @@ use App\OfferProgress;
 use App\DataTables\OfferDataTable;
 use App\Events\PurchaseOrderCreated;
 use App\Http\Requests\OfferProgressRequest;
-
+use App\Services\ProgressService;
 
 class ProgressController extends Controller
 {
@@ -31,76 +31,29 @@ class ProgressController extends Controller
 
     public function create(Offer $offer)
     {
-        if ($offer->progress->progress <= 99) :
-            return view('progress.create', [
-                'offer' => $offer,
-            ]);
-        else :
-            return redirect('offers');
-        endif;
+        abort_if($offer->progress->progress > 99, 403);
+        return view('progress.create', [
+            'offer' => $offer,
+        ]);
     }
 
-    public function update(Offer $offer, OfferProgressRequest $request)
+    public function update(Offer $offer, OfferProgressRequest $request, ProgressService $progressService)
     {
         $attr = $request->all();
-
         switch ($request->progress):
             case (50):
                 $offer->progress->update($attr);
-                Demo::create([
-                    'offer_progress_id' => $offer->progress->id,
-                    'date' => date('Y-m-d', strtotime($request->demo_date)),
-                    'description' => $request->description,
-                ]);
+                $progressService->createDemo($offer, $request);
                 break;
-
             case (99):
-                $orders = $offer->invoices->first()->orders
-                    ->whereIn('id', $request->id_order);
-                $price_po = 0;
-                foreach ($orders as $i => $order) {
-                    $order->update([
-                        'price' => str_replace(".", "", $request->price[$i]),
-                        'quantity' => $request->qty[$i],
-                    ]);
-                    $price_po += str_replace(".", "", $request->price[$i]) * $request->qty[$i];
-                }
-
-                $ppn = ($price_po * (10 / 100));
-                $shipping = isset($request->shipping) ? $request->shipping : 0;
-
-                Tax::create([
-                    'invoice_id' => $offer->invoices->first()->id,
-                    'price_po' => $price_po,
-                    'dpp' => $price_po,
-                    'ppn' => $ppn,
-                    'nett' => $price_po,
-                    'shipping' => str_replace(".", "", $shipping),
-                ]);
+                $progressService->updateOrder($offer, $request);
+                $progressService->createTax($offer, $request);
                 $offer->progress->update($attr);
-
-                // insert image to media table
-                $request->validate([
-                    'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
-                ]);
-                $imgName = date('YmdHi') . '.' . request()->file('img')->extension();
-                $offer->invoices->first()
-                    ->addMediaFromRequest('img')
-                    ->usingFileName($imgName)
-                    ->toMediaCollection('image_po');
-
-                // send email
-                // $admin = User::where('id', 13)->first();
-                // $admin->notify(new PurchaseOrderNotification($offer));
+                $progressService->uploadPurchase($offer, $request);
                 event(new PurchaseOrderCreated($offer));
                 break;
-
-
             default:
-
                 $offer->progress->update($attr);
-
-
         endswitch;
 
         session()->flash('success', 'Progress Penawaran berhasil di update!');

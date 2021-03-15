@@ -140,7 +140,8 @@ class VisitDataTable extends DataTable
                 ->orderable(false)
                 ->printable(false)
                 ->exportable(false)
-                ->width(50),
+                ->width(50)
+                ->addClass('text-center'),
 
             // hospital
             Column::make('customer.hospitals.name')

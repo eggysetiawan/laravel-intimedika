@@ -21,6 +21,8 @@
             @csrf
             @method('patch')
             <div class="card-body">
+
+
                 <div class="h5">
                     <div class="form-group icheck-danger">
                         <input type="checkbox" name="progress" id="check1" value="30" @if ($offer->progress->progress >= 30) checked @endif>
@@ -124,10 +126,11 @@
                                                 <span class="input-group-text">Rp</span>
                                             </div>
                                             <input type="hidden" name="references[]" value="{{ $order->references }}">
-                                            <input type="number" name="price[]" id="price"
+                                            <input type="text" name="price[]" id="price"
                                                 class="form-control @error('price') is-invalid @enderror" value="" required
-                                                data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                                                data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
                                                 data-mask>
+
                                             @error('price')
                                                 <span class="invalid-feedback" role="alert">
                                                     {{ $message }}
@@ -241,16 +244,15 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#check6").click(function() {
-                if ($(this).is(":checked")) {
-                    $("#img").show(300);
-                }
-                elseif({{ $offer->progress->progress == 99 }}) {
-                    $("#img").show(300);
+                    const progress = "{{ $offer->progress->progress }}";
+                    if ($(this).is(":checked") || progress == 99) {
+                        $("#img").show(300);
+                    }
+
                 } else {
                     $("#img").hide(200);
                 }
-            });
-            $("#img").hide();
+            }); $("#img").hide();
         });
 
     </script>

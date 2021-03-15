@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 class VisitService
 {
-    public function slug()
+    public function setSlug()
     {
         $timestamp = date('YmdHis');
         return Str::slug(request('request') . ' ' . $timestamp);
@@ -15,7 +15,7 @@ class VisitService
     {
         // validate input
         $attr = $request->all();
-        $attr['slug'] = $this->slug();
+        $attr['slug'] = $this->setSlug();
         // customer_id
         $attr['customer_id'] = $request->customer;
         $attr['is_visited'] = 1;
@@ -26,7 +26,7 @@ class VisitService
 
     public function update($request, $visit)
     {
-        $imgSlug = $this->slug() . '.' . request()->file('img')->extension();
+        $imgSlug = $this->setSlug() . '.' . request()->file('img')->extension();
 
         $visit
             ->addMediaFromRequest('img')

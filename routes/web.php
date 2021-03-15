@@ -36,9 +36,10 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // route funnels
+    Route::get('funnels/create', 'FunnelController@create')->name('funnels.create')->middleware('count');
     Route::resource('funnels', 'FunnelController')->parameters([
         'funnels' => 'funnel:slug',
-    ]);
+    ])->except(['create']);
 
     //  hospitals
     Route::resource('hospitals', 'HospitalController')->parameters([

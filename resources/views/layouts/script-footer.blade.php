@@ -110,8 +110,8 @@
         $(document).ready(function() {
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Pin yang anda masukkan salah!',
+                title: 'Pin yang anda masukkan salah!',
+                text: 'Silahkan coba lagi.',
             })
         });
 

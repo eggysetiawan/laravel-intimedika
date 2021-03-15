@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\DataTables\CustomerDataTable;
 use App\Hospital;
 use Illuminate\Support\Str;
 use App\Http\Requests\CustomerRequest;
@@ -10,16 +11,9 @@ use App\Http\Requests\CustomerUpdateRequest;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(CustomerDataTable $dataTable)
     {
-        $customers = Customer::with('author', 'visits', 'hospitals')
-            ->latest()
-            ->when(!auth()->user()->isAdmin(), function ($query) {
-                return $query->where('user_id', auth()->id());
-            })
-            ->paginate(10);
-
-        return view('customers.index', compact('customers'));
+        return $dataTable->render('customers.index');
     }
 
     public function show(Customer $customer)
@@ -69,10 +63,7 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        $hospitals = Hospital::select(['id', 'name', 'city'])
-            ->orderBy('name', 'asc')
-            ->where('name', '!=', '')
-            ->get();
+        $hospitals = Hospital::selectHospital();
         return view('customers.edit', compact('customer', 'hospitals'));
     }
 

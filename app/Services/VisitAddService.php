@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class VisitAddService
 {
-    protected $customer, $visit;
+    private $customer, $visit;
 
     public function slug()
     {
@@ -48,13 +48,10 @@ class VisitAddService
 
     public function uploadImage()
     {
-        if (request('img')) :
-            $imgSlug = $this->slug() . '.' . request()->file('img')->extension();
-
-            return   $this->visit
-                ->addMediaFromRequest('img')
-                ->usingFileName($imgSlug)
-                ->toMediaCollection('images');
-        endif;
+        $imgSlug = $this->slug() . '.' . request()->file('img')->extension();
+        return $this->visit
+            ->addMediaFromRequest('img')
+            ->usingFileName($imgSlug)
+            ->toMediaCollection('images');
     }
 }
