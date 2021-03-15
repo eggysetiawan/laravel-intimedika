@@ -9,11 +9,12 @@ class Hospital extends Model
 
     protected $fillable = ['name', 'slug', 'phone', 'city', 'address', 'email', 'class', 'code', 'address'];
 
-    public function scopeSelectHospital()
+    public function scopeSelectHospitalLimit()
     {
         return $this->select(['id', 'name', 'city'])
             ->orderBy('name', 'asc')
             ->where('name', '!=', '')
+            ->limit(1000)
             ->get();
     }
 

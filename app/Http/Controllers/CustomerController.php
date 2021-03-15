@@ -63,8 +63,9 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        $hospitals = Hospital::selectHospital();
+        $hospitals = Hospital::selectHospitalLimit();
         return view('customers.edit', compact('customer', 'hospitals'));
+        // return 'hola';
     }
 
     public function update(CustomerUpdateRequest $request, Customer $customer)
