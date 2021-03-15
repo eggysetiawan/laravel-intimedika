@@ -5,7 +5,7 @@
     @if (request()->segment(2) == 'trash')
         <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Penawaran</a></li>
     @else
-        <li class="breadcrumb-item">Penawaran</li>
+        <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Penawaran</a></li>
     @endif
 @endsection
 @section('content')
@@ -37,6 +37,8 @@
                         </button>
                     </div>
                 </div>
+
+                @include('offers.partials.reset')
 
                 @if (request()->segment(1) == 'offers' && request()->segment(2) == 'completed')
                     @include('offers.partials.filter')

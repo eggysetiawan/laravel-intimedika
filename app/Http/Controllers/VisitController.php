@@ -25,14 +25,9 @@ class VisitController extends Controller
 
     public function create()
     {
-        $customers = Customer::whereHas('hospitals')
-            ->select(['id', 'name'])
-            ->orderBy('name', 'asc')
-            ->get();
-
         return view('visits.create', [
             'visit' => new Visit(),
-            'customers' => $customers,
+            'customers' => Customer::selectCustomer(),
         ]);
     }
 

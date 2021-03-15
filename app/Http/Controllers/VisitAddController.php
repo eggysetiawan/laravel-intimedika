@@ -14,7 +14,7 @@ class VisitAddController extends Controller
     {
         return view('visits.add', [
             'customer' => new Customer(),
-            'hospitals' => Hospital::selectHospital(),
+            'hospitals' => Hospital::selectHospitalLimit(),
         ]);
     }
 

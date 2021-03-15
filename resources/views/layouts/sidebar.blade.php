@@ -49,7 +49,7 @@ use App\Offer;
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('visits.index') }}"
-                        class="nav-link{{ request()->segment(1) == 'visits' && !request()->segment(2) ? ' active' : '' }}">
+                        class="nav-link{{ request()->segment(1) == 'visits' ? ' active' : '' }}">
                         <i class="fas fa-route nav-icon"></i>
                         <p>Kunjungan</p>
                     </a>

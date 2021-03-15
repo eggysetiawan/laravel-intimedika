@@ -48,10 +48,7 @@ class OfferService
         $attr['offer_date'] = $date;
         $attr['customer_id'] = $request->customer;
 
-        $offer =  auth()->user()->offers()->create($attr);
-        $this->offer = $offer;
-
-        return $offer;
+        return $this->offer =  auth()->user()->offers()->create($attr);
     }
 
     public function createInvoice($request)

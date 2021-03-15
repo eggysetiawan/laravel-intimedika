@@ -32,7 +32,7 @@ class SendOfferNotification implements ShouldQueue
      */
     public function handle()
     {
-        $admin = User::where('id', 13)->first();
+        $admin = User::where('username', 'intiwid01')->first();
         $admin->notify(new NewOfferNotification($this->offer));
     }
 }
