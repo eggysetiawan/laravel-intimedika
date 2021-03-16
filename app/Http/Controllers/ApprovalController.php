@@ -18,7 +18,7 @@ class ApprovalController extends Controller
             ])
             ->render('offers.index', [
                 'tableHeader' => 'Ready to Approve',
-                'approval' => Offer::whereNull('is_approved')->count(),
+                'approval' => Offer::readyToApproveCount(),
             ]);
     }
 

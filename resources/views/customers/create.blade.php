@@ -21,3 +21,7 @@
         </form>
     </x-card>
 @endsection
+
+@section('script')
+
+@endsection

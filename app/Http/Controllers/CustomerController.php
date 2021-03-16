@@ -24,11 +24,7 @@ class CustomerController extends Controller
     {
         return view('customers.create', [
             'customer' => new Customer(),
-            'hospitals' => Hospital::select('id', 'name', 'city')
-                ->orderBy('name', 'asc')
-                ->where('name', '!=', '')
-                ->take(1000)
-                ->get()
+            'hospitals' => Hospital::selectHospitalLimit()
         ]);
     }
     public function create2()

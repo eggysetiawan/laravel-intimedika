@@ -1,4 +1,7 @@
 <div class="card-body">
+
+    <select class="js-data-example-ajax form-control"></select>
+
     @empty($nohospital)
         <div class="form-group">
             <label for="hospital">Pilih Rumah Sakit</label>

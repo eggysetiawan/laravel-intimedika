@@ -47,7 +47,6 @@
                 @elseif(request()->segment(1) == "offers" && !request()->segment(2))
                     @include('offers.partials.filter')
                 @endif
-
                 @if ($approval > 0 && request()->segment(1) == 'offers')
                     @include('offers.partials.approval')
                 @elseif($approval > 0 && request()->segment(1) == 'progresses')

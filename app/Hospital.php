@@ -11,7 +11,7 @@ class Hospital extends Model
 
     public function scopeSelectHospitalLimit()
     {
-        return $this->select(['id', 'name', 'city'])
+        return $this->pluck(['id', 'name', 'city'])
             ->orderBy('name', 'asc')
             ->where('name', '!=', '')
             ->limit(1000)
