@@ -25,7 +25,7 @@ class ProgressService
         $order = [];
         foreach ($orders as $i => $order) {
             $order->update([
-                'price' => str_replace(".", "", $request->price[$i]),
+                'price' => str_replace(",", "", $request->price[$i]),
                 'quantity' => $request->qty[$i],
             ]);
             $this->price_po += str_replace(",", "", $request->price[$i]) * $request->qty[$i];

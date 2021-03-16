@@ -52,7 +52,7 @@ class LoginController extends Controller
                     ->withErrors(['email' => 'User tidak ditemukan.'])
                     ->withInput();
             } else {
-                return redirect()->route('login.resend');
+                return view('auth.resend-email', ['email' => $request->email,]);
             }
         endif;
 

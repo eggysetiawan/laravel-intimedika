@@ -29,6 +29,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Silahkan cek link yang telah dikirimkan ke email anda.</p>
+                <p class="text-center">{{ $email }}</p>
                 <p class="text-center"><a href="{{ route('login.email') }}" class="text-orange">Kirim Ulang
                         Email/Login ke Portal</a>
                 </p>

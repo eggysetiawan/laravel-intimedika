@@ -169,9 +169,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
                                 </div>
-                                <input type="number" name="shipping" id="shipping"
+                                <input type="text" name="shipping" id="shipping"
                                     class="form-control @error('shipping') is-invalid @enderror"
-                                    data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
+                                    data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
                                     data-mask value="{{ old('shipping') }}" required>
                                 @error('shipping')
                                     <span class="invalid-feedback" role="alert">

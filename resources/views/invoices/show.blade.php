@@ -58,8 +58,10 @@
                                     {{-- approve penawaran --}}
                                     @can('approval')
                                         <div class="btn-group form-control-plaintext">
-                                            <button class="btn btn-success btn-sm">Approve.</button>
-                                            <button class="btn btn-danger btn-sm">Reject.</button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-target="#approveModal{{ $offer->id }}">Approve.</button>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#rejectModal{{ $offer->id }}">Reject.</button>
                                         </div>
                                     @endcan
 
@@ -262,22 +264,9 @@
                         </div>
                         <div class="tab-pane fade" id="vert-tabs-order" role="tabpanel"
                             aria-labelledby="vert-tabs-order-tab">
-                            @if ($offer->progress->progress == 99)
-                                @can('approval')
-                                    <form action="{{ route('approval.progress', $offer->slug) }}" method="POST">
-                                        @csrf
-                                        @method('patch')
-                                        <div class="btn-group form-control-plaintext">
-                                            <button class="btn btn-success btn-sm" name="approval" type="submit" value="1"
-                                                onclick="return confirm('apakah anda yakin?')">Approve Purchase Order.</button>
-                                            <button class="btn btn-danger btn-sm" name="approval" value="2"
-                                                onclick="return confirm('apakah anda yakin?')">Reject Purchase Order.</button>
-                                        </div>
-                                    </form>
-                                @endcan
-                            @endif
+
                             {{-- repeat order --}}
-                            @can('repeat order')
+                            @can('view', $offer)
                                 @if ($offer->progress->approval == 1)
                                     <button type="button" class="btn bg-olive form-control-plaintext mb-2" data-toggle="modal"
                                         data-target="#repeatOrder">
@@ -285,6 +274,7 @@
                                     </button>
                                 @endif
                             @endcan
+
 
                             <div class="callout callout-info">
                                 <h5><i class="fas fa-info"></i>
@@ -428,24 +418,19 @@
                                             <div class="row no-print">
                                                 <div class="col-12">
                                                     @if ($offer->progress->progress == 99)
-                                                        @can('approval')
-                                                            <form class="inline"
-                                                                action="{{ route('approval.progress', $offer->slug) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('patch')
-                                                                <button class="btn btn-success float-right" name="approval"
-                                                                    type="submit" value="1"
-                                                                    onclick="return confirm('apakah anda yakin?')"><i
-                                                                        class="fas fa-check-circle"></i>
-                                                                    Approve Purchase
-                                                                </button>
-                                                                <button class="btn btn-danger float-right"
-                                                                    style="margin-right: 5px;" name="approval" value="2"
-                                                                    onclick="return confirm('apakah anda yakin?')">
-                                                                    <i class="fas fa-times-circle"></i> Reject Purchase
-                                                                </button>
-                                                            </form>
+                                                        @can('view', $offer)
+
+                                                            <button class="btn btn-success float-right" data-toggle="modal"
+                                                                data-target="#approvePurchase{{ $offer->id }}"><i
+                                                                    class="fas fa-check-circle"></i>
+                                                                Approve Purchase
+                                                            </button>
+                                                            <button class="btn btn-danger float-right"
+                                                                style="margin-right: 5px;" data-toggle="modal"
+                                                                data-target="#rejectPurchase{{ $offer->id }}">
+                                                                <i class="fas fa-times-circle"></i> Reject Purchase
+                                                            </button>
+
                                                         @endcan
                                                     @endif
                                                 </div>
@@ -629,6 +614,8 @@
             </div>
         </div>
     </div>
+
+    @include('offers.modals.pin')
 @endsection
 
 @if (@$tab)
