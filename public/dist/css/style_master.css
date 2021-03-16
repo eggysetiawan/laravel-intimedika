@@ -607,3 +607,8 @@ body::-webkit-scrollbar-thumb {
         #2ab0ed 100%
     );
 }
+
+
+.card-body{
+    padding: 2.5rem;
+}

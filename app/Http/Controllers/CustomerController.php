@@ -39,11 +39,9 @@ class CustomerController extends Controller
     {
         // validate input
         $attr = $request->all();
-
         // assignt name to slug (slug = name-role)
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
         $nohospital = (@request('hospital') == 'false') ? true : false;
-
         if ($nohospital) :
             auth()->user()->customers()->create($attr);
         else :

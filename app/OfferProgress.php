@@ -13,6 +13,13 @@ class OfferProgress extends Model
     protected $table = 'offer_progress';
 
 
+    public function scopeReadyToApprove()
+    {
+        return $this->whereNull('is_approved')
+            ->where('progress', 99)
+            ->count();
+    }
+
     public function demo()
     {
         return $this->hasOne(Demo::class)->withDefault([

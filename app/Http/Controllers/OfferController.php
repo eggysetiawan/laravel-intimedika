@@ -65,10 +65,8 @@ class OfferController extends Controller
 
     public function edit(Offer $offer)
     {
-        $customers = Customer::with('hospitals')
-            ->orderBy('name', 'asc')
-            ->get();
-        $modalities = Modality::orderBy('name', 'asc', 'price')->get();
+        $customers = Customer::selectCustomer();
+        $modalities = Modality::selectModality();
 
         return view('offers.edit', compact('offer', 'customers', 'modalities'));
     }

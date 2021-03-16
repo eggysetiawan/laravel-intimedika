@@ -12,7 +12,7 @@
 
 <!-- Approve Modal -->
 <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-teal">
                 <h5 class="modal-title" id="exampleModalLabel">
