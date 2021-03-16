@@ -31,55 +31,12 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Nama</th>
-                                <th>Model</th>
-                                <th>Merk</th>
-                                <th>Harga</th>
-                                <th>Stok</th>
-                                <th>Referensi</th>
-                                <th>Spesifikasi</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        @forelse($modalities as $modality)
-
-                            <tbody>
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $modality->name }}</td>
-                                    <td>{{ $modality->model }}</td>
-                                    <td>{{ $modality->brand }}</td>
-                                    <td>@currency($modality->price)</td>
-                                    <td>{{ $modality->stock }}</td>
-                                    <td>{{ $modality->reference }}</td>
-                                    <td>
-                                        {{ Str::limit($modality->spec, 50) }}
-                                        <div><a href="{{ route('modalities.show', $modality->slug) }}">Read More..</a></div>
-                                    </td>
-                                    <td><a href="{{ route('modalities.edit', $modality->slug) }}"
-                                            class="btn btn-success btn-sm">Edit</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        @empty
-                            <tbody>
-                                <tr>
-                                    <td cols="6">Tidak ada data.</td>
-                                </tr>
-                            </tbody>
-                        @endforelse
-                    </table>
-                    {{-- agar ditengah = center , kanan = end, kiri = start --}}
-                    <div class="d-flex justify-content-end mr-4">
-                        <div>
-                            {{ $modalities->links() }}
-                        </div>
-                    </div>
+                <div class="card-body table-responsive ">
+                    {!! $dataTable->table([
+    'class' => 'table table-centered table-striped dt-responsive
+                    nowrap w-100',
+    'id' => 'modality-table',
+]) !!}
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -88,4 +45,7 @@
 
 
     </div>
+@endsection
+@section('script')
+    {!! $dataTable->scripts() !!}
 @endsection

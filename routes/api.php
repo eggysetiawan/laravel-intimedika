@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\v1\ApiHospitalController;
+use App\Http\Controllers\Api\v1\{ApiCustomerController, ApiHospitalController};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('hospitals', ([ApiHospitalController::class, 'index']));
+Route::get('customers', ([ApiCustomerController::class, 'index']));

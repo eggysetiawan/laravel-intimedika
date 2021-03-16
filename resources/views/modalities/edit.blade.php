@@ -7,25 +7,20 @@
 @endsection
 
 @section('content')
-    <div class="container">
-
-        <div class="d-flex justify-content-center">
-            <div class="col-md-10">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Update {{ $modality->name }}</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-
-                    <form role="form" method="post" action="{{ route('modalities.update', $modality->slug) }}" novalidate>
-                        @method('patch')
-                        @csrf
-                        @include('modalities.partials.form-control', ['submit' => 'Update'])
-                    </form>
-                </div>
-                <!-- /.card -->
-            </div>
+    <x-card>
+        <div class="card-header">
+            <h3 class="card-title">Update {{ $modality->name }}</h3>
         </div>
-    </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+
+        <form role="form" method="post" action="{{ route('modalities.update', $modality->slug) }}" novalidate>
+            @method('patch')
+            @csrf
+            @include('modalities.partials.form-control', ['submit' => 'Update'])
+        </form>
+    </x-card>
+
+
+
 @endsection

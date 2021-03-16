@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ModalityDataTable;
 use App\Http\Requests\ModalityRequest;
 use App\Modality;
 use Illuminate\Support\Str;
@@ -13,10 +14,9 @@ class ModalityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ModalityDataTable $dataTable)
     {
-        $modalities = Modality::latest()->paginate(5);
-        return view('modalities.index', compact('modalities'));
+        return $dataTable->render('modalities.index');
     }
 
     /**
