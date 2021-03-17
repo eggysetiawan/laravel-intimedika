@@ -7,9 +7,10 @@ use Carbon\Carbon;
 
 class FilterService
 {
-    public function getFromDate()
+    public function getOfferFromDate()
     {
         $offer = Offer::firstDate();
-        return Carbon::parse($offer->offer_date)->format('Y-m-d');
+        $date =  ($offer->count() > 0) ? Carbon::parse($offer->offer_date)->format('Y-m-d') : date('Y-m-d');
+        return $date;
     }
 }

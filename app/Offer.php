@@ -31,26 +31,28 @@ class Offer extends Model implements HasMedia
     ];
 
 
-    public function scopeFirstDate()
+    public function scopeFirstDateComplete()
     {
-        return $this->select('offer_date')
-            ->orderBy('offer_date', 'asc')
+
+        return $this->whereHas('progress', function ($query) {
+            return $query->where('progress', 100);
+        })->orderBy('offer_date', 'asc')
             ->whereNotNull('offer_date')
             ->first();
+    }
+    public function scopeFirstDate()
+    {
+        return $this->orderBy('offer_date', 'asc')->whereNotNull('offer_date')->first();
     }
 
     public function scopeReadytoPurchaseCount()
     {
-        return $this->with('progressApproval')
-            ->whereHas('progressApproval')
-            ->count();
+        return $this->with('progressApproval')->whereHas('progressApproval')->count();
     }
 
     public function scopeReadyToApproveCount()
     {
-        return $this->whereNull('is_approved')
-            ->whereNotNull('offer_no')
-            ->count();
+        return $this->whereNull('is_approved')->whereNotNull('offer_no')->count();
     }
 
     public function revision()

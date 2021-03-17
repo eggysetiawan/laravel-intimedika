@@ -23,7 +23,7 @@ class OfferController extends Controller
                 ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
                 ->whereNull('is_approved')
                 ->count(),
-            'fromDate' => date('Y-m-d'),
+            'fromDate' => $filterService->getOfferFromDate(),
         ]);
     }
 

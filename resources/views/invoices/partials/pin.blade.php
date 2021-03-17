@@ -178,7 +178,11 @@
                 title: 'Pin yang anda masukkan salah!',
                 text: 'Silahkan coba lagi.',
             });
-            $("#approveModal{{ $offer->id }}").modal("show");
+            $("#approvalModal{{ $offer->id }}").modal("show");
+            $("#rejectModal{{ $offer->id }}").modal("show");
+            $("#approvalPurchase{{ $offer->id }}").modal("show");
+            $("#rejectPurchase{{ $offer->id }}").modal("show");
+            console.log("$offer->id");
 
         });
 

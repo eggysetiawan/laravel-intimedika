@@ -284,7 +284,7 @@
                                 </h5>
 
                             </div>
-                            <div class="scroll-less">
+                            <div class="scroll-less ">
                                 @if ($offer->progress->progress >= 99)
                                     @foreach ($offer->invoices as $invoice)
                                         <!-- Main content -->
@@ -531,13 +531,11 @@
                                             <div class="input-group mb-3">
                                                 @isset($order->quantity)
                                                     <input type="text" value="@currency($order->price)"
-                                                        class="form-control text-right" disabled
-                                                        data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
-                                                        data-mask>
+                                                        class="form-control text-right" disabled>
                                                 @else
                                                     <input type="text" name="price[{{ $order->id }}]" id="price"
                                                         class="form-control @error('price') is-invalid @enderror" required
-                                                        data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
+                                                        data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                                                         data-mask>
                                                 @endisset
 
@@ -585,7 +583,7 @@
                                         </div>
                                         <input type="text" name="shipping" id="shipping"
                                             class="form-control @error('shipping') is-invalid @enderror" value="" required
-                                            data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
+                                            data-inputmask="'mask': ['9.999','99.999','999.999','9.999.999', '99.999.999', '99.999.999', '999.999.999','9.999.999.999','99.999.999.999','999.999.999.999','9.999.999.999.999','99.999.999.999.999','999.999.999.999.999']"
                                             data-mask>
                                         @error('shipping')
                                             <span class="invalid-feedback" role="alert">
@@ -617,7 +615,7 @@
         </div>
     </div>
 
-    @include('offers.modals.pin')
+    @include('invoices.partials.pin')
 @endsection
 
 @if (@$tab)

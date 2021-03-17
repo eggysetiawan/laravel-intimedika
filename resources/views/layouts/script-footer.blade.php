@@ -113,6 +113,23 @@
                 title: 'Pin yang anda masukkan salah!',
                 text: 'Silahkan coba lagi.',
             });
+            $("#approveModal{{ $offer->id }}").modal("show");
+
+
+        });
+
+    </script>
+
+@enderror
+
+@error('pin')
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Pin yang anda masukkan salah!',
+                text: 'Silahkan coba lagi.',
+            });
             $("#approvalModal").modal("show");
 
         });
