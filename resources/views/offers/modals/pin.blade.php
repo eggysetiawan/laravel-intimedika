@@ -20,9 +20,14 @@
                                 Pin</a>
                         @else
                             <label for="pin">Masukkan Pin</label>
-                            <input type="password" size="4" maxlength="4" name="pin" class="form-control" autofocus>
+                            <input type="password" size="4" maxlength="4" name="pin"
+                                class="form-control @error('pin') is-invalid @enderror" autofocus>
                         @endempty
-
+                        @error('pin')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -164,3 +169,22 @@
         </div>
     </div>
 </div>
+
+@error('pin')
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Pin yang anda masukkan salah!',
+                text: 'Silahkan coba lagi.',
+            });
+            $("#approvalModal{{ $offer->id }}").modal("show");
+            $("#rejectModal{{ $offer->id }}").modal("show");
+            $("#approvalPurchase{{ $offer->id }}").modal("show");
+            $("#rejectPurchase{{ $offer->id }}").modal("show");
+
+        });
+
+    </script>
+
+@enderror

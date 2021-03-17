@@ -608,7 +608,36 @@ body::-webkit-scrollbar-thumb {
     );
 }
 
-
-.card-body{
-    padding: 2.5rem;
+.card-body {
+    padding: 1.5rem;
 }
+
+.dataTables_wrapper .dt-buttons {
+    margin-bottom: 10px;
+}
+
+
+
+/*back to top*/
+#button-back {
+    display: inline-block;
+
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+#button-back.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Styles for the content section */

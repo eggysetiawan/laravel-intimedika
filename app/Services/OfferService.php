@@ -93,7 +93,7 @@ class OfferService
             // to table orders
             $order = $order->update([
                 'modality_id' => $request->modality[$i],
-                'price' => str_replace(".", "", $request->price[$i]),
+                'price' => str_replace(",", "", $request->price[$i]),
                 'references' => $request->references[$i],
                 'updated_at' => now()->toDateTimeString(),
             ]);

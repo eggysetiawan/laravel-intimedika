@@ -28,7 +28,7 @@
                     @default
 
                     <x-button-create href="{{ route('visitadd.create') }}">Kunjungan Baru</x-button-create>
-                    <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm">Tambah Kunjungan</a>
+                    <a href="{{ route('visits.create') }}" class="btn btn-secondary btn-sm"> Lanjutkan Kunjungan</a>
 
                     @can('restore')
                         @if (request()->segment(2) == 'trash')

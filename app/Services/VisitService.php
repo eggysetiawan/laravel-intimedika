@@ -26,7 +26,7 @@ class VisitService
 
     public function update($request, $visit)
     {
-        $imgSlug = $this->setSlug() . '.' . request()->file('img')->extension();
+        $imgSlug = uniqid() . '.' . request()->file('img')->extension();
 
         $visit
             ->addMediaFromRequest('img')

@@ -35,12 +35,7 @@ class VisitAddService
     public function addVisit($request)
     {
         $attr = $request->all();
-
-        $timestamp = date('Y-m-d-H-i-s');
-        $slug = Str::slug(request('request') . ' ' . $timestamp);
-        $attr['slug'] = $slug;
-
-        // insert into table visits
+        $attr['slug'] = $this->slug();
         $attr['customer_id'] = $this->customer->id;
         $attr['is_visited'] = 1;
         return $this->visit = auth()->user()->visits()->create($attr);
@@ -48,7 +43,7 @@ class VisitAddService
 
     public function uploadImage()
     {
-        $imgSlug = $this->slug() . '.' . request()->file('img')->extension();
+        $imgSlug = uniqid() . '.' . request()->file('img')->extension();
         return $this->visit
             ->addMediaFromRequest('img')
             ->usingFileName($imgSlug)

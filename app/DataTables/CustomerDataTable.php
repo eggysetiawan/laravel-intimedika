@@ -67,7 +67,7 @@ class CustomerDataTable extends DataTable
             ->minifiedAjax()
             ->parameters([
                 'stateSave' => true,
-                'dom'          => 'Blfrtip',
+                'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
                 'buttons'      => ['excel', 'print', 'reset'],
                 'order'   => [1, 'desc'],
                 'lengthMenu' => [

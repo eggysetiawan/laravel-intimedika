@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label for="role">Jabatan</label>
                     <input type="text" name="role" id="role" class="form-control @error('role') is-invalid @enderror"
-                        value="{{ old('role') }}">
+                        value="{{ old('role') }}" placeholder="Tuliskan jabatan..">
                 </div>
                 <div class="form-group">
                     <label for="request">Permintaan</label>
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="file" name="img" id="img" class="form-control @error('img') is-invalid @enderror">
+                    <input type="file" name="img" id="img" class="form-control-file @error('img') is-invalid @enderror">
                     @error('img')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}

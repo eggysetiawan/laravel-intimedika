@@ -31,6 +31,13 @@ class Offer extends Model implements HasMedia
     ];
 
 
+    public function scopeFirstDate()
+    {
+        return $this->select('offer_date')
+            ->orderBy('offer_date', 'asc')
+            ->whereNotNull('offer_date')
+            ->first();
+    }
 
     public function scopeReadytoPurchaseCount()
     {

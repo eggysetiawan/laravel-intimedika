@@ -112,7 +112,9 @@
                 icon: 'error',
                 title: 'Pin yang anda masukkan salah!',
                 text: 'Silahkan coba lagi.',
-            })
+            });
+            $("#approvalModal").modal("show");
+
         });
 
     </script>
@@ -200,5 +202,28 @@
 
 
     })
+
+</script>
+
+<script type="text/javascript">
+    var btn = $('#button-back');
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 1000) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({
+            scrollTop: 0
+        }, '300');
+    });
+
+
+
+    // $("#approvalModal").modal("show");
 
 </script>

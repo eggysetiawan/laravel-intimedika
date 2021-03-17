@@ -9,18 +9,21 @@ use App\{Offer, Customer};
 use App\Events\OfferCreated;
 use App\Events\OfferUpdated;
 use App\Http\Requests\UpdateOfferRequest;
+use App\Services\FilterService;
 use App\Services\OfferService;
 
 class OfferController extends Controller
 {
-    public function index(OfferDataTable $dataTable, Offer $offer)
+    public function index(OfferDataTable $dataTable, Offer $offer, FilterService $filterService)
     {
+
         return $dataTable->render('offers.index', [
             'approval' => 0,
             'offer_approval_count' => $offer
                 ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
                 ->whereNull('is_approved')
                 ->count(),
+            'fromDate' => date('Y-m-d'),
         ]);
     }
 

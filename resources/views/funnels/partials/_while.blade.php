@@ -52,9 +52,11 @@ $i = 0;
                     <div class="input-group-prepend">
                         <span class="input-group-text">Rp</span>
                     </div>
-                    <input type="number" name="price[]" id="price"
+                    <input type="text" name="price[]" id="price"
                         class="form-control @error('price.' . $i) is-invalid @enderror"
-                        value="{{ old('price.' . $i) ?? $order->price }}" required>
+                        value="{{ old('price.' . $i) ?? $order->price }}" required
+                        data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
+                        data-mask>
                 </div>
 
                 @error('price.' . $i)

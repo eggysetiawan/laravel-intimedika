@@ -57,7 +57,9 @@
         <!-- Control Sidebar -->
         @include('layouts.control-sidebar')
         <!-- /.control-sidebar -->
-
+        <a id="button-back" href="#" class="btn bg-teal back-to-top" role="button" aria-label="Scroll to top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
         <!-- Main Footer -->
         @include('layouts.footer')
     </div>

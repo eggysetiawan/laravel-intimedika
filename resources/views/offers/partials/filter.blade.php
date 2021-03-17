@@ -17,7 +17,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-teal"><i class="far fa-calendar-alt"></i></span>
                         </div>
-                        <input type="date" value="{{ old('from') }}" name="from" id="datemask"
+                        <input type="date" value="{{ $fromDate ?? date('Y-m-d') }}" name="from" id="datemask"
                             class="form-control @error('date') is-invalid @enderror">
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-teal"><i class="far fa-calendar-alt"></i></span>
                         </div>
-                        <input type="date" name="to" value="{{ old('to') }}" id="datemask"
+                        <input type="date" name="to" value="{{ date('Y-m-d') }}" id="datemask"
                             class="form-control @error('date') is-invalid @enderror">
                         <span class="input-group-append">
                             <button type="submit" class="btn bg-teal btn-sm">Filter</button>

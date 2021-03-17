@@ -26,8 +26,7 @@ class ArrivalController extends Controller
         $visit->update($attr);
         // insert image to media table
         if (request('img')) :
-            $slug = $visit->slug;
-            $imgSlug = $slug . '.' . request()->file('img')->extension();
+            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
 
             $visit
                 ->addMediaFromRequest('img')

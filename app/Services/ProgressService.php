@@ -55,7 +55,7 @@ class ProgressService
         $request->validate([
             'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
         ]);
-        $imgName = date('YmdHi') . '.' . request()->file('img')->extension();
+        $imgName = uniqid() . '.' . request()->file('img')->extension();
         return $offer->invoices->first()
             ->addMediaFromRequest('img')
             ->usingFileName($imgName)

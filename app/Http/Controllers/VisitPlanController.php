@@ -8,7 +8,6 @@ use App\VisitPlan;
 use Illuminate\Support\Str;
 use App\DataTables\VisitDataTable;
 use App\Http\Requests\VisitPlanRequest;
-use App\Http\Requests\VisitRequest;
 use App\Visit;
 
 class VisitPlanController extends Controller
@@ -34,11 +33,7 @@ class VisitPlanController extends Controller
     public function create()
     {
         return view('visitplan.create', [
-            'hospitals' => Hospital::select(['id', 'name', 'city'])
-                ->orderBy('name', 'asc')
-                ->whereNotNull('name')
-                ->get(),
-
+            'hospitals' => Hospital::selectHospitalLimit(),
             'visit' => new Visit(),
             'visitplan' => new VisitPlan(),
             'customer' => new Customer(),
@@ -82,7 +77,10 @@ class VisitPlanController extends Controller
         $customer = $visit->customer;
         $visitplan = $visit->plan;
 
-        return view('visitplan.edit', compact('visit', 'visitplan', 'customer'));
+        return view(
+            'visitplan.edit',
+            compact('visit', 'visitplan', 'customer')
+        );
     }
 
 
