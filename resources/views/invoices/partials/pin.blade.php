@@ -169,23 +169,3 @@
         </div>
     </div>
 </div>
-
-@error('pin')
-    <script>
-        $(document).ready(function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Pin yang anda masukkan salah!',
-                text: 'Silahkan coba lagi.',
-            });
-            $("#approvalModal{{ $offer->id }}").modal("show");
-            $("#rejectModal{{ $offer->id }}").modal("show");
-            $("#approvalPurchase{{ $offer->id }}").modal("show");
-            $("#rejectPurchase{{ $offer->id }}").modal("show");
-            console.log("$offer->id");
-
-        });
-
-    </script>
-
-@enderror
