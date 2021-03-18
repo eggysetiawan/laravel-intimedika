@@ -94,6 +94,7 @@ class OfferService
             $order = FixPriceOrder::insert([
                 'offer_id' => $this->offer->id,
                 'modality_id' => $request->modality[$i],
+                'price' => str_replace(",", "", $request->price[$i]),
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
             ]);
