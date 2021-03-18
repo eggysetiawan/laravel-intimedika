@@ -35,6 +35,24 @@ class ProgressService
         $this->ppn = ($this->price_po * (10 / 100));
     }
 
+    public function updatePrice($offer, $request)
+    {
+        $orders = $offer->invoices->first()->orders
+            ->whereIn('id', $request->id_order);
+        $this->price_po = 0;
+        $order = [];
+        foreach ($orders as $i => $order) {
+            $order->update([
+                'price' => str_replace(",", "", $request->price[$i]),
+                'quantity' => $request->qty[$i],
+            ]);
+            $this->price_po += str_replace(",", "", $request->price[$i]) * $request->qty[$i];
+        }
+        return $order;
+
+        $this->ppn = ($this->price_po * (10 / 100));
+    }
+
     public function createTax($offer, $request)
     {
         $shipping = isset($request->shipping) ? $request->shipping : 0;

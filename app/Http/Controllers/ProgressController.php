@@ -45,6 +45,7 @@ class ProgressController extends Controller
                 break;
             case (99):
                 $progressService->updateOrder($offer, $request);
+                $progressService->updatePrice($offer, $request);
                 $progressService->createTax($offer, $request);
                 $offer->progress->update($attr);
                 $progressService->uploadPurchase($offer, $request);

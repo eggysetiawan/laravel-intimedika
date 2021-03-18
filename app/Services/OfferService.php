@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\FixPriceOrder;
 use App\Offer;
 use App\Order;
 
@@ -79,6 +80,20 @@ class OfferService
                 'modality_id' => $request->modality[$i],
                 'price' => str_replace(",", "", $request->price[$i]),
                 'references' => $request->references[$i],
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
+            ]);
+        }
+        return $order;
+    }
+    public function insertPrice($request)
+    {
+        $order = [];
+        foreach ($request->modality as $i => $v) {
+            // to table orders
+            $order = FixPriceOrder::insert([
+                'offer_id' => $this->offer->id,
+                'modality_id' => $request->modality[$i],
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
             ]);

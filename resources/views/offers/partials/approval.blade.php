@@ -40,14 +40,8 @@
                                 Pin</a>
                         @else
                             <label for="pin">Masukkan Pin</label>
-                            <input type="password" size="4" maxlength="4" name="pin"
-                                class="form-control @error('pin') is-invalid @enderror" autofocus
+                            <input type="password" size="4" maxlength="4" name="pin" class="form-control" autofocus
                                 placeholder="Masukkan 4 digit Pin anda">
-                            @error('pin')
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
                         @endempty
 
                     </div>

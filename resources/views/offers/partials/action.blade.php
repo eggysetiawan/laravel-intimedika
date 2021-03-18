@@ -11,18 +11,15 @@
 
             @can('approval')
                 @if ($offer->progress->progress == 99)
-                    <form action="{{ route('approval.progress', $offer->slug) }}" method="POST"
-                        class=" justify-content-center">
-                        @csrf
-                        @method('patch')
-                        <button class="dropdown-item" name="approval" type="submit" value="1"
-                            onclick="return confirm('apakah anda yakin?')" title="Setujui PO"><i
-                                class="far fa-check-circle nav-icon"></i>
-                            Approve PO.</button>
-                        <button class="dropdown-item" name="approval" value="2" onclick="return confirm('apakah anda yakin?')"
-                            title="Tolak PO"><i class="far fa-times-circle nav-icon"></i>
-                            Reject PO.</button>
-                    </form>
+                    <button type="button" class="dropdown-item" data-toggle="modal"
+                        data-target="#approvePurchase{{ $offer->id }}">
+                        <i class="far fa-check-circle nav-icon"></i>
+                        Approve Purchase.
+                    </button>
+                    <button type="button" class="dropdown-item" data-toggle="modal"
+                        data-target="#rejectPurchase{{ $offer->id }}">
+                        <i class="far fa-times-circle nav-icon"></i>
+                        Reject.</button>
                 @endif
             @endcan
 

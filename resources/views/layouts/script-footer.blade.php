@@ -113,7 +113,6 @@
                 title: 'Pin yang anda masukkan salah!',
                 text: 'Silahkan coba lagi.',
             });
-            $("#approveModal{{ $offer->id }}").modal("show");
 
 
         });
@@ -122,22 +121,18 @@
 
 @enderror
 
-@error('pin')
-    <script>
-        $(document).ready(function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Pin yang anda masukkan salah!',
-                text: 'Silahkan coba lagi.',
-            });
-            $("#approvalModal").modal("show");
 
-        });
+<script>
+    function myFunctionOld() {
+        var x = document.getElementById("pin_old");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
-    </script>
-
-@enderror
-
+</script>
 <script>
     function myFunction() {
         var x = document.getElementById("pin");
@@ -238,9 +233,5 @@
             scrollTop: 0
         }, '300');
     });
-
-
-
-    // $("#approvalModal").modal("show");
 
 </script>

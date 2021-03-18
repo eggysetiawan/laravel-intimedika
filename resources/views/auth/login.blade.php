@@ -53,7 +53,7 @@
                             autocomplete="current-password">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <a href="#!" onclick="myFunction()"><span class="fas fa-eye"></span></a>
                             </div>
                         </div>
 
@@ -115,7 +115,17 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
 
+    </script>
 </body>
 
 </html>

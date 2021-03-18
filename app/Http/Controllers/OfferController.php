@@ -59,6 +59,8 @@ class OfferController extends Controller
         $offerService->createProgress($request);
         // to orders table
         $offerService->insertOrder($request);
+        // to fix price table
+        $offerService->insertPrice($request);
         // send mail to admin via event & listener
         event(new OfferCreated($offer));
         // alert success

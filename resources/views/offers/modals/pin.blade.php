@@ -178,8 +178,6 @@
                 title: 'Pin yang anda masukkan salah!',
                 text: 'Silahkan coba lagi.',
             });
-            $("#approveModal{{ $offer->id }}").modal("show");
-
         });
 
     </script>
