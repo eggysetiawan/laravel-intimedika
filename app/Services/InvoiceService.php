@@ -69,6 +69,25 @@ class InvoiceService
         return $insert;
     }
 
+    public function updatePrice($offer, $request)
+    {
+        $modalities = $offer->invoices->first()->orders->whereIn('id', $request->id_order)->pluck('modality_id');
+        $modality_id = $modalities->all();
+        $orders = $offer->fixPrices->whereIn('modality_id', $modality_id);
+        $fix_price = [];
+        $j = 0;
+
+        foreach ($orders as $i => $order) {
+            $fix_price = $order->update([
+                'price' => str_replace(",", "", $request->price[$j]),
+                'order_id' => $request->id_order[$j],
+                'updated_at' => now()->toDateString(),
+            ]);
+            $j++;
+        }
+        return $fix_price;
+    }
+
     public function createTax()
     {
         return Tax::create([

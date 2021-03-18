@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class FixPriceOrder extends Model
 {
-    protected $fillable = ['modality_id', 'price'];
+    protected $fillable = ['modality_id', 'price', 'offer_id', 'order_id'];
+
+
 
     public function offer()
     {
@@ -14,6 +16,6 @@ class FixPriceOrder extends Model
     }
     public function modality()
     {
-        return  $this->belongsTo(Modality::class);
+        return $this->belongsTo(Modality::class);
     }
 }

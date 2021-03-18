@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tax;
 use App\Offer;
-use App\Order;
 use App\Invoice;
 use App\Services\InvoiceService;
 use Illuminate\Http\Request;
@@ -16,6 +14,7 @@ class InvoiceController extends Controller
         $invoiceService->repeatInvoice($invoice, $request);
         $invoiceService->uploadPO($request);
         $invoiceService->insertOrder($request);
+        $invoiceService->updatePrice($invoice->offer, $request);
         $invoiceService->createTax();
 
         session()->flash('success', 'Repeat order berhasil!');

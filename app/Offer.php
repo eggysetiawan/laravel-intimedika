@@ -30,7 +30,7 @@ class Offer extends Model implements HasMedia
         'slug'
     ];
 
-    public function fixPrice()
+    public function fixPrices()
     {
         return $this->hasMany(FixPriceOrder::class);
     }

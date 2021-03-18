@@ -501,7 +501,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <dt>Pilih Modality yang ingin di order.</dt>
-                            @foreach ($offer->invoices->last()->orders as $order)
+                            @foreach ($offer->fixPrices as $order)
                                 <div class="d-flex justify-content-center">
 
                                     <div class="col-md-6">
@@ -510,7 +510,7 @@
 
                                             <div class="col-md-2">
                                                 <input style="padding: 10px; width: 54px; height: 38px;" type="checkbox"
-                                                    name="id_order[]" value="{{ $order->id }}">
+                                                    name="id_order[]" value="{{ $order->order_id }}">
                                             </div>
                                             <div class="col-md-10">
 
@@ -529,11 +529,11 @@
                                     <div class="col-md-3">
                                         <div class="row" style="margin-top: 30px;">
                                             <div class="input-group mb-3">
-                                                @isset($order->quantity)
+                                                @isset($order->price)
                                                     <input type="text" value="@currency($order->price)"
                                                         class="form-control text-right" disabled>
                                                 @else
-                                                    <input type="text" name="price[{{ $order->id }}]" id="price"
+                                                    <input type="text" name="price[{{ $order->order_id }}]" id="price"
                                                         class="form-control @error('price') is-invalid @enderror" required
                                                         data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
                                                         data-mask>
@@ -559,7 +559,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Qty</span>
                                             </div>
-                                            <input type="text" name="qty[{{ $order->id }}]" id="qty"
+                                            <input type="text" name="qty[{{ $order->order_id }}]" id="qty"
                                                 class="form-control @error('qty') is-invalid @enderror" placeholder="unit"
                                                 required>
                                             @error('qty')

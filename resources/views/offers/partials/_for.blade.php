@@ -21,8 +21,8 @@
             {{-- modality --}}
             <div class="col-md-12">
 
-                <select name="modality[]" id="modality{{ $i }}"
-                    class="form-control select2 @error('modality.' . $i) is-invalid @enderror">
+                <select name="modalities[]" id="modality{{ $i }}"
+                    class="form-control select2 @error('modalities.' . $i) is-invalid @enderror">
                     <option selected disabled>Pilih Alat</option>
                     @foreach ($modalities as $modality)
                         <option value="{{ $modality->id }}">
@@ -30,7 +30,7 @@
                         </option>
                     @endforeach
                 </select>
-                @error('modality.' . $i)
+                @error('modalities.' . $i)
                     <span class="invalid-feedback" role="alert">
                         {{ $message }}
                     </span>
@@ -46,13 +46,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Rp</span>
                     </div>
-                    <input type="text" name="price[]" id="price"
-                        class="form-control @error('price.' . $i) is-invalid @enderror"
+                    <input type="text" name="prices[]" id="price"
+                        class="form-control @error('prices.' . $i) is-invalid @enderror"
                         data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
-                        data-mask value="{{ old('price.' . $i) }}" required>
+                        data-mask value="{{ old('prices.' . $i) }}" required>
                 </div>
 
-                @error('price.' . $i)
+                @error('prices.' . $i)
                     <span class="invalid-feedback" role="alert">
                         {{ $message }}
                     </span>

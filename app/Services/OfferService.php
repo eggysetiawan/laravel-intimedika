@@ -73,12 +73,12 @@ class OfferService
     public function insertOrder($request)
     {
         $order = [];
-        foreach ($request->modality as $i => $v) {
+        foreach ($request->modalities as $i => $v) {
             // to table orders
             $order = Order::insert([
                 'invoice_id' => $this->invoice->id,
-                'modality_id' => $request->modality[$i],
-                'price' => str_replace(",", "", $request->price[$i]),
+                'modality_id' => $request->modalities[$i],
+                'price' => str_replace(",", "", $request->prices[$i]),
                 'references' => $request->references[$i],
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
@@ -89,12 +89,11 @@ class OfferService
     public function insertPrice($request)
     {
         $order = [];
-        foreach ($request->modality as $i => $v) {
+        foreach ($request->modalities as $i => $v) {
             // to table orders
             $order = FixPriceOrder::insert([
                 'offer_id' => $this->offer->id,
-                'modality_id' => $request->modality[$i],
-                'price' => str_replace(",", "", $request->price[$i]),
+                'modality_id' => $request->modalities[$i],
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
             ]);
@@ -108,8 +107,8 @@ class OfferService
         foreach ($offer->invoices->last()->orders as $i => $order) {
             // to table orders
             $order = $order->update([
-                'modality_id' => $request->modality[$i],
-                'price' => str_replace(",", "", $request->price[$i]),
+                'modality_id' => $request->modalities[$i],
+                'price' => str_replace(",", "", $request->prices[$i]),
                 'references' => $request->references[$i],
                 'updated_at' => now()->toDateTimeString(),
             ]);
