@@ -71,20 +71,15 @@ class InvoiceService
 
     public function updatePrice($offer, $request)
     {
-        $modalities = $offer->invoices->first()->orders->whereIn('id', $request->id_order)->pluck('modality_id');
-        $modality_id = $modalities->all();
-        $orders = $offer->fixPrices->whereIn('modality_id', $modality_id);
+        $orders = $offer->fixPrices->whereIn('order_id', $request->id_order);
         $fix_price = [];
-        $j = 0;
-
-        foreach ($orders as $i => $order) {
+        $orders->each(function ($order, $i) use ($request, &$fix_price) {
+            $price = isset($request->price[$order->order_id]) ? str_replace(",", "", $request->price[$order->order_id]) : $order->price;
             $fix_price = $order->update([
-                'price' => str_replace(",", "", $request->price[$j]),
-                'order_id' => $request->id_order[$j],
+                'price' => $price,
                 'updated_at' => now()->toDateString(),
             ]);
-            $j++;
-        }
+        });
         return $fix_price;
     }
 

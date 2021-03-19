@@ -55,6 +55,22 @@ class ProgressService
         }
         return $fix_price;
     }
+    public function updateOrderId($offer)
+    {
+        $orders = $offer->invoices->first()->orders->pluck('id');
+        $order_id = $orders->all();
+        $fix_prices = $offer->fixPrices;
+        $insert = [];
+        $j = 0;
+
+        $fix_prices->each(function ($fix_price, $i) use (&$order_id, &$insert, &$j) {
+            $insert = $fix_price->update([
+                'order_id' => $order_id[$j],
+            ]);
+            $j++;
+        });
+        return $insert;
+    }
 
     public function createTax($offer, $request)
     {

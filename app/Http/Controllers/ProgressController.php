@@ -49,6 +49,7 @@ class ProgressController extends Controller
                 $progressService->createTax($offer, $request);
                 $offer->progress->update($attr);
                 $progressService->uploadPurchase($offer, $request);
+                $progressService->updateOrderId($offer);
                 event(new PurchaseOrderCreated($offer));
                 break;
             default:

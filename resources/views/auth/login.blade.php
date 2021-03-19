@@ -98,11 +98,11 @@
                         </a>
                     @endif
                 </p>
-                <p class="mb-0">
+                {{-- <p class="mb-0">
                     @if (Route::has('register'))
                         <a class="btn btn-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
-                </p>
+                </p> --}}
             </div>
             <!-- /.login-card-body -->
         </div>
