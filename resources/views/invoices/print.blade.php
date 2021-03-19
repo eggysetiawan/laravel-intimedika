@@ -213,3 +213,13 @@
 </body>
 
 </html>
+
+<script>
+    var delayInMilliseconds = 1000; //1 second
+
+    setTimeout(function() {
+        window.close();
+
+    }, delayInMilliseconds);
+
+</script>
