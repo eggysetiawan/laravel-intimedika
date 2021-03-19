@@ -79,6 +79,16 @@ class HospitalDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // action
+            Column::computed('action')
+                ->title('<i class="fas fa-cogs"></i>')
+                ->exportable(false)
+                ->printable(false)
+                ->orderable(false)
+                ->searchable(false)
+                ->width(50)
+                ->addClass('text-center'),
+
             Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
             Column::make('name')->title('Rumah Sakit'),
             Column::make('address')->title('Alamat'),

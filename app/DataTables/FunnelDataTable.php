@@ -98,19 +98,21 @@ class FunnelDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // action
+            Column::computed('action')
+                ->title('<i class="fas fa-cogs"></i>')
+                ->exportable(false)
+                ->printable(false)
+                ->orderable(false)
+                ->searchable(false)
+                ->width(50)
+                ->addClass('text-center'),
+
             // No.
             Column::make('DT_RowIndex')
                 ->title('No.')
                 ->orderable(false)
                 ->searchable(false)
-                ->width(10),
-
-            // action button (approve/reject)
-            Column::computed('action')
-                ->searchable(false)
-                ->orderable(false)
-                ->printable(false)
-                ->exportable(false)
                 ->width(10),
 
             // customer

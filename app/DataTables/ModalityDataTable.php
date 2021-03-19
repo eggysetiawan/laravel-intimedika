@@ -86,18 +86,21 @@ class ModalityDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // action
+            Column::computed('action')
+                ->title('<i class="fas fa-cogs"></i>')
+                ->exportable(false)
+                ->printable(false)
+                ->orderable(false)
+                ->searchable(false)
+                ->width(50)
+                ->addClass('text-center'),
             // No.
             Column::make('DT_RowIndex')
                 ->title('No.')
                 ->orderable(false)
-                ->searchable(false),
-
-            // action
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+                ->searchable(false)
+                ->width(30),
 
             // nama
             Column::make('name')

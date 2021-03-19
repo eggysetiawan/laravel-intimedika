@@ -129,19 +129,22 @@ class VisitDataTable extends DataTable
     protected function visits()
     {
         return [
+            // action
+            Column::computed('action')
+                ->title('<i class="fas fa-cogs"></i>')
+                ->exportable(false)
+                ->printable(false)
+                ->orderable(false)
+                ->searchable(false)
+                ->width(50)
+                ->addClass('text-center'),
+
             // No.
             Column::make('DT_RowIndex')
                 ->title('No.')
                 ->orderable(false)
                 ->searchable(false),
 
-            Column::computed('action')
-                ->searchable(false)
-                ->orderable(false)
-                ->printable(false)
-                ->exportable(false)
-                ->width(50)
-                ->addClass('text-center'),
 
             // hospital
             Column::make('customer.hospitals.name')
@@ -201,18 +204,22 @@ class VisitDataTable extends DataTable
     protected function visitplan()
     {
         return [
+            // action
+            Column::computed('action')
+                ->title('<i class="fas fa-cogs"></i>')
+                ->exportable(false)
+                ->printable(false)
+                ->orderable(false)
+                ->searchable(false)
+                ->width(50)
+                ->addClass('text-center'),
+
             // No.
             Column::make('DT_RowIndex')
                 ->title('No.')
                 ->orderable(false)
                 ->searchable(false),
 
-            Column::computed('action')
-                ->searchable(false)
-                ->orderable(false)
-                ->printable(false)
-                ->exportable(false)
-                ->width(50),
 
             // hospital
             Column::make('customer.hospitals.name')

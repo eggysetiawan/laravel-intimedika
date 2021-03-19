@@ -153,6 +153,16 @@ class OfferDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // action
+            Column::computed('action')
+                ->title('<i class="fas fa-cogs"></i>')
+                ->exportable(false)
+                ->printable(false)
+                ->orderable(false)
+                ->searchable(false)
+                ->width(50)
+                ->addClass('text-center'),
+
             // No.
             Column::make('DT_RowIndex')
                 ->title('No.')
@@ -160,13 +170,6 @@ class OfferDataTable extends DataTable
                 ->searchable(false)
                 ->width(20),
 
-            // action button (approve/reject)
-            Column::computed('action')
-                ->searchable(false)
-                ->orderable(false)
-                ->printable(false)
-                ->exportable(false)
-                ->width(20),
 
             // no.penawaran
             Column::make('offer_no')
