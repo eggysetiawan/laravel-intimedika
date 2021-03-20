@@ -1,5 +1,4 @@
 @extends('layouts.app', ['title'=>'Penawaran'])
-@extends('layouts.app', ['title'=>'Penawaran'])
 
 
 

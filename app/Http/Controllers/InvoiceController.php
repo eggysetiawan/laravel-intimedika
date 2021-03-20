@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RepeatRequest;
 use App\Offer;
 use App\Invoice;
 use App\Services\InvoiceService;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    public function repeat(Invoice $invoice, Request $request, InvoiceService $invoiceService)
+    public function repeat(Invoice $invoice, RepeatRequest $request, InvoiceService $invoiceService)
     {
         $invoiceService->repeatInvoice($invoice, $request);
         $invoiceService->uploadPO($request);

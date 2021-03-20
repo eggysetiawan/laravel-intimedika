@@ -501,6 +501,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <dt>Pilih Modality yang ingin di order.</dt>
+                            <x-alert></x-alert>
                             @foreach ($offer->fixPrices as $order)
                                 <div class="d-flex justify-content-center">
 
@@ -539,7 +540,7 @@
                                                         data-mask>
                                                 @endisset
 
-                                                @error('price')
+                                                @error('price.*')
                                                     <span class="invalid-feedback" role="alert">
                                                         {{ $message }}
                                                     </span>

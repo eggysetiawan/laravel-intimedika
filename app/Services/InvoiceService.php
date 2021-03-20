@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\FixPriceOrder;
 use App\Invoice;
 use App\Order;
 use App\Tax;
