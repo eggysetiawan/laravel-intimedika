@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\FixPriceOrder;
-use App\Invoice;
-use App\Order;
-use App\Tax;
+use App\{Invoice, Order, Tax};
+
 
 class InvoiceService
 {
