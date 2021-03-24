@@ -94,7 +94,7 @@ class OfferController extends Controller
     {
         $this->authorize('delete', $offer);
         $offer->delete();
-        session()->flash('success', 'data telah berhasil di hapus!');
+        session()->flash('success', 'Penawaran telah berhasil di hapus!');
         return redirect('offers');
     }
 }

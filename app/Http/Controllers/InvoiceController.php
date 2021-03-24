@@ -25,7 +25,7 @@ class InvoiceController extends Controller
     public function show(Offer $offer)
     {
         return view('invoices.show', [
-            'offer' => $offer,
+            'offer' => $offer->load(['invoices.orders.modality', 'author',  'customer', 'progress']),
         ]);
     }
     public function toOrder(Offer $offer)

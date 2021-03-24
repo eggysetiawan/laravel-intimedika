@@ -31,6 +31,21 @@
             @endif
 
 
+            @if (auth()
+            ->user()
+            ->superAdmin())
+                <form action="{{ route('offers.destroy', $offer->slug) }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button class="dropdown-item" name="approval" type="submit"
+                        onclick="return confirm('apakah anda yakin?')" title="Hapus Penawaran."><i
+                            class="far fa-trash-alt nav-icon"></i>
+                        Delete</button>
+                </form>
+            @endif
+
+
+
 
 
         </div>

@@ -71,6 +71,7 @@ class FunnelController extends Controller
      */
     public function show(Funnel $funnel)
     {
+        $funnel->load(['offer.invoices.orders.modality']);
         return view('funnels.show', compact('funnel'));
     }
 

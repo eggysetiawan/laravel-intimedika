@@ -26,8 +26,8 @@
             @php
                 $i = 1;
             @endphp
-            @foreach ($funnel->offer->orders as $order)
-                <hr>
+            @foreach ($funnel->offer->invoices->first()->orders as $order)
+                <hr class="mt-4">
                 <p>
                     <dt>Nama Modality #{{ $i++ }}</dt>
                 <p>{{ $order->modality->name }}</p>

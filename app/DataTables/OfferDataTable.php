@@ -44,6 +44,7 @@ class OfferDataTable extends DataTable
                         'offer' => $offer
                     ]);
                 }
+                return '';
             })
             ->editColumn('customer.hospitals.name', function (Offer $offer) {
                 return $offer->customer->hospitals->first()->name ?? $offer->customer->name;
@@ -57,7 +58,10 @@ class OfferDataTable extends DataTable
                 return join(" & ", array_unique($references));
             })
             ->editColumn('offer_date', function (Offer $offer) {
-                return date('d-m-Y', strtotime($offer->offer_date));
+                if ($offer->offer_date) {
+                    return date('d-m-Y', strtotime($offer->offer_date));
+                }
+                return '';
             })
             ->editColumn('invoices.tax.price_po', function (Offer $offer) {
                 return $offer->invoices->last()->tax->price_po ?? '';
@@ -104,6 +108,7 @@ class OfferDataTable extends DataTable
             ->when($this->trash, function ($query) { //menu restore.
                 return $query->onlyTrashed();
             })
+            ->whereNotNull('offer_date') //hanya tampilkan penawaran resmi, bukan funnel plan.
             ->whereNotNull('offer_no') //hanya tampilkan penawaran resmi, bukan funnel plan.
             ->latest(); //order berdasarkan data terbaru.
     }

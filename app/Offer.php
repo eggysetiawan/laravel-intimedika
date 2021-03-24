@@ -51,7 +51,7 @@ class Offer extends Model implements HasMedia
 
     public function scopeReadytoPurchaseCount()
     {
-        return $this->with('progressApproval')->whereHas('progressApproval')->count();
+        return $this->whereHas('progressApproval')->count();
     }
 
     public function scopeReadyToApproveCount()
@@ -67,11 +67,6 @@ class Offer extends Model implements HasMedia
     public function funnel()
     {
         return $this->hasOne(Funnel::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasManyThrough(Order::class, Invoice::class);
     }
 
     public function tax()

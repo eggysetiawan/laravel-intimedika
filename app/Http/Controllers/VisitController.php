@@ -19,7 +19,7 @@ class VisitController extends Controller
     public function show(Visit $visit)
     {
         return view('visits.show', [
-            'visit' => $visit,
+            'visit' => $visit->load(['customer', 'author', 'comments']),
         ]);
     }
 
