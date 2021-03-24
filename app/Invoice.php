@@ -29,4 +29,9 @@ class Invoice extends Model implements HasMedia
     {
         return $this->hasMany(Order::class);
     }
+
+    public function getTotalPurchaseAttribute()
+    {
+        return $this->tax->price_po + $this->tax->ppn + $this->tax->shipping;
+    }
 }

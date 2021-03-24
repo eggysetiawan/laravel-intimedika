@@ -356,12 +356,12 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($invoice->orders->whereNotNull('quantity') as $order)
+                                                            @foreach ($invoice->orders()->whereNotNull('quantity') as $order)
                                                                 <tr>
                                                                     <td>{{ $order->quantity }}</td>
-                                                                    <td>{{ $order->modality->name }}</td>
-                                                                    <td>{{ $order->modality->spec }}</td>
-                                                                    <td>@currency($order->modality->price)</td>
+                                                                    <td>{{ $order->modality()->name }}</td>
+                                                                    <td>{{ $order->modality()->spec }}</td>
+                                                                    <td>@currency($order->modality()->price)</td>
                                                                     <td>@currency($order->price)</td>
                                                                 </tr>
                                                             @endforeach
@@ -410,8 +410,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Total:</th>
-                                                                <td>@currency($invoice->tax->price_po + $invoice->tax->ppn +
-                                                                    $invoice->tax->shipping)</td>
+                                                                <td>@currency($invoice->totalPurchase)</td>
                                                             </tr>
                                                         </table>
                                                     </div>

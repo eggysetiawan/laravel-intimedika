@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use App\Demo;
-use App\FixPriceOrder;
-use App\Tax;
-use Dompdf\Positioner\Fixed;
+use App\{Demo, Tax};
 
 class ProgressService
 {
