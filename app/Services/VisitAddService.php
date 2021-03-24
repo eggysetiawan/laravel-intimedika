@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Customer;
+use Spatie\Image\Image;
 use Illuminate\Support\Str;
 
 class VisitAddService
@@ -43,7 +44,20 @@ class VisitAddService
 
     public function uploadImage()
     {
+        // $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+        // return $this->visit
+        //     ->addMediaFromRequest('img')
+        //     ->usingFileName($imgSlug)
+        //     ->toMediaCollection('images');
+
+        // $image = Image::load(request()->file('img'))
+        //     ->width(800)
+        //     ->height(600)
+        //     ->optimize()
+        //     ->save();
+
         $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+
         return $this->visit
             ->addMediaFromRequest('img')
             ->usingFileName($imgSlug)

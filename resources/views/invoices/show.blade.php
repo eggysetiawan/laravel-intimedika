@@ -376,15 +376,15 @@
                                             <div class="row">
                                                 <!-- accepted payments column -->
                                                 <div class="col-6">
-                                                    @if ($invoice->getFirstMediaUrl('image_po'))
+                                                    @if ($invoice->getFirstMediaUrl('image_po', 'thumb'))
                                                         <dt>Foto Purchase-Order</dt>
 
-                                                        <a href="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                        <a href="{{ asset($invoice->getFirstMediaUrl('image_po', 'thumb')) }}"
                                                             data-toggle="lightbox"
                                                             data-title="Purhcase Order : {{ $offer->offer_no }}"
                                                             data-gallery="gallery">
                                                             <div class="product-image-thumb">
-                                                                <img src="{{ asset($invoice->getFirstMediaUrl('image_po')) }}"
+                                                                <img src="{{ asset($invoice->getFirstMediaUrl('image_po', 'thumb')) }}"
                                                                     class="img-fluid" alt="PO {{ $offer->slug }}" />
                                                             </div>
                                                         </a>

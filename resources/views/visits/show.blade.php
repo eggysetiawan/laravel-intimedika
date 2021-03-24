@@ -43,7 +43,7 @@
                 <div class="card-body">
                     @if ($visit->getFirstMedia('images'))
                         <img class="img-fluid pad" style="height:270px;object-fit:cover;object-position:center;width:600px"
-                            src="{{ asset($visit->getFirstMedia('images')->getUrl()) }}" alt="Photo">
+                            src="{{ asset($visit->getFirstMediaUrl('images', 'thumb')) }}" alt="Photo">
                     @endif
 
                     <p>

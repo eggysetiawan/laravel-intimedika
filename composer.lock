@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc0642f1a6ff61faf633346c79ddc030",
+    "content-hash": "ad2e04bcc898b680f8371913eaa48a12",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4227,13 +4227,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/spatie/image/zipball/7ea129bc7b7521864c5a540e3b1c14ea194316d3",
                 "reference": "7ea129bc7b7521864c5a540e3b1c14ea194316d3",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-exif": "*",

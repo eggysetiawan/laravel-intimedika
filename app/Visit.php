@@ -6,8 +6,9 @@ use App\User;
 use App\VisitComment;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Visit extends Model implements HasMedia
 {
@@ -16,7 +17,13 @@ class Visit extends Model implements HasMedia
 
     protected $fillable = ['request', 'slug', 'result', 'customer_id', 'is_visited'];
 
-
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(800)
+            ->height(600)
+            ->performOnCollections('images');
+    }
 
     public function plan()
     {
