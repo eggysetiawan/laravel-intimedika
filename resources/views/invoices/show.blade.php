@@ -51,12 +51,12 @@
 
                                     @break
                                     @case(2)
-                                    <div class="btn btn-danger form-control-plaintext text-center">Rejected!</div>
+                                    <div class="btn btn-danger form-control-plaintext text-center">has been rejected!</div>
                                     @break
 
                                     @default
-                                    {{-- approve penawaran --}}
                                     @can('approval')
+                                        {{-- when progress is ready to approve --}}
                                         <div class="btn-group form-control-plaintext">
                                             <button class="btn btn-success btn-sm" data-toggle="modal"
                                                 data-target="#approveModal{{ $offer->id }}">Approve.</button>
@@ -64,6 +64,12 @@
                                                 data-target="#rejectModal{{ $offer->id }}">Reject.</button>
                                         </div>
                                     @endcan
+
+                                    @if ($offer->is_approved == 3)
+                                        {{-- when progress is on hold --}}
+                                        <a href="{{ route('offers.edit', $offer->slug) }}"
+                                            class="btn btn-warning form-control-plaintext text-white">Edit Penawaran</a>
+                                    @endif
 
                                 @endswitch
                             </div>
@@ -440,7 +446,7 @@
 
                                 @else
 
-                                    @if ($offer->is_approved)
+                                    @if ($offer->is_approved == 1)
                                         <a href="{{ route('progresses.create', $offer->slug) }}"
                                             class="btn btn-outline-success form-control-plaintext">Update Progress
                                             Penawaran</a>
