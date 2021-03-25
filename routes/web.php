@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('invoices/{offer:slug}/print', 'InvoiceController@print')->name('invoices.print');
     Route::get('invoices/{offer:slug}', 'InvoiceController@show')->name('invoices.order');
     Route::get('invoices/{offer:slug}/order', 'InvoiceController@toOrder')->name('invoices.toOrder');
-    Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat')->middleware(['role:sales|superadmin']);
+    Route::post('invoices/{invoice:id}/repeat', 'InvoiceController@repeat')->name('invoices.repeat');
     // modalities
     Route::resource('modalities', 'ModalityController')->parameters([
         'modalities' => 'modality:slug',

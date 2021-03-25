@@ -29,6 +29,7 @@ class InvoiceService
 
         // to media tables
         $fileName = uniqid() . '.' . request()->file('img')->extension();
+
         return $this->invoice_create
             ->addMediaFromRequest('img')
             ->usingFileName($fileName)
@@ -37,9 +38,7 @@ class InvoiceService
 
     public function insertOrder($request)
     {
-        // $request->validate([
-        //     'price.*' => 'nullable',
-        // ]);
+
         $invoice = $this->invoice_create;
         $orders = Order::whereIn('id', $request->id_order);
         $price_po = 0;

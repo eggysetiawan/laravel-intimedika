@@ -8,12 +8,17 @@
         <div class="d-flex justify-content-center">
             Ini adalah halaman Dashboard Intimedika Puspa Indah Portal.
         </div>
-        @empty(auth()->user()->pin)
-            <div class="d-flex justify-content-center">
-                <div class="form-group">
-                    <a href="{{ route('pins.create') }}" class="btn btn-success form-control">Setup Pin Anda disini</a>
+        @if (auth()
+            ->user()
+            ->isAdmin())
+            @empty(auth()->user()->pin)
+                <div class="d-flex justify-content-center">
+                    <div class="form-group">
+                        <a href="{{ route('pins.create') }}" class="btn btn-success form-control">Setup Pin Anda disini</a>
+                    </div>
                 </div>
-            </div>
-        @endempty
+            @endempty
+        @endif
+
     </div>
 @endsection

@@ -18,7 +18,7 @@ class CreateFunnelsTable extends Migration
             $table->foreignId('offer_id')->constrained('offers')->cascadeOnDelete();
             $table->tinyInteger('progress');
             $table->date('date');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
