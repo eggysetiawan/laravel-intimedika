@@ -58,6 +58,7 @@ class HospitalDataTable extends DataTable
             ->setTableId('hospital-table')
             ->minifiedAjax()
             ->parameters([
+                'stateSave' => true,
                 'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
                 'buttons'      => ['excel', 'print', 'reset'],
                 'order'   => [[0, 'desc']],
@@ -92,11 +93,7 @@ class HospitalDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
             Column::make('name')->title('Rumah Sakit'),
             Column::make('address')->title('Alamat'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+
         ];
     }
 

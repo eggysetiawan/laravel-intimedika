@@ -8,25 +8,19 @@
 @endsection
 
 @section('content')
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Edit Rumah Sakit</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-
-                    <form role="form" method="post" action="{{ route('hospitals.update', $hospital->slug) }}">
-                        @method('patch')
-                        @csrf
-                        @include('hospitals.partials.form-control')
-                    </form>
-                </div>
-                <!-- /.card -->
-            </div>
+    <x-card>
+        <div class="card-header">
+            <h3 class="card-title">Edit Rumah Sakit</h3>
         </div>
-    </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+
+        <form role="form" method="post" action="{{ route('hospitals.update', $hospital->slug) }}">
+            @method('patch')
+            @csrf
+            @include('hospitals.partials.form-control')
+        </form>
+        </div>
+    </x-card>
+
 @endsection

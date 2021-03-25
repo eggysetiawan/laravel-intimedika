@@ -49,6 +49,10 @@ class HospitalController extends Controller
         return redirect('hospitals');
     }
 
+    public function show(Hospital $hospital)
+    {
+    }
+
     public function destroy(Hospital $hospital)
     {
         $hospital->delete();

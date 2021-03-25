@@ -70,7 +70,7 @@
     </div>
 
     <div class="modal fade" id="modal-sm">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
             <form action="{{ route('offers.create') }}" method="GET">
                 <div class="modal-content">
                     <div class="modal-header bg-gradient-teal">

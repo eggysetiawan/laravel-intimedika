@@ -60,6 +60,8 @@
                                         <div class="btn-group form-control-plaintext">
                                             <button class="btn btn-success btn-sm" data-toggle="modal"
                                                 data-target="#approveModal{{ $offer->id }}">Approve.</button>
+                                            <a href="{{ route('revisions.edit', $offer->slug) }}"
+                                                class="btn btn-warning btn-sm text-white">Hold</a>
                                             <button class="btn btn-danger btn-sm" data-toggle="modal"
                                                 data-target="#rejectModal{{ $offer->id }}">Reject.</button>
                                         </div>
