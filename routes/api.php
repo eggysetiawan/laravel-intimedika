@@ -1,23 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\v1\{ApiCustomerController, ApiHospitalController};
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\v1\{ApiCustomerController, ApiHospitalController, ApiVisitController};
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::get('hospitals', ([ApiHospitalController::class, 'index']));
 Route::get('customers', ([ApiCustomerController::class, 'index']));
+
+Route::prefix('visits')->group(function () {
+    Route::get('', [ApiVisitController::class, 'index']);
+    Route::post('store', [ApiVisitController::class, 'store']);
+    Route::get('{visit:slug}', [ApiVisitController::class, 'show']);
+    Route::patch('{visit:slug}/edit', [ApiVisitController::class, 'update']);
+    Route::delete('{visit:slug}/delete', [ApiVisitController::class, 'destroy']);
+});
