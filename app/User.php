@@ -57,6 +57,8 @@ class User extends Authenticatable
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=mp&s=" . $size;
     }
 
+    // relations
+
     public function visits()
     {
         return $this->hasMany(Visit::class);
@@ -71,6 +73,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(VisitComment::class, 'id');
     }
+
+    public function targets()
+    {
+        return $this->hasMany(Target::class);
+    }
+
+
+    // roles
 
     public function isAdmin()
     {

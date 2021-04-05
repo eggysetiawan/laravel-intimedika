@@ -32,6 +32,9 @@ class ModalityDataTable extends DataTable
                     'modality' => $modality
                 ]);
             })
+            ->editColumn('price', function (Modality $modality) {
+                return 'Rp ' . number_format($modality->price ?? NULL, 0, ',', '.');
+            })
             ->rawColumns(['action']);
     }
 

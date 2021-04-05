@@ -64,13 +64,13 @@ class OfferDataTable extends DataTable
                 return '';
             })
             ->editColumn('invoices.tax.price_po', function (Offer $offer) {
-                return $offer->invoices->last()->tax->price_po ?? '';
+                return 'Rp ' . number_format($offer->invoices->last()->tax->price_po ?? NULL, 0, ',', '.');
             })
             ->editColumn('invoices.tax.dpp', function (Offer $offer) {
-                return $offer->invoices->last()->tax->dpp ?? '';
+                return 'Rp ' . number_format($offer->invoices->last()->tax->dpp ?? NULL, 0, ',', '.');
             })
             ->editColumn('invoices.tax.ppn', function (Offer $offer) {
-                return $offer->invoices->last()->tax->ppn ?? '';
+                return 'Rp ' . number_format($offer->invoices->last()->tax->ppn ?? NULL, 0, ',', '.');
             })
             ->rawColumns(['action']);
     }
@@ -84,7 +84,7 @@ class OfferDataTable extends DataTable
     public function query(Offer $model)
     {
 
-        return $model->query()
+        return $model->newQuery()
             ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
             ->when($this->from && $this->to, function ($query) { //query untuk filter periode from ~ to.
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);

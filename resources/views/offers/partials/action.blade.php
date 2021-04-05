@@ -40,7 +40,7 @@
                     <button class="dropdown-item" name="approval" type="submit"
                         onclick="return confirm('apakah anda yakin?')" title="Hapus Penawaran. (only superadmin does)"><i
                             class="far fa-trash-alt nav-icon"></i>
-                        Delete</button>
+                        Hapus</button>
                 </form>
             @endif
 

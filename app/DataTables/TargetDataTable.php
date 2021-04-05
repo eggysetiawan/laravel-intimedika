@@ -2,11 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Hospital;
+use App\Target;
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class HospitalDataTable extends DataTable
+class TargetDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,12 +20,13 @@ class HospitalDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->editColumn('action', function (Hospital $hospital) {
-                if ($hospital->slug) {
-                    return view('hospitals.partials.action', [
-                        'hospital' => $hospital
-                    ]);
-                }
+            ->editColumn('action', function (Target $target) {
+                return view('targets.partials.action', [
+                    'target' => $target
+                ]);
+            })
+            ->editColumn('target', function (Target $target) {
+                return 'Rp ' . number_format($target->target ?? 0, 0, ',', '.');
             })
             ->rawColumns(['action']);
     }
@@ -32,18 +34,22 @@ class HospitalDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param Hospital $model
+     * @param \App\App\Target $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Hospital $model)
+    public function query(Target $model)
     {
-
+        $selectedYear = $this->selectedYear;
 
         return $model->newQuery()
-            ->when($this->from && $this->to, function ($query) {
-                return $query->whereBetween('created_at', [$this->from, $this->to]);
+            ->with('author')
+            ->when($this->selectedYear, function ($query) use ($selectedYear) {
+                return $query->where('year', $selectedYear);
             })
-            ->latest();
+            ->latest()
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id);
+            });
     }
 
     /**
@@ -51,11 +57,10 @@ class HospitalDataTable extends DataTable
      *
      * @return \Yajra\DataTables\Html\Builder
      */
-
     public function html()
     {
         return $this->builder()
-            ->setTableId('visit-table')
+            ->setTableId('target-table')
             ->minifiedAjax()
             ->parameters([
                 'stateSave' => true,
@@ -69,15 +74,14 @@ class HospitalDataTable extends DataTable
             ])
             ->language([
                 'processing' => '<div class="spinner">
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
-</div>'
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>'
             ])
             ->columns($this->getColumns());
     }
-
 
     /**
      * Get columns.
@@ -97,10 +101,25 @@ class HospitalDataTable extends DataTable
                 ->width(50)
                 ->addClass('text-center'),
 
-            Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
-            Column::make('name')->title('Rumah Sakit'),
-            Column::make('address')->title('Alamat'),
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false),
 
+            // nama sales
+            Column::make('author.name')
+                ->title('Sales'),
+
+            // target
+            Column::make('target')
+                ->title('Target')
+                ->orderable('false')
+                ->searchable('false'),
+
+            // year
+            Column::make('year')
+                ->title('Tahun Target')
         ];
     }
 
@@ -111,6 +130,6 @@ class HospitalDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'IPI | Daftar Rumah Sakit _' . date('YmdHis');
+        return 'IPI_Target_' . date('YmdHis');
     }
 }

@@ -85,6 +85,9 @@ Route::middleware('auth')->group(function () {
         ->middleware(['role:director|superadmin'])
         ->name('revisions.update');
 
+    // targets
+    Route::resource('targets', 'TargetController');
+
     // visit trash
     Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);
 

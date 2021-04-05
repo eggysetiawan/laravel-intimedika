@@ -9,7 +9,7 @@
             <a href="{{ route('home') }}" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="{{ route('targets.index') }}" class="nav-link">Target</a>
         </li>
     </ul>
 
@@ -136,14 +136,18 @@
         ->user()
         ->isAdmin())
                     <a class="dropdown-item" href="{{ route('pins.create') }}">Setup Pin</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+
+                    @if (Route::has('register'))
+                        <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    @endif
                 @endif
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-
-                @if (Route::has('register'))
-                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                @if (auth()->user()->username != 'intimedika01')
+                    <a href="{{ route('targets.index') }}" class="dropdown-item">Target Sales</a>
                 @endif
             </div>
         </li>
