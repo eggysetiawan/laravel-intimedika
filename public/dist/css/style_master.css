@@ -21,6 +21,7 @@ input[type="checkbox"] {
     width: 100px;
     height: 100px;
     position: fixed;
+    background-color: transparent;
 }
 
 .spinner div {
@@ -28,7 +29,7 @@ input[type="checkbox"] {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 10px solid transparent;
+    border: 1px solid transparent;
     border-top-color: #20c997;
     border-radius: 50%;
     animation: spinnerOne 1.2s linear infinite;
