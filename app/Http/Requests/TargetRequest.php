@@ -28,4 +28,11 @@ class TargetRequest extends FormRequest
             'target' => 'required',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'year' => 'Tahun Target',
+        ];
+    }
 }
