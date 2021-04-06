@@ -9,7 +9,7 @@ use Yajra\DataTables\Services\DataTable;
 class HospitalDataTable extends DataTable
 {
     /**
-     * Build DataTable class.
+     * Build DataTable class. hanya tester
      *
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
