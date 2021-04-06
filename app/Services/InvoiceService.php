@@ -45,7 +45,7 @@ class InvoiceService
         $insert = [];
         $orders->each(function ($order, $i) use ($invoice, $request, &$price_po, &$insert) {
 
-            $price = isset($request->price[$order->id]) ? str_replace(",", "", $request->price[$order->id]) : $price = $order->price;
+            $price = isset($request->price[$order->id]) ? str_replace([",", "_"], "", $request->price[$order->id]) : $price = $order->price;
 
             $insert =  $order->insert([
                 'invoice_id' => $invoice->id,
@@ -89,7 +89,7 @@ class InvoiceService
             'dpp' => $this->price_po,
             'ppn' => $this->ppn,
             'nett' => $this->price_po,
-            'shipping' => str_replace(",", "", $this->shipping),
+            'shipping' => str_replace([",", "_"], "", $this->shipping),
         ]);
     }
 }

@@ -38,7 +38,7 @@ class FunnelService
             $order = Order::insert([
                 'invoice_id' => $this->invoice->id,
                 'modality_id' => $request->modality[$i],
-                'price' => str_replace(",", "", $request->price[$i]),
+                'price' => str_replace([",", "_"], "", $request->price[$i]),
                 'references' => $request->references[$i],
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
@@ -63,7 +63,7 @@ class FunnelService
             // to table orders
             $insert =  $order->update([
                 'modality_id' => $request->modality[$i],
-                'price' => str_replace(",", "", $request->price[$i]),
+                'price' => str_replace([",", "_"], "", $request->price[$i]),
                 'references' => $request->references[$i],
                 'updated_at' => now()->toDateTimeString(),
             ]);

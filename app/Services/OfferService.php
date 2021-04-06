@@ -78,7 +78,7 @@ class OfferService
             $order = Order::insert([
                 'invoice_id' => $this->invoice->id,
                 'modality_id' => $request->modalities[$i],
-                'price' => str_replace(",", "", $request->prices[$i]),
+                'price' => str_replace([",", "_"], "", $request->prices[$i]),
                 'references' => $request->references[$i],
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
@@ -108,7 +108,7 @@ class OfferService
             // to table orders
             $order = $order->update([
                 'modality_id' => $request->modalities[$i],
-                'price' => str_replace(",", "", $request->prices[$i]),
+                'price' => str_replace([",", "_"], "", $request->prices[$i]),
                 'references' => $request->references[$i],
                 'updated_at' => now()->toDateTimeString(),
             ]);
