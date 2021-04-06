@@ -46,6 +46,18 @@
 
 
 
+{{-- <script>
+    $(document).on({
+        ajaxStart: function() {
+            $(".content").addClass("spinner");
+        },
+        ajaxStop: function() {
+            $(".content").removeClass("spinner");
+        }
+    });
+
+</script> --}}
+
 @if (session()->has('success'))
 
     <script>

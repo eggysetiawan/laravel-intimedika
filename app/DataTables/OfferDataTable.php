@@ -83,7 +83,6 @@ class OfferDataTable extends DataTable
      */
     public function query(Offer $model)
     {
-
         return $model->newQuery()
             ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
             ->when($this->from && $this->to, function ($query) { //query untuk filter periode from ~ to.
@@ -134,18 +133,12 @@ class OfferDataTable extends DataTable
                 ],
             ])
             ->language([
-                'processing' => '<div class="spinner">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>',
-                'loadingRecords' => '<div class="spinner">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>',
+                'processing' => '<div class="loadingio-spinner-double-ring-2u42wjzuj9"><div class="ldio-1rv8kps4nil">
+                <div></div>
+                <div></div>
+                <div><div></div></div>
+                <div><div></div></div>
+                </div></div>',
             ])
             ->columns($this->getColumns());
     }

@@ -16,7 +16,6 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse accent-teal">
-
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -44,11 +43,11 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="content">
+            <section class="content">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
-            </div>
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

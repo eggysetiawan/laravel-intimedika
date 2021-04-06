@@ -8,7 +8,11 @@ use App\Order;
 
 class OfferService
 {
-    protected $invoice, $offer, $order;
+    protected
+        $invoice,
+        $offer,
+        $order;
+
     public function getDate($request)
     {
         return date('Y-m-d', strtotime($request->date));

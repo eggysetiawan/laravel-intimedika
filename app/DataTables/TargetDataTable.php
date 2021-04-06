@@ -73,12 +73,12 @@ class TargetDataTable extends DataTable
                 ],
             ])
             ->language([
-                'processing' => '<div class="spinner">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>'
+                'processing' => '<div class="loadingio-spinner-double-ring-2u42wjzuj9"><div class="ldio-1rv8kps4nil">
+                <div></div>
+                <div></div>
+                <div><div></div></div>
+                <div><div></div></div>
+                </div></div>',
             ])
             ->columns($this->getColumns());
     }
