@@ -22,7 +22,7 @@
         @include('layouts.navbar')
         <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
+        <!-- Main Sidebar Containers -->
         @include('layouts.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
