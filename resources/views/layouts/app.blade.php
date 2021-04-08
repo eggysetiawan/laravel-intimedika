@@ -43,11 +43,11 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
+            <main class="content">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
-            </section>
+            </main>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

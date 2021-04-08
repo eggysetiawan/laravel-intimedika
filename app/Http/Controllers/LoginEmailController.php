@@ -16,7 +16,7 @@ class LoginEmailController extends Controller
         if (auth()->guest()) :
             return view('auth.email-login');
         else :
-            return redirect('/');
+            return redirect()->route('home');
         endif;
     }
 }

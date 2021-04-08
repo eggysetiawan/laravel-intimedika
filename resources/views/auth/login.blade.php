@@ -23,7 +23,7 @@
 <body class="hold-transition login-page accent-orange">
     <div class="login-box">
         <div class="login-logo">
-            <a href="/"><b>{{ config('app.name', 'Laravel') }}</a>
+            <a href="{{ route('home') }}"><b>{{ config('app.name', 'Laravel') }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
