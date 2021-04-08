@@ -132,19 +132,20 @@
                     {{ __('Sign Out') }}
                 </a>
 
-                @if (auth()
-        ->user()
-        ->isAdmin())
+                @if (auth()->user()->isAdmin())
                     <a class="dropdown-item" href="{{ route('pins.create') }}">Setup Pin</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
+                @endif
 
+                @if (auth()->user()->superAdmin())
                     @if (Route::has('register'))
                         <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @endif
+
 
                 @if (auth()->user()->username != 'intimedika01')
                     <a href="{{ route('targets.index') }}" class="dropdown-item">Target Sales</a>

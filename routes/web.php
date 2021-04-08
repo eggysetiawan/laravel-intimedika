@@ -77,6 +77,9 @@ Route::middleware('auth')->group(function () {
     Route::get('search/offers', 'SearchController@offer')->name('offers.filter');
     Route::get('search/complete/offers', 'SearchController@offerCompleted')->name('offers.filter-completed');
 
+    // register
+    Route::post('registers', 'RegisterController')->name('registers.store')->middleware('register');
+
     // revision
     Route::get('revisions/{offer:slug}/edit', 'RevisionController@edit')
         ->middleware(['role:director|superadmin'])

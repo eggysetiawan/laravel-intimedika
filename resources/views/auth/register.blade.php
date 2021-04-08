@@ -30,7 +30,7 @@
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
 
-                <form method="POST" action="{{ route('register') }}" novalidate>
+                <form method="POST" action="{{ route('registers.store') }}" novalidate>
                     @csrf
                     <div class="input-group mb-3">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
