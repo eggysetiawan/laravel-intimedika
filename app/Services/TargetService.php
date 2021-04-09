@@ -12,7 +12,7 @@ class TargetService
         return auth()->user()->targets()->create([
             'slug' => Str::slug(auth()->user()->name . ' ' . $request->year),
             'year' => $request->year,
-            'target' => str_replace([",", "_"], "", $request->target)
+            'target' => str_replace([",", "_", "."], "", $request->target)
         ]);
     }
 }

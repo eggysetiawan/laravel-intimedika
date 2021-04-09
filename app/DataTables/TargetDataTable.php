@@ -26,7 +26,7 @@ class TargetDataTable extends DataTable
                 ]);
             })
             ->editColumn('target', function (Target $target) {
-                return 'Rp ' . number_format($target->target ?? 0, 0, ',', '.');
+                return 'Rp ' . number_format($target->target ?? NULL, 0, ',', '.');
             })
             ->rawColumns(['action']);
     }
