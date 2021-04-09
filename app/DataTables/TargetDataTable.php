@@ -46,10 +46,10 @@ class TargetDataTable extends DataTable
             ->when($this->selectedYear, function ($query) use ($selectedYear) {
                 return $query->where('year', $selectedYear);
             })
-            ->latest()
             ->when(!auth()->user()->isAdmin(), function ($query) {
-                return $query->where('user_id', auth()->id);
-            });
+                return $query->where('user_id', auth()->id());
+            })
+            ->latest();
     }
 
     /**
