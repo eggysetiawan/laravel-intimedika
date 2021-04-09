@@ -23,7 +23,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="/"><b>Intimedika</b> Portal</a>
+            <a href="{{ route('home') }}"><b>Intimedika</b> Portal</a>
         </div>
 
         <x-alert></x-alert>
@@ -120,8 +120,6 @@
                     <div class="input-group mb-3">
                         <select name="role" id="role" class="form-control">
                             <option selected disabled>Choose Role</option>
-                            <option value="superadmin">superadmin</option>
-                            <option value="director">Direktur</option>
                             <option value="sales">Sales</option>
                             <option value="teknisi">Teknisi</option>
                             <option value="admin">Admin</option>
