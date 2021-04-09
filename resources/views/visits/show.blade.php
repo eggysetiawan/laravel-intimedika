@@ -91,7 +91,7 @@
                         <!-- .img-push is used to add margin to elements next to floating images -->
                         <div class="img-push">
                             <input type="text" class="form-control form-control-sm"
-                                placeholder="Press enter to post comment">
+                                placeholder="Press enter to post comment" disabled>
                         </div>
                     </form>
                 </div>
