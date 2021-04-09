@@ -14,6 +14,7 @@
                 <div class="card card-teal">
                     <div class="card-header">
                         <h3 class="card-title">Edit Customer {{ $customer->name }}</h3>
+                        {{ $nohospital }}
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->

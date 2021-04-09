@@ -5,7 +5,7 @@
             <div class="input-group">
                 <select name="hospital" id="hospital" class="form-control @error('hospital') is-invalid @enderror select2">
                     <option selected disabled>Pilih Rumah Sakit</option>
-                    @if ($customer->hospitals())
+                    @if ($customer->hospitals->first())
                         <option value="{{ $customer->hospitals->first()->id }}" selected>
                             {{ $customer->hospitals->first()->name . ' - ' . $customer->hospitals->first()->city }}
                         </option>
@@ -28,8 +28,10 @@
             </div>
         </div>
     @else
-        <a href="{{ route('customers.create') }}" class="btn btn-secondary  form-control">Munculkan Rumah Sakit</a>
-        <input type="hidden" name="hospital" value="false">
+        @isset($create)
+            <a href="{{ route('customers.create') }}" class="btn btn-secondary  form-control">Munculkan Rumah Sakit</a>
+            <input type="hidden" name="hospital" value="false">
+        @endisset
     @endempty
 
     <div class="form-group">

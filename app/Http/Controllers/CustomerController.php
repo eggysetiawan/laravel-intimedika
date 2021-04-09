@@ -32,6 +32,7 @@ class CustomerController extends Controller
         return view('customers.create', [
             'customer' => new Customer(),
             'nohospital' => '1',
+            'create' => true
         ]);
     }
 
@@ -58,7 +59,16 @@ class CustomerController extends Controller
     public function edit(Customer $customer)
     {
         $hospitals = Hospital::selectHospitalLimit();
-        return view('customers.edit', compact('customer', 'hospitals'));
+
+        if ($customer->doesntHave('hospitals')) {
+            $nohospital = true;
+        } else {
+            $customer->load('hospitals');
+            $nohospital = false;
+        }
+        $create = null;
+
+        return view('customers.edit', compact('customer', 'hospitals', 'nohospital', 'create'));
         // return 'hola';
     }
 

@@ -9,10 +9,7 @@
         <div class="col-md-6">
             <h1>Kunjungan Harian</h1>
 
-            @foreach ($customer
-            ->visits()
-            ->latest()
-            ->get()
+            @foreach ($customer->visits()->latest()->get()
         as $visit)
                 <!-- Box Comment -->
                 <div class="card card-widget mb-5">
@@ -21,7 +18,9 @@
                         <div class="user-block">
                             <img class="img-circle" src="{{ $visit->customer->gravatar() }}" alt="User Image">
                             <span class="username"><a href="#">{{ $visit->customer->name }}</a></span>
-                            <span class="description">{{ $visit->customer->hospitals->first()->name }} -
+                            <span
+                                class="description">{{ $visit->customer->hospitals->first()->name ?? $visit->customer->name }}
+                                -
                                 {{ $visit->created_at->diffForHumans() }}</span>
                         </div>
                         <!-- /.user-block -->
@@ -91,7 +90,8 @@
                     <!-- /.card-footer -->
                     <div class="card-footer">
                         <form action="#" method="post">
-                            <img class="img-fluid img-circle img-sm" src="{{ auth()->user()->gravatar() }}" alt="Alt Text">
+                            <img class="img-fluid img-circle img-sm" src="{{ auth()->user()->gravatar() }}"
+                                alt="Alt Text">
                             <!-- .img-push is used to add margin to elements next to floating images -->
                             <div class="img-push">
                                 <input type="text" class="form-control form-control-sm"
