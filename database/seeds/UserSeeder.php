@@ -41,25 +41,32 @@ class UserSeeder extends Seeder
 
         Permission::create(['name' => 'approval']);
         Permission::create(['name' => 'salesman']);
+        Permission::create(['name' => 'engineering']);
         Permission::create(['name' => 'admin']);
         Permission::create(['name' => 'supervise']);
 
 
         $supeardmin = Role::create(['name' => 'superadmin']);
         $director = Role::create(['name' => 'director']);
+        $sales = Role::create(['name' => 'sales']);
+        $teknisi = Role::create(['name' => 'teknisi']);
+        $admin = Role::create(['name' => 'admin']);
 
-        Role::create(['name' => 'sales']);
-        Role::create(['name' => 'teknisi']);
-        Role::create(['name' => 'admin']);
-
-
+        // give permission
         $supeardmin->givePermissionTo('approval');
         $supeardmin->givePermissionTo('salesman');
         $supeardmin->givePermissionTo('admin');
 
-
         $director->givePermissionTo('approval');
 
+        $sales->givePermissionTo('salesman');
+
+        $teknisi->givePermissionTo('engineering');
+
+        $admin->givePermissionTo('admin');
+
+
+        // assign role
         $userSuperAdmin->assignRole('superadmin');
         $userDirector->assignRole('director');
     }
