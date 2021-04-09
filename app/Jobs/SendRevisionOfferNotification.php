@@ -32,8 +32,7 @@ class SendRevisionOfferNotification implements ShouldQueue
      */
     public function handle()
     {
-        $admin = User::emailToDirector();
-
+        $sales = User::where('id', $this->offer->user_id)->first();
         $sales->notify(new RevisionOfferNotification($this->offer));
     }
 }

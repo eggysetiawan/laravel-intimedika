@@ -96,8 +96,6 @@ class Offer extends Model implements HasMedia
         })
             ->latest();
     }
-
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
