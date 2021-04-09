@@ -44,6 +44,7 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'engineering']);
         Permission::create(['name' => 'admin']);
         Permission::create(['name' => 'supervise']);
+        Permission::create(['name' => 'openworld']);
 
 
         $supeardmin = Role::create(['name' => 'superadmin']);

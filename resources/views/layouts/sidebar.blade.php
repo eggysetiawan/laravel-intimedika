@@ -122,14 +122,15 @@ use App\Offer;
 
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('offers.complete') }}"
-                            class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
-                            <i class="fas fa-check-circle nav-icon"></i>
-                            <p>Penawaran Berhasil</p>
-                        </a>
-                    </li>
                 @endcan
+
+                <li class="nav-item">
+                    <a href="{{ route('offers.complete') }}"
+                        class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'complete' ? ' active' : '' }}">
+                        <i class="fas fa-check-circle nav-icon"></i>
+                        <p>Penawaran Berhasil</p>
+                    </a>
+                </li>
 
 
 
