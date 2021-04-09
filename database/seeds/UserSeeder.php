@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
             'email' => 'setiawaneggy@gmail.com',
             'password' => bcrypt('intiwid1'),
             'pin' => bcrypt(112233),
-            'level' => 'top',
             'phone' => '081387239119',
             'address' => 'North Jakarta',
             'city' => 'Jakarta',
@@ -33,7 +32,6 @@ class UserSeeder extends Seeder
             'initial' => 'JH',
             'email' => 'jhn@mail.com',
             'password' => bcrypt('intiwid1'),
-            'level' => 'middle',
             'phone' => '0816854312',
             'address' => 'North Jakarta',
             'city' => 'Jakarta',
@@ -49,6 +47,7 @@ class UserSeeder extends Seeder
 
         $supeardmin = Role::create(['name' => 'superadmin']);
         $director = Role::create(['name' => 'director']);
+        $supervisor = Role::create(['name' => 'supervisor']);
         $sales = Role::create(['name' => 'sales']);
         $teknisi = Role::create(['name' => 'teknisi']);
         $admin = Role::create(['name' => 'admin']);
@@ -57,8 +56,12 @@ class UserSeeder extends Seeder
         $supeardmin->givePermissionTo('approval');
         $supeardmin->givePermissionTo('salesman');
         $supeardmin->givePermissionTo('admin');
+        $supeardmin->givePermissionTo('openworld');
+        $supeardmin->givePermissionTo('supervise');
 
         $director->givePermissionTo('approval');
+
+        $supervisor->givePermissionTo('supervise');
 
         $sales->givePermissionTo('salesman');
 

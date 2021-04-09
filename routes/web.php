@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
 
 
     // approval
-    Route::middleware(['permission:approval'])->group(function () {
+    Route::middleware(['permission:approval|openworld'])->group(function () {
         Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
         Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
         Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
     //offers
     Route::get('offers/completed', 'OfferCompletedController')->name('offers.complete');
     Route::get('offers/create', 'OfferController@create')->name('offers.create')->middleware('count');
-    Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin', 'permission:restore']);
+    Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin']);
     Route::resource('offers', 'OfferController')->parameters([
         'offers' => 'offer:slug',
     ])->except(['create']);
@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('targets', 'TargetController');
 
     // visit trash
-    Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin', 'permission:restore']);
+    Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin']);
 
     Route::get('visits/restore/{visit:slug}', 'VisitController@restore')->name('visits.restore')->middleware(['role:superadmin']);
     // visitplan

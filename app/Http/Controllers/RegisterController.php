@@ -25,8 +25,7 @@ class RegisterController extends Controller
         $user = User::create($attr);
 
         $user->assignRole($request->role);
-
         session()->flash('success', 'User telah berhasil di daftarkan!');
-        return redirect('/');
+        return redirect()->route('home');
     }
 }

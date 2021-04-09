@@ -17,9 +17,9 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('slug', 150);
-            $table->string('name', 100);
-            $table->string('mobile', 20);
-            $table->string('role', 50);
+            $table->string('name', 100)->nullable();
+            $table->string('mobile', 20)->nullable();
+            $table->string('role', 50)->nullable();
             $table->string('city', 100)->nullable();
             $table->longText('address')->nullable();
             $table->string('email', 100)->unique();

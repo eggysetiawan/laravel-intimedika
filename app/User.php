@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-        'level',
+        // 'level',
         'phone',
         'pin',
         'last_login_time',
@@ -84,17 +84,17 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->level == "top" || $this->id == 13;
+        return $this->hasPermissionTo('approval');
     }
 
     public function superAdmin()
     {
-        return $this->level == 'top';
+        return $this->hasPermissionTo('openworld');
     }
 
     public function director()
     {
-        return $this->where('id', 13)->first()->name;
+        return $this->hasRole('director');
     }
 
     public static function emailToDirector()

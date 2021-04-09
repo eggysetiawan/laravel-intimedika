@@ -7,6 +7,7 @@
 @endsection
 @section('content')
     <div class="container-fluid">
+        @unlessrole('director')
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
                 <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-funnel">
@@ -14,6 +15,7 @@
                 </button>
             </div>
         </div>
+        @endunlessrole
     </div>
 
 

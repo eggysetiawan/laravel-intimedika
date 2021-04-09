@@ -19,8 +19,10 @@
                     <a href="{{ route('offers.index') }}" class="btn btn-primary btn-sm"><i
                             class="fas fa-table nav-icon"></i> Semua Penawaran</a>
                 @else
-                    <a href="{{ route('offers.trash') }}" class="btn btn-warning btn-sm"><i
-                            class="fas fa-recycle nav-icon"></i> Recyle Bin</a>
+                    @can('openworld')
+                        <a href="{{ route('offers.trash') }}" class="btn btn-warning btn-sm"><i
+                                class="fas fa-recycle nav-icon"></i> Recyle Bin</a>
+                    @endcan
                 @endif
             </div>
         </div>
@@ -109,6 +111,4 @@
 
 @section('script')
     {!! $dataTable->scripts() !!}
-
-
 @endsection

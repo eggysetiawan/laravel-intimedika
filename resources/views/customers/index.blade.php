@@ -6,11 +6,15 @@
 @endsection
 @section('content')
     <div class="col-md-12">
+        @unlessrole('director')
         <div class="d-flex justify-content-end mb-4">
             <div class="btn-group">
                 <x-button-create href="{{ route('customers.create') }}">Tambah Customer</x-button-create>
             </div>
         </div>
+        @endunlessrole
+
+
     </div>
 
     <div class="d-flex justify-content-center">

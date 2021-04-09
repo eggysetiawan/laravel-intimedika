@@ -8,9 +8,11 @@
 @section('content')
     <div class="col-md-12">
         <div class="d-flex justify-content-end">
+            @unlessrole('director')
             <div class="btn-group">
                 <x-button-create href="{{ route('modalities.create') }}">Tambah Alat</x-button-create>
             </div>
+            @endunlessrole
         </div>
     </div>
 

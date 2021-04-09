@@ -129,6 +129,7 @@ class CustomerDataTable extends DataTable
             // Jumlah Kunjungan
             Column::make('visit.count')
                 ->title('Kunjungan')
+                ->printable(false)
                 ->orderable(false)
                 ->searchable(false),
 

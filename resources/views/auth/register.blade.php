@@ -98,28 +98,11 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="input-group mb-3">
-                        <select name="level" id="level" class="form-control">
-                            <option selected disabled>Choose Level</option>
-                            <option value="low">Low</option>
-                            <option value="mid">Middle</option>
-                            <option value="top">Top</option>
-                        </select>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fa fa-sitemap"></span>
-                            </div>
-                        </div>
 
-                        @error('level')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
                     <div class="input-group mb-3">
                         <select name="role" id="role" class="form-control">
                             <option selected disabled>Choose Role</option>
+                            <option value="supervisor">Supervisor (Sales/Teknisi)</option>
                             <option value="sales">Sales</option>
                             <option value="teknisi">Teknisi</option>
                             <option value="admin">Admin</option>

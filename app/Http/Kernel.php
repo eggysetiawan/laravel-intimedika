@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'offers.exist' => \App\Http\Middleware\OfferMiddleware::class,
         'count' => \App\Http\Middleware\ModalityCount::class,
         'register' => \App\Http\Middleware\RegisterUserMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

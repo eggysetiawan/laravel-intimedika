@@ -20,6 +20,7 @@
 
     <div class="container-fluid">
         <div class="d-flex justify-content-end mb-4">
+            @unlessrole('director')
             <div class="btn-group">
                 @switch(request()->segment(1))
                     @case('visitplan')
@@ -42,6 +43,8 @@
                 @endswitch
 
             </div>
+            @endunlessrole
+
         </div>
     </div>
     <div class="d-flex justify-content-center">
