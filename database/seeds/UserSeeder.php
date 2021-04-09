@@ -2,6 +2,8 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -12,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $userSuperAdmin = User::create([
             'name' => 'IT Division',
             'username' => 'intiwid01',
             'initial' => 'IT',
@@ -24,5 +26,41 @@ class UserSeeder extends Seeder
             'address' => 'North Jakarta',
             'city' => 'Jakarta',
         ]);
+
+        $userDirector = User::create([
+            'name' => 'Johannes Hendrajaja',
+            'username' => 'intimedika01',
+            'initial' => 'JH',
+            'email' => 'jhn@mail.com',
+            'password' => bcrypt('intiwid1'),
+            'level' => 'middle',
+            'phone' => '0816854312',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
+        Permission::create(['name' => 'approval']);
+        Permission::create(['name' => 'salesman']);
+        Permission::create(['name' => 'admin']);
+        Permission::create(['name' => 'supervise']);
+
+
+        $supeardmin = Role::create(['name' => 'superadmin']);
+        $director = Role::create(['name' => 'director']);
+
+        Role::create(['name' => 'sales']);
+        Role::create(['name' => 'teknisi']);
+        Role::create(['name' => 'admin']);
+
+
+        $supeardmin->givePermissionTo('approval');
+        $supeardmin->givePermissionTo('salesman');
+        $supeardmin->givePermissionTo('admin');
+
+
+        $director->givePermissionTo('approval');
+
+        $userSuperAdmin->assignRole('superadmin');
+        $userDirector->assignRole('director');
     }
 }

@@ -26,6 +26,8 @@
             <a href="/"><b>Intimedika</b> Portal</a>
         </div>
 
+        <x-alert></x-alert>
+
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
@@ -110,6 +112,27 @@
                         </div>
 
                         @error('level')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <select name="role" id="role" class="form-control">
+                            <option selected disabled>Choose Role</option>
+                            <option value="superadmin">superadmin</option>
+                            <option value="director">Direktur</option>
+                            <option value="sales">Sales</option>
+                            <option value="teknisi">Teknisi</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-sitemap"></span>
+                            </div>
+                        </div>
+
+                        @error('role')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
