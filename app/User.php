@@ -96,4 +96,9 @@ class User extends Authenticatable
     {
         return $this->where('id', 13)->first()->name;
     }
+
+    public static function emailToDirector()
+    {
+        return static::where('username', 'intiwid01')->first();
+    }
 }

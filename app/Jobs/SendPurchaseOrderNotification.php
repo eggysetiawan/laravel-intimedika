@@ -32,7 +32,7 @@ class SendPurchaseOrderNotification implements ShouldQueue
      */
     public function handle()
     {
-        $admin = User::where('id', 13)->first();
+        $admin = User::emailToDirector();
         $admin->notify(new PurchaseOrderNotification($this->offer));
     }
 }
