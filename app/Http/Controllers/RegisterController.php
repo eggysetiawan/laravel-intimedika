@@ -16,6 +16,7 @@ class RegisterController extends Controller
     public function __invoke(RegisterRequest $request)
     {
         $attr = $request->all();
+        $attr['password'] = bcrypt($request->password);
         User::create($attr);
 
         session()->flash('success', 'User telah berhasil di daftarkan!');
