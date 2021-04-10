@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'initial' => 'IT',
             'email' => 'setiawaneggy@gmail.com',
             'password' => bcrypt('intiwid1'),
-            'pin' => bcrypt(112233),
+            'pin' => bcrypt(1111),
             'phone' => '081387239119',
             'address' => 'North Jakarta',
             'city' => 'Jakarta',
