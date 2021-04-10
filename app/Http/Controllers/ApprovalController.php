@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\ApprovalRequest;
+use App\Notifications\Offer\TwoFactorCode;
 use App\Offer;
 use App\OfferProgress;
 
@@ -105,8 +106,12 @@ class ApprovalController extends Controller
 
     public function offer(ApprovalRequest $request, Offer $offer)
     {
-        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
+        // abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
         $request->all();
+        if ($request->two_factor_code != $offer->two_factor_code) {
+            session()->flash('error', 'Kode yang anda masukkan salah!');
+            return back();
+        }
 
         if ($request->approval == 1) :
             $approval = 1;
@@ -124,7 +129,8 @@ class ApprovalController extends Controller
         ]);
 
         session()->flash('success', $message);
+        $offer->resetTwoFactorCode();
 
-        return back();
+        return redirect('offers');
     }
 }

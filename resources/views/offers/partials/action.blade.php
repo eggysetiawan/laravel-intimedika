@@ -31,9 +31,7 @@
             @endif
 
 
-            @if (auth()
-            ->user()
-            ->superAdmin())
+            @if (auth()->user()->superAdmin())
                 <form action="{{ route('offers.destroy', $offer->slug) }}" method="POST">
                     @csrf
                     @method('delete')
@@ -78,11 +76,13 @@
 
             @can('approval')
                 {{-- approve button --}}
-                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#approveModal{{ $offer->id }}"
+                {{-- <button type="button" class="dropdown-item" data-toggle="modal" data-target="#approveModal{{ $offer->id }}"
                     title="Setujui penawaran ini.">
                     <i class="far fa-check-circle nav-icon"></i>
                     Approve.
-                </button>
+                </button> --}}
+
+                <a href="{{ route('verify.index', $offer->slug) }}" class="dropdown-item">Approve.</a>
                 {{-- hold button --}}
                 @if ($offer->is_approved != 3)
                     {{-- 3 = On Hold --}}

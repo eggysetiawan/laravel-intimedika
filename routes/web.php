@@ -91,6 +91,12 @@ Route::middleware('auth')->group(function () {
     // targets
     Route::resource('targets', 'TargetController');
 
+    // verify
+    Route::get('verify/{offer:slug}/send', 'Auth\TwoFactorController@send')->name('verify.send');
+    Route::get('verify/{offer:slug}/resend', 'Auth\TwoFactorController@resend')->name('verify.resend');
+    Route::middleware('permission:approval|openworld')->get('verify/{offer:slug}', 'Auth\TwoFactorController@index')->name('verify.index');
+
+
     // visit trash
     Route::get('visits/trash', 'VisitController@trash')->name('visits.trash')->middleware(['role:superadmin']);
 
