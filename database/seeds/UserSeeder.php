@@ -36,6 +36,46 @@ class UserSeeder extends Seeder
             'address' => 'North Jakarta',
             'city' => 'Jakarta',
         ]);
+        $userAdmin = User::create([
+            'name' => 'PT. Intimedika Puspa Indah',
+            'username' => 'admin_intimed',
+            'initial' => 'IPI',
+            'email' => 'intimedika@mail.com',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0816854312',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $userSupervisor = User::create([
+            'name' => 'Demo Supervisor',
+            'username' => 'spv_intimed',
+            'initial' => 'SPV',
+            'email' => 'spv@mail.com',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0816854312',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $userTeknisi = User::create([
+            'name' => 'Demo Teknisi',
+            'username' => 'teknisi',
+            'initial' => 'TKN',
+            'email' => 'teknisi@mail.com',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0816854312',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $userSales = User::create([
+            'name' => 'Demo sales',
+            'username' => 'sales',
+            'initial' => 'Sls',
+            'email' => 'sales@mail.com',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0816854312',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
 
         Permission::create(['name' => 'approval']);
         Permission::create(['name' => 'salesman']);
@@ -73,5 +113,9 @@ class UserSeeder extends Seeder
         // assign role
         $userSuperAdmin->assignRole('superadmin');
         $userDirector->assignRole('director');
+        $userAdmin->assignRole('admin');
+        $userTeknisi->assignRole('teknisi');
+        $userSales->assignRole('sales');
+        $userSupervisor->assignRole('supervisor');
     }
 }
