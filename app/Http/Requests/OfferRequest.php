@@ -32,7 +32,8 @@ class OfferRequest extends FormRequest
             'note' => 'nullable',
             'date' => 'date',
             'queue' => 'required|numeric|min:1',
-            'modalities.*' => 'distinct',
+            'modalities' => 'required',
+            'modalities.*' => 'required|distinct',
             'references.*' => 'nullable',
             'price.*' => 'integer|nullable',
         ];
