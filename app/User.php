@@ -22,12 +22,15 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-        // 'level',
         'phone',
         'pin',
         'last_login_time',
         'last_login_ip',
+        'two_factor_code',
+        'two_factor_expires_at'
     ];
+
+    protected $dates = ['two_factor_expires_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -46,6 +49,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function generateTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $otp = $this->two_factor_code = rand(1000, 9999);
+        $this->two_factor_expires_at = now()->addMinutes(10);
+        $this->save();
+
+        return $otp;
+    }
+
+    public function resetTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $this->two_factor_code = null;
+        $this->two_factor_expires_at = null;
+        $this->save();
+    }
 
     public function offers()
     {

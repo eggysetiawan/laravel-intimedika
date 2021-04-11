@@ -5,25 +5,10 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('login/email', 'LoginEmailController')->name('login.email');
-Route::get('email/success', 'ResendEmailController')->name('login.resend');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
-    // view approval penawaran & po
-    Route::middleware(['role:director|superadmin'])->group(function () {
-        Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
-        Route::get('offers/approval', 'ApprovalController@index')->name('offers.approval');
-    });
 
-
-    // approval
-    Route::middleware(['permission:approval|openworld'])->group(function () {
-        Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
-        Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
-        Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
-        Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
-    });
     // arrived
     Route::resource('arrival', 'ArrivalController')->parameters([
         'arrival' => 'visit:slug',
@@ -62,12 +47,6 @@ Route::middleware('auth')->group(function () {
         'offers' => 'offer:slug',
     ])->except(['create']);
 
-
-    // pin setup
-    // Route::resource('pins', 'RegisterPinController');
-    Route::get('pins/create', 'RegisterPinController@create')->name('pins.create');
-    Route::patch('pins/update', 'RegisterPinController@update')->name('pins.update');
-
     // progress
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
     Route::patch('progresses/{offer:slug}/update', 'ProgressController@update')->name('progresses.update');
@@ -76,17 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::get('hospitals-filter', 'SearchController@hospital')->name('hospitals.filter');
     Route::get('search/offers', 'SearchController@offer')->name('offers.filter');
     Route::get('search/complete/offers', 'SearchController@offerCompleted')->name('offers.filter-completed');
-
-    // register
-    Route::post('registers', 'RegisterController')->name('registers.store')->middleware('register');
-
-    // revision
-    Route::get('revisions/{offer:slug}/edit', 'RevisionController@edit')
-        ->middleware(['role:director|superadmin'])
-        ->name('revisions.edit');
-    Route::patch('revisions/{offer:slug}', 'RevisionController@update')
-        ->middleware(['role:director|superadmin'])
-        ->name('revisions.update');
 
     // targets
     Route::resource('targets', 'TargetController');

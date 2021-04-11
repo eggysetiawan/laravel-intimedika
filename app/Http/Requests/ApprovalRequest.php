@@ -26,7 +26,8 @@ class ApprovalRequest extends FormRequest
     {
         return [
             'approval' => 'integer|required',
-            'pin' => new PinApproval,
+            'two_factor_code' => 'integer|required',
+            // 'pin' => new PinApproval,
         ];
     }
 }

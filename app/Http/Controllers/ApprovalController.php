@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\ApprovalRequest;
+use App\Notifications\Offer\TwoFactorCode;
 use App\Offer;
 use App\OfferProgress;
 
@@ -24,7 +25,7 @@ class ApprovalController extends Controller
 
     public function allPurchase(ApprovalRequest $request)
     {
-        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
+        abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
         $request->all();
         if ($request->approval == 1) :
             // get approved
@@ -51,7 +52,7 @@ class ApprovalController extends Controller
     }
     public function allOffer(ApprovalRequest $request)
     {
-        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
+        abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
 
         $request->all();
         if ($request->approval == 1) :
@@ -77,7 +78,7 @@ class ApprovalController extends Controller
 
     public function progress(ApprovalRequest $request, Offer $offer)
     {
-        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
+        abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
         $request->all();
         if ($request->approval == 1) :
             // get approved
@@ -105,7 +106,7 @@ class ApprovalController extends Controller
 
     public function offer(ApprovalRequest $request, Offer $offer)
     {
-        abort_unless(auth()->user()->pin, 403); //abort jika pin belum di setup
+        abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
         $request->all();
 
         if ($request->approval == 1) :
@@ -122,9 +123,10 @@ class ApprovalController extends Controller
             'approved_by' => $approved_by,
             'approved_at' => now()
         ]);
+        auth()->user()->resetTwoFactorCode();
 
         session()->flash('success', $message);
 
-        return back();
+        return redirect('offers');
     }
 }

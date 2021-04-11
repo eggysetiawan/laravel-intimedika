@@ -92,10 +92,7 @@
                         <div id="img">
 
                             @foreach ($offer->invoices->first()->orders as $order)
-                                {{-- <div class="card">
-                                    <div class="card-body p-0 m-0"> --}}
                                 <div class="attachment-block clearfix px-0 mx-0">
-
                                     <div class="d-flex justify-content-center">
 
                                         <div class="col-md-6">
@@ -167,8 +164,6 @@
 
                                     </div>
                                 </div>
-                                {{-- </div>
-                                </div> --}}
                             @endforeach
 
                             {{-- ongkir --}}

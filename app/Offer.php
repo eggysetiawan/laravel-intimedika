@@ -27,8 +27,30 @@ class Offer extends Model implements HasMedia
         'approved_at',
         'approved_by',
         'offer_date',
-        'slug'
+        'slug',
+        'two_factor_code',
+        'two_factor_expires_at'
     ];
+
+    protected $dates = ['two_factor_expires_at'];
+
+    public function generateTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $otp = $this->two_factor_code = rand(1000, 9999);
+        $this->two_factor_expires_at = now()->addMinutes(10);
+        $this->save();
+
+        return $otp;
+    }
+
+    public function resetTwoFactorCode()
+    {
+        $this->timestamps = false;
+        $this->two_factor_code = null;
+        $this->two_factor_expires_at = null;
+        $this->save();
+    }
 
     public function fixPrices()
     {

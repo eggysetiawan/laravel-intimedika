@@ -92,20 +92,17 @@
 @if (session()->has('error'))
     <script>
         $(document).ready(function() {
-            $(document).Toasts('create', {
-                class: 'bg-danger bot-left',
-                position: 'bottomLeft',
-                fixed: true,
-                title: 'Something wrong!',
-                autohide: true,
-                delay: 3500,
-                subtitle: 'Subtitle',
-                body: "{{ session()->get('error') }}"
-            })
+            var message = "{{ session()->get('error') }}";
+            Swal.fire({
+                icon: 'error',
+                title: message,
+                text: 'Silahkan coba lagi.',
+            });
+
+
         });
 
     </script>
-
 @endif
 
 {{-- dark mode --}}
