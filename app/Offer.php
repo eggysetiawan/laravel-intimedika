@@ -27,12 +27,9 @@ class Offer extends Model implements HasMedia
         'approved_at',
         'approved_by',
         'offer_date',
-        'slug',
-        'two_factor_code',
-        'two_factor_expires_at'
+        'slug'
     ];
 
-    protected $dates = ['two_factor_expires_at'];
 
     public function generateTwoFactorCode()
     {
