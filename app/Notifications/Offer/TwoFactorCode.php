@@ -47,9 +47,8 @@ class TwoFactorCode extends Notification implements ShouldQueue
         // $otp = $this->offer->otp;
         return (new MailMessage)
             ->line('Your two factor code is ' . $otp)
-            ->action('Verify Here', route('verify.index', $slug))
             ->line('The code will expire in 10 minutes')
-            ->line('If you have not tried to login, ignore this message.');
+            ->line('If you have not tried to make descision, ignore this message.');
     }
 
     /**
