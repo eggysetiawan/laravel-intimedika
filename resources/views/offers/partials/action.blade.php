@@ -76,13 +76,9 @@
 
             @can('approval')
                 {{-- approve button --}}
-                {{-- <button type="button" class="dropdown-item" data-toggle="modal" data-target="#approveModal{{ $offer->id }}"
-                    title="Setujui penawaran ini.">
-                    <i class="far fa-check-circle nav-icon"></i>
-                    Approve.
-                </button> --}}
 
-                <a href="{{ route('verify.index', $offer->slug) }}" class="dropdown-item">Approve.</a>
+                <a href="{{ route('verify.offer.approve', $offer->slug) }}" class="dropdown-item"
+                    title="Setujui Penawaran ini."> <i class="far fa-check-circle nav-icon"></i> Approve.</a>
                 {{-- hold button --}}
                 @if ($offer->is_approved != 3)
                     {{-- 3 = On Hold --}}
@@ -92,10 +88,9 @@
                         Hold.</a>
                 @endif
                 {{-- reject --}}
-                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#rejectModal{{ $offer->id }}"
-                    title="Tolak penawaran ini.">
-                    <i class="far fa-times-circle nav-icon"></i>
-                    Reject.</button>
+                <a href="{{ route('verify.offer.reject', $offer->slug) }}" class="dropdown-item"
+                    title="Tolak penawaran ini."> <i class="far fa-times-circle nav-icon"></i>
+                    Reject.</a>
             @endcan
 
 
