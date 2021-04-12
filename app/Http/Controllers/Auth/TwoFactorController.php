@@ -11,13 +11,13 @@ use Illuminate\Http\Request;
 class TwoFactorController extends Controller
 {
     // offer
-    public function allOfferApprove(Offer $offer)
+    public function allOfferApprove()
     {
-        return view('verify.all-offer', compact('offer'));
+        return view('verify.all-offer');
     }
-    public function allOfferReject(Offer $offer)
+    public function allOfferReject()
     {
-        return view('verify.rejectall-offer', compact('offer'));
+        return view('verify.rejectall-offer');
     }
     public function offerApprove(Offer $offer)
     {
@@ -29,13 +29,13 @@ class TwoFactorController extends Controller
     }
 
     // purchase
-    public function allPurchaseApprove(Offer $offer)
+    public function allPurchaseApprove()
     {
-        return view('verify.all-purchase', compact('offer'));
+        return view('verify.all-purchase');
     }
-    public function allPurchaseReject(Offer $offer)
+    public function allPurchaseReject()
     {
-        return view('verify.rejectall-purchase', compact('offer'));
+        return view('verify.rejectall-purchase');
     }
     public function purchaseApprove(Offer $offer)
     {
@@ -46,20 +46,20 @@ class TwoFactorController extends Controller
         return view('verify.purchase-reject', compact('offer'));
     }
 
-    public function send(Offer $offer)
+    public function send()
     {
         $user = auth()->user();
         $otp = $user->generateTwoFactorCode();
-        $user->notify(new TwoFactorCode($offer, $otp));
+        $user->notify(new TwoFactorCode($otp));
         session()->flash('success', 'The two factor code has been sent to your email.');
         return back();
     }
 
-    public function resend(Offer $offer)
+    public function resend()
     {
         $user = auth()->user();
         $otp = $user->generateTwoFactorCode();
-        $user->notify(new TwoFactorCode($offer, $otp));
+        $user->notify(new TwoFactorCode($otp));
 
         session()->flash('success', 'The two factor code has been sent again to your email.');
         return back();

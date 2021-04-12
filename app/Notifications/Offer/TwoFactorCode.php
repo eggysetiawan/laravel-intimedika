@@ -11,15 +11,14 @@ use Illuminate\Notifications\Notification;
 class TwoFactorCode extends Notification implements ShouldQueue
 {
     use Queueable;
-    public $offer, $otp;
+    public $otp;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Offer $offer, $otp)
+    public function __construct($otp)
     {
-        $this->offer = $offer;
         $this->otp = $otp;
     }
 
@@ -42,9 +41,7 @@ class TwoFactorCode extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $slug = $this->offer->slug;
         $otp = $this->otp;
-        // $otp = $this->offer->otp;
         return (new MailMessage)
             ->line('Your two factor code is ' . $otp)
             ->line('The code will expire in 10 minutes')

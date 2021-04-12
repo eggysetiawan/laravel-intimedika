@@ -45,9 +45,11 @@ Route::middleware('auth')->group(function () {
     Route::get('offers/trash', 'OfferController@trash')->name('offers.trash')->middleware(['role:superadmin']);
     Route::resource('offers', 'OfferController')->parameters([
         'offers' => 'offer:slug',
-    ])->except(['create']);
+    ])->except(['create', 'show']);
 
     // progress
+    Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
+
     Route::get('progresses/{offer:slug}', 'ProgressController@create')->name('progresses.create');
     Route::patch('progresses/{offer:slug}/update', 'ProgressController@update')->name('progresses.update');
     // search

@@ -12,7 +12,7 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route('approval.purchase', $offer->slug) }}">
+            <form method="POST" action="{{ route('approval.all-purchase') }}">
                 @method('patch')
                 @csrf
 

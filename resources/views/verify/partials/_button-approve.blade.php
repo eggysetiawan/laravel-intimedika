@@ -3,11 +3,11 @@
         <button type="submit" name="approval" value="1" class="btn btn-success px-4">
             Approve.
         </button>
-        <a href="{{ route('verify.resend', $offer->slug) }}" class="btn btn-warning px-4">
+        <a href="{{ route('verify.resend') }}" class="btn btn-warning px-4">
             Resend OTP
         </a>
     @else
-        <a href="{{ route('verify.send', $offer->slug) }}" class="btn btn-primary px-4">
+        <a href="{{ route('verify.send') }}" class="btn btn-primary px-4">
             Send OTP
         </a>
     @endisset

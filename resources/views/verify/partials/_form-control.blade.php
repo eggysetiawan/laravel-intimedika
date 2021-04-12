@@ -1,6 +1,6 @@
 <p class="text-muted">
     You have received an email which contains two factor approval code.
-    If you haven't received it, press <a href="{{ route('verify.resend', $offer->slug) }}">here</a>.
+    If you haven't received it, press <a href="{{ route('verify.resend') }}">here</a>.
 </p>
 
 <div class="input-group mb-3">

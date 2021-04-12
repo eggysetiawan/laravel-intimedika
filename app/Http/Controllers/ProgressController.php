@@ -13,8 +13,6 @@ use App\Services\ProgressService;
 
 class ProgressController extends Controller
 {
-
-
     public function approval(OfferDataTable $dataTable)
     {
         return $dataTable

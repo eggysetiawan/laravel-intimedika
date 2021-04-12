@@ -3,7 +3,6 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="/visits">Kunjungan Harian</a></li>
-    <li class="breadcrumb-item">Slug/Name Here</li>
 @endsection
 @section('content')
     <x-card>
@@ -12,7 +11,7 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route('approval.all-offers', $offer->slug) }}">
+            <form method="POST" action="{{ route('approval.all-offers') }}">
                 @method('patch')
                 @csrf
 

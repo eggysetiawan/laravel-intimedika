@@ -1,16 +1,15 @@
 <div class="card-body">
 
     <div class="btn-group">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvalModal">
-            Approve all
-        </button>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rejectModal">
-            Reject all
-        </button>
+
+        <a href=" @if (request()->segment(1) == 'offers') {{ route('verify.alloffer.approve') }} @else {{ route('verify.allpurchase.approve') }} @endif" class="btn
+            btn-success">Approve All</a>
+        <a href="{{ route('verify.alloffer.reject') }}" class="btn btn-danger">Reject
+            All</a>
     </div>
 </div>
 
-<!-- Approve Modal -->
+{{-- <!-- Approve Modal -->
 <div class="modal fade show in" id="approvalModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
@@ -55,7 +54,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 

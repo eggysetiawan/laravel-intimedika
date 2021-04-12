@@ -4,12 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
-
 Route::middleware('auth')->group(function () {
-
     // view approval penawaran & po
-    Route::middleware(['role:director|superadmin'])->group(function () {
-        Route::get('progresses/approval', 'ProgressController@approval')->name('progresses.approval');
+    Route::middleware(['permission:approval|openworld'])->group(function () {
         Route::get('offers/approval', 'ApprovalController@index')->name('offers.approval');
     });
 
@@ -18,7 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['twofactor', 'permission:approval|openworld']], function () {
         Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
         Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
-        Route::middleware('twofactor')->patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
+        Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
         Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
     });
 
@@ -41,8 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::post('registers', 'RegisterController')->name('registers.store')->middleware('register');
 
     // verify
-    Route::get('verify/{offer:slug}/send', 'Auth\TwoFactorController@send')->name('verify.send');
-    Route::get('verify/{offer:slug}/resend', 'Auth\TwoFactorController@resend')->name('verify.resend');
+    Route::get('verify/send', 'Auth\TwoFactorController@send')->name('verify.send');
+    Route::get('verify/resend', 'Auth\TwoFactorController@resend')->name('verify.resend');
 
     Route::middleware('permission:approval|openworld')->prefix('verify')->group(function () {
 
