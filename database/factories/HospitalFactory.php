@@ -3,16 +3,17 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Hospital;
-use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-use Faker\Provider\en_US\Company;
 
 $factory->define(Hospital::class, function (Faker $faker) {
     return [
-        'name' => $faker->sentence(),
-        'slug' => Str::slug($faker->sentence()),
+        'name' => $faker->company(),
+        'code' => $faker->unique()->randomDigit,
+        'slug' => $faker->slug(),
         'phone' => $faker->phoneNumber,
+        'mobile' => $faker->phoneNumber,
         'address' => $faker->address,
         'city' => $faker->city,
+        'type' => strtoupper($faker->randomElements()),
     ];
 });

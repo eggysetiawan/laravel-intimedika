@@ -8,10 +8,12 @@ use Illuminate\Support\Str;
 
 $factory->define(Visit::class, function (Faker $faker) {
     return [
-        'customer_id' => rand(1, 3),
-        'slug' => Str::slug($faker->sentence()),
+        'customer_id' => $faker->unique()->randomDigit,
+        'user_id' => rand(1, 6),
+        'slug' => Str::slug($faker->sentence() . '-' . $faker->paragraph(10)),
         'result' => $faker->paragraph(10),
         'request' => $faker->sentence(),
-        'username' => 'eggysetiawan',
+        'is_visited' => '1',
+        'username' => $faker->userName,
     ];
 });
