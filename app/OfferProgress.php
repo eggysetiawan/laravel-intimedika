@@ -9,9 +9,17 @@ class OfferProgress extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['progress', 'detail', 'status', 'progress_date', 'is_approved', 'approved_at', 'approved_by'];
-    protected $table = 'offer_progress';
+    protected $fillable = [
+        'progress',
+        'detail',
+        'status',
+        'progress_date',
+        'is_approved',
+        'approved_at',
+        'approved_by'
+    ];
 
+    protected $table = 'offer_progress';
 
     public function scopeReadyToApprove()
     {

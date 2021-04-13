@@ -39,9 +39,7 @@ class ModalityController extends Controller
 
         Modality::create($attr);
 
-        // alert success
         session()->flash('success', 'Alat berhasil di tambahkan!');
-
         return redirect('modalities');
     }
     public function edit(Modality $modality)

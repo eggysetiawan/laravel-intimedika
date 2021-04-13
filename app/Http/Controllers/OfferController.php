@@ -79,13 +79,16 @@ class OfferController extends Controller
     public function update(UpdateOfferRequest $request, Offer $offer, OfferService $offerService)
     {
         $attr = $request->all();
+
         // update orders table
         $offerService->updateOrder($offer, $request);
+
         // update offer table
         $offer->update($attr);
+
         // send mail to admin via event & listener
         event(new OfferUpdated($offer));
-        // alert success
+
         session()->flash('success', 'Penawaran telah berhasil di update!');
         return redirect('offers');
     }

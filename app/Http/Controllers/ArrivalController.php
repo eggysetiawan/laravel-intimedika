@@ -17,25 +17,26 @@ class ArrivalController extends Controller
     public function update(ArrivalRequest $request, Visit $visit)
     {
         $attr  = $request->all();
+
         // update table customers
         $visit->customer()->update([
             'role' => $request->role,
         ]);
+
         // update table visits
         $attr['is_visited'] = 1;
         $visit->update($attr);
-        // insert image to media table
-        if (request('img')) :
-            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
 
+        // insert image to media table
+        if (request('img')) {
+            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
             $visit
                 ->addMediaFromRequest('img')
                 ->usingFileName($imgSlug)
                 ->toMediaCollection('images');
-        endif;
-        // session
+        }
+
         session()->flash('success', 'Kunjungan Berhasil di Buat!');
-        // redirect page
         return redirect('visits');
     }
 }

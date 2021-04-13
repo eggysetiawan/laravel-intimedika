@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Revision extends Model
 {
-    protected $fillable = ['is_called', 'reason', 'revision_by'];
+    protected $fillable = [
+        'is_called',
+        'reason',
+        'revision_by'
+    ];
 
     public function offer()
     {

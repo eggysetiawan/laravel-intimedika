@@ -27,22 +27,25 @@ class ApprovalController extends Controller
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
         $request->all();
-        if ($request->approval == 1) :
-            // get approved
+
+        // approved
+        if ($request->approval == 1) {
             $approval = 1;
             $message = 'Pruchase Order telah berhasil di approve!';
             $progress = 100;
-        else :
-            // get rejected
+        }
+
+        // rejected
+        if ($request->approval == 2) {
             $approval = 2;
             $message = 'Purchase Order telah berhasil di reject!';
             $progress = 0;
-        endif;
-        $approved_by = auth()->id();
+        }
+
         OfferProgress::whereNull('is_approved')
             ->update([
                 'is_approved' => $approval,
-                'approved_by' => $approved_by,
+                'approved_by' => auth()->id(),
                 'approved_at' => now(),
                 'progress' => $progress,
             ]);
@@ -54,24 +57,27 @@ class ApprovalController extends Controller
     public function allOffer(ApprovalRequest $request)
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
-
         $request->all();
-        if ($request->approval == 1) :
-            // get approved
+
+        //  approved
+        if ($request->approval == 1) {
             $approval = 1;
             $message = 'Semua Penawaran telah berhasil di approve!';
-        else :
-            // get rejected
+        }
+
+        // rejected
+        if ($request->approval == 2) {
             $approval = 2;
             $message = 'Semua Penawaran telah berhasil di reject!';
-        endif;
-        $approved_by = auth()->id();
+        }
+
         Offer::whereNull('is_approved')
             ->update([
                 'is_approved' => $approval,
-                'approved_by' => $approved_by,
+                'approved_by' => auth()->id(),
                 'approved_at' => now()
             ]);
+
         auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
         return redirect('offers');
@@ -81,27 +87,28 @@ class ApprovalController extends Controller
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
         $request->all();
-        if ($request->approval == 1) :
-            // get approved
+
+        // approved
+        if ($request->approval == 1) {
             $approval = 1;
             $message = 'Purchase Order telah berhasil di approve!';
-        else :
-            // get rejected
+        }
+
+        // rejected
+        if ($request->approval == 2) {
             $approval = 2;
             $message = 'Purchse Order telah berhasil di reject!';
-        endif;
-        $approved_by = auth()->id();
-
+        }
 
         $offer->progress->update([
             'progress' => 100,
             'is_approved' => $approval,
-            'approved_by' => $approved_by,
+            'approved_by' => auth()->id(),
             'approved_at' => now()
         ]);
+
         auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
-
         return redirect('offers');
     }
 
@@ -110,24 +117,26 @@ class ApprovalController extends Controller
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
         $request->all();
 
-        if ($request->approval == 1) :
+        // get approved
+        if ($request->approval == 1) {
             $approval = 1;
             $message = 'Penawaran telah berhasil di approve!';
-        else :
+        }
+
+        // get rejected
+        if ($request->approval == 2) {
             $approval = 2;
             $message = 'Penawaran telah berhasil di reject!';
-        endif;
-        $approved_by = auth()->id();
+        }
 
         $offer->update([
             'is_approved' => $approval,
-            'approved_by' => $approved_by,
+            'approved_by' => auth()->id(),
             'approved_at' => now()
         ]);
+
         auth()->user()->resetTwoFactorCode();
-
         session()->flash('success', $message);
-
         return redirect('offers');
     }
 }

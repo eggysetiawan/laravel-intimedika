@@ -36,11 +36,13 @@ class ProgressController extends Controller
     public function update(Offer $offer, OfferProgressRequest $request, ProgressService $progressService)
     {
         $attr = $request->all();
+
         switch ($request->progress):
             case (50):
                 $offer->progress->update($attr);
                 $progressService->createDemo($offer, $request);
                 break;
+
             case (99):
                 $progressService->updateOrder($offer, $request);
                 $progressService->updatePrice($offer, $request);
@@ -50,12 +52,12 @@ class ProgressController extends Controller
                 $progressService->updateOrderId($offer);
                 event(new PurchaseOrderCreated($offer));
                 break;
+
             default:
                 $offer->progress->update($attr);
         endswitch;
 
         session()->flash('success', 'Progress Penawaran berhasil di update!');
-
         return redirect('offers');
     }
 }

@@ -27,11 +27,10 @@ class HospitalController extends Controller
     {
         $attr = $request->all();
         $attr['slug'] = Str::slug(request('name'));
+
         Hospital::create($attr);
 
-        // alert success
         session()->flash('success', 'Rumah Sakit berhasil di buat!');
-
         return redirect('hospitals');
     }
 

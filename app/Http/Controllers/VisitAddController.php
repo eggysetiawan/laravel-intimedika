@@ -25,13 +25,11 @@ class VisitAddController extends Controller
         $visitAddService->attachHospital();
         $visitAddService->addVisit($request);
 
-        if (request('img')) :
+        if (request('img')) {
             $visitAddService->uploadImage();
-        endif;
+        }
 
-        // alert success
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
-        // redirect to index visits
         return redirect('visits');
     }
 }

@@ -10,9 +10,14 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Invoice extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia;
+    use SoftDeletes;
+    use InteractsWithMedia;
 
-    protected $fillable = ['status', 'date', 'offer_id'];
+    protected $fillable = [
+        'status',
+        'date',
+        'offer_id'
+    ];
 
 
 

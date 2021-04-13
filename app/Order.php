@@ -9,7 +9,13 @@ class Order extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['invoice_id', 'modality_id', 'quantity', 'status', 'price'];
+    protected $fillable = [
+        'invoice_id',
+        'modality_id',
+        'quantity',
+        'status',
+        'price'
+    ];
 
     public function invoice()
     {

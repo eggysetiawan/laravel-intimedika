@@ -34,7 +34,6 @@ class VisitController extends Controller
     public function store(VisitRequest $request, VisitService $visitService)
     {
         $visitService->create($request);
-        // alert success
         session()->flash('success', 'Kunjungan Berhasil di Buat!');
         return redirect('visits');
     }
@@ -46,16 +45,13 @@ class VisitController extends Controller
 
     public function update(VisitRequest $request, Visit $visit, VisitService $visitService)
     {
-        $this->authorize('update', $visit);
         $visitService->update($request, $visit);
-        // alert success
         session()->flash('success', 'Kunjungan Berhasil di Update!');
         return redirect('visits');
     }
 
     public function destroy(Visit $visit)
     {
-        $this->authorize('delete', $visit);
         $visit->delete();
         session()->flash('success', 'data berhasil di hapus!');
         return redirect('visits');
@@ -74,8 +70,8 @@ class VisitController extends Controller
         if ($visit->trashed()) {
             $visit->restore();
         }
-        session()->flash('success', 'data berhasil di restore!');
 
+        session()->flash('success', 'data berhasil di restore!');
         return back();
     }
 }

@@ -52,11 +52,9 @@ class VisitPlanController extends Controller
         $attr['customer_id'] = $customer->id;
 
         $visit = auth()->user()->visits()->create($attr);
-
         $visit->plan()->create($attr);
-        // alert success
-        session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
 
+        session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
         return redirect()->route('visitplan.index');
     }
 

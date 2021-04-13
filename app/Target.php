@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Target extends Model
 {
-    protected $fillable = ['slug', 'year', 'target'];
+    protected $fillable = [
+        'slug',
+        'year',
+        'target'
+    ];
 
     public function author()
     {

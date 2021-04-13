@@ -13,9 +13,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class Visit extends Model implements HasMedia
 {
 
-    use InteractsWithMedia, SoftDeletes;
+    use InteractsWithMedia;
+    use SoftDeletes;
 
-    protected $fillable = ['request', 'slug', 'result', 'customer_id', 'is_visited'];
+    protected $fillable = [
+        'request',
+        'slug',
+        'result',
+        'customer_id',
+        'is_visited'
+    ];
 
     public function registerMediaConversions(Media $media = null): void
     {

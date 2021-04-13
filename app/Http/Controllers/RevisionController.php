@@ -27,7 +27,6 @@ class RevisionController extends Controller
         event(new RevisionCreated($offer));
 
         session()->flash('success', 'Permintaan revisi telah berhasil!');
-
         return redirect('offers');
     }
 }

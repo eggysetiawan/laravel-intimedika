@@ -38,21 +38,22 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        // validate input
         $attr = $request->all();
+
         // assignt name to slug (slug = name-role)
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
         $nohospital = (@request('hospital') == 'false') ? true : false;
-        if ($nohospital) :
+
+        if ($nohospital) {
             auth()->user()->customers()->create($attr);
-        else :
+        }
+
+        if (!$nohospital) {
             $customer = auth()->user()->customers()->create($attr);
             $customer->hospitals()->attach(request('hospital'));
-        endif;
+        }
 
-        // alert success
         session()->flash('success', 'Customer Baru Berhasil di Buat!');
-
         return redirect('customers');
     }
 

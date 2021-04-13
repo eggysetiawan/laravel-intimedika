@@ -9,7 +9,17 @@ class Tax extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['invoice_id', 'price_po', 'dpp', 'pph', 'komisi', 'nett', 'shipping', 'bank_admin', 'ppn'];
+    protected $fillable = [
+        'invoice_id',
+        'price_po',
+        'dpp',
+        'pph',
+        'komisi',
+        'nett',
+        'shipping',
+        'bank_admin',
+        'ppn'
+    ];
 
     public function invoice()
     {

@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisitPlan extends Model
 {
-    protected $fillable = ['date', 'description', 'is_visited', 'area', 'territory'];
+    protected $fillable = [
+        'date',
+        'description',
+        'is_visited',
+        'area',
+        'territory'
+    ];
     protected $table = 'visitplan';
 
     public function visit()

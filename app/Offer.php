@@ -10,7 +10,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Offer extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, Notifiable;
+    use SoftDeletes;
+    use InteractsWithMedia;
+    use Notifiable;
 
     protected $fillable = [
         'customer_id',

@@ -49,16 +49,19 @@ class FunnelController extends Controller
     {
         // to offers table
         $funnelService->createOffer($request);
+
         // to invoices table
         $funnelService->createInvoice();
+
         // to offer_progress table
         $funnelService->createProgress($request);
+
         // to orders table
         $funnelService->insertOrder($request);
+
         // to funnels table
         $funnelService->createFunnel($request);
 
-        // alert success
         session()->flash('success', 'Funnel telah berhasil dibuat!');
         return redirect('funnels');
     }

@@ -22,9 +22,10 @@ class RegisterController extends Controller
     {
         $attr = $request->all();
         $attr['password'] = bcrypt($request->password);
-        $user = User::create($attr);
 
+        $user = User::create($attr);
         $user->assignRole($request->role);
+
         session()->flash('success', 'User telah berhasil di daftarkan!');
         return redirect()->route('home');
     }
