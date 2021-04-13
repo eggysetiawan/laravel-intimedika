@@ -106,8 +106,8 @@ use App\Offer;
                             class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-exclamation nav-icon"></i>
                             <p>Approve Penawaran </p>
-                            @if (Offer::readyToApproveCount() > 0)
-                                <span class="badge badge-danger right">{{ Offer::readyToApproveCount() }}</span>
+                            @if ($readyToApprove > 0)
+                                <span class="badge badge-danger right">{{ $readyToApprove }}</span>
                             @endif
                         </a>
                     </li>
@@ -116,8 +116,8 @@ use App\Offer;
                             class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
                             <i class="fas fa-hand-holding-usd nav-icon"></i>
                             <p>Approve Purchase-Order</p>
-                            @if (Offer::readyToPurchaseCount() > 0)
-                                <span class="badge badge-danger right">{{ Offer::readyToPurchaseCount() }}</span>
+                            @if ($readyToPurchase > 0)
+                                <span class="badge badge-danger right">{{ $readyToPurchase }}</span>
                             @endif
 
                         </a>

@@ -1,4 +1,6 @@
 <div class="card-body">
+    <x-testing-user></x-testing-user>
+
     {{-- customer/rumah sakit --}}
     <div class="form-group">
         <label for="customer">Pilih Customer/Rumah Sakit</label>

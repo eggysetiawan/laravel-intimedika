@@ -41,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
         \Carbon\Carbon::setLocale('id');
 
         view()->share('users', User::select('id', 'name')->get());
+        view()->share('readyToApprove', Offer::readyToApproveCount());
+        view()->share('readyToPurchase', Offer::readyToPurchaseCount());
     }
 }

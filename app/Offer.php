@@ -70,14 +70,14 @@ class Offer extends Model implements HasMedia
         return $this->orderBy('offer_date', 'asc')->whereNotNull('offer_date')->first();
     }
 
-    public function scopeReadytoPurchaseCount()
+    public static function readytoPurchaseCount()
     {
-        return $this->whereHas('progressApproval')->count();
+        return static::whereHas('progressApproval')->count();
     }
 
-    public function scopeReadyToApproveCount()
+    public static function readyToApproveCount()
     {
-        return $this->whereNull('is_approved')->whereNotNull('offer_no')->count();
+        return static::whereNull('is_approved')->whereNotNull('offer_no')->count();
     }
 
     public function revision()

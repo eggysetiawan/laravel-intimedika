@@ -1,4 +1,5 @@
 <div class="card-body">
+    <x-testing-user></x-testing-user>
 
 
     @empty($nohospital)

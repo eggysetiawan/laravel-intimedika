@@ -1,5 +1,6 @@
 <div class="card-body">
-    
+    <x-testing-user></x-testing-user>
+
     <div class="form-group">
         <label for="hospital">Pilih Rumah Sakit</label>
         <div class="input-group">

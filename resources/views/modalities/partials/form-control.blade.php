@@ -1,4 +1,6 @@
 <div class="card-body">
+    <x-testing-user></x-testing-user>
+
     <div class="form-group">
         <label for="name">Nama Alat</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
