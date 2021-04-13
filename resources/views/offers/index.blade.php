@@ -85,8 +85,7 @@
                         <div class="form-group">
                             <label for="count">Masukan Jumlah Alat</label>
                             <select name="count" id="count" class="form-control">
-                                <option value="10" selected>10 Alat</option>
-                                @for ($i = 1; $i <= 9; $i++)
+                                @for ($i = 1; $i <= 10; $i++)
                                     <option value="{{ $i }}">{{ $i }} Alat</option>
                                 @endfor
                             </select>

@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
             Route::get('reject-offer', 'Auth\TwoFactorController@offerReject')->name('verify.offer.reject');
 
             Route::get('approve-purchase', 'Auth\TwoFactorController@purchaseApprove')->name('verify.purchase.approve');
-            Route::get('reject-purchase', 'Auth\TwoFactorController@purchaseReject')->name('verify.purchase.approve');
+            Route::get('reject-purchase', 'Auth\TwoFactorController@purchaseReject')->name('verify.purchase.reject');
         });
 
         Route::get('approve-alloffer', 'Auth\TwoFactorController@allOfferApprove')->name('verify.alloffer.approve');

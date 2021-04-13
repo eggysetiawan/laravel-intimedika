@@ -2,8 +2,7 @@
 'caption'=> 'Verify your credential.'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/visits">Kunjungan Harian</a></li>
-    <li class="breadcrumb-item">Slug/Name Here</li>
+    <li class="breadcrumb-item">{{ $offer->slug }}</li>
 @endsection
 @section('content')
     <x-card>

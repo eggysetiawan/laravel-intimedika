@@ -15,7 +15,7 @@ class CreateTaxesTable extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id')->constrained('invoices');
+            $table->foreignId('invoice_id')->constrained('invoices')->cascadeOnDelete();
             $table->double('price_po')->nullable();
             $table->double('dpp')->nullable();
             $table->double('ppn')->nullable();

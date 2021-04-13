@@ -2,8 +2,7 @@
 'caption'=> 'Verify your credential.'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/visits">Kunjungan Harian</a></li>
-    <li class="breadcrumb-item">Slug/Name Here</li>
+    <li class="breadcrumb-item">Tolak semua purchase order.</li>
 @endsection
 @section('content')
     <x-card>
@@ -12,7 +11,7 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route('approval.all-purchase', $offer->slug) }}">
+            <form method="POST" action="{{ route('approval.all-purchase') }}">
                 @method('patch')
                 @csrf
 

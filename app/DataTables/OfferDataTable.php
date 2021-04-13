@@ -85,13 +85,11 @@ class OfferDataTable extends DataTable
      */
     public function query(Offer $model)
     {
-        return $model->newQuery()
-            ->latest()
-            ->whereNotNull('offer_date') //hanya tampilkan penawaran resmi, bukan funnel plan.
+        return $model->newQuery() //hanya tampilkan penawaran resmi, bukan funnel plan.
+            ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
             ->when(!auth()->user()->isAdmin(), function ($query) { //jika bukan admin, tampilkan hanya penawaran milik masing2 sales.
                 return $query->where('user_id', auth()->id());
             })
-            ->with(['customer.hospitals', 'author', 'invoices.orders', 'progress.demo', 'invoices.tax'])
             ->when($this->from && $this->to, function ($query) { //query untuk filter periode from ~ to.
                 return $query->whereBetween('offer_date', [$this->from, $this->to]);
             })
@@ -110,7 +108,9 @@ class OfferDataTable extends DataTable
             })
             ->when($this->trash, function ($query) { //menu restore.
                 return $query->onlyTrashed();
-            }); //order berdasarkan data terbaru.
+            })
+            ->latest()
+            ->whereNotNull('offer_date'); //order berdasarkan data terbaru.
     }
 
     /**

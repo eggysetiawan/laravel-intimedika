@@ -2,9 +2,11 @@
 
     <div class="btn-group">
 
-        <a href=" @if (request()->segment(1) == 'offers') {{ route('verify.alloffer.approve') }} @else {{ route('verify.allpurchase.approve') }} @endif" class="btn
+    <a href="@if (request()->segment(1) == 'offers') {{ route('verify.alloffer.approve') }} @elseif(request()->segment(1) == 'progresses')
+            {{ route('verify.allpurchase.approve') }} @endif" class="btn
             btn-success">Approve All</a>
-        <a href="{{ route('verify.alloffer.reject') }}" class="btn btn-danger">Reject
+    <a href="@if (request()->segment(1) == 'offers') {{ route('verify.alloffer.reject') }} @elseif(request()->segment(1) == 'progresses')
+            {{ route('verify.allpurchase.reject') }} @endif" class="btn btn-danger">Reject
             All</a>
     </div>
 </div>

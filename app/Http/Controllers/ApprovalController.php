@@ -47,6 +47,7 @@ class ApprovalController extends Controller
                 'progress' => $progress,
             ]);
 
+        auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
         return redirect('offers');
     }
@@ -71,7 +72,7 @@ class ApprovalController extends Controller
                 'approved_by' => $approved_by,
                 'approved_at' => now()
             ]);
-
+        auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
         return redirect('offers');
     }
@@ -98,10 +99,10 @@ class ApprovalController extends Controller
             'approved_by' => $approved_by,
             'approved_at' => now()
         ]);
-
+        auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
 
-        return back();
+        return redirect('offers');
     }
 
     public function offer(ApprovalRequest $request, Offer $offer)
