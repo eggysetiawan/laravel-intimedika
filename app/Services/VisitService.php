@@ -13,10 +13,8 @@ class VisitService
     }
     public function create($request)
     {
-        // validate input
         $attr = $request->all();
         $attr['slug'] = $this->setSlug();
-        // customer_id
         $attr['customer_id'] = $request->customer;
         $attr['is_visited'] = 1;
 
@@ -27,12 +25,10 @@ class VisitService
     public function update($request, $visit)
     {
         $imgSlug = uniqid() . '.' . request()->file('img')->extension();
-
         $visit
             ->addMediaFromRequest('img')
             ->usingFileName($imgSlug)
             ->toMediaCollection('images');
-
 
         $attr = $request->all();
         return $visit->update($attr);

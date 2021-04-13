@@ -24,7 +24,7 @@ class InvoiceService
     public function uploadPO($request)
     {
         $request->validate([
-            'img' => 'required|image|mimes:png,jpg,jpeg,pdf',
+            'img' => ['required', 'image', 'mimes:png,jpg,jpeg,pdf'],
         ]);
 
         // to media tables
@@ -41,6 +41,7 @@ class InvoiceService
 
         $invoice = $this->invoice_create;
         $orders = Order::whereIn('id', $request->id_order);
+
         $price_po = 0;
         $insert = [];
         $orders->each(function ($order, $i) use ($invoice, $request, &$price_po, &$insert) {
@@ -56,7 +57,6 @@ class InvoiceService
                 'created_at' => now()->format('Y-m-d H:i:s'),
                 'updated_at' => now()->format('Y-m-d H:i:s'),
             ]);
-            // price_po yang dibawah ini mau dipakai diluar
             $price_po += $price * $request->qty[$order->id];
         });
 
@@ -70,6 +70,7 @@ class InvoiceService
     public function updatePrice($offer, $request)
     {
         $orders = $offer->fixPrices->whereIn('order_id', $request->id_order);
+
         $fix_price = [];
         $orders->each(function ($order, $i) use ($request, &$fix_price) {
             $price = isset($request->price[$order->order_id]) ? str_replace(",", "", $request->price[$order->order_id]) : $order->price;
@@ -78,6 +79,7 @@ class InvoiceService
                 'updated_at' => now()->toDateString(),
             ]);
         });
+
         return $fix_price;
     }
 

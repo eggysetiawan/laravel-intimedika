@@ -33,6 +33,7 @@ class FunnelService
     public function insertOrder($request)
     {
         $order = [];
+
         foreach ($request->modality as $i => $v) {
             // to table orders
             $order = Order::insert([
@@ -50,17 +51,15 @@ class FunnelService
     public function createFunnel($request)
     {
         $attr = $request->all();
-        // assign to funnel slug
         $attr['slug'] = Str::slug($request->description . ' ' . date('YmdHis'));
-        // insert into funnels table
         return $this->offer->funnel()->create($attr);
     }
 
     public function updateOrder($request, $funnel)
     {
         $insert = [];
+
         foreach ($funnel->offer->invoices->last()->orders as $i => $order) {
-            // to table orders
             $insert =  $order->update([
                 'modality_id' => $request->modality[$i],
                 'price' => str_replace([",", "_"], "", $request->price[$i]),
@@ -68,6 +67,7 @@ class FunnelService
                 'updated_at' => now()->toDateTimeString(),
             ]);
         }
+
         return $insert;
     }
 }

@@ -20,35 +20,32 @@ class OfferService
 
     public function maxOfferNo()
     {
-        if (Offer::first()) {
-            return Offer::where(function ($query) {
-                $maxYear = $query->max('offer_date');
-                return $query->where('offer_date', $maxYear);
-            })
-                ->max('offer_no');
-        } else {
+        if (!Offer::first()) {
             return 'Belum ada penawaran dibuat.';
         }
+
+        return Offer::where(function ($query) {
+            $maxYear = $query->max('offer_date');
+            return $query->where('offer_date', $maxYear);
+        })
+            ->max('offer_no');
     }
 
     public function createOffer($request)
     {
-        // convert month romawi
         $attr = $request->all();
 
+        // convert month romawi
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
 
         // offer_no
         $queue = str_pad($request->queue, 3, '0', STR_PAD_LEFT);
-        // acronym
         $initial = auth()->user()->initial;
         $bln = $array_bln[date('n', strtotime($request->date))];
         $tahun = date('Y', strtotime($request->date));
 
         $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
         $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
-
-
         $date = $this->getDate($request);
         $attr['offer_date'] = $date;
         $attr['customer_id'] = $request->customer;
@@ -61,6 +58,7 @@ class OfferService
         $invoice = $this->offer->invoices()->create([
             'date' => $this->getDate($request),
         ]);
+
         $this->invoice = $invoice;
         return $invoice;
     }

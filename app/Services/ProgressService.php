@@ -21,6 +21,7 @@ class ProgressService
         $orders = $offer->invoices->first()->orders
             ->whereIn('id', $request->id_order);
         $this->price_po = 0;
+
         $order = [];
         foreach ($orders as $i => $order) {
             $order->update([
@@ -38,10 +39,10 @@ class ProgressService
     {
         $modalities = $offer->invoices->first()->orders->whereIn('id', $request->id_order)->pluck('modality_id');
         $modality_id = $modalities->all();
-        $orders = $offer->fixPrices->whereIn('modality_id', $modality_id);
-        $fix_price = [];
-        $j = 0;
 
+        $j = 0;
+        $fix_price = [];
+        $orders = $offer->fixPrices->whereIn('modality_id', $modality_id);
         foreach ($orders as $i => $order) {
             $fix_price = $order->update([
                 'price' => str_replace(",", "", $request->price[$j]),
@@ -57,9 +58,9 @@ class ProgressService
         $orders = $offer->invoices->first()->orders->pluck('id');
         $order_id = $orders->all();
         $fix_prices = $offer->fixPrices;
-        $insert = [];
-        $j = 0;
 
+        $j = 0;
+        $insert = [];
         $fix_prices->each(function ($fix_price, $i) use (&$order_id, &$insert, &$j) {
             $insert = $fix_price->update([
                 'order_id' => $order_id[$j],
@@ -71,7 +72,9 @@ class ProgressService
 
     public function createTax($offer, $request)
     {
-        $shipping = isset($request->shipping) ? $request->shipping : 0;
+        $shipping = isset($request->shipping) ?
+            $request->shipping :
+            0;
 
         return Tax::create([
             'invoice_id' => $offer->invoices->first()->id,
@@ -88,6 +91,7 @@ class ProgressService
         // insert image to media table
         $request->validate([
             'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
+            'img' => ['required_if:progress,99', 'mimes:png,jpg,jpeg'],
         ]);
         $imgName = uniqid() . '.' . request()->file('img')->extension();
         return $offer->invoices->first()
