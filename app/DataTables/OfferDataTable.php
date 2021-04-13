@@ -86,6 +86,7 @@ class OfferDataTable extends DataTable
     public function query(Offer $model)
     {
         return $model->newQuery()
+            ->latest()
             ->whereNotNull('offer_date') //hanya tampilkan penawaran resmi, bukan funnel plan.
             ->when(!auth()->user()->isAdmin(), function ($query) { //jika bukan admin, tampilkan hanya penawaran milik masing2 sales.
                 return $query->where('user_id', auth()->id());
@@ -109,8 +110,7 @@ class OfferDataTable extends DataTable
             })
             ->when($this->trash, function ($query) { //menu restore.
                 return $query->onlyTrashed();
-            })
-            ->latest(); //order berdasarkan data terbaru.
+            }); //order berdasarkan data terbaru.
     }
 
     /**
@@ -126,8 +126,8 @@ class OfferDataTable extends DataTable
             ->parameters([
                 'stateSave' => true,
                 'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
-                'buttons'      => ['excel', 'print', 'reset'],
-                'order'   => [[1, 'desc']],
+                'buttons'      => ['print', 'reset'],
+                'order'   => [[0, 'desc']],
                 'lengthMenu' => [
                     [10, 25, 50, 100],
                     ['10', '25', '50', '100']
