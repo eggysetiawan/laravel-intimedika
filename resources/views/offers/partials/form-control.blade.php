@@ -1,4 +1,8 @@
 <div class="card-body">
+
+    <x-testing-user></x-testing-user>
+
+
     {{-- only appears when created --}}
     @empty($offer->offer_no)
         <div class="form-group">

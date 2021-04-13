@@ -36,6 +36,7 @@ class OfferRequest extends FormRequest
             'modalities.*' => 'required|distinct',
             'references.*' => 'nullable',
             'price.*' => 'integer|nullable',
+            'user' => ['integer', 'nullable'],
         ];
     }
 

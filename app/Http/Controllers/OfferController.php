@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Modality;
-use App\DataTables\OfferDataTable;
-use App\Http\Requests\OfferRequest;
 use App\{Offer, Customer};
 use App\Events\OfferCreated;
 use App\Events\OfferUpdated;
-use App\Http\Requests\UpdateOfferRequest;
-use App\Services\FilterService;
 use App\Services\OfferService;
+use App\Services\FilterService;
+use App\DataTables\OfferDataTable;
+use App\Http\Requests\OfferRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateOfferRequest;
 
 class OfferController extends Controller
 {
     public function index(OfferDataTable $dataTable, Offer $offer, FilterService $filterService)
     {
-
         return $dataTable->render('offers.index', [
             'approval' => 0,
             'offer_approval_count' => $offer
@@ -51,6 +51,7 @@ class OfferController extends Controller
 
     public function store(OfferRequest $request, OfferService $offerService)
     {
+
         // to offers table
         $offer = $offerService->createOffer($request);
         // to invoices table

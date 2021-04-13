@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\User;
 use App\Offer;
 use App\Observers\OfferObserver;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -37,5 +39,7 @@ class AppServiceProvider extends ServiceProvider
 
         config(['app.locale' => 'id']);
         \Carbon\Carbon::setLocale('id');
+
+        view()->share('users', User::select('id', 'name')->get());
     }
 }
