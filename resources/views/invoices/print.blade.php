@@ -191,8 +191,8 @@
                         <div style="float: right; padding-right: 3px;">
                             Mengetahui,<br>
 
-                            <div style="height:130px; padding: 20px 0px 0px 0px; margin-bottom: 22px;">
-                                {!! QrCode::generate(route('invoices.order', $offer->slug)) !!}
+                            <div style="height:118px; padding: 30px 0px 0px 0px; margin-bottom: 0px;">
+                                <img src="data:image/png;base64, {!! $qrcode !!}">
                             </div>
                             <p style="text-decoration: underline; margin-bottom: 0px; font-weight: bold;">
                                 Johannes Hendrajaja</p>

@@ -35,43 +35,43 @@
                             <div class="form-group">
                                 @switch($offer->is_approved)
                                     @case(1)
-                                    <div class="d-flex justify-content-end">
-                                        {{-- print --}}
-                                        <a href="{{ route('invoices.print', $offer->slug) }}" target="_blank"
-                                            class="btn btn-info mr-2"><i class="fas fa-print"></i></a>
+                                        <div class="d-flex justify-content-end">
+                                            {{-- print --}}
+                                            <a href="{{ route('pdf.offer', $offer->slug) }}" target="_blank"
+                                                class="btn btn-info mr-2"><i class="fas fa-print"></i></a>
 
-                                        {{-- repeat order --}}
-                                        @if ($offer->progress->is_approved == 1)
-                                            <button type="button" class="btn bg-olive" data-toggle="modal"
-                                                data-target="#repeatOrder">
-                                                Repeat Order
-                                            </button>
-                                        @endif
-                                    </div>
+                                            {{-- repeat order --}}
+                                            @if ($offer->progress->is_approved == 1)
+                                                <button type="button" class="btn bg-olive" data-toggle="modal"
+                                                    data-target="#repeatOrder">
+                                                    Repeat Order
+                                                </button>
+                                            @endif
+                                        </div>
 
                                     @break
                                     @case(2)
-                                    <div class="btn btn-danger form-control-plaintext text-center">has been rejected!</div>
+                                        <div class="btn btn-danger form-control-plaintext text-center">has been rejected!</div>
                                     @break
 
                                     @default
-                                    @can('approval')
-                                        {{-- when progress is ready to approve --}}
-                                        <div class="btn-group form-control-plaintext">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal"
-                                                data-target="#approveModal{{ $offer->id }}">Approve.</button>
-                                            <a href="{{ route('revisions.edit', $offer->slug) }}"
-                                                class="btn btn-warning btn-sm text-white">Hold</a>
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#rejectModal{{ $offer->id }}">Reject.</button>
-                                        </div>
-                                    @endcan
+                                        @can('approval')
+                                            {{-- when progress is ready to approve --}}
+                                            <div class="btn-group form-control-plaintext">
+                                                <button class="btn btn-success btn-sm" data-toggle="modal"
+                                                    data-target="#approveModal{{ $offer->id }}">Approve.</button>
+                                                <a href="{{ route('revisions.edit', $offer->slug) }}"
+                                                    class="btn btn-warning btn-sm text-white">Hold</a>
+                                                <button class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#rejectModal{{ $offer->id }}">Reject.</button>
+                                            </div>
+                                        @endcan
 
-                                    @if ($offer->is_approved == 3)
-                                        {{-- when progress is on hold --}}
-                                        <a href="{{ route('offers.edit', $offer->slug) }}"
-                                            class="btn btn-warning form-control-plaintext text-white">Edit Penawaran</a>
-                                    @endif
+                                        @if ($offer->is_approved == 3)
+                                            {{-- when progress is on hold --}}
+                                            <a href="{{ route('offers.edit', $offer->slug) }}"
+                                                class="btn btn-warning form-control-plaintext text-white">Edit Penawaran</a>
+                                        @endif
 
                                 @endswitch
                             </div>

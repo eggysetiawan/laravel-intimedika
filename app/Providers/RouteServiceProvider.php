@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapApprovalRoutes();
+        $this->mapExportRoutes();
         $this->mapGuestRoutes();
 
         //
@@ -70,6 +71,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web/approval.php'));
+    }
+    protected function mapExportRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/export.php'));
     }
     protected function mapGuestRoutes()
     {
