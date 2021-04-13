@@ -8,6 +8,8 @@ use Yajra\DataTables\Services\DataTable;
 
 class OfferDataTable extends DataTable
 {
+
+
     /**
      * Build DataTable class.
      *
@@ -125,7 +127,7 @@ class OfferDataTable extends DataTable
                 'stateSave' => true,
                 'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
                 'buttons'      => ['excel', 'print', 'reset'],
-                'order'   => [[0, 'desc']],
+                'order'   => [[1, 'desc']],
                 'lengthMenu' => [
                     [10, 25, 50, 100],
                     ['10', '25', '50', '100']
