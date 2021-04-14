@@ -5,6 +5,6 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::prefix('pdf')->middleware('auth')->group(function () {
+Route::prefix('pdf')->group(function () {
     Route::get('{offer:slug}', 'PdfController@offer')->name('pdf.offer');
 });

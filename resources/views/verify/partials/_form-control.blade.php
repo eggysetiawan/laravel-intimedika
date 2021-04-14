@@ -1,20 +1,18 @@
-<p class="text-muted">
-    You have received an email which contains two factor approval code.
-    If you haven't received it, press <a href="{{ route('verify.resend') }}">here</a>.
-</p>
+@method('patch')
+@csrf
 
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text">
-            <i class="fa fa-lock"></i>
-        </span>
-    </div>
-    <input name="two_factor_code" type="text"
-        class="form-control{{ $errors->has('two_factor_code') ? ' is-invalid' : '' }}" required autofocus
-        placeholder="4-digit Two Factor Code" maxlength="4">
-    @if ($errors->has('two_factor_code'))
-        <div class="invalid-feedback">
-            {{ $errors->first('two_factor_code') }}
-        </div>
+<h5 class="m-0">Email address verification</h5><span class="mobile-text">
+    @empty(auth()->user()->two_factor_code)
+        We will send the verification code to
+    @else
+        Enter the code we just send on
+        your
+        email address
+    @endempty
+    <b class="text-orange">{{ auth()->user()->email }}</b></span>
+<div class="mt-5 mb-3">
+    @if (auth()->user()->two_factor_code)
+        <input type="text" name="two_factor_code" class="form-control" autofocus="" placeholder="Enter 4-digit code"
+            maxlength="4" style="text-align: center" autocomplete="off">
     @endif
 </div>

@@ -67,6 +67,8 @@ class CustomerController extends Controller
             $customer->load('hospitals');
             $nohospital = false;
         }
+
+
         $create = null;
 
         return view('customers.edit', compact('customer', 'hospitals', 'nohospital', 'create'));

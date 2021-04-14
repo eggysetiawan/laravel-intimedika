@@ -5,45 +5,58 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Notifications\Offer\TwoFactorCode;
 use App\Offer;
-use App\User;
-use Illuminate\Http\Request;
+
 
 class TwoFactorController extends Controller
 {
     // offer
     public function allOfferApprove()
     {
-        return view('verify.all-offer');
+        $route = route('approval.all-offers');
+        return view('verify.approve', compact('route'));
     }
+
     public function allOfferReject()
     {
-        return view('verify.rejectall-offer');
+        $route = route('approval.all-offers');
+        return view('verify.reject', compact('route'));
     }
+
     public function offerApprove(Offer $offer)
     {
-        return view('verify.offer-approve', compact('offer'));
+        $route = route('approval.offers', $offer->slug);
+        return view('verify.approve', compact('offer', 'route'));
     }
+
     public function offerReject(Offer $offer)
     {
-        return view('verify.offer-reject', compact('offer'));
+        $route = route('approval.offers', $offer->slug);
+        return view('verify.reject', compact('offer', 'route'));
     }
 
     // purchase
     public function allPurchaseApprove()
     {
-        return view('verify.all-purchase');
+        $route = route('approval.all-purchase');
+        return view('verify.approve', compact('route'));
     }
+
     public function allPurchaseReject()
     {
-        return view('verify.rejectall-purchase');
+        $route = route('approval.all-purchase');
+        return view('verify.reject', compact('route'));
     }
+
     public function purchaseApprove(Offer $offer)
     {
-        return view('verify.purchase-approve', compact('offer'));
+        $route = route('approval.progress', $offer->slug);
+        return view('verify.approve', compact('offer', 'route'));
     }
+
     public function purchaseReject(Offer $offer)
     {
-        return view('verify.purchase-reject', compact('offer'));
+        $route = route('approval.progress', $offer->slug);
+        return view('verify.reject', compact('offer', 'route'));
     }
 
     public function send()

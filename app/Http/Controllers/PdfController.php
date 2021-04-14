@@ -10,8 +10,8 @@ class PdfController extends Controller
 {
     public function offer(Offer $offer)
     {
-        $data['offer'] = $offer;
-        $data['qrcode'] = base64_encode(QrCode::format('svg')->size(95)->errorCorrection('H')->generate(route('invoices.order', $offer->slug)));
+        $data['offer'] = $offer->load(['invoices.orders.modality', 'author',  'customer', 'progress', 'invoices.orders']);
+        $data['qrcode'] = base64_encode(QrCode::format('svg')->size(95)->errorCorrection('H')->generate(route('pdf.offer', $offer->slug)));
         $pdf = PDF::loadView('invoices.print', $data);
         $pdf->setPaper('a4', 'potrait');
         $pdf->setWarnings(false);

@@ -87,15 +87,15 @@
                                     <th>
                                         <center>Nama Alat</center>
                                     </th>
-                                    <th>
+                                    {{-- <th>
                                         <center>Qty</center>
-                                    </th>
+                                    </th> --}}
                                     <th>
                                         <center>Harga Satuan</center>
                                     </th>
-                                    <th>
+                                    {{-- <th>
                                         <center> Harga Total</center>
-                                    </th>
+                                    </th> --}}
                                 </tr>
                             </thead>
                             @foreach ($offer->invoices->first()->orders as $order)
@@ -114,19 +114,19 @@
                                             <pre>{{ $order->modality->spec }}</pre><br>
                                         </div>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <center>{{ $order->quantity }}</center>
-                                    </td>
+                                    </td> --}}
                                     <td>
                                         <center>
                                             @currency($order->price)
                                         </center>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <center>
                                             @currency($order->quantity * $order->price)<br>
                                             images</center>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
 

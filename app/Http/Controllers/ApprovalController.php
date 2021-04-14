@@ -43,6 +43,7 @@ class ApprovalController extends Controller
         }
 
         OfferProgress::whereNull('is_approved')
+            ->where('progress', 99)
             ->update([
                 'is_approved' => $approval,
                 'approved_by' => auth()->id(),
@@ -62,21 +63,34 @@ class ApprovalController extends Controller
         //  approved
         if ($request->approval == 1) {
             $approval = 1;
+            $progress = 30;
             $message = 'Semua Penawaran telah berhasil di approve!';
         }
 
         // rejected
         if ($request->approval == 2) {
             $approval = 2;
+            $progress = 0;
             $message = 'Semua Penawaran telah berhasil di reject!';
         }
 
-        Offer::whereNull('is_approved')
-            ->update([
-                'is_approved' => $approval,
-                'approved_by' => auth()->id(),
-                'approved_at' => now()
-            ]);
+        $offer = Offer::whereNull('is_approved');
+
+
+        $offer->update([
+            'is_approved' => $approval,
+            'approved_by' => auth()->id(),
+            'approved_at' => now()
+        ]);
+
+        // $offerId = $offer->pluck('id')->all();
+        // foreach ($offerId as $id) {
+        //     $offer_progress = OfferProgress::findOrFail($id);
+        //     $offer_progress->update([
+        //         'progress' => $progress
+        //     ]);
+        // }
+
 
         auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
