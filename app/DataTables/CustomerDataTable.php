@@ -68,7 +68,7 @@ class CustomerDataTable extends DataTable
             ->parameters([
                 'stateSave' => true,
                 'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
-                'buttons'      => ['print', 'reset'],
+                'buttons'      => ['reload', 'reset'],
                 'order'   => [1, 'desc'],
                 'lengthMenu' => [
                     [10, 25, 50, 100],
