@@ -1,7 +1,7 @@
 @extends('layouts.app' ,['title' => 'Buat Kunjungan Harian'])
 
 @section('breadcrumb')
-        <li class="breadcrumb-item"><a href="{{ route('visitplan.index') }}">Rencana Kunjungan</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('visitplan.index') }}">Rencana Kunjungan</a></li>
     <li class="breadcrumb-item">Buat</li>
 @endsection
 
@@ -16,4 +16,8 @@
             @include('visits.partials.form-control2', ['submit' => 'Create'])
         </form>
     </x-card>
+@endsection
+
+@section('script')
+    @include('hospitals.partials._select-hospital-script')
 @endsection

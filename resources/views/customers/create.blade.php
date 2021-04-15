@@ -23,5 +23,5 @@
 @endsection
 
 @section('script')
-
+    @include('hospitals.partials._select-hospital-script')
 @endsection

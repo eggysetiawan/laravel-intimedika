@@ -9,12 +9,6 @@ class PdfController extends Controller
 {
     public function offer(Offer $offer, PdfService $pdfService)
     {
-        // return $pdfService->exportOfferPage($offer);
-        return $pdfService->exportOfferTable();
-    }
-
-    public function offerTable(PdfService $pdfService)
-    {
-        return $pdfService->exportOfferTable();
+        return $pdfService->exportOfferPage($offer);
     }
 }

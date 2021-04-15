@@ -178,6 +178,7 @@ class OfferDataTable extends DataTable
             Column::make('customer.hospitals.name')
                 ->title('Customer/Rumah Sakit')
                 ->orderable(false),
+
             Column::make('customer.name')->title('Customer')
                 ->orderable(false)
                 ->visible(false)

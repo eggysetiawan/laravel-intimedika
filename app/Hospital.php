@@ -27,6 +27,14 @@ class Hospital extends Model
             ->limit(1000)
             ->get();
     }
+    public static function selectHospital()
+    {
+        return static::select(['id', 'name', 'city'])
+            ->orderBy('name', 'asc')
+            ->where('name', '!=', '')
+            ->limit(5)
+            ->get();
+    }
 
     public function customers()
     {

@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     ])->except(['create']);
 
     //  hospitals
+    Route::post('hospitals/select', 'SelectHospitalController')->name('hospitals.select');
     Route::resource('hospitals', 'HospitalController')->parameters([
         'hospitals' => 'hospital:slug',
     ]);
