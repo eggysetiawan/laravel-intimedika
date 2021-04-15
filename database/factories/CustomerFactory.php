@@ -2,17 +2,18 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Customer;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Customer::class, function (Faker $faker) {
     return [
         'user_id' => rand(1, 6),
-        'slug' => $faker->slug(),
         'name' => $faker->name,
         'mobile' => $faker->phoneNumber,
-        'role' => $faker->title,
+        'role' => $faker->jobTitle,
         'city' => $faker->city,
+        'slug' => Str::slug($faker->name . '-' . $faker->city),
         'address' => $faker->address,
         'email' => $faker->safeEmail,
     ];

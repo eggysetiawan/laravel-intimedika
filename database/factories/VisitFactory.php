@@ -4,16 +4,14 @@
 
 use App\Visit;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
 
 $factory->define(Visit::class, function (Faker $faker) {
     return [
-        'customer_id' => $faker->unique()->randomDigit,
+        'customer_id' => rand(1, 50),
         'user_id' => rand(1, 6),
-        'slug' => Str::slug($faker->sentence() . '-' . $faker->paragraph(10)),
+        'slug' => $faker->slug(),
         'result' => $faker->paragraph(10),
         'request' => $faker->sentence(),
         'is_visited' => '1',
-        'username' => $faker->userName,
     ];
 });
