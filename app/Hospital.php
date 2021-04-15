@@ -40,4 +40,9 @@ class Hospital extends Model
     {
         return $this->belongsToMany(Customer::class);
     }
+
+    public function advances()
+    {
+        return $this->belongsToMany(Advance::class);
+    }
 }
