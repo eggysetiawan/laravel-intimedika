@@ -23,11 +23,12 @@ class SelectHospitalController extends Controller
         }
 
         if ($search) {
-            $hospitals =  Hospital::select(['id', 'name'])
+            $hospitals =  Hospital::select(['id', 'name', 'city'])
                 ->orderBy('name', 'asc')
                 ->where('name', '!=', '')
                 ->where('name', 'LIKE', '%' . $search . '%')
-                ->limit(5)
+                ->orWhere('city', 'LIKE', '%' . $search . '%')
+                ->limit(50)
                 ->get();
         }
 
@@ -35,7 +36,7 @@ class SelectHospitalController extends Controller
         foreach ($hospitals as $hospital) {
             $response[] = array(
                 'id' => $hospital->id,
-                'text' => $hospital->name,
+                'text' => $hospital->name . ' - ' . $hospital->city,
             );
         }
 
