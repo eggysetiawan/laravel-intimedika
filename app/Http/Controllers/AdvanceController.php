@@ -24,7 +24,7 @@ class AdvanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('advances.create');
     }
 
     /**

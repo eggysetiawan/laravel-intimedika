@@ -66,10 +66,33 @@
                             </span>
                         @enderror
                     </div>
+                    <div class="input-group mb-3">
+                        <select name="position" id="position"
+                            class="form-control @error('position') is-invalid @enderror">
+                            <option selected disabled>Choose Position</option>
+                            <option value="IT Developer">IT Developer</option>
+                            <option value="Teknisi">Teknisi</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Direktur">Direktur</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+
+                        @error('position')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
                     <div class="input-group mb-3">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                            name="email" value="{{ old('email') }}" required autocomplete="email"
+                            placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

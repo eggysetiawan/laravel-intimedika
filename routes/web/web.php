@@ -10,6 +10,9 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
 
+    // advances
+    Route::resource('advances', 'AdvanceController');
+
     // arrived
     Route::resource('arrival', 'ArrivalController')->parameters([
         'arrival' => 'visit:slug',

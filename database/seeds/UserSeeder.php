@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         $userSuperAdmin = User::create([
             'name' => 'IT Division',
             'username' => 'intiwid01',
+            'position' => 'IT Developer',
             'initial' => 'IT',
             'email' => 'setiawaneggy@gmail.com',
             'password' => bcrypt('intiwid1'),
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         $userDirector = User::create([
             'name' => 'Johannes Hendrajaja',
             'username' => 'intimedika01',
+            'position' => 'Direktur',
             'initial' => 'JH',
             'email' => 'jhn@mail.com',
             'password' => bcrypt('intiwid1'),
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
         $userAdmin = User::create([
             'name' => 'PT. Intimedika Puspa Indah',
             'username' => 'admin_intimed',
+            'position' => 'Admin',
             'initial' => 'IPI',
             'email' => 'intimedika@mail.com',
             'password' => bcrypt('intiwid1'),
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
         $userSupervisor = User::create([
             'name' => 'Demo Supervisor',
             'username' => 'spv_intimed',
+            'position' => 'Sales',
             'initial' => 'SPV',
             'email' => 'spv@mail.com',
             'password' => bcrypt('intiwid1'),
@@ -59,6 +63,7 @@ class UserSeeder extends Seeder
         $userTeknisi = User::create([
             'name' => 'Demo Teknisi',
             'username' => 'teknisi',
+            'position' => 'Teknisi',
             'initial' => 'TKN',
             'email' => 'teknisi@mail.com',
             'password' => bcrypt('intiwid1'),
@@ -69,6 +74,7 @@ class UserSeeder extends Seeder
         $userSales = User::create([
             'name' => 'Demo sales',
             'username' => 'sales',
+            'position' => 'Sales',
             'initial' => 'Sls',
             'email' => 'sales@mail.com',
             'password' => bcrypt('intiwid1'),
