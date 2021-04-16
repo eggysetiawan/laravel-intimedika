@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Need;
 use App\Advance;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\AdvanceRequest;
+use App\NeedSource;
 
 class AdvanceController extends Controller
 {
@@ -24,7 +28,9 @@ class AdvanceController extends Controller
      */
     public function create()
     {
-        return view('advances.create');
+        return view('advances.create', [
+            'need_sources' => NeedSource::get(),
+        ]);
     }
 
     /**
@@ -33,9 +39,29 @@ class AdvanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdvanceRequest $request)
     {
-        //
+        $attr = $request->all();
+
+        $attr['slug'] = Str::slug($request->destination . '-' . $request->objective);
+
+        $advance = auth()->user()->advances()->create($attr);
+
+        foreach ($request->needs as $i => $v) {
+            Need::insert([
+                'advance_id' => $advance->id,
+                'need' => $request->needs[$i],
+                'price' => $request->prices[$i],
+                'day' => $request->days[$i],
+                'total' => ($request->prices[$i] * $request->days[$i]),
+                'note' => $request->notes[$i],
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
+            ]);
+        }
+
+        session()->flash('success', 'Advances Perjalanan berhasil dibuat!');
+        return back();
     }
 
     /**

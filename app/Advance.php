@@ -11,8 +11,8 @@ class Advance extends Model
 
     protected $fillable = [
         'slug',
+        'destination',
         'objective',
-        'title',
         'start_date',
         'end_date',
         'approved_by_supervisor_at',
@@ -23,8 +23,14 @@ class Advance extends Model
     {
         return $this->belongsToMany(Hospital::class);
     }
+
     public function needs()
     {
         return $this->hasMany(Need::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

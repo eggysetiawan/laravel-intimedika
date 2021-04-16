@@ -101,6 +101,11 @@ class User extends Authenticatable
         return $this->hasMany(Target::class);
     }
 
+    public function advances()
+    {
+        return $this->hasMany(Advance::class);
+    }
+
 
     // roles
 
