@@ -58,12 +58,14 @@
                                         @can('approval')
                                             {{-- when progress is ready to approve --}}
                                             <div class="btn-group form-control-plaintext">
-                                                <button class="btn btn-success btn-sm" data-toggle="modal"
-                                                    data-target="#approveModal{{ $offer->id }}">Approve.</button>
+                                                <a href="{{ route('verify.offer.approve', $offer->slug) }}"
+                                                    class="btn btn-success btn-sm">Approve.</a>
+
                                                 <a href="{{ route('revisions.edit', $offer->slug) }}"
                                                     class="btn btn-warning btn-sm text-white">Hold</a>
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#rejectModal{{ $offer->id }}">Reject.</button>
+
+                                                <a href="{{ route('verify.offer.reject', $offer->slug) }}"
+                                                    class="btn btn-danger btn-sm text-white">Reject.</a>
                                             </div>
                                         @endcan
 
@@ -427,16 +429,15 @@
                                                     @if ($offer->progress->progress == 99)
                                                         @can('view', $offer)
 
-                                                            <button class="btn btn-success float-right" data-toggle="modal"
-                                                                data-target="#approvePurchase{{ $offer->id }}"><i
-                                                                    class="fas fa-check-circle"></i>
-                                                                Approve Purchase
-                                                            </button>
-                                                            <button class="btn btn-danger float-right"
-                                                                style="margin-right: 5px;" data-toggle="modal"
-                                                                data-target="#rejectPurchase{{ $offer->id }}">
-                                                                <i class="fas fa-times-circle"></i> Reject Purchase
-                                                            </button>
+                                                            <a href="{{ route('verify.purchase.approve', $offer->slug) }}"
+                                                                class="btn btn-success float-right" title="Setujui PO ini."><i
+                                                                    class="fas fa-check-circle"></i> Approve
+                                                                Purchase.</a>
+
+                                                            <a href="{{ route('verify.purchase.reject', $offer->slug) }}"
+                                                                class="btn btn-danger float-right" style="margin-right: 5px;"
+                                                                title="Tolak PO ini."><i class="fas fa-times-circle"></i> Reject
+                                                                Purchase.</a>
 
                                                         @endcan
                                                     @endif

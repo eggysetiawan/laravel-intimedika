@@ -106,16 +106,18 @@ class ApprovalController extends Controller
         if ($request->approval == 1) {
             $approval = 1;
             $message = 'Purchase Order telah berhasil di approve!';
+            $progress = 100;
         }
 
         // rejected
         if ($request->approval == 2) {
             $approval = 2;
             $message = 'Purchse Order telah berhasil di reject!';
+            $progress = 0;
         }
 
         $offer->progress->update([
-            'progress' => 100,
+            'progress' => $progress,
             'is_approved' => $approval,
             'approved_by' => auth()->id(),
             'approved_at' => now()

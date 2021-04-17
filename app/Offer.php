@@ -32,6 +32,15 @@ class Offer extends Model implements HasMedia
         'slug'
     ];
 
+    public function isPurchaseReadyToUpdate()
+    {
+        return $this->progress->progress <= 99;
+    }
+
+    public function isPurchaseReadyToApprove()
+    {
+        return $this->progress->progress == 99;
+    }
 
     public function generateTwoFactorCode()
     {
@@ -114,8 +123,7 @@ class Offer extends Model implements HasMedia
     {
         return $this->hasMany(Invoice::class)->whereHas('orders', function ($query) {
             return $query->whereNotNull('quantitiy');
-        })
-            ->latest();
+        })->latest();
     }
     public function customer()
     {
