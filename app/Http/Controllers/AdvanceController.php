@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Need;
 use App\Advance;
+use App\DataTables\AdvanceDataTable;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdvanceRequest;
 use App\NeedSource;
+use App\Services\AdvanceService;
 
 class AdvanceController extends Controller
 {
@@ -16,9 +18,9 @@ class AdvanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(AdvanceDataTable $dataTable)
     {
-        //
+        return $dataTable->render('advances.index');
     }
 
     /**
@@ -28,40 +30,22 @@ class AdvanceController extends Controller
      */
     public function create()
     {
-        return view('advances.create', [
-            'need_sources' => NeedSource::get(),
-        ]);
+        return view('advances.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\AdvanceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AdvanceRequest $request)
+    public function store(AdvanceRequest $request, AdvanceService $advanceService)
     {
-        $attr = $request->all();
-
-        $attr['slug'] = Str::slug($request->destination . '-' . $request->objective);
-
-        $advance = auth()->user()->advances()->create($attr);
-
-        foreach ($request->needs as $i => $v) {
-            Need::insert([
-                'advance_id' => $advance->id,
-                'need' => $request->needs[$i],
-                'price' => $request->prices[$i],
-                'day' => $request->days[$i],
-                'total' => ($request->prices[$i] * $request->days[$i]),
-                'note' => $request->notes[$i],
-                'created_at' => now()->toDateTimeString(),
-                'updated_at' => now()->toDateTimeString(),
-            ]);
-        }
+        $advanceService->createAdvance($request);
+        $advanceService->insertNeeds($request);
 
         session()->flash('success', 'Advances Perjalanan berhasil dibuat!');
-        return back();
+        return redirect('advances');
     }
 
     /**

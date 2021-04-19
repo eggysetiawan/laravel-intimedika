@@ -1,8 +1,8 @@
-@extends('layouts.app', ['title'=> 'Perjalanan Dinas',
-'caption'=> 'Perjalanan Dinas'])
+@extends('layouts.app', ['title'=> 'Alat kesehatan',
+'caption'=> 'Daftar Modalitas'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Perjalanan Dinas</li>
+    <li class="breadcrumb-item">Daftar Modality</li>
     {{-- <li class="breadcrumb-item">Slug/Name Here</li> --}}
 @endsection
 @section('content')
@@ -10,7 +10,7 @@
         @unlessrole('director')
         <div class="d-flex justify-content-end">
             <div class="btn-group">
-                <x-button-create href="{{ route('advances.create') }}">Buat Advance</x-button-create>
+                <x-button-create href="{{ route('modalities.create') }}">Tambah Alat</x-button-create>
             </div>
         </div>
         @endunlessrole
@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Table Advance</h3>
+                    <h3 class="card-title">{{ $modalities->name ?? 'Table Modality' }}</h3>
 
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -37,7 +37,7 @@
                     {!! $dataTable->table([
     'class' => 'table table-centered table-striped dt-responsive
                     nowrap w-100',
-    'id' => 'advance-table',
+    'id' => 'modality-table',
 ]) !!}
                 </div>
                 <!-- /.card-body -->

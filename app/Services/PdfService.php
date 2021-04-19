@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Offer;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Support\Facades\Schema;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PdfService

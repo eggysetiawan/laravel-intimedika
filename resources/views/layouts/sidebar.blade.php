@@ -1,6 +1,3 @@
-@php
-use App\Offer;
-@endphp
 <aside class="main-sidebar sidebar-light-teal  elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link navbar-white text-sm">
@@ -38,14 +35,14 @@ use App\Offer;
                     </a>
                 </li>
 
-                {{-- <li class="nav-header">Perjalanan Dinas</li>
+                <li class="nav-header">Perjalanan Dinas</li>
                 <li class="nav-item">
-                    <a href="{{ route('advances.create') }}"
+                    <a href="{{ route('advances.index') }}"
                         class="nav-link{{ request()->segment(1) == 'advances' ? ' active' : '' }}">
-                        <i class="fas fa-map-marked-alt nav-icon"></i>
+                        <i class="fas fa-luggage-cart nav-icon"></i>
                         <p>Perjalanan Dinas</p>
                     </a>
-                </li> --}}
+                </li>
 
                 {{-- kunjungan/visits --}}
                 <li class="nav-header">Kunjungan Harian</li>
