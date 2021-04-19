@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use App\Hospital;
 use App\Http\Requests\VisitRequest;
 use App\Services\VisitAddService;
 
@@ -14,7 +13,6 @@ class VisitAddController extends Controller
     {
         return view('visits.add', [
             'customer' => new Customer(),
-            'hospitals' => Hospital::selectHospitalLimit(),
         ]);
     }
 

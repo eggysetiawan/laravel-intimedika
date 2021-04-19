@@ -8,9 +8,9 @@ class Customer extends Model
 {
     protected $fillable = ['slug', 'name', 'mobile', 'role', 'email',  'user_id'];
 
-    public function scopeSelectCustomer()
+    public static function selectCustomer()
     {
-        return $this->with('hospitals')
+        return static::with('hospitals')
             ->orderBy('name', 'asc')
             ->get();
     }

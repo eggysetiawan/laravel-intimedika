@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Hospital;
-use App\Http\Requests\SelectHospitalRequest;
-use App\Http\Resources\SelectHospitalResource;
+use App\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\SelectHospitalRequest;
+use App\Http\Resources\SelectCustomerResource;
 
-class SelectHospitalController extends Controller
+class SelectCustomerController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -20,20 +20,20 @@ class SelectHospitalController extends Controller
         $search = $request->search;
 
         if (!$search) {
-            $hospitals = Hospital::selectHospital();
+            $customers = Customer::selectCustomer();
         }
 
         if ($search) {
-            $hospitals =  Hospital::select(['id', 'name', 'city'])
+            $customers =  Customer::with(['hospitals' => function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            }])
                 ->orderBy('name', 'asc')
-                ->whereNotNull('name')
                 ->where('name', 'LIKE', '%' . $search . '%')
-                ->orWhere('city', 'LIKE', '%' . $search . '%')
                 ->limit(20)
                 ->get();
         }
 
-        $response = SelectHospitalResource::collection($hospitals);
+        $response = SelectCustomerResource::collection($customers);
         return response()->json($response);
     }
 }

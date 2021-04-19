@@ -38,14 +38,14 @@ use App\Offer;
                     </a>
                 </li>
 
-                <li class="nav-header">Perjalanan Dinas</li>
+                {{-- <li class="nav-header">Perjalanan Dinas</li>
                 <li class="nav-item">
                     <a href="{{ route('advances.create') }}"
                         class="nav-link{{ request()->segment(1) == 'advances' ? ' active' : '' }}">
                         <i class="fas fa-map-marked-alt nav-icon"></i>
                         <p>Perjalanan Dinas</p>
                     </a>
-                </li>
+                </li> --}}
 
                 {{-- kunjungan/visits --}}
                 <li class="nav-header">Kunjungan Harian</li>

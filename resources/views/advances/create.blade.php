@@ -7,11 +7,13 @@
     <div class="col-md-12 ">
         <x-alert></x-alert>
         <div class="card card-teal">
+
             <div class="card-header">
                 <h3 class="card-title">{{ $tableHeader ?? 'Advance Perjalanan' }}</h3>
-
             </div>
+
             <form method="post" action="{{ route('advances.store') }}">
+
                 @csrf
                 <input type="hidden" id="count" name="count" value="{{ old('count') }}">
                 <div class="card-body">
@@ -79,9 +81,11 @@
                     </div>
 
                 </div>
+
                 <div class="card-footer">
                     <x-button-submit>Buat Advance</x-button-submit>
                 </div>
+
             </form>
 
         </div>
@@ -96,7 +100,6 @@
         $(document).ready(function() {
 
             var count = 1;
-            var countField = $('#count').val(count);
 
             dynamic_field(count);
 

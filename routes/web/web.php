@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // route customers
+    Route::post('customers/select', 'SelectCustomerController')->name('customers.select');
     Route::get('customers/create-2', 'CustomerController@create2')->name('customers.create-2');
     Route::resource('customers', 'CustomerController')->parameters([
         'customers' => 'customer:slug',

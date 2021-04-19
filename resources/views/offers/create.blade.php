@@ -8,7 +8,7 @@
     <x-alert></x-alert>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <div class="callout callout-success">
                     <h5>No. Penawaran Terakhir</h5>
                     <p>{{ $max ?? 'Belum ada penawaran yang di buat.' }}</p>
@@ -26,3 +26,7 @@
         </form>
     </x-card>
 @endsection
+
+{{-- @section('script')
+    @include('customers.partials._select-customer')
+@endsection --}}

@@ -18,3 +18,7 @@
         </form>
     </x-card>
 @endsection
+
+{{-- @section('script')
+    @include('customers.partials._select-customer')
+@endsection --}}
