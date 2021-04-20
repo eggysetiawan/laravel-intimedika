@@ -4,9 +4,6 @@
         <label for="name">Customer</label>
         <select name="customer" id="customer" class="form-control select2">
             <option selected disabled>Pilih Customer</option>
-            @foreach ($customers as $customer)
-                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-            @endforeach
         </select>
         @error('name')
             <span class="invalid-feedback" role="alert">

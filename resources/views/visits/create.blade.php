@@ -19,6 +19,6 @@
     </x-card>
 @endsection
 
-{{-- @section('script')
+@section('script')
     @include('customers.partials._select-customer')
-@endsection --}}
+@endsection

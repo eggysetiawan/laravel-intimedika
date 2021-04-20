@@ -11,6 +11,7 @@
             <i class="far fa-eye nav-icon"></i>
             Detail
         </a>
+        <a href="{{ route('advances.edit', $advance->id) }}" class="dropdown-item">Edit</a>
 
     </div>
 

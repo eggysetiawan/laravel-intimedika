@@ -2,7 +2,6 @@
 
     <x-testing-user></x-testing-user>
 
-
     {{-- only appears when created --}}
     @empty($offer->offer_no)
         <div class="form-group">
@@ -49,11 +48,6 @@
                     </option>
                 @else
                     <option disabled selected>Pilih Customer</option>
-                    @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}">
-                            {{ $customer->hospitals->first()->name ?? $customer->name }}
-                        </option>
-                    @endforeach
                 @endisset
 
             </select>

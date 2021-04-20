@@ -24,13 +24,7 @@ class SelectCustomerController extends Controller
         }
 
         if ($search) {
-            $customers =  Customer::with(['hospitals' => function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
-            }])
-                ->orderBy('name', 'asc')
-                ->where('name', 'LIKE', '%' . $search . '%')
-                ->limit(20)
-                ->get();
+            $customers =  Customer::selectAllCustomer($search);
         }
 
         $response = SelectCustomerResource::collection($customers);

@@ -6,17 +6,10 @@
         <label for="customer">Pilih Customer/Rumah Sakit</label>
         <select name="customer" id="customer" class="select2 form-control @error('customer') is-invalid @enderror">
             @if ($offer->customer_id)
-
                 <option value="{{ $offer->customer_id }}">
                     {{ $offer->customer->hospitals->first()->name ?? $offer->customer->name }}</option>
-
             @else
-
-                @foreach ($customers as $customer)
-                    <option value="{{ $customer->id }}">{{ $customer->hospitals->first()->name ?? $customer->name }}
-                    </option>
-                @endforeach
-
+                <option selected disabled>Pilih Customer</option>
             @endif
         </select>
         @error('customer')

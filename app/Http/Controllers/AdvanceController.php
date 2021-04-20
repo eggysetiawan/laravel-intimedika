@@ -8,6 +8,7 @@ use App\DataTables\AdvanceDataTable;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdvanceRequest;
+use App\Http\Resources\UpdateNeedResource;
 use App\NeedSource;
 use App\Services\AdvanceService;
 
@@ -30,7 +31,9 @@ class AdvanceController extends Controller
      */
     public function create()
     {
-        return view('advances.create');
+        return view('advances.create', [
+            'advance' => new Advance(),
+        ]);
     }
 
     /**
@@ -67,7 +70,16 @@ class AdvanceController extends Controller
      */
     public function edit(Advance $advance)
     {
-        //
+        $advance->load('needs');
+        return view('advances.edit', [
+            'advance' => $advance,
+        ]);
+    }
+
+    public function needs(Advance $advance)
+    {
+        $needs = UpdateNeedResource::collection($advance->needs);
+        return response()->json($needs);
     }
 
     /**

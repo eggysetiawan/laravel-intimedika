@@ -11,7 +11,28 @@ class Customer extends Model
     public static function selectCustomer()
     {
         return static::with('hospitals')
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
             ->orderBy('name', 'asc')
+            ->limit(5)
+            ->get();
+    }
+
+    public static function selectAllCustomer($search)
+    {
+        return static::with('hospitals')
+            ->orderBy('name', 'asc')
+            ->where('name', 'LIKE', '%' . $search . '%')
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
+            ->orWhere(function ($query) use ($search) {
+                return $query->whereHas('hospitals', function ($q) use ($search) {
+                    return $q->where('name', 'LIKE', '%' . $search . '%');
+                });
+            })
+            ->limit(20)
             ->get();
     }
 
