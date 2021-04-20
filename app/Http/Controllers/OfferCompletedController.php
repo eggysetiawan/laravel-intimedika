@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\OfferDataTable;
+use App\Offer;
 use App\Services\FilterService;
+use App\DataTables\OfferDataTable;
 
 class OfferCompletedController extends Controller
 {
@@ -18,6 +19,9 @@ class OfferCompletedController extends Controller
                 'tableHeader' => 'Penawaran Berhasil',
                 'approval' => 0,
                 'fromDate' => $filterService->getOfferFromDate(),
+                'completedCount' => Offer::whereHas('progress', function ($query) {
+                    return $query->where('progress', 100);
+                })->count(),
             ]);
     }
 }

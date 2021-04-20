@@ -59,10 +59,12 @@
 
                 <div class="card-body table-responsive ">
                     @if (request()->segment(2) == 'completed')
-
-                        <a href="{{ route('excel.offer') }}" class="btn btn-success mb-2"><i
-                                class="far fa-file-excel"></i>
-                            Excel</a>
+                        @if ($completedCount > 0)
+                            <a href="{{ route('excel.offer') }}" class="btn btn-success btn-sm mb-2"><i
+                                    class="far fa-file-excel"></i>
+                                Excel
+                            </a>
+                        @endif
                     @endif
                     {!! $dataTable->table([
     'class' => 'table table-centered table-striped dt-responsive

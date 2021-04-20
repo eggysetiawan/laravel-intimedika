@@ -51,7 +51,6 @@ class OfferController extends Controller
 
     public function store(OfferRequest $request, OfferService $offerService)
     {
-
         // to offers table
         $offer = $offerService->createOffer($request);
         // to invoices table

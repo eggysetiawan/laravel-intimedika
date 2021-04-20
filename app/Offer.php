@@ -32,6 +32,8 @@ class Offer extends Model implements HasMedia
         'slug'
     ];
 
+
+
     public function isPurchaseReadyToUpdate()
     {
         return $this->progress->progress <= 99;
