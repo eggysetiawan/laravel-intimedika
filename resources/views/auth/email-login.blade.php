@@ -69,17 +69,6 @@
                         <!-- /.col -->
                     </div>
                 </form>
-
-
-
-                <!-- /.social-auth-links -->
-
-
-                <p class="mb-0">
-                    @if (Route::has('register'))
-                        <a class="btn btn-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    @endif
-                </p>
             </div>
             <!-- /.login-card-body -->
         </div>
