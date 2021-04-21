@@ -41,4 +41,7 @@
             </span>
         @enderror
     </div>
+
+    <x-testing-user></x-testing-user>
+
 @endempty
