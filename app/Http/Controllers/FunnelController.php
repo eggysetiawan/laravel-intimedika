@@ -102,10 +102,11 @@ class FunnelController extends Controller
      */
     public function update(FunnelUpdateRequest $request, Funnel $funnel, FunnelService $funnelService)
     {
-        $attr = $request->all();
         $funnelService->updateOrder($request, $funnel);
+
+        $attr = $request->all();
         $funnel->update($attr);
-        // alert success
+
         session()->flash('success', 'Funnel telah berhasil di update!');
         return redirect('funnels');
     }

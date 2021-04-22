@@ -1,6 +1,3 @@
-@php
-$i = 0;
-@endphp
 @foreach ($offer->invoices->first()->orders as $order)
     @php
         $i++;

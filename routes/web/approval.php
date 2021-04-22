@@ -5,56 +5,55 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 Route::middleware('auth')->group(function () {
+
     // view approval penawaran & po
     Route::middleware(['permission:approval|openworld'])->group(function () {
         Route::get('offers/approval', 'ApprovalController@index')->name('offers.approval');
     });
 
-
     // approval
-    Route::group(['middleware' => ['twofactor', 'permission:approval|openworld']], function () {
-        Route::patch('approve/all/offers', 'ApprovalController@allOffer')->name('approval.all-offers');
-        Route::patch('approve/all/progress', 'ApprovalController@allPurchase')->name('approval.all-purchase');
-        Route::patch('approve/{offer:slug}/offers', 'ApprovalController@offer')->name('approval.offers');
-        Route::patch('approve/{offer:slug}/progress', 'ApprovalController@progress')->name('approval.progress');
+    Route::prefix('approve')->name('approval.')->middleware(['twofactor', 'permission:approval|openworld'])->group(function () {
+        Route::patch('all/offers', 'ApprovalController@allOffer')->name('all-offers');
+        Route::patch('all/progress', 'ApprovalController@allPurchase')->name('all-purchase');
+        Route::patch('{offer:slug}/offers', 'ApprovalController@offer')->name('offers');
+        Route::patch('{offer:slug}/progress', 'ApprovalController@progress')->name('progress');
     });
 
     // pin setup
-    // Route::resource('pins', 'RegisterPinController');
-    Route::get('pins/create', 'RegisterPinController@create')->name('pins.create');
-    Route::patch('pins/update', 'RegisterPinController@update')->name('pins.update');
+    Route::prefix('pins')->name('pins.')->group(function () {
+        Route::get('create', 'RegisterPinController@create')->name('create');
+        Route::patch('update', 'RegisterPinController@update')->name('update');
+    });
 
     // revision
-    Route::get('revisions/{offer:slug}/edit', 'RevisionController@edit')
-        ->middleware(['role:director|superadmin'])
-        ->name('revisions.edit');
-    Route::patch('revisions/{offer:slug}', 'RevisionController@update')
-        ->middleware(['role:director|superadmin'])
-        ->name('revisions.update');
-
-
+    Route::prefix('revisions')->name('revisions.')->middleware(['role:director|superadmin'])->group(function () {
+        Route::get('{offer:slug}/edit', 'RevisionController@edit')->name('edit');
+        Route::patch('{offer:slug}', 'RevisionController@update')->name('update');
+    });
 
     // register
     Route::post('registers', 'RegisterController')->name('registers.store')->middleware('register');
 
     // verify
-    Route::get('verify/send', 'Auth\TwoFactorController@send')->name('verify.send');
-    Route::get('verify/resend', 'Auth\TwoFactorController@resend')->name('verify.resend');
+    Route::prefix('verify')->name('verify.')->group(function () {
+        Route::get('send', 'Auth\TwoFactorController@send')->name('send');
+        Route::get('resend', 'Auth\TwoFactorController@resend')->name('resend');
+    });
 
-    Route::middleware('permission:approval|openworld')->prefix('verify')->group(function () {
+    Route::prefix('verify')->name('verify.')->middleware('permission:approval|openworld')->group(function () {
 
         Route::prefix('{offer:slug}')->group(function () {
-            Route::get('approve-offer', 'Auth\TwoFactorController@offerApprove')->name('verify.offer.approve');
-            Route::get('reject-offer', 'Auth\TwoFactorController@offerReject')->name('verify.offer.reject');
+            Route::get('approve-offer', 'Auth\TwoFactorController@offerApprove')->name('offer.approve');
+            Route::get('reject-offer', 'Auth\TwoFactorController@offerReject')->name('offer.reject');
 
-            Route::get('approve-purchase', 'Auth\TwoFactorController@purchaseApprove')->name('verify.purchase.approve');
-            Route::get('reject-purchase', 'Auth\TwoFactorController@purchaseReject')->name('verify.purchase.reject');
+            Route::get('approve-purchase', 'Auth\TwoFactorController@purchaseApprove')->name('purchase.approve');
+            Route::get('reject-purchase', 'Auth\TwoFactorController@purchaseReject')->name('purchase.reject');
         });
 
-        Route::get('approve-alloffer', 'Auth\TwoFactorController@allOfferApprove')->name('verify.alloffer.approve');
-        Route::get('reject-alloffer', 'Auth\TwoFactorController@allOfferReject')->name('verify.alloffer.reject');
+        Route::get('approve-alloffer', 'Auth\TwoFactorController@allOfferApprove')->name('alloffer.approve');
+        Route::get('reject-alloffer', 'Auth\TwoFactorController@allOfferReject')->name('alloffer.reject');
 
-        Route::get('approve-allpurchase', 'Auth\TwoFactorController@allPurchaseApprove')->name('verify.allpurchase.approve');
-        Route::get('reject-allpurchase', 'Auth\TwoFactorController@allPurchaseReject')->name('verify.allpurchase.reject');
+        Route::get('approve-allpurchase', 'Auth\TwoFactorController@allPurchaseApprove')->name('allpurchase.approve');
+        Route::get('reject-allpurchase', 'Auth\TwoFactorController@allPurchaseReject')->name('allpurchase.reject');
     });
 });

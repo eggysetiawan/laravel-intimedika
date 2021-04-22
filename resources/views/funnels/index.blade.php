@@ -48,7 +48,7 @@
     </div>
 
     <div class="modal fade" id="modal-funnel">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
             <form action="{{ route('funnels.create') }}" method="GET">
                 <div class="modal-content">
                     <div class="modal-header bg-gradient-teal">

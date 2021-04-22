@@ -2,10 +2,7 @@
 
     <x-testing-user></x-testing-user>
 
-    {{-- only appears when create offer --}}
-    @empty($offer->offer_no)
-        @include('offers.partials.head')
-    @endempty
+    @include('offers.partials.head')
 
     @include('offers.partials.foot')
 

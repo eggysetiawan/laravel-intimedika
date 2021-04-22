@@ -109,8 +109,8 @@ class OfferService
         foreach ($offer->invoices->last()->orders as $i => $order) {
             // to table orders
             $order = $order->update([
-                'modality_id' => $request->modalities[$i],
-                'price' => str_replace([",", "_"], "", $request->prices[$i]),
+                'modality_id' => $request->modality[$i],
+                'price' => str_replace([",", "_"], "", $request->price[$i]),
                 'references' => $request->references[$i],
                 'updated_at' => now()->toDateTimeString(),
             ]);

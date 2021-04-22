@@ -14,7 +14,8 @@ class Order extends Model
         'modality_id',
         'quantity',
         'status',
-        'price'
+        'price',
+        'references'
     ];
 
     public function invoice()

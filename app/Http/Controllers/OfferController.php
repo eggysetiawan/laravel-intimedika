@@ -72,8 +72,9 @@ class OfferController extends Controller
     {
         $customers = Customer::selectCustomer();
         $modalities = Modality::selectModality();
+        $i = 0;
 
-        return view('offers.edit', compact('offer', 'customers', 'modalities'));
+        return view('offers.edit', compact('offer', 'customers', 'modalities', 'i'));
     }
 
     public function update(UpdateOfferRequest $request, Offer $offer, OfferService $offerService)
