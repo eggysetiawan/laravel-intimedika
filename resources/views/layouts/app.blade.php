@@ -34,23 +34,21 @@
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">{{ $caption ?? '' }}</h1>
                         </div>
-                        <!-- /.col -->
                         @include('layouts.breadcrumb')
-                        <!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
+            </div> <!-- /.content-header -->
 
             <!-- Main content -->
             <main class="content">
+
                 <div class="container-fluid">
                     @yield('content')
                 </div>
             </main>
             <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
+
+        </div><!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
         @include('layouts.control-sidebar')
