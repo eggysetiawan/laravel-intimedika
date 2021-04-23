@@ -93,7 +93,7 @@ class UserSeeder extends Seeder
 
         $supeardmin = Role::create(['name' => 'superadmin']);
         $director = Role::create(['name' => 'director']);
-        $supervisor = Role::create(['name' => 'supervisor']);
+        // $supervisor = Role::create(['name' => 'supervisor']);
         $sales = Role::create(['name' => 'sales']);
         $teknisi = Role::create(['name' => 'teknisi']);
         $admin = Role::create(['name' => 'admin']);
@@ -107,7 +107,7 @@ class UserSeeder extends Seeder
 
         $director->givePermissionTo('approval');
 
-        $supervisor->givePermissionTo('supervise');
+        $userSupervisor->givePermissionTo('supervise');
 
         $sales->givePermissionTo('salesman');
 
@@ -122,6 +122,6 @@ class UserSeeder extends Seeder
         $userAdmin->assignRole('admin');
         $userTeknisi->assignRole('teknisi');
         $userSales->assignRole('sales');
-        $userSupervisor->assignRole('supervisor');
+        $userSupervisor->assignRole('sales');
     }
 }

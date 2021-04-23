@@ -152,6 +152,7 @@ class OfferDataTable extends DataTable
     protected function getColumns()
     {
         return [
+
             // action
             Column::computed('action')
                 ->title('<i class="fas fa-cogs"></i>')
