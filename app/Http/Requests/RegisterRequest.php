@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
             'role' => ['required', Rule::In(['sales', 'teknisi', 'admin', 'supervisor'])],
             'phone' => ['required', 'max:15'],
             'email' => ['required', 'email', 'unique:users,email', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
             'terms' => ['accepted'],
         ];
     }

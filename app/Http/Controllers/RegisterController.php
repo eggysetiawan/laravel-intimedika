@@ -24,7 +24,14 @@ class RegisterController extends Controller
         $attr['password'] = bcrypt($request->password);
 
         $user = User::create($attr);
-        $user->assignRole($request->role);
+
+        if ($request->role == 'supervisor') {
+            $user->assignRole('sales');
+        }
+
+        if ($request->role != 'supervisor') {
+            $user->assignRole($request->role);
+        }
 
         session()->flash('success', 'User telah berhasil di daftarkan!');
         return redirect()->route('home');
