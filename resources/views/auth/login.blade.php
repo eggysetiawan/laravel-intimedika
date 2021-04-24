@@ -18,9 +18,14 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/pre.css') }}">
 </head>
 
 <body class="hold-transition login-page accent-orange">
+    <div class="loader">
+        <img src="{{ asset('image/preloader.gif') }}" alt="">
+    </div>
+
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ route('home') }}"><b>{{ config('app.name', 'Laravel') }}</a>
@@ -126,6 +131,8 @@
         }
 
     </script>
+
+    <script src="{{ asset('js/pre.js') }}"></script>
 </body>
 
 </html>

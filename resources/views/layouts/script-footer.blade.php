@@ -44,6 +44,8 @@
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/pre.js') }}"></script>
+
 
 
 

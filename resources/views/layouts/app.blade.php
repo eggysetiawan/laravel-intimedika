@@ -13,17 +13,22 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     @include('layouts.head')
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse accent-teal">
+    {{-- Preloader Content --}}
+    <div class="loader">
+        <img src="{{ asset('image/preloader-menu.gif') }}" alt="">
+    </div>
     <div class="wrapper">
-
         <!-- Navbar -->
         @include('layouts.navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Containers -->
         @include('layouts.sidebar')
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper layering">

@@ -95,19 +95,12 @@ class VisitDataTable extends DataTable
                 'stateSave' => true,
                 'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
                 'buttons'      => ['reload', 'reset'],
-                'order'   => [1, 'desc'],
+                'order'   => [0, 'desc'],
                 'lengthMenu' => [
                     [10, 25, 50, 100],
                     ['10', '25', '50', '100']
                 ],
-            ])
-            ->language([
-                'processing' => '<div class="loadingio-spinner-double-ring-2u42wjzuj9"><div class="ldio-1rv8kps4nil">
-                <div></div>
-                <div></div>
-                <div><div></div></div>
-                <div><div></div></div>
-                </div></div>',
+                'processing' => false,
             ])
             ->columns($this->getColumns());
     }
