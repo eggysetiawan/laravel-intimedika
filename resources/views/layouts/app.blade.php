@@ -19,7 +19,11 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse accent-teal">
     {{-- Preloader Content --}}
     <div class="loader">
-        <img src="{{ asset('image/preloader-menu.gif') }}" alt="">
+       <div class="justify-content-center text-center">
+           <img src="{{ asset('image/preloader-menu4.gif') }}" alt="">
+           <h4 class="text-center font-weight-bold ">Connecting</h4>
+       </div>
+
     </div>
     <div class="wrapper">
         <!-- Navbar -->
