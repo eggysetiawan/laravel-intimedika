@@ -13,7 +13,7 @@ class OfferFunnelRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,35 @@ class OfferFunnelRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'queue' => 'required|numeric|min:1',
+            'date' => 'date',
+            'customer' => 'integer|required',
+            'budget' => 'required',
+            'price_note' => 'nullable',
+            'warranty_note' => 'nullable',
+            'availability_note' => 'nullable',
+            'note' => 'nullable',
+            'modality' => 'required',
+            'modality.*' => 'required|distinct',
+            'references.*' => 'nullable',
+            'price.*' => 'required',
+            'user' => ['integer', 'nullable'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'customer' => 'Pelanggan',
+            'budget' => 'Sumber Dana',
+            'references' => 'Referensi',
+            'modality' => 'Alat Kesehatan',
+            'quantity' => 'Kuantitas',
+            'price' => 'Harga',
+            'price_note' => 'Catatan Harga',
+            'warranty_note' => 'Garansi',
+            'availability_note' => 'Ketersediaan',
+            'note' => 'Keterangan',
         ];
     }
 }

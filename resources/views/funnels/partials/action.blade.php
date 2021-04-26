@@ -16,11 +16,13 @@
             Edit
         </a>
 
-        <a href="{{ route('offerfunnel.edit', $funnel->slug) }}" class="dropdown-item"
-            title="Buat penawaran dari funnel ini.">
-            <i class="fab fa-buffer nav-icon"></i>
-            Buat Penawaran
-        </a>
+        @if ($funnel->progress < 100)
+            <a href="{{ route('offerfunnel.edit', $funnel->slug) }}" class="dropdown-item"
+                title="Buat penawaran dari funnel ini.">
+                <i class="fab fa-buffer nav-icon"></i>
+                Buat Penawaran
+            </a>
+        @endif
 
     </div>
 </div>

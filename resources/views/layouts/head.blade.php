@@ -27,4 +27,3 @@
 {{-- style master --}}
 <link rel="stylesheet" href="{{ asset('dist/css/style_master.css') }}">
 <link rel="stylesheet" href="{{ asset('css/pre.css') }}">
-

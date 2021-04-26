@@ -10,7 +10,6 @@ use App\Services\OfferService;
 use App\Services\FilterService;
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\OfferRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateOfferRequest;
 
 class OfferController extends Controller

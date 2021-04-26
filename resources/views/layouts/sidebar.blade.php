@@ -35,14 +35,14 @@
                     </a>
                 </li>
 
-                {{-- <li class="nav-header">Perjalanan Dinas</li>
+                <li class="nav-header">Perjalanan Dinas</li>
                 <li class="nav-item">
                     <a href="{{ route('advances.index') }}"
                         class="nav-link{{ request()->segment(1) == 'advances' ? ' active' : '' }}">
                         <i class="fas fa-luggage-cart nav-icon"></i>
                         <p>Perjalanan Dinas</p>
                     </a>
-                </li> --}}
+                </li>
 
                 {{-- kunjungan/visits --}}
                 <li class="nav-header">Kunjungan Harian</li>

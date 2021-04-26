@@ -46,7 +46,7 @@ class OfferRequest extends FormRequest
             'customer' => 'Pelanggan',
             'budget' => 'Sumber Dana',
             'references' => 'Referensi',
-            'modality' => 'Alat Kesehatan',
+            'modalities' => 'Alat Kesehatan',
             'quantity' => 'Kuantitas',
             'price' => 'Harga',
             'price_note' => 'Catatan Harga',

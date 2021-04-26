@@ -16,4 +16,14 @@ class PdfService
         $pdf->setWarnings(false);
         return $pdf->stream($offer->offer_no . '_' . $offer->author->name . '.pdf');
     }
+
+    public function exportAdvance($advance)
+    {
+        $data['advance'] = $advance->load(['hospitals', 'needs', 'author']);
+        // $data['qrcode'] = base64_encode(QrCode::format('svg')->size(95)->errorCorrection('H')->generate(route('pdf.offer', $offer->slug)));
+        $pdf = PDF::loadView('advances.print.print', $data);
+        $pdf->setPaper('a4', 'potrait');
+        $pdf->setWarnings(false);
+        return $pdf->stream(uniqid() . '.pdf');
+    }
 }

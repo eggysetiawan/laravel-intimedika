@@ -28,9 +28,11 @@
                     class="form-control select2 @error('modality.' . $i) is-invalid @enderror">
                     <option selected value="{{ $order->modality_id }}">{{ $order->modality->name }}</option>
                     @foreach ($modalities as $modality)
-                        <option value="{{ $modality->id }}">
-                            {{ $modality->name . ' - ' . $modality->model }} (@currency($modality->price))
-                        </option>
+                        @if ($modality->id != $order->modality_id)
+                            <option value="{{ $modality->id }}">
+                                {{ $modality->name . ' - ' . $modality->model }} (@currency($modality->price))
+                            </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('modality.' . $i)

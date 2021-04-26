@@ -53,9 +53,7 @@ class FunnelDataTable extends DataTable
     public function query(Funnel $model)
     {
         return $model->newQuery()
-            ->with(['offer.customer.hospitals', 'offer.author', 'offer' => function ($query) {
-                return $query->whereNull('offer_no');
-            }])
+            ->with(['offer.customer.hospitals', 'offer.author', 'offer'])
             ->latest();
     }
 
@@ -112,6 +110,7 @@ class FunnelDataTable extends DataTable
             Column::make('offer.customer.hospitals.name')
                 ->title('Customer/Rumah Sakit')
                 ->orderable(false),
+
             Column::make('offer.customer.name')->title('Customer')
                 ->orderable(false)
                 ->visible(false)

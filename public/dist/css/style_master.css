@@ -156,3 +156,12 @@ body::-webkit-scrollbar-thumb {
         transform: rotate(1800deg);
     }
 }
+
+
+
+.body_pdf{
+    font-size: 13px;
+}
+.table-ttd  th{
+    width: 240px;
+}

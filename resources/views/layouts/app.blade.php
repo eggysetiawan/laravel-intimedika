@@ -11,7 +11,6 @@
     <title>{{ 'IPI Portal | ' . $title ?? 'Portal Intimedika' }}</title>
 
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     @include('layouts.head')
 
 </head>

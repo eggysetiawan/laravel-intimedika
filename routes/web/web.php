@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
     // offerfunnel
     Route::prefix('offerfunnel')->name('offerfunnel.')->group(function () {
         Route::get('{funnel:slug}/edit', 'OfferFunnelController@edit')->name('edit');
-        Route::patch('{funnel:slug}', 'OfferFunnelController@edit')->name('update');
+        Route::patch('{funnel:slug}', 'OfferFunnelController@update')->name('update');
     });
 
     // progresses
