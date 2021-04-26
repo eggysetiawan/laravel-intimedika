@@ -36,7 +36,7 @@
                 <form action="{{ route('login') }}" method="post" novalidate>
                     @csrf
                     <div class="input-group mb-3">
-                        <input placeholder="username" id="username" type="text"
+                        <input placeholder="Username" id="username" type="text"
                             class="form-control  @error('username') is-invalid @enderror" name="username"
                             value="{{ old('username') }}" autocomplete="username" autofocus>
                         <div class="input-group-append">
