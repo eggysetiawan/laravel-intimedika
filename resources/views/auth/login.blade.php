@@ -22,10 +22,8 @@
 </head>
 
 <body class="hold-transition login-page accent-orange">
-    <div class="loader">
-        <img src="{{ asset('image/preloader.gif') }}" alt="">
-    </div>
-
+    {{-- Preloader Content --}}
+    @include('layouts.preloader')
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ route('home') }}"><b>{{ config('app.name', 'Laravel') }}</a>

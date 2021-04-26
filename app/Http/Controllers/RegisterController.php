@@ -10,7 +10,7 @@ class RegisterController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\RegisterRequest  $request
      * @return \Illuminate\Http\Response
      */
 
@@ -27,6 +27,7 @@ class RegisterController extends Controller
 
         if ($request->role == 'supervisor') {
             $user->assignRole('sales');
+            $user->givePermissionTo('supervise');
         }
 
         if ($request->role != 'supervisor') {
