@@ -11,7 +11,11 @@
             <i class="far fa-eye nav-icon"></i>
             Detail
         </a>
-        <a href="{{ route('advances.edit', $advance->id) }}" class="dropdown-item">Edit</a>
+
+        <a href="{{ route('advances.edit', $advance->slug) }}" class="dropdown-item">
+            <i class="fas fa-edit nav-icon"></i>
+            Edit
+        </a>
 
     </div>
 

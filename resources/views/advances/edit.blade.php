@@ -2,7 +2,7 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('advances.index') }}">Table Advance</a></li>
-    <li class="breadcrumb-item">{{ Str::limit($advance, 25, '...') }}</li>
+    <li class="breadcrumb-item">{{ Str::limit($advance->destination, 25, '...') }}</li>
 @endsection
 @section('content')
     <div class="col-md-12 ">
