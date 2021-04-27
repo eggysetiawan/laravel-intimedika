@@ -31,9 +31,8 @@ class ProgressService
             ]);
             $this->price_po += str_replace([",", "_"], "", $request->price[$i]) * $request->qty[$i];
         }
-        return $order;
-
         $this->ppn = ($this->price_po * (10 / 100));
+        return $order;
     }
 
     public function updatePrice($offer, $request)
@@ -76,13 +75,12 @@ class ProgressService
 
         $main_modality = strtolower($offer->invoices->first()->orders->first()->modality->category);
 
-        if ($main_modality == 'software') {
-            $komisi = $this->price_po * (3 / 100);
-        }
+        $komisi_3_percent = $this->price_po * (3 / 100);
+        $komisi_1_percent = $this->price_po * (1 / 100);
 
-        if ($main_modality != 'software') {
-            $komisi = $this->price_po * (1 / 100);
-        }
+        $komisi = $main_modality == 'software' ?
+            $komisi_3_percent :
+            $komisi_1_percent;
 
         $shipping = isset($request->shipping) ?
             $request->shipping
