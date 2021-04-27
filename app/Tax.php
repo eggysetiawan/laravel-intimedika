@@ -18,7 +18,8 @@ class Tax extends Model
         'nett',
         'shipping',
         'bank_admin',
-        'ppn'
+        'ppn',
+        'cn'
     ];
 
     public function invoice()

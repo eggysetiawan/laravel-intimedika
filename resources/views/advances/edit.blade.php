@@ -5,7 +5,7 @@
     <li class="breadcrumb-item">{{ Str::limit($advance->destination, 25, '...') }}</li>
 @endsection
 @section('content')
-    <div class="col-md-12 ">
+    <div class="col-md-12">
         <x-alert></x-alert>
         <div class="card card-teal">
 

@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-start">
-        <h1>{{ $modality->model }}</h1>
+        <h1>{{ $modality->model }}aaa</h1>
     </div>
     <small class="text-danger">
         <div class="container px-2">

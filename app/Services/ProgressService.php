@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+
 use App\{Demo, Tax};
 
 class ProgressService
@@ -72,9 +73,22 @@ class ProgressService
 
     public function createTax($offer, $request)
     {
+
+        $main_modality = strtolower($offer->invoices->first()->orders->first()->modality->category);
+
+        if ($main_modality == 'software') {
+            $komisi = $this->price_po * (3 / 100);
+        }
+
+        if ($main_modality != 'software') {
+            $komisi = $this->price_po * (1 / 100);
+        }
+
         $shipping = isset($request->shipping) ?
-            $request->shipping :
-            0;
+            $request->shipping
+            : 0;
+
+        $cn = $this->price_po * ($request->cn / 100);
 
         return Tax::create([
             'invoice_id' => $offer->invoices->first()->id,
@@ -82,6 +96,8 @@ class ProgressService
             'dpp' => $this->price_po,
             'ppn' => $this->ppn,
             'nett' => $this->price_po,
+            'cn' => $cn,
+            'komisi' => $komisi,
             'shipping' => str_replace([",", "_"], "", $shipping),
         ]);
     }
