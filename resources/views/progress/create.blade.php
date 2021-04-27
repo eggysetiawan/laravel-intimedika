@@ -166,22 +166,36 @@
                                 </div>
                             @endforeach
 
-                            {{-- ongkir --}}
-                            <label for="shipping">Ongkos Kirim</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Rp</span>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <label for="cn">Nilai CN</label>
+                                    <select name="cn" id="cn" class="form-control select2">
+                                        @for ($i = 1; $i <= 10; $i++)
+                                            <option value="{{ $i }}">{{ $i }}%</option>
+                                        @endfor
+                                    </select>
                                 </div>
-                                <input type="text" name="shipping" id="shipping"
-                                    class="form-control @error('shipping') is-invalid @enderror"
-                                    data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
-                                    data-mask value="{{ old('shipping') }}" required>
-                                @error('shipping')
-                                    <span class="invalid-feedback" role="alert">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+                                <div class="col-md">
+                                    {{-- ongkir --}}
+                                    <label for="shipping">Ongkos Kirim</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp</span>
+                                        </div>
+                                        <input type="text" name="shipping" id="shipping"
+                                            class="form-control @error('shipping') is-invalid @enderror"
+                                            data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
+                                            data-mask value="{{ old('shipping') }}" required>
+                                        @error('shipping')
+                                            <span class="invalid-feedback" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+
+
 
                             {{-- image --}}
                             <div class="form-group">
