@@ -83,7 +83,7 @@ class ProgressService
             $komisi_1_percent;
 
         $shipping = isset($request->shipping) ?
-            $request->shipping
+            str_replace([",", "_"], "", $request->shipping)
             : 0;
 
         $cn = $this->price_po * ($request->cn / 100);
@@ -96,7 +96,7 @@ class ProgressService
             'nett' => $this->price_po,
             'cn' => $cn,
             'komisi' => $komisi,
-            'shipping' => str_replace([",", "_"], "", $shipping),
+            'shipping' => $shipping,
         ]);
     }
 
