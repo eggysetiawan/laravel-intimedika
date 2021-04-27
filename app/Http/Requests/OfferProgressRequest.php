@@ -30,6 +30,7 @@ class OfferProgressRequest extends FormRequest
             'demo_date' => 'required_if:progress,50',
             'description' => 'required_if:progress,50',
             'shipping' => 'nullable',
+            'cn' => 'required|integer',
             'price.*' => 'nullable',
             'qty.*' => 'nullable',
             'img' => 'required_if:progress,99|mimes:png,jpg,jpeg',
