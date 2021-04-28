@@ -157,11 +157,16 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-
-
-.body_pdf{
+.body_pdf {
     font-size: 13px;
 }
-.table-ttd  th{
+.table-ttd th {
     width: 240px;
+}
+
+.advance td {
+    text-align: center;
+}
+.advance th {
+    text-align: center;
 }

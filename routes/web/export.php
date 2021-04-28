@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::prefix('pdf')->group(function () {
-    Route::get('{advance:slug}/print', 'PdfController@advance')->name('pdf.advance');
-    Route::get('{offer:slug}', 'PdfController@offer')->name('pdf.offer');
+Route::prefix('pdf')->name('pdf.')->group(function () {
+    Route::get('{advance:slug}/advance', 'PdfController@advance')->name('advance');
+    Route::get('{offer:slug}/offer', 'PdfController@offer')->name('offer');
 });
 
 Route::prefix('excel')->middleware('auth')->name('excel.')->group(function () {

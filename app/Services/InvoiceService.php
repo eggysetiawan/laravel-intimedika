@@ -83,15 +83,40 @@ class InvoiceService
         return $fix_price;
     }
 
-    public function createTax()
+    public function createTax($offer)
     {
+
+        $main_modality = strtolower($offer->invoices->first()->orders->first()->modality->category);
+
+        if ($main_modality == 'software') {
+            $komisi_percentage = 3;
+            $komisi = $this->price_po * (3 / 100);
+        }
+
+        if ($main_modality != 'software') {
+            $komisi_percentage = 1;
+            $komisi = $this->price_po * (1 / 100);
+        }
+
+        $shipping = isset($this->shipping) ?
+            str_replace([",", "_"], "", $this->shipping)
+            : 0;
+
+        $cn_percentage = $offer->taxes->first()->cn_percentage;
+        $cn = $this->price_po * ($offer->taxes->first()->cn_percentage / 100);
+
         return Tax::create([
+            'offer_id' => $offer->id,
             'invoice_id' => $this->invoice_create->id,
             'price_po' => $this->price_po,
             'dpp' => $this->price_po,
             'ppn' => $this->ppn,
             'nett' => $this->price_po,
-            'shipping' => str_replace([",", "_"], "", $this->shipping),
+            'cn' => $cn,
+            'cn_percentage' => $request->cn,
+            'komisi' => $komisi,
+            'komisi_percentage' => $komisi_percentage,
+            'shipping' => $shipping,
         ]);
     }
 }

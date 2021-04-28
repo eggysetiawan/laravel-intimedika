@@ -16,7 +16,7 @@ class InvoiceController extends Controller
         $invoiceService->uploadPO($request);
         $invoiceService->insertOrder($request);
         $invoiceService->updatePrice($invoice->offer, $request);
-        $invoiceService->createTax();
+        $invoiceService->createTax($invoice->offer);
 
         session()->flash('success', 'Repeat order berhasil!');
         return back();

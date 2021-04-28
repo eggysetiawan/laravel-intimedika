@@ -13,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" media="all"></script>
     <link rel="stylesheet" href="{{ asset('dist/css/style_master.css') }}" media="all">
 
+    <title>IPI Portal | Advance</title>
 
 </head>
 
@@ -29,76 +30,70 @@
                 <tr>
                     <td>Nama</td>
                     <td>:</td>
-                    <td>Mamat</td>
+                    <td>{{ $advance->author->name }}</td>
                 </tr>
                 <tr>
                     <td>Jabatan</td>
                     <td>:</td>
-                    <td>Driver</td>
+                    <td>{{ $advance->author->position }}</td>
                 </tr>
                 <tr>
                     <td>Pekerjaan</td>
                     <td>:</td>
-                    <td>Anter Film</td>
+                    <td>{{ $advance->objective }}</td>
                 </tr>
                 <tr>
                     <td>Tempat</td>
                     <td>:</td>
-                    <td>Madiun</td>
+                    <td>{{ $advance->destination }}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Pelaksanaan</td>
                     <td>:</td>
-                    <td>22-09-2021</td>
+                    <td>{{ $ongoing_date }}</td>
                 </tr>
                 <tr>
                     <td>No HP</td>
                     <td>:</td>
-                    <td>08976767573</td>
+                    <td>{{ $advance->author->phone }}</td>
                 </tr>
             </table>
         </div>
         <br>
         <div>
-            <table cellspacing="0" cellpadding="8" border="1">
-                <tr>
-                    <th>No</th>
-                    <th>Uraian Keperluan</th>
-                    <th>Harga kebutuhan</th>
-                    <th>Hari/jumlah</th>
-                    <th>Total biaya</th>
-                    <th>Keterangan</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Hotel</td>
-                    <td>Rp 400.000</td>
-                    <td>2</td>
-                    <td>Rp. 800.000</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. repudiandae quaerat velit eaque quisquam accusantium</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Meals</td>
-                    <td>Rp 110.000</td>
-                    <td>2</td>
-                    <td>Rp. 220.000</td>
-                    <td>Maem</td>
-                </tr>
+            <table cellspacing="0" cellpadding="8" border="1" class="advance">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">No</th>
+                        <th>Uraian Keperluan</th>
+                        <th>Harga kebutuhan</th>
+                        <th style="width: 1%">Hari/jumlah</th>
+                        <th>Total biaya</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($advance->needs as $need)
+                        <tr>
+                            <td style="width: 1%">{{ $loop->iteration }}</td>
+                            <td>{{ $need->need }}</td>
+                            <td>@currency($need->price)</td>
+                            <td style="width: 1%">{{ $need->day }}</td>
+                            <td>@currency($need->total)</td>
+                            <td>{{ $need->note }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+
             </table>
         </div>
 
         <div>
-            <table>
-                <tr>
-                    <td>Jumlah</td>
-                    <td>:</td>
-                    <td>Rp. 2.000.000</td>
-                </tr>
+            <table class="h5 font-weight-bold">
                 <tr>
                     <td>Total pengajuan perjalanan dinas</td>
                     <td>:</td>
-                    <td>Rp. 2.000.000</td>
+                    <td>@currency($advance->needs->sum('total'))</td>
                 </tr>
             </table>
         </div>
@@ -118,9 +113,10 @@
                 <th>Diketahui oleh,</th>
             </tr>
             <tr>
-                <td>tgl,</td>
-                <td>tgl,</td>
-                <td>tgl,</td>
+                <td>{{ $advance->created_at->format('d-m-Y') }},</td>
+                <td>{{ $advance->created_at->format('d-m-Y') }},</td>
+                <td>{{ $advance->created_at->format('d-m-Y') }},</td>
+
             </tr>
             <tr class="ttd">
                 <td>

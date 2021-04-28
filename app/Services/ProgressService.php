@@ -75,12 +75,15 @@ class ProgressService
 
         $main_modality = strtolower($offer->invoices->first()->orders->first()->modality->category);
 
-        $komisi_3_percent = $this->price_po * (3 / 100);
-        $komisi_1_percent = $this->price_po * (1 / 100);
+        if ($main_modality == 'software') {
+            $komisi_percentage = 3;
+            $komisi = $this->price_po * (3 / 100);
+        }
 
-        $komisi = $main_modality == 'software' ?
-            $komisi_3_percent :
-            $komisi_1_percent;
+        if ($main_modality != 'software') {
+            $komisi_percentage = 1;
+            $komisi = $this->price_po * (1 / 100);
+        }
 
         $shipping = isset($request->shipping) ?
             str_replace([",", "_"], "", $request->shipping)
@@ -89,13 +92,16 @@ class ProgressService
         $cn = $this->price_po * ($request->cn / 100);
 
         return Tax::create([
+            'offer_id' => $offer->id,
             'invoice_id' => $offer->invoices->first()->id,
             'price_po' => $this->price_po,
             'dpp' => $this->price_po,
             'ppn' => $this->ppn,
             'nett' => $this->price_po,
             'cn' => $cn,
+            'cn_percentage' => $request->cn,
             'komisi' => $komisi,
+            'komisi_percentage' => $komisi_percentage,
             'shipping' => $shipping,
         ]);
     }

@@ -91,6 +91,14 @@ class Offer extends Model implements HasMedia
         return static::whereNull('is_approved')->whereNotNull('offer_no')->count();
     }
 
+    // relation
+
+    public function taxes()
+    {
+        return $this->hasMany(Tax::class);
+    }
+
+
     public function revision()
     {
         return $this->hasOne(Revision::class);

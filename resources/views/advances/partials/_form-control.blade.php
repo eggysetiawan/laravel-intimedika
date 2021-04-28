@@ -26,7 +26,7 @@
         <label for="start_date">Tanggal Keberangkatan</label>
         <div class="form-group">
             <input type="date" name="start_date" id="start_date" class="form-control"
-                value="{{ old('start_date') ?? date('Y-m-d', strtotime($advance->start_date)) }}">
+                value="{{ old('start_date') ?? date('Y-m-d', strtotime($advance->start_date ?? now())) }}">
         </div>
     </div>
 
@@ -34,7 +34,7 @@
         <label for="end_date">Tanggal Kepulangan</label>
         <div class="form-group">
             <input type="date" name="end_date" id="start_date" class="form-control"
-                value="{{ old('end_date') ?? date('Y-m-d', strtotime($advance->end_date)) }}">
+                value="{{ old('end_date') ?? date('Y-m-d', strtotime($advance->end_date ?? now()->addDays(2))) }}">
         </div>
     </div>
 
