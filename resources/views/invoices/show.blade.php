@@ -20,16 +20,22 @@
                         aria-orientation="vertical" style="">
                         <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home"
                             role="tab" aria-controls="vert-tabs-home" aria-selected="true">Penawaran</a>
+
                         <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"
                             aria-controls="vert-tabs-order" aria-selected="false">Order</a>
-                        <a class="nav-link" id="vert-tabs-cn-tab" data-toggle="pill" href="#vert-tabs-cn" role="tab"
-                            aria-controls="vert-tabs-cn" aria-selected="false">CN</a>
-                        <a class="nav-link" id="vert-tabs-komisi-tab" data-toggle="pill" href="#vert-tabs-komisi" role="tab"
-                            aria-controls="vert-tabs-komisi" aria-selected="false">Komisi</a>
-                        @if ($offer->progress->demo->date)
+
+                        @if ($offer->purchaseApproved())
+                            <a class="nav-link" id="vert-tabs-cn-tab" data-toggle="pill" href="#vert-tabs-cn" role="tab"
+                                aria-controls="vert-tabs-cn" aria-selected="false">CN</a>
+                            <a class="nav-link" id="vert-tabs-komisi-tab" data-toggle="pill" href="#vert-tabs-komisi"
+                                role="tab" aria-controls="vert-tabs-komisi" aria-selected="false">Komisi</a>
+                        @endif
+
+                        @if ($offer->hasDemo())
                             <a class="nav-link" id="vert-tabs-demo-tab" data-toggle="pill" href="#vert-tabs-demo" role="tab"
                                 aria-controls="vert-tabs-demo" aria-selected="false">Demo</a>
                         @endif
+
                     </div>
                 </div>
                 <div class="col-7 col-sm-9">
@@ -481,9 +487,12 @@
 
 
                             <div class="callout callout-info">
-                                <h5><i class="fas fa-info"></i>
+                                <h5>
+                                    <i class="fas fa-info"></i>
                                     <div class="d-flex justify-content-between">Total CN
-                                        <p>@currency($offer->taxes->sum('cn'))</p>
+                                        <p class="font-weight-bold">
+                                            @currency($offer->taxes()->where('is_paid', 1)->sum('cn'))
+                                        </p>
                                     </div>
                                 </h5>
 
@@ -668,12 +677,14 @@
                             <div class="callout callout-info">
                                 <h5><i class="fas fa-info"></i>
                                     <div class="d-flex justify-content-between">Total Komisi
-                                        <p>@currency($offer->taxes->sum('komisi'))</p>
+                                        <p class="font-weight-bold">
+                                            @currency($offer->taxes()->where('is_paid',1)->sum('komisi'))
+                                        </p>
                                     </div>
                                 </h5>
 
                             </div>
-                            <div class="scroll-less ">
+                            <div class="scroll-less">
                                 @if ($offer->progress->progress >= 99)
                                     @foreach ($offer->invoices as $invoice)
                                         <!-- Main content -->

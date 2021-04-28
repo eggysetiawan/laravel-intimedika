@@ -113,7 +113,7 @@ class InvoiceService
             'ppn' => $this->ppn,
             'nett' => $this->price_po,
             'cn' => $cn,
-            'cn_percentage' => $request->cn,
+            'cn_percentage' => $cn_percentage,
             'komisi' => $komisi,
             'komisi_percentage' => $komisi_percentage,
             'shipping' => $shipping,

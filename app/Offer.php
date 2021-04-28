@@ -32,7 +32,15 @@ class Offer extends Model implements HasMedia
         'slug'
     ];
 
+    public function hasDemo()
+    {
+        $this->progress->demo->date;
+    }
 
+    public  function purchaseApproved()
+    {
+        return $this->progress->is_approved == 1;
+    }
 
     public function isPurchaseReadyToUpdate()
     {
