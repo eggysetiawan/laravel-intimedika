@@ -39,6 +39,7 @@ class OfferExport implements FromView, ShouldAutoSize, WithStyles, WithColumnFor
         return [
             'H' => '_-Rp* #,##0_-;-Rp* #,##0_-;_-Rp* "-"_-;_-@_-',
             'I' => '_-Rp* #,##0_-;-Rp* #,##0_-;_-Rp* "-"_-;_-@_-',
+            'J' => '_-Rp* #,##0_-;-Rp* #,##0_-;_-Rp* "-"_-;_-@_-',
         ];
     }
 }
