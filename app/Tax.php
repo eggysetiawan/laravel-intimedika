@@ -22,7 +22,8 @@ class Tax extends Model
         'bank_admin',
         'ppn',
         'cn',
-        'cn_percentage'
+        'cn_percentage',
+        'is_paid'
     ];
 
     public function invoice()

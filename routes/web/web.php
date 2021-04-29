@@ -74,6 +74,11 @@ Route::middleware('auth')->group(function () {
         Route::patch('{funnel:slug}', 'OfferFunnelController@update')->name('update');
     });
 
+    // payments
+    Route::prefix('payments')->name('payments.')->group(function () {
+        Route::patch('{tax}/update', 'PaymentController@update')->name('update');
+    });
+
     // progresses
     Route::prefix('progresses')->name('progresses.')->group(function () {
         Route::get('approval', 'ProgressController@approval')->name('approval');

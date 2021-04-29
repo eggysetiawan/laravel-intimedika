@@ -612,6 +612,10 @@
                                                                     {{ $invoice->tax->cn_percentage }}% :</th>
                                                                 <td>@currency($invoice->tax->cn)</td>
                                                             </tr>
+                                                            <tr>
+                                                                <th>Status Pembayaran:</th>
+                                                                <td>{{ $invoice->notPaidLabel() }}</td>
+                                                            </tr>
 
 
                                                         </table>
@@ -621,26 +625,8 @@
                                             </div>
                                             <!-- /.row -->
 
-                                            <!-- this row will not appear when printing -->
-                                            <div class="row no-print">
-                                                <div class="col-12">
-                                                    @if ($offer->progress->progress == 99)
-                                                        @can('view', $offer)
-
-                                                            <a href="{{ route('verify.purchase.approve', $offer->slug) }}"
-                                                                class="btn btn-success float-right" title="Setujui PO ini."><i
-                                                                    class="fas fa-check-circle"></i> Approve
-                                                                Purchase.</a>
-
-                                                            <a href="{{ route('verify.purchase.reject', $offer->slug) }}"
-                                                                class="btn btn-danger float-right" style="margin-right: 5px;"
-                                                                title="Tolak PO ini."><i class="fas fa-times-circle"></i> Reject
-                                                                Purchase.</a>
-
-                                                        @endcan
-                                                    @endif
-                                                </div>
-                                            </div>
+                                            <!-- tombol sudah bayar -->
+                                            @include('invoices.partials.button-paid')
                                         </div>
                                     @endforeach
 
@@ -798,33 +784,20 @@
                                                                 <th>Komisi {{ $invoice->tax->komisi_percentage }}%:</th>
                                                                 <td>@currency($invoice->tax->komisi)</td>
                                                             </tr>
+                                                            <tr>
+                                                                <th>Status Pembayaran:</th>
+                                                                <td>{{ $invoice->notPaidLabel() }}</td>
+                                                            </tr>
                                                         </table>
                                                     </div>
                                                 </div>
                                                 <!-- /.col -->
                                             </div>
                                             <!-- /.row -->
+                                            {{-- row --}}
 
-                                            <!-- this row will not appear when printing -->
-                                            <div class="row no-print">
-                                                <div class="col-12">
-                                                    @if ($offer->progress->progress == 99)
-                                                        @can('view', $offer)
-
-                                                            <a href="{{ route('verify.purchase.approve', $offer->slug) }}"
-                                                                class="btn btn-success float-right" title="Setujui PO ini."><i
-                                                                    class="fas fa-check-circle"></i> Approve
-                                                                Purchase.</a>
-
-                                                            <a href="{{ route('verify.purchase.reject', $offer->slug) }}"
-                                                                class="btn btn-danger float-right" style="margin-right: 5px;"
-                                                                title="Tolak PO ini."><i class="fas fa-times-circle"></i> Reject
-                                                                Purchase.</a>
-
-                                                        @endcan
-                                                    @endif
-                                                </div>
-                                            </div>
+                                            <!-- tombol sudah bayar -->
+                                            @include('invoices.partials.button-paid')
                                         </div>
                                     @endforeach
 

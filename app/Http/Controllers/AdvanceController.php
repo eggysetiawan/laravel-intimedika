@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Need;
 use App\Advance;
 use App\DataTables\AdvanceDataTable;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdvanceRequest;
 use App\Http\Resources\UpdateNeedResource;
-use App\NeedSource;
 use App\Services\AdvanceService;
 
 class AdvanceController extends Controller
@@ -102,6 +99,8 @@ class AdvanceController extends Controller
      */
     public function destroy(Advance $advance)
     {
-        //
+        $advance->delete();
+        session()->flash('success', 'Advance telah berhasil dihapus!');
+        return redirect('advances');
     }
 }

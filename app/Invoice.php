@@ -19,21 +19,24 @@ class Invoice extends Model implements HasMedia
         'offer_id'
     ];
 
+    // business logic
 
-
-    public function tax()
+    public function notPaid()
     {
-        return $this->hasOne(Tax::class);
+        return $this->tax()->where('is_paid', 0)->exists();
     }
 
-    public function offer()
+    public function notPaidLabel()
     {
-        return $this->belongsTo(Offer::class);
-    }
+        $is_paid = $this->tax()->where('is_paid', 1)->exists();
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
+        if (!$is_paid) {
+            return 'Belum Lunas';
+        }
+
+        if ($is_paid) {
+            return 'Lunas';
+        }
     }
 
     public function getTotalPurchaseAttribute()
@@ -47,5 +50,21 @@ class Invoice extends Model implements HasMedia
             ->width(800)
             ->height(600)
             ->performOnCollections('image_po');
+    }
+
+    // relationship
+    public function tax()
+    {
+        return $this->hasOne(Tax::class);
+    }
+
+    public function offer()
+    {
+        return $this->belongsTo(Offer::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
