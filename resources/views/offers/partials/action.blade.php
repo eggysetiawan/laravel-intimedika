@@ -8,7 +8,8 @@
 
             <div class="dropdown-menu">
                 <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"
-                    title="Lihat detail penawaran."><i class="far fa-eye nav-icon"></i>
+                    title="Lihat detail penawaran.">
+                    <i class="far fa-eye nav-icon"></i>
                     Detail
                 </a>
 
