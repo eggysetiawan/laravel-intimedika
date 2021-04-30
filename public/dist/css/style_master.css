@@ -170,3 +170,10 @@ body::-webkit-scrollbar-thumb {
 .advance th {
     text-align: center;
 }
+
+
+@media only screen and (max-width: 741px) {
+    .hide-log-animate{
+        display: none;
+    }
+}
