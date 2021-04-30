@@ -18,28 +18,37 @@
                 <div class="col-md-2">
                     <div class="nav flex-column nav-tabs h-100 " id="vert-tabs-tab" role="tablist"
                         aria-orientation="vertical" style="">
+
                         <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home"
                             role="tab" aria-controls="vert-tabs-home" aria-selected="true">Penawaran</a>
+
+
+                        <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-final-tab" data-toggle="pill" href="#vert-tabs-final"
+                            role="tab" aria-controls="vert-tabs-final" aria-selected="false">Harga Final</a>
+
 
                         <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"
                             aria-controls="vert-tabs-order" aria-selected="false">Order</a>
 
-                        @if ($offer->purchaseApproved())
-                            <a class="nav-link" id="vert-tabs-cn-tab" data-toggle="pill" href="#vert-tabs-cn" role="tab"
-                                aria-controls="vert-tabs-cn" aria-selected="false">CN</a>
-                            <a class="nav-link" id="vert-tabs-komisi-tab" data-toggle="pill" href="#vert-tabs-komisi"
-                                role="tab" aria-controls="vert-tabs-komisi" aria-selected="false">Komisi</a>
-                        @endif
 
-                        @if ($offer->hasDemo())
-                            <a class="nav-link" id="vert-tabs-demo-tab" data-toggle="pill" href="#vert-tabs-demo" role="tab"
-                                aria-controls="vert-tabs-demo" aria-selected="false">Demo</a>
-                        @endif
+                        <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-cn-tab" data-toggle="pill"
+                            href="#vert-tabs-cn" role="tab"
+                            aria-controls="vert-tabs-cn" aria-selected="false">CN</a>
+
+                        <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-komisi-tab" data-toggle="pill" href="#vert-tabs-komisi"
+                            role="tab"
+                            aria-controls="vert-tabs-komisi" aria-selected="false">Komisi</a>
+
+                        <a class="nav-link @if (!$offer->hasDemo()) disabled @endif" id="vert-tabs-demo-tab" data-toggle="pill" href="#vert-tabs-demo"
+                            role="tab"
+                            aria-controls="vert-tabs-demo" aria-selected="false">Demo</a>
 
                     </div>
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content" id="vert-tabs-tabContent">
+
+                        {{-- tab_penawaran --}}
                         <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel"
                             aria-labelledby="vert-tabs-home-tab">
                             <div class="form-group">
@@ -287,6 +296,23 @@
 
                             </div>
                         </div>
+
+                        {{-- tab_harga final --}}
+                        <div class="tab-pane fade" id="vert-tabs-final" role="tabpanel"
+                            aria-labelledby="vert-tabs-final-tab">
+
+                            <div class="row justify-content-center">
+                                <div class="text-center font-weight-bolder">
+                                    <h2>Total Harga Penawaran Final </h2>
+                                    <h4>
+                                        @currency($offer->invoices->first()->orders->sum('price'))
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {{-- tab_order --}}
                         <div class="tab-pane fade" id="vert-tabs-order" role="tabpanel"
                             aria-labelledby="vert-tabs-order-tab">
 
@@ -478,6 +504,7 @@
 
                         </div>
 
+                        {{-- tab_cn --}}
                         <div class="tab-pane fade" id="vert-tabs-cn" role="tabpanel" aria-labelledby="vert-tabs-cn-tab">
 
                             {{-- repeat order --}}
@@ -651,6 +678,8 @@
 
 
                         </div>
+
+                        {{-- tab_komisi --}}
                         <div class="tab-pane fade" id="vert-tabs-komisi" role="tabpanel"
                             aria-labelledby="vert-tabs-komisi-tab">
 
@@ -823,7 +852,7 @@
 
                         </div>
 
-
+                        {{-- tab_demo --}}
                         <div class="tab-pane fade" id="vert-tabs-demo" role="tabpanel" aria-labelledby="vert-tabs-demo-tab">
                             <table>
                                 <tr>
