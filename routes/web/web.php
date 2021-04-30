@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('completed', 'OfferCompletedController')->name('complete');
         Route::middleware('count')->get('create', 'OfferController@create')->name('create');
         Route::middleware(['role:superadmin'])->get('trash', 'OfferController@trash')->name('trash');
+        Route::patch('{offer:slug}/note_edit', 'OfferNoteController')->name('note_edit');
     });
 
     // offers resource

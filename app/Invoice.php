@@ -13,11 +13,7 @@ class Invoice extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
 
-    protected $fillable = [
-        'status',
-        'date',
-        'offer_id'
-    ];
+    protected $fillable = ['status', 'date', 'offer_id'];
 
     // business logic
 
@@ -28,13 +24,13 @@ class Invoice extends Model implements HasMedia
 
     public function notPaidLabel()
     {
-        $is_paid = $this->tax()->where('is_paid', 1)->exists();
+        $not_paid = $this->tax()->where('is_paid', 0)->exists();
 
-        if (!$is_paid) {
+        if ($not_paid) {
             return 'Belum Lunas';
         }
 
-        if ($is_paid) {
+        if (!$not_paid) {
             return 'Lunas';
         }
     }

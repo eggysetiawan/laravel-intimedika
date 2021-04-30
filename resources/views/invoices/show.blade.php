@@ -15,7 +15,7 @@
         <div class="card-body">
             <h4>Menu</h4>
             <div class="row">
-                <div class="col-5 col-sm-3">
+                <div class="col-md-2">
                     <div class="nav flex-column nav-tabs h-100 " id="vert-tabs-tab" role="tablist"
                         aria-orientation="vertical" style="">
                         <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-home"
@@ -38,7 +38,7 @@
 
                     </div>
                 </div>
-                <div class="col-7 col-sm-9">
+                <div class="col-md-10">
                     <div class="tab-content" id="vert-tabs-tabContent">
                         <div class="tab-pane text-left fade show active" id="vert-tabs-home" role="tabpanel"
                             aria-labelledby="vert-tabs-home-tab">
@@ -46,12 +46,16 @@
                                 @switch($offer->is_approved)
                                     @case(1)
                                         <div class="d-flex justify-content-end">
+
+                                            <button type="button" class="btn btn-warning mr-2" data-toggle="modal"
+                                                data-target="#edit_note">Edit keterangan penawaran</button>
+
                                             {{-- print --}}
                                             <a href="{{ route('pdf.offer', $offer->slug) }}" target="_blank"
                                                 class="btn btn-info mr-2"><i class="fas fa-print"></i></a>
 
                                             {{-- repeat order --}}
-                                            @if ($offer->progress->is_approved == 1)
+                                            @if ($offer->purchaseApproved())
                                                 <button type="button" class="btn bg-olive" data-toggle="modal"
                                                     data-target="#repeatOrder">
                                                     Repeat Order
@@ -153,14 +157,15 @@
                                                 <td style="font-size: 14px">Dengan hormat,</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 14px">ket_form</td>
+                                                <td style="font-size: 14px">
+                                                    {{ $offer->form_note ?? '--Keterangan Penawaran--' }}</td>
                                             </tr>
                                         </table>
                                         <div class="fill">
                                             <div class="detail-table">
-                                                <table class="table table-responsive " border="1"
+                                                <table class="table" border="1"
                                                     style="border-collapse: collapse;width:100%">
-                                                    <thead class="thead-dark ">
+                                                    <thead class="thead-dark">
                                                         <tr>
                                                             <th>No.</th>
                                                             <th>
@@ -849,8 +854,7 @@
     </div>
 
 
-    {{-- repeat order --}}
-    <!-- Modal -->
+    <!-- Modal Repeat Order -->
     <div class="modal fade" id="repeatOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -974,6 +978,36 @@
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <x-button-submit>Repeat</x-button-submit>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal edit form note --}}
+    <div class="modal fade" id="edit_note" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-teal">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Keterangan Penawaran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('offers.note_edit', $offer->slug) }}" method="POST">
+                    @csrf
+                    @method('patch')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="form_note" class="col-form-label">Keterangan Penawaran:</label>
+                            <textarea name="form_note" class="form-control"
+                                id="form_note">{{ $offer->form_note ?? old('form_note') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-teal">Edit</button>
                     </div>
                 </form>
 

@@ -29,7 +29,8 @@ class Offer extends Model implements HasMedia
         'approved_at',
         'approved_by',
         'offer_date',
-        'slug'
+        'slug',
+        'form_note'
     ];
 
     public function hasDemo()
@@ -70,10 +71,7 @@ class Offer extends Model implements HasMedia
         $this->save();
     }
 
-    public function fixPrices()
-    {
-        return $this->hasMany(FixPriceOrder::class);
-    }
+
 
     public function scopeFirstDateComplete()
     {
@@ -99,7 +97,12 @@ class Offer extends Model implements HasMedia
         return static::whereNull('is_approved')->whereNotNull('offer_no')->count();
     }
 
-    // relation
+    // relationship
+
+    public function fixPrices()
+    {
+        return $this->hasMany(FixPriceOrder::class);
+    }
 
     public function taxes()
     {
