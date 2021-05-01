@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\DataTables\VisitDataTable;
 use App\Http\Requests\VisitPlanRequest;
 use App\Visit;
+use Illuminate\Support\Facades\DB;
 
 class VisitPlanController extends Controller
 {
@@ -51,8 +52,10 @@ class VisitPlanController extends Controller
 
         $attr['customer_id'] = $customer->id;
 
-        $visit = auth()->user()->visits()->create($attr);
-        $visit->plan()->create($attr);
+        DB::transaction(function () use ($attr) {
+            $visit = auth()->user()->visits()->create($attr);
+            $visit->plan()->create($attr);
+        });
 
         session()->flash('success', 'Rencana Kunjungan telah berhasil di buat!');
         return redirect()->route('visitplan.index');

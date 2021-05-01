@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DataTables\OfferDataTable;
 use App\Http\Requests\ApprovalRequest;
-use App\Notifications\Offer\TwoFactorCode;
 use App\Offer;
 use App\OfferProgress;
 
@@ -75,8 +74,6 @@ class ApprovalController extends Controller
         }
 
         $offer = Offer::whereNull('is_approved');
-
-
         $offer->update([
             'is_approved' => $approval,
             'approved_by' => auth()->id(),

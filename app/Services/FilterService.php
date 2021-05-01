@@ -9,8 +9,8 @@ class FilterService
 {
     public function getOfferFromDate()
     {
-        $offer = Offer::firstDate();
-        $date =  ($offer->count() > 0) ?
+        $offer = Offer::oldest();
+        $date =  ($offer->firstDate()) ?
             Carbon::parse($offer->offer_date)->format('Y-m-d') :
             date('Y-m-d');
 

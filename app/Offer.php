@@ -84,7 +84,8 @@ class Offer extends Model implements HasMedia
     }
     public function scopeFirstDate()
     {
-        return $this->orderBy('offer_date', 'asc')->whereNotNull('offer_date')->first();
+
+        return $this->orderBy('offer_date', 'asc')->whereNotNull('offer_date')->exists();
     }
 
     public static function readytoPurchaseCount()

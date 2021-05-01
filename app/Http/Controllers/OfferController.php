@@ -9,6 +9,7 @@ use App\Events\OfferUpdated;
 use App\Services\OfferService;
 use App\Services\FilterService;
 use App\DataTables\OfferDataTable;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
 
@@ -50,18 +51,22 @@ class OfferController extends Controller
 
     public function store(OfferRequest $request, OfferService $offerService)
     {
-        // to offers table
-        $offer = $offerService->createOffer($request);
-        // to invoices table
-        $offerService->createInvoice($request);
-        // to offer_progress table
-        $offerService->createProgress($request);
-        // to orders table
-        $offerService->insertOrder($request);
-        // to fix price table
-        $offerService->insertPrice($request);
-        // send mail to admin via event & listener
-        event(new OfferCreated($offer));
+
+        DB::transaction(function () use ($request, $offerService) {
+            // to offers table
+            $offer = $offerService->createOffer($request);
+            // to invoices table
+            $offerService->createInvoice($request);
+            // to offer_progress table
+            $offerService->createProgress($request);
+            // to orders table
+            $offerService->insertOrder($request);
+            // to fix price table
+            $offerService->insertPrice($request);
+            // send mail to admin via event & listener
+            event(new OfferCreated($offer));
+        });
+
         // alert success
         session()->flash('success', 'Penawaran telah berhasil dibuat!');
         return redirect('offers');

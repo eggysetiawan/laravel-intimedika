@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Advance;
-use App\DataTables\AdvanceDataTable;
 use Illuminate\Http\Request;
+use App\Services\AdvanceService;
+use Illuminate\Support\Facades\DB;
+use App\DataTables\AdvanceDataTable;
 use App\Http\Requests\AdvanceRequest;
 use App\Http\Resources\UpdateNeedResource;
-use App\Services\AdvanceService;
 
 class AdvanceController extends Controller
 {
@@ -41,8 +42,10 @@ class AdvanceController extends Controller
      */
     public function store(AdvanceRequest $request, AdvanceService $advanceService)
     {
-        $advanceService->createAdvance($request);
-        $advanceService->insertNeeds($request);
+        DB::transaction(function () use ($advanceService, $request) {
+            $advanceService->createAdvance($request);
+            $advanceService->insertNeeds($request);
+        });
 
         session()->flash('success', 'Advances Perjalanan berhasil dibuat!');
         return redirect('advances');

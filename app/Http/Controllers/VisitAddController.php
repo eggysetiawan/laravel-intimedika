@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use App\Http\Requests\VisitRequest;
 use App\Services\VisitAddService;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\VisitRequest;
 
 class VisitAddController extends Controller
 {
@@ -19,13 +20,17 @@ class VisitAddController extends Controller
 
     public function store(VisitRequest $request, VisitAddService $visitAddService)
     {
-        $visitAddService->createCustomer($request);
-        $visitAddService->attachHospital();
-        $visitAddService->addVisit($request);
+        DB::transaction(function () use ($request, $visitAddService) {
 
-        if (request('img')) {
-            $visitAddService->uploadImage();
-        }
+            $visitAddService->createCustomer($request);
+            $visitAddService->attachHospital();
+            $visitAddService->addVisit($request);
+
+            if (request('img')) {
+                $visitAddService->uploadImage();
+            }
+        });
+
 
         session()->flash('success', 'Kunjungan Baru Berhasil di Buat!');
         return redirect('visits');

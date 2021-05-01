@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Visit;
 use App\Customer;
 use App\DataTables\VisitDataTable;
-use Illuminate\Support\Str;
 use App\Http\Requests\VisitRequest;
 use App\Services\VisitService;
 

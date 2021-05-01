@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use App\DataTables\CustomerDataTable;
 use App\Hospital;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use App\DataTables\CustomerDataTable;
 use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 
@@ -37,20 +38,22 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        $attr = $request->all();
+        DB::transaction(function () use ($request) {
+            $attr = $request->all();
 
-        // assignt name to slug (slug = name-role)
-        $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
-        $nohospital = (@request('hospital') == 'false') ? true : false;
+            // assignt name to slug (slug = name-role)
+            $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
+            $nohospital = (@request('hospital') == 'false') ? true : false;
 
-        if ($nohospital) {
-            auth()->user()->customers()->create($attr);
-        }
+            if ($nohospital) {
+                auth()->user()->customers()->create($attr);
+            }
 
-        if (!$nohospital) {
-            $customer = auth()->user()->customers()->create($attr);
-            $customer->hospitals()->attach(request('hospital'));
-        }
+            if (!$nohospital) {
+                $customer = auth()->user()->customers()->create($attr);
+                $customer->hospitals()->attach(request('hospital'));
+            }
+        });
 
         session()->flash('success', 'Customer Baru Berhasil di Buat!');
         return redirect('customers');
