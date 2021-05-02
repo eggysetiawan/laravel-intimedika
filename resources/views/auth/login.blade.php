@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="{{ asset('css/pre.css') }}">
 </head>
 
@@ -25,7 +26,7 @@
     {{-- Preloader Content --}}
     @include('layouts.preloader')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" data-aos="fade-down" data-aos-delay="1000" data-aos-duration="500">
             <a href="{{ route('home') }}" class=""><img src="{{ asset('image/logoipi.png') }}" width="400"
                     class="img-fluid" alt="Logo IPI">
             </a>
@@ -33,7 +34,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-4 mt-5">
-                <div class="login-box">
+                <div class="login-box" data-aos="fade-left">
                     <!-- /.login-logo -->
                     <p class="login-box-msg">Sign in to start your session</p>
 
@@ -140,8 +141,13 @@
         }
 
     </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
     <script src="{{ asset('js/pre.js') }}"></script>
+
+    <script>
+        AOS.init();
+      </script>
 </body>
 
 </html>

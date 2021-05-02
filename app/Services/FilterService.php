@@ -9,11 +9,9 @@ class FilterService
 {
     public function getOfferFromDate()
     {
-        $offer = Offer::oldest();
-        $date =  ($offer->firstDate()) ?
+        $offer = Offer::whereNotNull('offer_date')->orderBy('offer_date', 'ASC')->first();
+        return (@$offer->offer_date) ?
             Carbon::parse($offer->offer_date)->format('Y-m-d') :
             date('Y-m-d');
-
-        return $date;
     }
 }
