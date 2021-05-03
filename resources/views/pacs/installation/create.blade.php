@@ -1,30 +1,41 @@
-@extends('layouts.app')
-@section('title', 'Instalasi PACSC')
-
-
+@extends('layouts.app', ['title'=>'Instalasi PACS'])
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('pacs_installations.index') }}">Instalasi PACS</a></li>
-    <li class="breadcrumb-item">Buat Instalasi PACS</li>
+    <li class="breadcrumb-item"><a href="{{ route('pacs_installations.index') }}">Daftar Penawaran</a></li>
+    <li class="breadcrumb-item">Buat Instalasi</li>
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Tambah Kunjungan Harian</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
+    <x-alert></x-alert>
+    <div class="container-fluid">
+        <form method="POST" action="{{ route('pacs_installations.store') }}" enctype="multipart/form-data">
 
-                    <form role="form" method="post" action="/visits/store">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card card-teal">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Informasi Lokasi Instalasi</h3>
+                        </div>
                         @csrf
-                        @include('visits.partials.add-form-control', ['submit' => 'Create'])
-                    </form>
+                        @include('pacs.installation.partials._form-control-left', ['submit' => 'Create'])
+                    </div>
                 </div>
-                <!-- /.card -->
+                <div class="col-md-6">
+                    <div class="card card-teal">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Informasi Lokasi Instalasi</h3>
+                        </div>
+                        @csrf
+                        @include('pacs.installation.partials._form-control-left', ['submit' => 'Create'])
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </form>
+
     </div>
+
+@endsection
+
+@section('script')
+    @include('hospitals.partials._select-hospital-script')
 @endsection

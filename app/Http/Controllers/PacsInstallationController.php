@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\PacsInstallation;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PacsInstallationController extends Controller
      */
     public function index()
     {
-        //
+        return view('pacs.installation.index');
     }
 
     /**
@@ -24,7 +25,8 @@ class PacsInstallationController extends Controller
      */
     public function create()
     {
-        return view('pacs.installation.create');
+        $engineers = User::with('roles')->role('it')->get();
+        return view('pacs.installation.create', compact('engineers'));
     }
 
     /**
