@@ -82,6 +82,17 @@ class UserSeeder extends Seeder
             'address' => 'North Jakarta',
             'city' => 'Jakarta',
         ]);
+        $userIT = User::create([
+            'name' => 'IT Intimedika',
+            'username' => 'intimedika_it',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'it@intimedika.co',
+            'password' => bcrypt('intiwid'),
+            'phone' => '0816854312',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
 
         Permission::create(['name' => 'approval']);
         Permission::create(['name' => 'salesman']);
@@ -97,6 +108,7 @@ class UserSeeder extends Seeder
         $sales = Role::create(['name' => 'sales']);
         $teknisi = Role::create(['name' => 'teknisi']);
         $admin = Role::create(['name' => 'admin']);
+        $it = Role::create(['name' => 'it']);
 
         // give permission
         $supeardmin->givePermissionTo('approval');
@@ -114,6 +126,9 @@ class UserSeeder extends Seeder
         $teknisi->givePermissionTo('engineering');
 
         $admin->givePermissionTo('admin');
+        $it->givePermissionTo('openworld');
+
+
 
 
         // assign role
@@ -123,5 +138,6 @@ class UserSeeder extends Seeder
         $userTeknisi->assignRole('teknisi');
         $userSales->assignRole('sales');
         $userSupervisor->assignRole('sales');
+        $userIT->assignRole('it');
     }
 }

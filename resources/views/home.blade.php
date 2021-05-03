@@ -5,88 +5,55 @@
 @endsection
 @section('content')
     <div class="container">
+        @hasrole('superadmin|sales')
+        <div class="row justify-content-start">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Target Tahunan
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Muhammad Saidi</h5>
+                        <p class="card-text">Rp 1.000.000.000/3.000.000.000</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="35"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 35%">
+                                <span class="sr-only">40% Complete (success)</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-1">
+                            <a href="{{ route('offers.create') }}" class="btn bg-teal ">Buat Penawaran!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
-
                     <div class="card-body">
-
                         <h1>{{ $chart1->options['chart_title'] }}</h1>
                         {!! $chart1->renderHtml() !!}
-
-
-
                     </div>
-
                 </div>
             </div>
         </div>
+
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-
-                    <div class="card-body">
-
-                        <h1>{{ $chart5->options['chart_title'] }}</h1>
-                        {!! $chart5->renderHtml() !!}
-
-
-
+            @foreach ($charts as $chart)
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>{{ $chart->options['chart_title'] }}</h1>
+                            {!! $chart->renderHtml() !!}
+                        </div>
                     </div>
-
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-
-                    <div class="card-body">
-
-                        <h1>{{ $chart2->options['chart_title'] }}</h1>
-                        {!! $chart2->renderHtml() !!}
-
-
-
-                    </div>
-
-                </div>
-            </div>
+            @endforeach
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-
-                    <div class="card-body">
-
-                        <h1>{{ $chart3->options['chart_title'] }}</h1>
-                        {!! $chart3->renderHtml() !!}
-
-
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-
-                    <div class="card-body">
-
-                        <h1>{{ $chart4->options['chart_title'] }}</h1>
-                        {!! $chart4->renderHtml() !!}
-
-
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+        @endhasrole
 
     </div>
 @endsection
@@ -95,8 +62,8 @@
     {!! $chart1->renderChartJsLibrary() !!}
 
     {!! $chart1->renderJs() !!}
-    {!! $chart2->renderJs() !!}
-    {!! $chart3->renderJs() !!}
-    {!! $chart4->renderJs() !!}
-    {!! $chart5->renderJs() !!}
+    @foreach ($charts as $chart)
+        {!! $chart->renderJs() !!}
+    @endforeach
+
 @endsection

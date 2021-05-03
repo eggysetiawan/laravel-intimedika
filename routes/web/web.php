@@ -118,4 +118,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('visits', 'VisitController')->parameters([
         'visits' => 'visit:slug',
     ]);
+
+    // Route::prefix('pacs_installations')->name('pacs_installations.')->group(function () {
+    //     Route::get('', 'PacsInstallationController@index')->name('index');
+    // });
 });

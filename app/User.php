@@ -81,6 +81,11 @@ class User extends Authenticatable
 
     // relations
 
+    public function charts()
+    {
+        return $this->hasMany(OrderChart::class);
+    }
+
     public function visits()
     {
         return $this->hasMany(Visit::class);

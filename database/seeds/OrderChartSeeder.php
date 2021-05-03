@@ -12,6 +12,6 @@ class OrderChartSeeder extends Seeder
      */
     public function run()
     {
-        factory(OrderChart::class, 500)->create();
+        factory(OrderChart::class, 2000)->create();
     }
 }

@@ -13,7 +13,8 @@ $factory->define(OrderChart::class, function (Faker $faker) {
     $randYear = array_rand($years);
 
     return [
-        'sales_name' => 'M. Fahmi Fadli',
+        'user_id' => 6,
+        'sales_name' => $sales_names[$randSales],
         'price' => round(rand(200000, 1000000000), -4),
         'is_approved' => rand(0, 1),
         'offer_date' => $faker->dateTimeInInterval($date = '-1 years', $invterval = '1 years'),
