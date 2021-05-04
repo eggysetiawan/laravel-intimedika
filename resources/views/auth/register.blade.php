@@ -129,6 +129,7 @@
                             <option value="sales">Sales</option>
                             <option value="teknisi">Teknisi</option>
                             <option value="admin">Admin</option>
+                            <option value="it">IT Developer</option>
                         </select>
                         <div class="input-group-append">
                             <div class="input-group-text">

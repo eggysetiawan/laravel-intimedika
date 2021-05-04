@@ -36,6 +36,7 @@ class Hospital extends Model
             ->get();
     }
 
+    // relationship
     public function customers()
     {
         return $this->belongsToMany(Customer::class);
@@ -44,5 +45,10 @@ class Hospital extends Model
     public function advances()
     {
         return $this->belongsToMany(Advance::class);
+    }
+
+    public function pacs()
+    {
+        return $this->hasMany(PacsInstallation::class);
     }
 }

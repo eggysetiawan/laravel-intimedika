@@ -9,7 +9,18 @@ class PacsStakeholder extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'pacs_installation_id',
+        'radiology_name',
+        'radiographer_name',
+        'phone_radiology',
+        'email_radiology',
+        'it_hospital_name',
+        'phone_it',
+        'email_it',
+        'phone_radiographer',
+        'email_radiographer',
+    ];
 
     // relationship
     public function pacsInstallation()

@@ -51,6 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function getRole($role)
+    {
+        return  static::with('roles')->role($role)->get();
+    }
+
     public function generateTwoFactorCode()
     {
         $this->timestamps = false;
@@ -80,6 +85,11 @@ class User extends Authenticatable
     }
 
     // relations
+
+    public function pacs_installs()
+    {
+        return $this->hasMany(PacsInstallation::class);
+    }
 
     public function charts()
     {

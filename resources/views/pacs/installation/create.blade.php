@@ -7,30 +7,28 @@
 @section('content')
     <x-alert></x-alert>
     <div class="container-fluid">
-        <form method="POST" action="{{ route('pacs_installations.store') }}" enctype="multipart/form-data">
 
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card card-teal">
-                        <div class="card-header">
-                            <h3 class="card-title">Data Informasi Lokasi Instalasi</h3>
-                        </div>
-                        @csrf
-                        @include('pacs.installation.partials._form-control-left', ['submit' => 'Create'])
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card card-teal">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <div class="d-flex">
+                                Informasi lokasi instalasi & user
+                            </div>
+                        </h3>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-teal">
-                        <div class="card-header">
-                            <h3 class="card-title">Data Informasi Lokasi Instalasi</h3>
-                        </div>
+                    <form method="POST" action="{{ route('pacs_installations.store') }}" enctype="multipart/form-data">
                         @csrf
-                        @include('pacs.installation.partials._form-control-left', ['submit' => 'Create'])
-                    </div>
+                        @include('pacs.installation.partials._form-control', ['submit' => 'Create'])
+                    </form>
                 </div>
-
             </div>
-        </form>
+
+
+
+        </div>
+
 
     </div>
 

@@ -9,7 +9,10 @@ class PacsEngineer extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'pacs_installation_id',
+        'user_id'
+    ];
 
     public function pacsInstallation()
     {

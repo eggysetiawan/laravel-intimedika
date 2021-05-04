@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'position' => ['required', 'string'],
             'username' => ['required', 'string', 'max:25'],
-            'role' => ['required', Rule::In(['sales', 'teknisi', 'admin', 'supervisor'])],
+            'role' => ['required', Rule::In(['sales', 'teknisi', 'admin', 'supervisor', 'it'])],
             'phone' => ['required', 'max:15'],
             'email' => ['required', 'email', 'unique:users,email', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
