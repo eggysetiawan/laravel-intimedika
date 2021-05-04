@@ -7,5 +7,11 @@
           <i class="fas fa-route nav-icon"></i>
           <p>Instalasi PACS</p>
       </a>
+
+      <a href="{{ route('pacs_supports.index') }}"
+          class="nav-link{{ request()->segment(1) == 'pacs_installations' ? ' active' : '' }}">
+          <i class="fas fa-route nav-icon"></i>
+          <p>Support PACS</p>
+      </a>
   </li>
   @endhasrole

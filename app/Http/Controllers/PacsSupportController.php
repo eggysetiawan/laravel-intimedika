@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PacsSupportDataTable;
 use App\PacsSupport;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class PacsSupportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PacsSupportDataTable $dataTable)
     {
-        //
+        return $dataTable->render('pacs.supports.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class PacsSupportController extends Controller
      */
     public function create()
     {
-        //
+        return view('pacs.supports.create');
     }
 
     /**

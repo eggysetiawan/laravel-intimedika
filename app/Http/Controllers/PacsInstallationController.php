@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PacsInstallationDataTable;
 use App\User;
 use App\Hospital;
 use App\PacsInstallation;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PacsInstallationRequest;
 use App\PacsEngineer;
 use Illuminate\Support\Facades\DB;
+use App\DataTables\QueryDataTable;
 
 class PacsInstallationController extends Controller
 {
@@ -18,9 +20,9 @@ class PacsInstallationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PacsInstallationDataTable $pacsInstallationDataTable)
     {
-        return view('pacs.installation.index');
+        return $pacsInstallationDataTable->render('pacs.installation.index');
     }
 
     /**

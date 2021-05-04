@@ -30,4 +30,11 @@ class PdfService
         $date = date('Y_m_d', strtotime($advance->start_date));
         return $pdf->stream('Advance_' . $destination . '_' . $date . '.pdf');
     }
+
+    public function exportPacsInstallation($pacsInstallation)
+    {
+        $data['pacsinstallation'] = $pacsInstallation;
+        $pdf = PDF::loadview('pacs.insallation.partials.pdf', $data)->setPaper('A4', 'potrait');
+        return $pdf->stream();
+    }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app', ['title'=> 'Alat kesehatan',
-'caption'=> 'Instalasi PACS'])
+'caption'=> 'Daftar Modalitas'])
 
 @section('breadcrumb')
     <li class="breadcrumb-item">Daftar Modality</li>
@@ -10,7 +10,7 @@
         @unlessrole('director')
         <div class="d-flex justify-content-end">
             <div class="btn-group">
-                <x-button-create href="{{ route('pacs_installations.create') }}">Buat Instalasi</x-button-create>
+                <x-button-create href="{{ route('pacs_supports.create') }}">Buat Support</x-button-create>
             </div>
         </div>
         @endunlessrole
@@ -20,12 +20,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ $installation->name ?? 'Table Instalasi' }}</h3>
-                    <div class="card-body table-responsive">
+                    <h3 class="card-title">{{ $modalities->name ?? 'Table Modality' }}</h3>
 
-                        {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id' => 'pacsinstallation-table']) !!}
-
-                    </div>
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -37,13 +33,13 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                {{-- <div class="card-body table-responsive ">
+                <div class="card-body table-responsive ">
                     {!! $dataTable->table([
     'class' => 'table table-centered table-striped dt-responsive
                     nowrap w-100',
-    'id' => 'pacs_installation-table',
+    'id' => 'pacssupport-table',
 ]) !!}
-                </div> --}}
+                </div>
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
