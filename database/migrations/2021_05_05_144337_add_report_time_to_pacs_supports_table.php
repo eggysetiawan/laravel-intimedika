@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePacsEngineersTable extends Migration
+class AddReportTimeToPacsSupportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreatePacsEngineersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pacs_engineers', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('pacs_supports', function (Blueprint $table) {
+            $table->time('report_time')->after('report_date');
+            $table->time('solve_time')->after('solve_date');
         });
     }
 
@@ -28,6 +26,8 @@ class CreatePacsEngineersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacs_engineers');
+        Schema::table('pacs_supports', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -49,30 +49,43 @@ class PacsInstallationController extends Controller
         $attr = $request->all();
         $hospital_name = Hospital::findOrFail(request('hospital'))->name;
         $attr['slug'] = Str::slug($hospital_name . ' ' . now()->format('Y'));
+        $attr['handover_date'] = date('Y-m-d H:i:s', strtotime($request->handover_date));
+        $attr['start_installation_date'] = date('Y-m-d H:i:s', strtotime($request->start_installation_date));
+        $attr['training_date'] = date('Y-m-d H:i:s', strtotime($request->training_date));
+        $attr['finish_installation_date'] = date('Y-m-d H:i:s', strtotime($request->finish_installation_date));
         $attr['hospital_id'] = $request->hospital;
 
         DB::transaction(function () use ($attr, $request) {
             $pacs_installations = auth()->user()->pacs_installs()->create($attr);
+            $pacs_installations->stakeholder()->create($attr);
 
             foreach ($request->pacs_engineers as $engineer) {
                 PacsEngineer::insert([
-                    'pacs_installation_id' => $pacs_installations->id,
+                    'engineerable_id' => $pacs_installations->id,
+                    'engineerable_type' => 'App\PacsInstallation',
                     'user_id' => $engineer,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             }
 
-            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+            // $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+
+            // $pacs_installations
+            //     ->addMediaFromRequest('img')
+            //     ->usingFileName($imgSlug)
+            //     ->toMediaCollection('files');
 
             $pacs_installations
-                ->addMediaFromRequest('img')
-                ->usingFileName($imgSlug)
-                ->toMediaCollection('files');
+                ->addMultipleMediaFromRequest(['img'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('files');
+                });
         });
 
+
         session()->flash('success', 'Instalasi telah berhasil dibuat');
-        return back();
+        return redirect('pacs_installations');
     }
 
     /**

@@ -24,7 +24,7 @@ class PacsInstallationRequest extends FormRequest
     public function rules()
     {
         return [
-            'hospital' => ['integer', 'required'],
+            'hospital' => ['integer', 'required', 'unique:pacs_installations,hospital_id'],
             'handover_date' => ['date'],
             'start_installation_date' => ['date', 'required'],
             'training_date' => ['nullable', 'date'],
@@ -42,8 +42,6 @@ class PacsInstallationRequest extends FormRequest
             'phone_radiology' => ['nullable'],
             'email_radiology' => ['nullable', 'email'],
             'user_note' => ['string', 'nullable'],
-
-
         ];
     }
 }

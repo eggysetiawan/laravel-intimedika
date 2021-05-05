@@ -23,6 +23,16 @@ class PacsInstallation extends Model implements HasMedia
         'warranty_end'
     ];
 
+    public static function hospitalRequest($request)
+    {
+        return static::query()
+            ->whereHas('hospital')
+            ->where('id', $request->pacs_installation)
+            ->first()
+            ->hospital
+            ->name;
+    }
+
     // relationship
     public function author()
     {
@@ -31,11 +41,20 @@ class PacsInstallation extends Model implements HasMedia
 
     public function engineers()
     {
-        return $this->hasMany(PacsEngineer::class);
+        return $this->morphMany('App\PacsEngineer', 'engineerable');
     }
 
     public function hospital()
     {
         return $this->belongsTo(Hospital::class);
+    }
+    public function stakeholder()
+    {
+        return $this->hasOne(PacsStakeholder::class);
+    }
+
+    public function supports()
+    {
+        return $this->hasMany(PacsSupport::class);
     }
 }

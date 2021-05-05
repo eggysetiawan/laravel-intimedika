@@ -2,13 +2,14 @@
 
 namespace App\DataTables;
 
+use Carbon\Carbon;
 use App\PacsInstallation;
-use PhpOffice\PhpSpreadsheet\Worksheet\ColumnIterator;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use PhpOffice\PhpSpreadsheet\Worksheet\ColumnIterator;
 
 class PacsInstallationDataTable extends DataTable
 {
@@ -25,13 +26,39 @@ class PacsInstallationDataTable extends DataTable
             ->addIndexColumn()
             ->editColumn('action', function (PacsInstallation $pacsInstallation) {
                 return view('pacs.installation.partials.action', [
-                    'pacsinstallation' => $pacsInstallation
+                    'pacsInstallation' => $pacsInstallation
                 ]);
             })
             ->addColumn('pdf', function (PacsInstallation $pacsInstallation) {
                 return view('pacs.installation.partials.pdf', [
                     'pacsinstallation' => $pacsInstallation,
                 ]);
+            })
+            ->editColumn('engineers.technician.name', function (PacsInstallation $pacsInstallation) {
+                $technicians = $pacsInstallation->engineers;
+                $names = array();
+                foreach ($technicians as $technician) :
+                    $names[] = $technician->technician->name;
+                endforeach;
+                return join(" & ", array_unique($names));
+            })
+            ->editColumn('start_installation_date', function (PacsInstallation $pacsInstallation) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $pacsInstallation->start_installation_date)->format('d-M-Y');
+            })
+            ->editColumn('training_date', function (PacsInstallation $pacsInstallation) {
+                return date('d-M-Y', strtotime($pacsInstallation->training_date));
+            })
+            ->editColumn('handover_date', function (PacsInstallation $pacsInstallation) {
+                return date('d-M-Y', strtotime($pacsInstallation->handover_date));
+            })
+            ->editColumn('finish_installation_date', function (PacsInstallation $pacsInstallation) {
+                return date('d-M-Y', strtotime($pacsInstallation->finish_installation_date));
+            })
+            ->editColumn('warranty_start', function (PacsInstallation $pacsInstallation) {
+                return date('d-M-Y', strtotime($pacsInstallation->warranty_start));
+            })
+            ->editColumn('warranty_end', function (PacsInstallation $pacsInstallation) {
+                return date('d-M-Y', strtotime($pacsInstallation->warranty_end));
             })
             ->rawColumns(['action']);
     }
@@ -45,7 +72,7 @@ class PacsInstallationDataTable extends DataTable
     public function query(PacsInstallation $model)
     {
         return $model->newQuery()
-            ->with(['hospital', 'engineers', 'author']);
+            ->with(['hospital', 'engineers', 'author', 'stakeholder']);
     }
 
     /**
@@ -107,7 +134,7 @@ class PacsInstallationDataTable extends DataTable
                 ->exportable(false),
 
             //nama RS
-            Column::make('hospital.name')
+            Column::computed('hospital.name')
                 ->title('Nama RS'),
 
             //alamat RS
@@ -147,6 +174,53 @@ class PacsInstallationDataTable extends DataTable
                 ->title('File')
                 ->width(10),
 
+            //email RS
+            Column::make('hospital.email')
+                ->title('Email RS'),
+
+            //enginer
+            Column::computed('engineers.technician.name')
+                ->title('Pacs Enginer'),
+
+            //Nama Petugas IT
+            Column::make('stakeholder.it_hospital_name')
+                ->title('IT Hospital Name'),
+
+            //Nomor Hp IT
+            Column::make('stakeholder.phone_it')
+                ->title('IT Phone'),
+
+            //Alamat Email IT
+            Column::make('stakeholder.email_it')
+                ->title('Email IT'),
+
+            //Nama Radiographer
+            Column::make('stakeholder.radiographer_name')
+                ->title('Radiographer Name'),
+
+            //Nomor Hp Radiographer
+            Column::make('stakeholder.phone_radiographer')
+                ->title('Radiographer Phone'),
+
+            //Email Radiographer
+            Column::make('stakeholder.email_radiographer')
+                ->title('Email Radiographer'),
+
+            //Nama Dokter
+            Column::make('stakeholder.radiology_name')
+                ->title('Radiology Physc Name'),
+
+            //No HP DOkter Radiology]
+            Column::make('stakeholder.phone_radiology')
+                ->title('Radiology Physc Phone'),
+
+            //Email Dokter Radiology
+            Column::make('stakeholder.email_radiology')
+                ->title('Radiology Email'),
+
+            //Keterangan
+            Column::make('stakeholder.user_note')
+                ->title('User Note'),
         ];
     }
 

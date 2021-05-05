@@ -1,6 +1,6 @@
 @extends('layouts.app', ['title'=>'Troubleshooting PACS'])
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('pacs_supports.index') }}">Daftar Instalasi PACS</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('pacs_supports.index') }}">Daftar Support PACS</a></li>
     <li class="breadcrumb-item">Tambah</li>
 @endsection
 

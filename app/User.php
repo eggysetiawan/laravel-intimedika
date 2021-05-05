@@ -85,6 +85,11 @@ class User extends Authenticatable
     }
 
     // relations
+    public function pacs_supports()
+    {
+        return $this->hasMany(PacsSupport::class);
+    }
+
 
     public function pacs_installs()
     {
@@ -119,6 +124,11 @@ class User extends Authenticatable
     public function advances()
     {
         return $this->hasMany(Advance::class);
+    }
+
+    public function pacs_engineers()
+    {
+        return $this->hasMany(PacsEngineer::class);
     }
 
 

@@ -46,24 +46,7 @@
                     </a>
                 </li>
 
-                {{-- resource --}}
-                <li class="nav-header">Resource</li>
-                <li class="nav-item">
-                    <a href="{{ route('modalities.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">
-                        <i class="fas fa-charging-station nav-icon"></i>
-                        <p>Alat Kesehatan</p>
-                    </a>
-                </li>
 
-                {{-- customers --}}
-                <li class="nav-item">
-                    <a href="{{ route('customers.index') }}"
-                        class="nav-link{{ request()->segment(1) == 'customers' ? ' active' : '' }}">
-                        <i class="fas fa-street-view nav-icon"></i>
-                        <p>Customer</p>
-                    </a>
-                </li>
 
                 {{-- hospital --}}
                 <li class="nav-item">

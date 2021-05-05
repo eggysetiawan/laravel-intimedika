@@ -23,9 +23,8 @@ class PacsStakeholder extends Model
     ];
 
     // relationship
-    public function pacsInstallation()
+    public function installation()
     {
         return $this->belongsTo(PacsInstallation::class, 'pacs_installation_id');
-        # code...
     }
 }

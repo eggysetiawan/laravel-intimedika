@@ -1,8 +1,8 @@
-@extends('layouts.app', ['title'=> 'Alat kesehatan',
-'caption'=> 'Daftar Modalitas'])
+@extends('layouts.app', ['title'=> 'Pacs Support',
+'caption'=> 'Intiwid Support'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Daftar Modality</li>
+    <li class="breadcrumb-item">Daftar Support</li>
     {{-- <li class="breadcrumb-item">Slug/Name Here</li> --}}
 @endsection
 @section('content')
@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ $modalities->name ?? 'Table Modality' }}</h3>
+                    <h3 class="card-title">Table Support</h3>
 
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">

@@ -10,12 +10,20 @@ class PacsEngineer extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'engineerable_id',
+        'engineerable_type',
         'pacs_installation_id',
         'user_id'
     ];
 
-    public function pacsInstallation()
+    public function engineerable()
     {
-        return $this->belongsTo(PacsInstallation::class, 'pacs_installation_id');
+        return $this->morphTo();
+    }
+
+    // engineers.technician.name
+    public function technician()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePacsEngineersTable extends Migration
+class AddPolymorphToPacsEngineersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreatePacsEngineersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pacs_engineers', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('pacs_engineers', function (Blueprint $table) {
+            $table->unsignedBigInteger('engineerable_id')->after('id');
+            $table->string('engineerable_type')->after('engineerable_id');
         });
     }
 
@@ -28,6 +26,8 @@ class CreatePacsEngineersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacs_engineers');
+        Schema::table('pacs_engineers', function (Blueprint $table) {
+            //
+        });
     }
 }
