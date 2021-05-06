@@ -21,8 +21,9 @@
             <div class="col-md-10">
                 <label for="item">Nama Barang</label>
                 <input type="text" name="item" id="item" class="form-control" placeholder="Input nama barang.."
-                    class="{{ old('item') ?? $inventory->item }}">
+                    value="{{ old('item') ?? $inventory->item }}">
             </div>
+
             <div class="col-md">
                 <label for="quantity">Jumlah/Unit</label>
                 <input type="number" name="quantity" id="quantity" class="form-control" placeholder="qty"
@@ -52,13 +53,21 @@
                 <label for="location">Lokasi</label>
                 <input type="text" name="location" id="location" class="form-control"
                     placeholder="Tuliskan lokasi barang saat ini.."
-                    class="{{ old('location') ?? $inventory->location }}">
+                    value="{{ old('location') ?? $inventory->location }}">
             </div>
             <div class="col-md-6">
                 <label for="department">Departement/Divisi</label>
                 <select name="department" id="department" class="form-control">
+                    @isset($inventory->department_id)
+                        <option selected value="{{ $inventory->department_id }}">{{ $inventory->department->name }}
+                        </option>
+                    @endisset
                     @foreach ($departments as $department)
-                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+
+                        @if ($inventory->department_id != $department->id)
+                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                        @endif
+
                     @endforeach
 
                 </select>
@@ -69,7 +78,7 @@
     <div class="form-group">
         <label for="purchase_date">Tanggal Pembelian</label>
         <input type="date" name="purchase_date" id="purchase_date" class="form-control"
-            value="{{ old('purchase_date') ?? ($inventory->purchase_date ?? now()->format('Y-m-d')) }}">
+            value="{{ old('purchase_date') ?? (date('Y-m-d', strtotime($inventory->purchase_date)) ?? now()->format('Y-m-d')) }}">
     </div>
 
     <div class="form-group">

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Inventory;
 use App\Department;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\DataTables\InventoryDataTable;
 use App\Http\Requests\InventoryRequest;
 use App\InventoryType;
@@ -31,8 +29,8 @@ class InventoryController extends Controller
     public function create()
     {
         return view('inventories.create', [
-            'departments' => Department::get(),
             'inventory' => new Inventory(),
+            'departments' => Department::get(),
             'types' => InventoryType::get(),
         ]);
     }
@@ -47,8 +45,6 @@ class InventoryController extends Controller
     {
         $inventoryService->createInventory($request);
         $inventoryService->createType($request);
-
-
 
         session()->flash('success', 'Inventory telah berhasil ditambahkan!');
         return redirect('inventories');
@@ -73,7 +69,11 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        return view('inventories.edit', [
+            'inventory' => $inventory,
+            'departments' => Department::get(),
+            'types' => InventoryType::get()
+        ]);
     }
 
     /**
@@ -83,9 +83,11 @@ class InventoryController extends Controller
      * @param  \App\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventory $inventory)
+    public function update(InventoryRequest $request, Inventory $inventory)
     {
-        //
+        (new InventoryService())->updateInventory($request, $inventory);
+        session()->flash('success', 'Inventory telah berhasil diupdate!');
+        return redirect('inventories');
     }
 
     /**
@@ -96,6 +98,8 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
-        //
+        $inventory->delete();
+        session()->flash('success', 'Data barang telah berhasil di hapus!');
+        return back();
     }
 }

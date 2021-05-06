@@ -113,6 +113,10 @@ class InventoryDataTable extends DataTable
             Column::make('purchase_date')
                 ->title('Tgl. Pembelian'),
 
+            // type
+            Column::make('type')
+                ->title('Jenis'),
+
             // Lokasi
             Column::make('location')
                 ->title('Lokasi'),

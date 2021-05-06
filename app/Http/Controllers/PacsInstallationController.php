@@ -133,26 +133,6 @@ class PacsInstallationController extends Controller
             }
         );
 
-        // DB::transaction(function () use ($attr, $request) {
-        //     $pacs_installations = auth()->user()->pacs_installs()->update($attr);
-        //     $pacs_installations->stakeholder()->update($attr);
-
-        //     foreach ($request->pacs_engineers as $engineer) {
-        //         PacsEngineer::insert([
-        //             'engineerable_id' => $pacs_installations->id,
-        //             'engineerable_type' => 'App\PacsInstallation',
-        //             'user_id' => $engineer,
-        //             'created_at' => now(),
-        //             'updated_at' => now(),
-        //         ]);
-        //     }
-
-        //     $pacs_installations
-        //         ->addMultipleMediaFromRequest(['img'])
-        //         ->each(function ($fileAdder) {
-        //             $fileAdder->toMediaCollection('files');
-        //         });
-        // });
 
         session()->flash('success', 'Instalasi telah berhasil diedit');
         return redirect('pacs_installations');

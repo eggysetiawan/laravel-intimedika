@@ -29,4 +29,11 @@ class InventoryService
         }
         return null;
     }
+
+    public function updateInventory($request, $inventory)
+    {
+        $attr = $request->all();
+        $attr['department_id'] = $request->department;
+        return  $inventory->update($attr);
+    }
 }
