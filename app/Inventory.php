@@ -11,7 +11,7 @@ class Inventory extends Model
 
     protected $fillable = [
         'slug',
-        'departmen_id',
+        'department_id',
         'service_tag',
         'serial_number',
         'item',
@@ -21,6 +21,12 @@ class Inventory extends Model
         'purchase_date',
         'note'
     ];
+
+    // relationship
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function department()
     {

@@ -85,6 +85,12 @@ class User extends Authenticatable
     }
 
     // relations
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
     public function pacs_supports()
     {
         return $this->hasMany(PacsSupport::class);
