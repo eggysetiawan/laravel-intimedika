@@ -32,6 +32,11 @@
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
+{{-- selectize --}}
+
+<script
+    src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js') }}">
+</script>
 
 <!-- DataTables -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
