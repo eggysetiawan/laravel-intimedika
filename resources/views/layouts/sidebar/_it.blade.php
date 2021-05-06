@@ -9,7 +9,6 @@
       </a>
   </li>
   <li class="nav-item">
-
       <a href="{{ route('pacs_supports.index') }}"
           class="nav-link{{ request()->segment(1) == 'pacs_supports' ? ' active' : '' }}">
           <i class="fas fa-phone-alt nav-icon"></i>

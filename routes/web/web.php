@@ -43,6 +43,11 @@ Route::middleware('auth')->group(function () {
         'hospitals' => 'hospital:slug',
     ]);
 
+    // inventories
+    Route::resource('inventories', 'InventoryController')->parameters([
+        'inventories' => 'inventory:slug',
+    ]);
+
     // invoices
     Route::prefix('invoices')->name('invoices.')->group(function () {
         Route::get('{offer:slug}/print', 'InvoiceController@print')->name('print');
@@ -118,8 +123,4 @@ Route::middleware('auth')->group(function () {
     Route::resource('visits', 'VisitController')->parameters([
         'visits' => 'visit:slug',
     ]);
-
-    // Route::prefix('pacs_installations')->name('pacs_installations.')->group(function () {
-    //     Route::get('', 'PacsInstallationController@index')->name('index');
-    // });
 });

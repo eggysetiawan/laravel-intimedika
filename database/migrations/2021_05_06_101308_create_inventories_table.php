@@ -15,7 +15,19 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('slug');
+            $table->unsignedBigInteger('department_id');
+            $table->string('service_tag', 100)->nullable();
+            $table->string('serial_number', 100)->nullable();
+            $table->string('item');
+            $table->string('quantity')->nullable();
+            $table->string('user')->nullable();
+            $table->string('location')->nullable();
+            $table->dateTime('purchase_date')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

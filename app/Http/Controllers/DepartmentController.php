@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Inventory;
 use App\Department;
 use Illuminate\Http\Request;
-use App\DataTables\InventoryDataTable;
 
-class InventoryController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(InventoryDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('inventories.index');
+        //
     }
 
     /**
@@ -26,9 +24,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        return view('inventories.create', [
-            'departments' => Department::get(),
-        ]);
+        //
     }
 
     /**
@@ -45,10 +41,10 @@ class InventoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Inventory  $inventory
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function show(Inventory $inventory)
+    public function show(Department $department)
     {
         //
     }
@@ -56,10 +52,10 @@ class InventoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Inventory  $inventory
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inventory $inventory)
+    public function edit(Department $department)
     {
         //
     }
@@ -68,10 +64,10 @@ class InventoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Inventory  $inventory
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventory $inventory)
+    public function update(Request $request, Department $department)
     {
         //
     }
@@ -79,10 +75,10 @@ class InventoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Inventory  $inventory
+     * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Inventory $inventory)
+    public function destroy(Department $department)
     {
         //
     }

@@ -47,7 +47,6 @@ class PacsInstallationController extends Controller
      */
     public function store(PacsInstallationRequest $request, PacsInstallationService $pacsInstallationService)
     {
-
         DB::transaction(function () use ($request, $pacsInstallationService) {
             $pacs_installations = $pacsInstallationService->createPacsInstallation($request);
             $pacs_installations->stakeholder()->create($request->all());
