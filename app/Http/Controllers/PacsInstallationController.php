@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\PacsInstallationDataTable;
 use App\User;
 use App\Hospital;
+use App\PacsEngineer;
+use App\PacsStakeholder;
 use App\PacsInstallation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Requests\PacsInstallationRequest;
-use App\PacsEngineer;
-use Illuminate\Support\Facades\DB;
 use App\DataTables\QueryDataTable;
+use Illuminate\Support\Facades\DB;
+use App\DataTables\PacsInstallationDataTable;
+use App\Http\Requests\PacsInstallationRequest;
 use App\Services\PacsInstallationService;
 
 class PacsInstallationController extends Controller
@@ -90,9 +91,71 @@ class PacsInstallationController extends Controller
      * @param  \App\PacsInstallation  $pacsInstallation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PacsInstallation $pacsInstallation)
+    public function update(PacsInstallationRequest $request, PacsInstallation $pacsInstallation)
     {
-        //
+        $attr = $request->all();
+        $attr['slug'] = $pacsInstallation->slug;
+        $attr['handover_date'] = date('Y-m-d H:i:s', strtotime($request->handover_date));
+        $attr['start_installation_date'] = date('Y-m-d H:i:s', strtotime($request->start_installation_date));
+        $attr['training_date'] = date('Y-m-d H:i:s', strtotime($request->training_date));
+        $attr['finish_installation_date'] = date('Y-m-d H:i:s', strtotime($request->finish_installation_date));
+
+        DB::transaction(
+            function () use ($attr, $request, $pacsInstallation) {
+                $pacsInstallation->update($attr);
+                $pacsInstallation->stakeholder()->update([
+                    'radiology_name' => $request->radiology_name,
+                    'radiographer_name' => $request->radiographer_name,
+                    'phone_radiology' => $request->phone_radiology,
+                    'email_radiology' => $request->email_radiology,
+                    'it_hospital_name' => $request->it_hospital_name,
+                    'phone_it' => $request->phone_it,
+                    'email_it' => $request->email_it,
+                    'phone_radiographer' => $request->phone_radiographer,
+                    'email_radiographer' => $request->email_radiographer,
+                ]);
+
+                foreach ($request->pacs_engineers as $engineer) {
+                    $pacsInstallation->engineers()->update([
+                        'engineerable_id' => $pacs_installations->id,
+                        'engineerable_type' => 'App\PacsInstallation',
+                        'user_id' => $engineer,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                $pacsInstallation
+                    ->addMultipleMediaFromRequest(['img'])
+                    ->each(function ($fileAdder) {
+                        $fileAdder->toMediaCollection('files');
+                    });
+            }
+        );
+
+        // DB::transaction(function () use ($attr, $request) {
+        //     $pacs_installations = auth()->user()->pacs_installs()->update($attr);
+        //     $pacs_installations->stakeholder()->update($attr);
+
+        //     foreach ($request->pacs_engineers as $engineer) {
+        //         PacsEngineer::insert([
+        //             'engineerable_id' => $pacs_installations->id,
+        //             'engineerable_type' => 'App\PacsInstallation',
+        //             'user_id' => $engineer,
+        //             'created_at' => now(),
+        //             'updated_at' => now(),
+        //         ]);
+        //     }
+
+        //     $pacs_installations
+        //         ->addMultipleMediaFromRequest(['img'])
+        //         ->each(function ($fileAdder) {
+        //             $fileAdder->toMediaCollection('files');
+        //         });
+        // });
+
+        session()->flash('success', 'Instalasi telah berhasil diedit');
+        return redirect('pacs_installations');
     }
 
     /**
