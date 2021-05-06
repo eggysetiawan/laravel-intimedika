@@ -100,6 +100,8 @@ class PacsInstallationController extends Controller
      */
     public function destroy(PacsInstallation $pacsInstallation)
     {
-        //
+        $pacsInstallation->delete();
+        session()->flash('success', 'Data telah berhasil dihapus!');
+        return redirect('pacs_installations');
     }
 }
