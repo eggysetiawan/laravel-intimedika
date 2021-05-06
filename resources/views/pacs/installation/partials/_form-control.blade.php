@@ -153,5 +153,5 @@
 </div>
 
 <div class="card-footer">
-    <x-button-submit>Submit</x-button-submit>
+    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
 </div>
