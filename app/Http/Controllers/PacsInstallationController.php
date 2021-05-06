@@ -34,7 +34,7 @@ class PacsInstallationController extends Controller
     {
         return view('pacs.installation.create', [
             'engineers' => User::getRole('it'),
-            'pacs' => new PacsInstallation(),
+            'pacsInstallation' => new PacsInstallation(),
         ]);
     }
 
@@ -89,7 +89,6 @@ class PacsInstallationController extends Controller
      */
     public function show(PacsInstallation $pacsInstallation)
     {
-        //
     }
 
     /**
@@ -100,7 +99,11 @@ class PacsInstallationController extends Controller
      */
     public function edit(PacsInstallation $pacsInstallation)
     {
-        //
+        $pacsInstallation->load('engineers', 'stakeholder');
+        return view('pacs.installation.edit', [
+            'engineers' => User::getRole('it'),
+            'pacsInstallation' => $pacsInstallation
+        ]);
     }
 
     /**
