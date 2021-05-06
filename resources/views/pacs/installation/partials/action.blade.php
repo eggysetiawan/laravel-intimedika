@@ -6,7 +6,7 @@
     <div class="dropdown-menu">
 
 
-        <a href="#" class="dropdown-item" title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
+        <a href="{{ route('pacs_installations.edit', $pacsInstallation->slug) }}" class="dropdown-item" title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
             Edit</a>
 
         @if (!$pacsInstallation->deleted_at)
