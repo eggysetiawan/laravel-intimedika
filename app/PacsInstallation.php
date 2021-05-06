@@ -2,10 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PacsInstallation extends Model implements HasMedia
 {
@@ -22,6 +23,14 @@ class PacsInstallation extends Model implements HasMedia
         'warranty_start',
         'warranty_end'
     ];
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(800)
+            ->height(600)
+            ->performOnCollections('files');
+    }
 
     public static function hospitalRequest($request)
     {

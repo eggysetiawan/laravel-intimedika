@@ -6,13 +6,12 @@
     <div class="dropdown-menu">
 
 
-        <a href="{{ route('visitplan.edit', $pacsInstallation->slug) }}" class="dropdown-item"
-            title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
+        <a href="#" class="dropdown-item" title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
             Edit</a>
 
         @if (!$pacsInstallation->deleted_at)
 
-            <form action="{{ route('pacs_supports.destroy', $pacsInstallation->slug) }}" method="POST">
+            <form action="{{ route('pacs_installations.destroy', $pacsInstallation->slug) }}" method="POST">
                 @csrf
                 @method('delete')
 

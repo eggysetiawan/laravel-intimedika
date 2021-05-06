@@ -4,12 +4,8 @@ namespace App\DataTables;
 
 use Carbon\Carbon;
 use App\PacsInstallation;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use PhpOffice\PhpSpreadsheet\Worksheet\ColumnIterator;
 
 class PacsInstallationDataTable extends DataTable
 {
@@ -31,7 +27,7 @@ class PacsInstallationDataTable extends DataTable
             })
             ->addColumn('pdf', function (PacsInstallation $pacsInstallation) {
                 return view('pacs.installation.partials.pdf', [
-                    'pacsinstallation' => $pacsInstallation,
+                    'pacsInstallation' => $pacsInstallation,
                 ]);
             })
             ->editColumn('engineers.technician.name', function (PacsInstallation $pacsInstallation) {
@@ -72,7 +68,8 @@ class PacsInstallationDataTable extends DataTable
     public function query(PacsInstallation $model)
     {
         return $model->newQuery()
-            ->with(['hospital', 'engineers', 'author', 'stakeholder']);
+            ->with(['hospital', 'engineers', 'author', 'stakeholder'])
+            ->latest();
     }
 
     /**
@@ -94,25 +91,11 @@ class PacsInstallationDataTable extends DataTable
                     [10, 25, 50, 100],
                     ['10', '25', '50', '100']
                 ],
-                'processing' => true,
+                'processing' => false,
             ])
             ->columns($this->getColumns());
     }
-    // {
-    //     return $this->builder()
-    //         ->setTableId('pacsinstallationdatatable-table')
-    //         ->columns($this->getColumns())
-    //         ->minifiedAjax()
-    //         ->dom('Bfrtip')
-    //         ->orderBy(1)
-    //         ->buttons(
-    //             Button::make('create'),
-    //             Button::make('export'),
-    //             Button::make('print'),
-    //             Button::make('reset'),
-    //             Button::make('reload')
-    //         );
-    // }
+
 
     /**
      * Get columns.

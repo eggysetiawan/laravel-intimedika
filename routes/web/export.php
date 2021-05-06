@@ -8,7 +8,7 @@ Auth::routes();
 Route::prefix('pdf')->name('pdf.')->group(function () {
     Route::get('{advance:slug}/advance', 'PdfController@advance')->name('advance');
     Route::get('{offer:slug}/offer', 'PdfController@offer')->name('offer');
-    Route::get('{pacs_installation/pacs', 'PdfController@pacsinstallation')->name('pacs_installation');
+    Route::get('{pacs_installation:slug}/pacs', 'PdfController@pacsinstallation')->name('pacs_installation');
 });
 
 Route::prefix('excel')->middleware('auth')->name('excel.')->group(function () {

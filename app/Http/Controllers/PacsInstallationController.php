@@ -69,13 +69,6 @@ class PacsInstallationController extends Controller
                 ]);
             }
 
-            // $imgSlug = uniqid() . '.' . request()->file('img')->extension();
-
-            // $pacs_installations
-            //     ->addMediaFromRequest('img')
-            //     ->usingFileName($imgSlug)
-            //     ->toMediaCollection('files');
-
             $pacs_installations
                 ->addMultipleMediaFromRequest(['img'])
                 ->each(function ($fileAdder) {

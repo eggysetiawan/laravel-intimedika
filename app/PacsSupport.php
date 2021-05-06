@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PacsSupport extends Model
 {
@@ -18,6 +19,8 @@ class PacsSupport extends Model
         'solve_date',
         'solve_time'
     ];
+
+
 
     // relationship
 

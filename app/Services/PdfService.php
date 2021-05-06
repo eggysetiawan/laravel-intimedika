@@ -33,8 +33,8 @@ class PdfService
 
     public function exportPacsInstallation($pacsInstallation)
     {
-        $data['pacsinstallation'] = $pacsInstallation;
-        $pdf = PDF::loadview('pacs.insallation.partials.pdf', $data)->setPaper('A4', 'potrait');
-        return $pdf->stream();
+        $data['pacsInstallation'] = $pacsInstallation;
+        $pdf = PDF::loadview('pacs.installation.pdf', $data)->setPaper('A4', 'potrait');
+        return $pdf->stream('Instalasi_Intiwid_' . $pacsInstallation->slug . '.pdf');
     }
 }
