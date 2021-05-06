@@ -20,6 +20,7 @@ class PacsStakeholder extends Model
         'email_it',
         'phone_radiographer',
         'email_radiographer',
+        'user_note'
     ];
 
     // relationship

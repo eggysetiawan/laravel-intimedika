@@ -12,6 +12,7 @@ use App\Http\Requests\PacsInstallationRequest;
 use App\PacsEngineer;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\QueryDataTable;
+use App\Services\PacsInstallationService;
 
 class PacsInstallationController extends Controller
 {
@@ -44,38 +45,15 @@ class PacsInstallationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PacsInstallationRequest $request)
+    public function store(PacsInstallationRequest $request, PacsInstallationService $pacsInstallationService)
     {
-        $attr = $request->all();
-        $hospital_name = Hospital::findOrFail(request('hospital'))->name;
-        $attr['slug'] = Str::slug($hospital_name . ' ' . now()->format('Y'));
-        $attr['handover_date'] = date('Y-m-d H:i:s', strtotime($request->handover_date));
-        $attr['start_installation_date'] = date('Y-m-d H:i:s', strtotime($request->start_installation_date));
-        $attr['training_date'] = date('Y-m-d H:i:s', strtotime($request->training_date));
-        $attr['finish_installation_date'] = date('Y-m-d H:i:s', strtotime($request->finish_installation_date));
-        $attr['hospital_id'] = $request->hospital;
 
-        DB::transaction(function () use ($attr, $request) {
-            $pacs_installations = auth()->user()->pacs_installs()->create($attr);
-            $pacs_installations->stakeholder()->create($attr);
-
-            foreach ($request->pacs_engineers as $engineer) {
-                PacsEngineer::insert([
-                    'engineerable_id' => $pacs_installations->id,
-                    'engineerable_type' => 'App\PacsInstallation',
-                    'user_id' => $engineer,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            $pacs_installations
-                ->addMultipleMediaFromRequest(['img'])
-                ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('files');
-                });
+        DB::transaction(function () use ($request, $pacsInstallationService) {
+            $pacs_installations = $pacsInstallationService->createPacsInstallation($request);
+            $pacs_installations->stakeholder()->create($request->all());
+            $pacsInstallationService->insertEngineer($request);
+            $pacsInstallationService->uploadFiles();
         });
-
 
         session()->flash('success', 'Instalasi telah berhasil dibuat');
         return redirect('pacs_installations');
