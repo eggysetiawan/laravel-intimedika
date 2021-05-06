@@ -16,3 +16,15 @@
         </form>
     </x-card>
 @endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#type').selectize({
+                create: true,
+                sortField: 'text'
+            });
+        });
+
+    </script>
+@endsection

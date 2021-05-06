@@ -117,6 +117,10 @@ class InventoryDataTable extends DataTable
             Column::make('location')
                 ->title('Lokasi'),
 
+            // nama pengguna
+            Column::make('user')
+                ->title('Nama Pengguna'),
+
             // Divisi/department
             Column::make('department.name')
                 ->title('Divisi'),

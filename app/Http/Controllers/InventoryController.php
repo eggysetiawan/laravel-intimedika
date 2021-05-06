@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\InventoryDataTable;
 use App\Http\Requests\InventoryRequest;
+use App\InventoryType;
+use App\Services\InventoryService;
 
 class InventoryController extends Controller
 {
@@ -31,6 +33,7 @@ class InventoryController extends Controller
         return view('inventories.create', [
             'departments' => Department::get(),
             'inventory' => new Inventory(),
+            'types' => InventoryType::get(),
         ]);
     }
 
@@ -40,13 +43,13 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InventoryRequest $request)
+    public function store(InventoryRequest $request, InventoryService $inventoryService)
     {
-        $attr = $request->all();
-        $sn = $request->service_tag ?? $request->serial_number;
-        $attr['slug'] = Str::slug($request->item . '-' . $sn);
-        $attr['department_id'] = $request->department;
-        auth()->user()->inventories()->create($attr);
+        $inventoryService->createInventory($request);
+        $inventoryService->createType($request);
+
+
+
         session()->flash('success', 'Inventory telah berhasil ditambahkan!');
         return redirect('inventories');
     }

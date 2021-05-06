@@ -28,7 +28,9 @@ class InventoryRequest extends FormRequest
             'department' => ['integer', 'required'],
             'serial_number' => ['nullable', 'string'],
             'item' => ['required', 'string'],
+            'user' => ['string', 'nullable'],
             'quantity' => ['required'],
+            'type' => ['required'],
             'location' => ['nullable'],
             'purchase_date' => ['nullable'],
             'note' => ['nullable', 'string']

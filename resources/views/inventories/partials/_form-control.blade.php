@@ -32,6 +32,21 @@
     </div>
 
     <div class="form-group">
+        <label for="type">Jenis Barang</label>
+        <select name="type" id="type" class="form-control type">
+            @foreach ($types as $type)
+                <option value="{{ $type->name }}">{{ $type->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="user">Nama User</label>
+        <input type="text" name="user" id="user" class="form-control" value="{{ old('user') ?? $inventory->user }}"
+            placeholder="Tulis nama pengguna..">
+    </div>
+
+    <div class="form-group">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <label for="location">Lokasi</label>

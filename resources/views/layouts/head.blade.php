@@ -24,6 +24,11 @@
 <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
 
+{{-- selectize --}}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css">
+
+
 {{-- style master --}}
 <link rel="stylesheet" href="{{ asset('dist/css/style_master.css') }}">
 <link rel="stylesheet" href="{{ asset('css/pre.css') }}">

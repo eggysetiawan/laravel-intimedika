@@ -19,7 +19,8 @@ class Inventory extends Model
         'user',
         'location',
         'purchase_date',
-        'note'
+        'note',
+        'type'
     ];
 
     // relationship
