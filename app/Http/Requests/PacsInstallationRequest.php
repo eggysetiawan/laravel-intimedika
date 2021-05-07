@@ -24,6 +24,8 @@ class PacsInstallationRequest extends FormRequest
     public function rules()
     {
         return [
+            'anydesk_server' => ['nullable'],
+            'anydesk_workstation' => ['nullable'],
             'hospital' => ['sometimes', 'integer', 'required', 'unique:pacs_installations,hospital_id'],
             'handover_date' => ['date'],
             'start_installation_date' => ['date', 'required'],

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title'=> 'Alat kesehatan',
+@extends('layouts.app', ['title'=> 'Instalasi Intiwid',
 'caption'=> 'Instalasi PACS'])
 
 @section('breadcrumb')

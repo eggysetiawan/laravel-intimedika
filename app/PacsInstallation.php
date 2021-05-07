@@ -21,7 +21,9 @@ class PacsInstallation extends Model implements HasMedia
         'finish_installation_date',
         'training_date',
         'warranty_start',
-        'warranty_end'
+        'warranty_end',
+        'anydesk_server',
+        'anydesk_workstation'
     ];
 
     public function registerMediaConversions(Media $media = null): void

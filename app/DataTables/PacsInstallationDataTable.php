@@ -68,7 +68,7 @@ class PacsInstallationDataTable extends DataTable
     public function query(PacsInstallation $model)
     {
         return $model->newQuery()
-            ->with(['hospital', 'engineers', 'author', 'stakeholder'])
+            ->with(['hospital', 'engineers.technician', 'author', 'stakeholder'])
             ->latest();
     }
 
@@ -120,6 +120,13 @@ class PacsInstallationDataTable extends DataTable
             Column::computed('hospital.name')
                 ->title('Nama RS'),
 
+            // anydesk server
+            Column::make('anydesk_server')
+                ->title('Anydesk Server'),
+
+            Column::make('anydesk_workstation')
+                ->title('Anydesk Workstation'),
+
             //alamat RS
             Column::make('hospital.address')
                 ->title('Alamat RS'),
@@ -152,10 +159,7 @@ class PacsInstallationDataTable extends DataTable
             Column::make('warranty_end')
                 ->title('Tgl Akhir Garansi'),
 
-            //upload
-            Column::computed('pdf')
-                ->title('File')
-                ->width(10),
+
 
             //email RS
             Column::make('hospital.email')
@@ -204,6 +208,11 @@ class PacsInstallationDataTable extends DataTable
             //Keterangan
             Column::make('stakeholder.user_note')
                 ->title('User Note'),
+
+            //upload
+            Column::computed('pdf')
+                ->title('File')
+                ->width(10),
         ];
     }
 

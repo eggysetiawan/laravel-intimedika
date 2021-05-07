@@ -1,5 +1,5 @@
 @extends('layouts.app', ['title'=> 'Rumah Sakit',
-'caption'=> 'Daftar Modalitas'])
+'caption'=> 'Daftar Rumah Sakit'])
 
 @section('breadcrumb')
     <li class="breadcrumb-item">Daftar Rumah Sakit</li>
