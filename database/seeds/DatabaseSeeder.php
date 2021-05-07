@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            HospitalSeeder::class,
-            CustomerSeeder::class,
-            VisitSeeder::class,
-            ModalitySeeder::class,
-            OrderChartSeeder::class,
+            // HospitalSeeder::class,
+            // CustomerSeeder::class,
+            // VisitSeeder::class,
+            // ModalitySeeder::class,
+            // OrderChartSeeder::class,
         ]);
     }
 }
