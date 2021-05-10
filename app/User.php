@@ -86,6 +86,11 @@ class User extends Authenticatable
 
     // relations
 
+    public function daily_jobs()
+    {
+        return $this->hasMany(DailyJob::class);
+    }
+
     public function inventories()
     {
         return $this->hasMany(Inventory::class);

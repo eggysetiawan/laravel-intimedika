@@ -31,6 +31,12 @@ Route::middleware('auth')->group(function () {
         'customers' => 'customer:slug',
     ]);
 
+    // dailyjobs
+    Route::get('daily_jobs/timeline', 'DailyJobController@timeline')->name('daily_jobs.timeline');
+    Route::resource('daily_jobs', 'DailyJobController')->parameters([
+        'daily_jobs' => 'daily_job:slug',
+    ]);
+
     // funnels
     Route::get('funnels/create', 'FunnelController@create')->name('funnels.create')->middleware('count');
     Route::resource('funnels', 'FunnelController')->parameters([
