@@ -19,6 +19,11 @@ class Hospital extends Model
         'address'
     ];
 
+    public static function intiwidHospital()
+    {
+        return static::whereHas('pacs')->groupBy('id')->get();
+    }
+
     public function scopeSelectHospitalLimit()
     {
         return $this->select(['id', 'name', 'city'])

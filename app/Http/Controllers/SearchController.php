@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Visit;
+use App\Hospital;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\OfferDataTable;
 use App\DataTables\HospitalDataTable;
+use App\DataTables\PacsInstallationDataTable;
+use App\Http\Requests\SearchPacsInstallationRequest;
 
 class SearchController extends Controller
 {
@@ -55,5 +58,14 @@ class SearchController extends Controller
             'complete' => true,
         ])
             ->render('offers.index');
+    }
+
+    public function pacsInstallation(SearchPacsInstallationRequest $request, PacsInstallationDataTable $dataTable)
+    {
+        return $dataTable->with([
+            'hospital' => $request->hospital,
+        ])->render('pacs.installation.index', [
+            'hospitals' => Hospital::intiwidHospital(),
+        ]);
     }
 }

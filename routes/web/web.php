@@ -92,13 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('{offer:slug}/update', 'ProgressController@update')->name('update');
     });
 
-    // search
-    Route::prefix('search')->group(function () {
-        Route::get('visits', 'SearchController@visit')->name('search.visits');
-        Route::get('hospitals', 'SearchController@hospital')->name('hospitals.filter');
-        Route::get('offers', 'SearchController@offer')->name('offers.filter');
-        Route::get('complete/offers', 'SearchController@offerCompleted')->name('offers.filter-completed');
-    });
+
 
 
     // targets

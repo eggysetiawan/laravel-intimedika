@@ -84,5 +84,4 @@
 
 @section('script')
     {!! $dataTable->scripts() !!}
-
 @endsection

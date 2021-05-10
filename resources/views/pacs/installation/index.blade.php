@@ -22,7 +22,36 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ $installation->name ?? 'Table Instalasi' }}</h3>
                     <div class="card-body table-responsive">
+                        <form action="{{ route('search.pacs_installations') }}" method="GET"
+                            class="form-inline float-right">
+                            <div class="row justify-content-end ">
+                                <div class="form-groupcol-md-4">
+                                    <select name="hospital" id="hospital" class="form-control select2">
+                                        <option selected disabled>Cari Rumah Sakit</option>
+                                        @foreach ($hospitals as $hospital)
+                                            <option value="{{ $hospital->slug }}">
+                                                {{ $hospital->name . ' - ' . $hospital->city }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
+                                @if (request('hospital'))
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-success ml-2">
+                                            Search
+                                        </button>
+                                        <a href="{{ route('pacs_installations.index') }}"
+                                            class="btn btn-warning">Reset</a>
+                                    </div>
+                                @else
+                                    <button type="submit" class="btn btn-success ml-2">
+                                        Search
+                                    </button>
+                                @endif
+
+                            </div>
+                        </form>
                         {!! $dataTable->table(['class' => 'table table-centered table-striped dt-responsive nowrap w-100', 'id' => 'pacsinstallation-table']) !!}
 
                     </div>
@@ -36,15 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.card-header -->
-                {{-- <div class="card-body table-responsive ">
-                    {!! $dataTable->table([
-    'class' => 'table table-centered table-striped dt-responsive
-                    nowrap w-100',
-    'id' => 'pacs_installation-table',
-]) !!}
-                </div> --}}
-                <!-- /.card-body -->
+
             </div>
             <!-- /.card -->
         </div>

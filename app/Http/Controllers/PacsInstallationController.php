@@ -4,16 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Hospital;
-use App\PacsEngineer;
-use App\PacsStakeholder;
 use App\PacsInstallation;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\DataTables\QueryDataTable;
 use Illuminate\Support\Facades\DB;
+use App\Services\PacsInstallationService;
 use App\DataTables\PacsInstallationDataTable;
 use App\Http\Requests\PacsInstallationRequest;
-use App\Services\PacsInstallationService;
 
 class PacsInstallationController extends Controller
 {
@@ -24,7 +19,9 @@ class PacsInstallationController extends Controller
      */
     public function index(PacsInstallationDataTable $pacsInstallationDataTable)
     {
-        return $pacsInstallationDataTable->render('pacs.installation.index');
+        return $pacsInstallationDataTable->render('pacs.installation.index', [
+            'hospitals' => Hospital::intiwidHospital(),
+        ]);
     }
 
     /**
@@ -117,7 +114,7 @@ class PacsInstallationController extends Controller
 
                 foreach ($request->pacs_engineers as $engineer) {
                     $pacsInstallation->engineers()->update([
-                        'engineerable_id' => $pacs_installations->id,
+                        'engineerable_id' => $pacsInstallation->id,
                         'engineerable_type' => 'App\PacsInstallation',
                         'user_id' => $engineer,
                         'created_at' => now(),
