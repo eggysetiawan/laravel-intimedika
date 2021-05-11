@@ -12,17 +12,10 @@
                 <div class="card-header">
                     Target Tahunan
                 </div>
-                @php
-                    $user = auth()->user();
-                    $name = $user->name;
-                    $offers = $user->offers[0]->invoices[0]->orders[0]->price;
-                    $targets = $user->targets[0]->target;
-                    $percentage = $offers / $targets * 100;
-                @endphp
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">{{ $name }}</h5>
                     <p class="card-text">Rp
-                        {{ number_format($offers) }}/{{ number_format($targets) }}
+                        {{ number_format($offers, 0, ',', '.') }}/{{ number_format($targets, 0, ',', '.') }}
                     </p>
                     <div class="progress">
                         <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" aria-valuenow="35"
