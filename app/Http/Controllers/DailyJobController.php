@@ -61,7 +61,7 @@ class DailyJobController extends Controller
      */
     public function show(DailyJob $dailyJob)
     {
-        //
+        return view('daily_jobs.show', compact('dailyJob'));
     }
 
     /**
@@ -86,7 +86,7 @@ class DailyJobController extends Controller
     {
         $dailyJob->update($request->all());
         session()->flash('success', 'Laporan harian berhasil di update');
-        return redirect('daily_jobs');
+        return redirect()->route('daily_jobs.timeline');
     }
 
     /**
