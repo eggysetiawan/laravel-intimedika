@@ -3,10 +3,7 @@
 namespace App\DataTables;
 
 use App\Inventory;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class InventoryDataTable extends DataTable
@@ -42,6 +39,11 @@ class InventoryDataTable extends DataTable
     {
         return $model->newQuery()
             ->with(['department', 'author'])
+            ->when(!auth()->user()->can('openworld'), function ($query) {
+                return $query->whereHas('department', function ($q) {
+                    return $q->where('name', auth()->user()->position);
+                });
+            })
             ->latest();
     }
 
