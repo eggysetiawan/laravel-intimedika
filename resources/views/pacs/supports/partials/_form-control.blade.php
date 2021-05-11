@@ -4,9 +4,16 @@
         <label for="pacs_installation">Rumah Sakit</label>
         <select name="pacs_installation" id="pacs_installation" class="form-control select2 select2-teal">
             <option selected disabled>Pilih Rumah Sakit</option>
-            @foreach ($pacss as $pacs)
-                <option value="{{ $pacs->id }}">{{ $pacs->hospital->name }}</option>
-            @endforeach
+            @if ($edit)
+                <option value="{{ $support->pacs_installation_id }}" selected>
+                    {{ $support->installation->hospital->name }}
+                </option>
+            @else
+                @foreach ($pacss as $pacs)
+                    <option value="{{ $pacs->id }}">{{ $pacs->hospital->name }}</option>
+                @endforeach
+            @endif
+
         </select>
     </div>
 
@@ -67,18 +74,20 @@
         </div>
     </div>
 
-    {{-- Engineer --}}
-    <div class="form-group">
-        <label for="pacs_engineers">Intwid Engineer</label>
+    @empty($support)
+        {{-- Engineer --}}
+        <div class="form-group">
+            <label for="pacs_engineers">Intwid Engineer</label>
 
-        <select name="pacs_engineers[]" id="pacs_engineers" class="form-control select2 js-example-basic-multiple"
-            multiple aria-placeholder="Pilih Engineer">
-            @foreach ($engineers as $engineer)
-                <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
-            @endforeach
+            <select name="pacs_engineers[]" id="pacs_engineers" class="form-control select2 js-example-basic-multiple"
+                multiple aria-placeholder="Pilih Engineer">
+                @foreach ($engineers as $engineer)
+                    <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
+                @endforeach
 
-        </select>
-    </div>
+            </select>
+        </div>
+    @endempty
 </div>
 
 <div class="card-footer">

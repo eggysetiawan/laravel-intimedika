@@ -39,22 +39,22 @@ class PacsInstallationDataTable extends DataTable
                 return join(" & ", array_unique($names));
             })
             ->editColumn('start_installation_date', function (PacsInstallation $pacsInstallation) {
-                return Carbon::createFromFormat('Y-m-d H:i:s', $pacsInstallation->start_installation_date)->format('d-M-Y');
+                return $pacsInstallation->start_installation_date->format('d-M-Y');
             })
             ->editColumn('training_date', function (PacsInstallation $pacsInstallation) {
-                return date('d-M-Y', strtotime($pacsInstallation->training_date));
+                return $pacsInstallation->training_date->format('d-M-Y');
             })
             ->editColumn('handover_date', function (PacsInstallation $pacsInstallation) {
-                return date('d-M-Y', strtotime($pacsInstallation->handover_date));
+                return $pacsInstallation->handover_date->format('d-M-Y');
             })
             ->editColumn('finish_installation_date', function (PacsInstallation $pacsInstallation) {
-                return date('d-M-Y', strtotime($pacsInstallation->finish_installation_date));
+                return $pacsInstallation->finish_installation_date->format('d-M-Y');
             })
             ->editColumn('warranty_start', function (PacsInstallation $pacsInstallation) {
-                return date('d-M-Y', strtotime($pacsInstallation->warranty_start));
+                return $pacsInstallation->warranty_start->format('d-M-Y');
             })
             ->editColumn('warranty_end', function (PacsInstallation $pacsInstallation) {
-                return date('d-M-Y', strtotime($pacsInstallation->warranty_end));
+                return $pacsInstallation->warranty_end->format('d-M-Y');
             })
             ->rawColumns(['action']);
     }

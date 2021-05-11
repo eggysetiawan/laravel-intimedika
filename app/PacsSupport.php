@@ -7,6 +7,14 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PacsSupport extends Model
 {
+
+    protected $dates = [
+        'report_date',
+        'report_time',
+        'solve_date',
+        'solve_time'
+    ];
+
     protected $fillable = [
         'slug',
         'pacs_installation_id',

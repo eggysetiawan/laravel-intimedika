@@ -61,7 +61,7 @@ class OfferDataTable extends DataTable
             })
             ->editColumn('offer_date', function (Offer $offer) {
                 if ($offer->offer_date) {
-                    return date('d-m-Y', strtotime($offer->offer_date));
+                    return $offer->offer_date->format('d-m-Y');
                 }
                 return '';
             })

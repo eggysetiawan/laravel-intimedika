@@ -11,6 +11,6 @@ Route::middleware('auth')->group(function () {
         'pacs_installations' => 'pacs_installation:slug',
     ]);
     Route::resource('pacs_supports', 'PacsSupportController')->parameters([
-        'pacs_supports' => 'pacs_installation:slug',
+        'pacs_supports' => 'pacs_support:slug',
     ]);
 });
