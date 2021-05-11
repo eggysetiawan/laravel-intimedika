@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Services\ChartService;
+use Illuminate\Support\Facades\Auth;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 
@@ -159,7 +160,6 @@ class HomeController extends Controller
         foreach ($allsales as $sales) {
             $charts[] = (new ChartService())->sales_chart($sales);
         }
-
 
         return view('home', compact('chart1', 'charts'));
     }
