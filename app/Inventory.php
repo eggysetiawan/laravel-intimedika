@@ -9,6 +9,8 @@ class Inventory extends Model
 {
     use SoftDeletes;
 
+    protected $dates = ['purchase_date'];
+
     protected $fillable = [
         'slug',
         'department_id',

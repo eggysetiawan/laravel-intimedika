@@ -14,6 +14,8 @@ class Offer extends Model implements HasMedia
     use InteractsWithMedia;
     use Notifiable;
 
+    protected $dates = ['offer_date'];
+
     protected $fillable = [
         'customer_id',
         'offer_no',

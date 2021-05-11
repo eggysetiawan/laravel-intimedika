@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Hospital;
 use App\PacsSupport;
 use App\PacsEngineer;
 use App\PacsInstallation;
@@ -11,6 +10,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\DataTables\PacsSupportDataTable;
 use App\Http\Requests\PacsSupportRequest;
+use App\Http\Requests\UpdatePacsSupportRequest;
+use App\Services\PacsSupportService;
 use Illuminate\Support\Facades\DB;
 
 class PacsSupportController extends Controller
@@ -36,6 +37,7 @@ class PacsSupportController extends Controller
             'pacss' => PacsInstallation::whereHas('hospital')->get(),
             'support' => new PacsSupport(),
             'engineers' => User::getRole('it'),
+            'edit' => false,
         ]);
     }
 
@@ -45,30 +47,14 @@ class PacsSupportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PacsSupportRequest $request)
+    public function store(PacsSupportRequest $request, PacsSupportService $pacsSupportService)
     {
-        $attr = $request->all();
-        $hospital_name = PacsInstallation::hospitalRequest($request);
-
-        $attr['slug'] = Str::slug($hospital_name . '-' . uniqid());
-        $attr['pacs_installation_id'] = $request->pacs_installation;
-
-        DB::transaction(function () use ($request, $attr) {
-            $pacs_supports = auth()->user()->pacs_supports()->create($attr);
-
-            foreach ($request->pacs_engineers as $engineer) {
-                PacsEngineer::insert([
-                    'engineerable_id' => $pacs_supports->id,
-                    'engineerable_type' => 'App\PacsSupport',
-                    'user_id' => $engineer,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+        DB::transaction(function () use ($request, $pacsSupportService) {
+            $pacsSupportService->createPacsSupport($request);
+            $pacsSupportService->createEngineers($request);
         });
 
         session()->flash('success', 'Data Troubleshooting telah berhasil dibuat!');
-
         return redirect('pacs_supports');
     }
 
@@ -80,7 +66,8 @@ class PacsSupportController extends Controller
      */
     public function show(PacsSupport $pacsSupport)
     {
-        //
+        $engineers = (new PacsSupportService())->getEngineers($pacsSupport);
+        return view('pacs.supports.show', compact('pacsSupport', 'engineers'));
     }
 
     /**
@@ -91,7 +78,9 @@ class PacsSupportController extends Controller
      */
     public function edit(PacsSupport $pacsSupport)
     {
-        //
+        $support = $pacsSupport;
+        $edit = true;
+        return view('pacs.supports.edit', compact('support', 'edit'));
     }
 
     /**
@@ -101,9 +90,11 @@ class PacsSupportController extends Controller
      * @param  \App\PacsSupport  $pacsSupport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PacsSupport $pacsSupport)
+    public function update(UpdatePacsSupportRequest $request, PacsSupport $pacsSupport)
     {
-        //
+        $pacsSupport->update($request->all());
+        session()->flash('success', 'Data telah berhasil diperbarui!');
+        return redirect('pacs_supports');
     }
 
     /**
@@ -114,6 +105,13 @@ class PacsSupportController extends Controller
      */
     public function destroy(PacsSupport $pacsSupport)
     {
-        //
+        $pacsSupport->delete();
+        PacsEngineer::query()
+            ->where('engineerable_type', 'App\PacsSupport')
+            ->where('engineerable_id', $pacsSupport->id)
+            ->delete();
+
+        session()->flash('success', 'Data telah berhasil dihapus!');
+        return redirect('pacs_supports');
     }
 }

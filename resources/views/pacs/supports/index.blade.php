@@ -3,18 +3,9 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item">Daftar Support</li>
-    {{-- <li class="breadcrumb-item">Slug/Name Here</li> --}}
 @endsection
 @section('content')
-    <div class="col-md-12">
-        @unlessrole('director')
-        <div class="d-flex justify-content-end">
-            <div class="btn-group">
-                <x-button-create href="{{ route('pacs_supports.create') }}">Buat Support</x-button-create>
-            </div>
-        </div>
-        @endunlessrole
-    </div>
+    @include('pacs.supports.partials._create-support')
 
     <div class="d-flex justify-content-center mt-2">
         <div class="col-md-12">

@@ -38,7 +38,7 @@ class DepartmentSeeder extends Seeder
 
         Department::create([
             'user_id' => 1,
-            'name' => 'IT',
+            'name' => 'IT Developer',
             'manager' => 'Hardian Kristi',
             'floor' => '3',
             'location' => 'Kantor Utama'

@@ -28,16 +28,30 @@ class PacsSupportDataTable extends DataTable
                 return $pacsSupport->installation->hospital->name;
             })
             ->editColumn('report_date', function (PacsSupport $pacsSupport) {
-                return date('d-m-Y', strtotime($pacsSupport->report_date)) ?? NULL;
+                return $pacsSupport->report_date->format('d-M-Y') ?? NULL;
             })
             ->editColumn('report_time', function (PacsSupport $pacsSupport) {
-                return date('H:i', strtotime($pacsSupport->report_time)) ?? NULL;
+                return $pacsSupport->report_time->format('H:i') ?? NULL;
             })
             ->editColumn('solve_date', function (PacsSupport $pacsSupport) {
-                return date('d-m-Y', strtotime($pacsSupport->solve_date)) ?? NULL;
+                return $pacsSupport->solve_date->format('d-M-Y') ?? NULL;
             })
             ->editColumn('solve_time', function (PacsSupport $pacsSupport) {
-                return date('H:i', strtotime($pacsSupport->solve_time)) ?? NULL;
+                return $pacsSupport->solve_time->format('H:i') ?? NULL;
+            })
+            ->editColumn('problem', function (PacsSupport $pacsSupport) {
+                return view('pacs.supports.partials.problem', compact('pacsSupport'));
+            })
+            ->editColumn('solve', function (PacsSupport $pacsSupport) {
+                return view('pacs.supports.partials.solve', compact('pacsSupport'));
+            })
+            ->editColumn('engineers.technician.name', function (PacsSupport $pacsSupport) {
+                $technicians = $pacsSupport->engineers;
+                $names = array();
+                foreach ($technicians as $technician) :
+                    $names[] = $technician->technician->name;
+                endforeach;
+                return join(" & ", array_unique($names));
             })
             ->rawColumns(['action']);
     }
@@ -134,8 +148,10 @@ class PacsSupportDataTable extends DataTable
 
             // Tanggal Penyelesaian
             Column::make('solve_date')
-                ->title('Tanggal Penyelesaian')
-
+                ->title('Tanggal Penyelesaian'),
+            //enginer
+            Column::computed('engineers.technician.name')
+                ->title('Pacs Enginer')
 
 
         ];

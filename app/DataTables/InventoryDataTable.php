@@ -28,7 +28,7 @@ class InventoryDataTable extends DataTable
                 ]);
             })
             ->editColumn('purchase_date', function (Inventory $inventory) {
-                return date('d-M-Y', strtotime($inventory->purchase_date));
+                return $inventory->purchase_date->format('d-M-Y');
             });
     }
 

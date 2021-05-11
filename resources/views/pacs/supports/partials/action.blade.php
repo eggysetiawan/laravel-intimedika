@@ -6,7 +6,7 @@
     <div class="dropdown-menu">
 
 
-        <a href="{{ route('visitplan.edit', $pacsSupport->slug) }}" class="dropdown-item"
+        <a href="{{ route('pacs_supports.edit', $pacsSupport->slug) }}" class="dropdown-item"
             title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
             Edit</a>
 
