@@ -21,5 +21,5 @@
 </div>
 
 <div class="card-footer">
-    <x-button-submit>Edit</x-button-submit>
+    <x-button-submit>Submit</x-button-submit>
 </div>
