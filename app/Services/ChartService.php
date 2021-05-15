@@ -37,7 +37,9 @@ class ChartService
 
     public function sales_chart($sales)
     {
-
+        if ($sales == null) {
+            return null;
+        }
         $chart_options = [
             'chart_title' => 'Penjualan ' . $sales->name . ' per bulan',
             'chart_type' => 'line',
