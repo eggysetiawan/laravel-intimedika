@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'username' => 'intimedika01',
             'position' => 'Direktur',
             'initial' => 'JH',
-            'email' => 'jhn@mail.com',
+            'email' => 'intiwid@intimedika.co',
             'password' => bcrypt('intiwid1'),
             'phone' => '0816854312',
             'address' => 'North Jakarta',
@@ -94,12 +94,95 @@ class UserSeeder extends Seeder
             'city' => 'Jakarta',
         ]);
 
+        // IT
+        $rahmat = User::create([
+            'name' => 'Rahmat Setiawan',
+            'username' => 'eggysetiawan',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'rahmat@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '081387239119',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $rafli = User::create([
+            'name' => 'M. Rafli Satriawan',
+            'username' => 'mraff10',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'rafli@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '081387239119',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
+        $andika = User::create([
+            'name' => 'Andika Utama',
+            'username' => 'andikautama',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'andika@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '081387239119',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $febrian = User::create([
+            'name' => 'Febrian Faturrahman',
+            'username' => 'febrianftr',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'febrian@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '081387239119',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $dimas = User::create([
+            'name' => 'Dimas Halim H',
+            'username' => 'dimashalimh',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'dimas@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '081387239119',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
+        $richard = User::create([
+            'name' => 'Richard Karisma',
+            'username' => 'richardkarisma',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'richard@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '081387239119',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
+        $hardian = User::create([
+            'name' => 'Hardian Kristi P.',
+            'username' => 'hardian',
+            'position' => 'IT Developer',
+            'initial' => 'IT',
+            'email' => 'hardian@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0822032030',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
         Permission::create(['name' => 'approval']);
         Permission::create(['name' => 'salesman']);
         Permission::create(['name' => 'engineering']);
         Permission::create(['name' => 'admin']);
         Permission::create(['name' => 'supervise']);
         Permission::create(['name' => 'openworld']);
+        Permission::create(['name' => 'develop']);
 
 
         $supeardmin = Role::create(['name' => 'superadmin']);
@@ -126,7 +209,7 @@ class UserSeeder extends Seeder
         $teknisi->givePermissionTo('engineering');
 
         $admin->givePermissionTo('admin');
-        $it->givePermissionTo('openworld');
+        $it->givePermissionTo('develop');
 
 
 
@@ -139,5 +222,14 @@ class UserSeeder extends Seeder
         $userSales->assignRole('sales');
         $userSupervisor->assignRole('sales');
         $userIT->assignRole('it');
+
+        $rahmat->assignRole('it');
+        $rafli->assignRole('it');
+        $febrian->assignRole('it');
+        $andika->assignRole('it');
+        $richard->assignRole('it');
+        $dimas->assignRole('it');
+        $hardian->assignRole('it');
+        $hardian->assignRole('supervisor');
     }
 }

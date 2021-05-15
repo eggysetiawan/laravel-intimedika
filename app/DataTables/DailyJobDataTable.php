@@ -42,6 +42,10 @@ class DailyJobDataTable extends DataTable
     public function query(DailyJob $model)
     {
         return $model->newQuery()
+            ->with(['author'])
+            ->when(!auth()->user()->isAdmin(), function ($query) {
+                return $query->where('user_id', auth()->id());
+            })
             ->latest();
     }
 
@@ -100,7 +104,11 @@ class DailyJobDataTable extends DataTable
 
             // date
             Column::make('date')
-                ->title('Tanggal')
+                ->title('Tanggal'),
+
+            // author
+            Column::make('author.name')
+                ->title('Author')
         ];
     }
 

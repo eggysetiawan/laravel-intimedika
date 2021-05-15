@@ -51,6 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public  function theAuthor($model)
+    {
+        return auth()->id() === $model->user_id;
+    }
+
     public static function getRole($role)
     {
         return  static::with('roles')->role($role)->get();
@@ -74,10 +79,6 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function offers()
-    {
-        return $this->hasMany(Offer::class);
-    }
 
     public function gravatar($size = 150)
     {
@@ -85,6 +86,11 @@ class User extends Authenticatable
     }
 
     // relations
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 
     public function daily_jobs()
     {
@@ -147,12 +153,17 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->hasPermissionTo('approval');
+        return $this->hasPermissionTo('approval') || $this->hasPermissionTo('supervise');
     }
 
     public function superAdmin()
     {
         return $this->hasPermissionTo('openworld');
+    }
+
+    public function supervisor()
+    {
+        return $this->hasPermissionTo('openworld') || $this->hasPermissionTo('supervise');
     }
 
     public function director()
