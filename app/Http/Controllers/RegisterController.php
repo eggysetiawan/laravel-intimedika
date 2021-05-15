@@ -26,12 +26,23 @@ class RegisterController extends Controller
         $user = User::create($attr);
 
         if ($request->role == 'supervisor') {
-            $user->assignRole('sales');
-            $user->givePermissionTo('supervise');
+            $user->assignRole('supervisor');
+            // $user->givePermissionTo('supervise');
         }
 
-        if ($request->role != 'supervisor') {
-            $user->assignRole($request->role);
+        switch ($request->position) {
+            case 'IT Developer':
+                $user->assignRole('it');
+                break;
+            case 'Teknisi':
+                $user->assignRole('teknisi');
+                break;
+            case 'Admin':
+                $user->assignRole('admin');
+                break;
+            case 'Sales':
+                $user->assignRole('sales');
+                break;
         }
 
         session()->flash('success', 'User telah berhasil di daftarkan!');

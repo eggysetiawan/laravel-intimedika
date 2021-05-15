@@ -1,4 +1,4 @@
-  @hasrole('superadmin|it')
+  @hasrole('superadmin|it|director')
   {{-- PACS Installation --}}
   <li class="nav-header">Laporan Harian</li>
   <li class="nav-item">

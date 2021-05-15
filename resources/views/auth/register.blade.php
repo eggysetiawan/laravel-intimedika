@@ -125,7 +125,7 @@
                     <div class="input-group mb-3">
                         <select name="role" id="role" class="form-control">
                             <option selected disabled>Choose Role</option>
-                            <option value="supervisor">Supervisor (Sales/Teknisi)</option>
+                            <option value="supervisor">Supervisor (Sales/Teknisi/IT)</option>
                             <option value="sales">Sales</option>
                             <option value="teknisi">Teknisi</option>
                             <option value="admin">Admin</option>
