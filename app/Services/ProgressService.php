@@ -3,7 +3,7 @@
 namespace App\Services;
 
 
-use App\{Demo, Tax};
+use App\{Demo, OrderChart, Tax};
 
 class ProgressService
 {
@@ -103,6 +103,19 @@ class ProgressService
             'komisi' => $komisi,
             'komisi_percentage' => $komisi_percentage,
             'shipping' => $shipping,
+        ]);
+    }
+
+    public function createOrderChart($offer)
+    {
+        OrderChart::create([
+            'user_id' => $offer->user_id,
+            'invoice_id' => $offer->invoices->first()->id,
+            'sales_name' => $offer->author->name,
+            'price' => $this->price_po,
+            'is_approved' => 0,
+            'year' => $offer->offer_date->format('Y'),
+            'offer_date' => $offer->offer_date->format('Y-m-d')
         ]);
     }
 

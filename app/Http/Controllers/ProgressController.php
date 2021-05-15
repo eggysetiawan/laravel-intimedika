@@ -47,6 +47,7 @@ class ProgressController extends Controller
 
                 case (99):
                     $progressService->updateOrder($offer, $request);
+                    $progressService->createOrderChart($offer);
                     $progressService->updatePrice($offer, $request);
                     $progressService->createTax($offer, $request);
                     $offer->progress->update($attr);

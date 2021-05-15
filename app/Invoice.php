@@ -49,6 +49,11 @@ class Invoice extends Model implements HasMedia
     }
 
     // relationship
+    public function chart()
+    {
+        return $this->hasOne(OrderChart::class);
+    }
+
     public function tax()
     {
         return $this->hasOne(Tax::class);

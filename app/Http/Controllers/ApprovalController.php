@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\OfferDataTable;
-use App\Http\Requests\ApprovalRequest;
 use App\Offer;
+use App\OrderChart;
 use App\OfferProgress;
+use App\DataTables\OfferDataTable;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ApprovalRequest;
 
 class ApprovalController extends Controller
 {
@@ -41,14 +43,22 @@ class ApprovalController extends Controller
             $progress = 0;
         }
 
-        OfferProgress::whereNull('is_approved')
-            ->where('progress', 99)
-            ->update([
-                'is_approved' => $approval,
-                'approved_by' => auth()->id(),
-                'approved_at' => now(),
-                'progress' => $progress,
-            ]);
+        DB::transaction(function () use ($approval, $progress) {
+            OfferProgress::whereNull('is_approved')
+                ->where('progress', 99)
+                ->update([
+                    'is_approved' => $approval,
+                    'approved_by' => auth()->id(),
+                    'approved_at' => now(),
+                    'progress' => $progress,
+                ]);
+
+            OrderChart::query()
+                ->whereNull('is_approved')
+                ->update([
+                    'is_approved' => 1,
+                ]);
+        });
 
         auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);
@@ -113,12 +123,18 @@ class ApprovalController extends Controller
             $progress = 0;
         }
 
-        $offer->progress->update([
-            'progress' => $progress,
-            'is_approved' => $approval,
-            'approved_by' => auth()->id(),
-            'approved_at' => now()
-        ]);
+        DB::transaction(function () use ($offer, $progress, $approval) {
+            $offer->progress->update([
+                'progress' => $progress,
+                'is_approved' => $approval,
+                'approved_by' => auth()->id(),
+                'approved_at' => now()
+            ]);
+
+            $offer->invoices->first()->chart()->update([
+                'is_approved' => 1,
+            ]);
+        });
 
         auth()->user()->resetTwoFactorCode();
         session()->flash('success', $message);

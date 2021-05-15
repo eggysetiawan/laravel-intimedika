@@ -65,13 +65,13 @@ class HomeController extends Controller
             $charts[] = (new ChartService())->sales_chart($sales);
         }
 
-        $user = auth()->user();
-        $name = $user->name;
-        $offers = $user->offers[0]->invoices[0]->orders[0]->price ?? '0';
-        $targets = $user->targets[0]->target ?? '0';
+        // $user = auth()->user();
+        // $name = $user->name;
+        // $offers = $user->offers[0]->invoices[0]->orders[0]->price ?? 0;
+        // $targets = $user->targets[0]->target ?? '0';
 
-        $percentage = $offers == 0 && $targets == 0 ? '0' : $offers / $targets * 100;
+        // $percentage = $offers == 0 && $targets == 0 ?: $offers / $targets * 100 ?? 0;
 
-        return view('home', compact('chart1', 'charts', 'name', 'offers', 'targets', 'percentage'));
+        return view('home', compact('chart1', 'charts'));
     }
 }
