@@ -15,17 +15,22 @@
                     @csrf
                     @method('delete')
                     <div class="card-tools">
-                        <a href="{{ route('daily_jobs.edit', $dailyJob->slug) }}" type="button" class="btn btn-tool"
-                            title="Edit Post">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
 
-                        <button type="submit" class="btn btn-tool" onclick="return confirm('Yakin ingin menghapus?')">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        @if (auth()->user()->theAuthor($dailyJob))
+                            <a href="{{ route('daily_jobs.edit', $dailyJob->slug) }}" type="button"
+                                class="btn btn-tool" title="Edit Post">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+
+
+                            <button type="submit" class="btn btn-tool"
+                                onclick="return confirm('Yakin ingin menghapus?')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        @endif
                     </div>
                 </form>
 
