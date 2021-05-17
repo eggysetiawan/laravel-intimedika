@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\DataTables\DailyJobDataTable;
 use App\Http\Requests\DailyJobRequest;
 use App\Services\DailyJobService;
+use Illuminate\Support\Facades\DB;
 
 class DailyJobController extends Controller
 {
@@ -48,7 +49,18 @@ class DailyJobController extends Controller
      */
     public function store(DailyJobRequest $request)
     {
-        (new DailyJobService())->createDailyJob($request);
+        // dd($request->img);
+        DB::transaction(function () use ($request) {
+            $dailyJob = (new DailyJobService())->createDailyJob($request);
+
+            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+            $dailyJob
+                ->addMediaFromRequest('img')
+                ->usingFileName($imgSlug)
+                ->toMediaCollection('sourcecode');
+        });
+
+
         session()->flash('success', 'Laporan harian telah berhasil dibuat!');
         return redirect('daily_jobs');
     }

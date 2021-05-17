@@ -10,7 +10,7 @@
         <div class="card-header">
             <h3 class="card-title">Buat Laporan Harian</h3>
         </div>
-        <form method="POST" action="{{ route('daily_jobs.store') }}">
+        <form method="POST" action="{{ route('daily_jobs.store') }}" enctype="multipart/form-data">
             @csrf
             @include('daily_jobs.partials._form-control', ['submit' => 'Create'])
         </form>

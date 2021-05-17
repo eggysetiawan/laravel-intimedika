@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class DailyJobService
 {
+    private $dailyJob;
     public function createDailyJob($request)
     {
         $attr = $request->all();
@@ -19,6 +20,15 @@ class DailyJobService
         }
 
         $attr['slug'] = $slug;
-        return auth()->user()->daily_jobs()->create($attr);
+        return $this->dailyJob = auth()->user()->daily_jobs()->create($attr);
     }
+
+    // public function uploadFiles()
+    // {
+    //     $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+    //     return $this->dailyJob
+    //         ->addMediaFromRequest('img')
+    //         ->usingFileName($imgSlug)
+    //         ->toMediaCollection('sourcecode');
+    // }
 }

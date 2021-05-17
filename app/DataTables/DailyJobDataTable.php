@@ -30,6 +30,12 @@ class DailyJobDataTable extends DataTable
             ->editColumn('description', function (DailyJob $dailyJob) {
                 return view('daily_jobs.partials.description', compact('dailyJob'));
             })
+            ->editColumn('file', function (DailyJob $dailyJob) {
+                if (!$dailyJob->getFirstMediaUrl('sourcecode')) {
+                    return null;
+                }
+                return view('daily_jobs.partials.file', compact('dailyJob'));
+            })
             ->rawColumns(['action']);
     }
 
@@ -108,7 +114,11 @@ class DailyJobDataTable extends DataTable
 
             // author
             Column::make('author.name')
-                ->title('Author')
+                ->title('Author'),
+
+            // file
+            Column::computed('file')
+                ->title('File')
         ];
     }
 
