@@ -7,6 +7,7 @@
         <i class="fas fa-ellipsis-v"></i>
     </a>
 
+
     <div class="dropdown-menu">
         <a href="{{ route('hospitals.edit', ['hospital' => $hospital->slug]) }}" class="dropdown-item"
             title="Ubah data Rumah Sakit"><i class="fas fa-edit nav-icon"></i> Edit</a>

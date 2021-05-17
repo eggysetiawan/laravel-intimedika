@@ -51,7 +51,7 @@
                 <li class="nav-item">
                     <a href="{{ route('inventories.index') }}"
                         class="nav-link{{ request()->segment(1) == 'inventories' ? ' active' : '' }}">
-                        <i class="fas fa-box-open nav-icon"></i>
+                        <i class="fas fa-archive nav-icon"></i>
                         <p>Inventory</p>
                     </a>
                 </li>
