@@ -87,6 +87,12 @@ class CustomerDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false),
+
             // action
             Column::computed('action')
                 ->title('<i class="fas fa-cogs"></i>')
@@ -94,14 +100,8 @@ class CustomerDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->searchable(false)
-                ->width(50)
+                ->width(10)
                 ->addClass('text-center'),
-
-            // No.
-            Column::make('DT_RowIndex')
-                ->title('No.')
-                ->orderable(false)
-                ->searchable(false),
 
             // name
             Column::make('name')

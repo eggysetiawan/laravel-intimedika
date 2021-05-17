@@ -122,7 +122,8 @@ class PacsInstallationDataTable extends DataTable
             //action
             Column::computed('action')
                 ->title('Action')
-                ->exportable(false),
+                ->exportable(false)
+                ->width(50),
 
             //nama RS
             Column::computed('hospital.name')

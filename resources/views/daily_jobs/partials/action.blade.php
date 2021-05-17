@@ -4,13 +4,16 @@
     </a>
 
     <div class="dropdown-menu">
-        <a href="#" class="dropdown-item" title="detail data Laporan harian ini."><i class="fas fa-eye nav-icon"></i>
-            Detail</a>
+        <a href="{{ route('daily_jobs.show', $dailyJob->slug) }}" class="dropdown-item"
+            title="detail data Laporan harian ini."><i class="fas fa-eye nav-icon"></i>
+            Detail
+        </a>
 
         @if (auth()->user()->theAuthor($dailyJob))
             <a href="{{ route('daily_jobs.edit', $dailyJob->slug) }}" class="dropdown-item"
                 title="Edit data Laporan harian ini."><i class="fas fa-edit nav-icon"></i>
-                Edit</a>
+                Edit
+            </a>
 
             @if (!$dailyJob->deleted_at)
 
@@ -20,7 +23,8 @@
 
                     <button type="submit" onclick="return confirm('anda yakin ingin menghapus?')" class="dropdown-item"
                         title="Hapus data kunjungan dari tabel"><i class="far fa-trash-alt nav-icon"></i>
-                        Hapus</button>
+                        Hapus
+                    </button>
                 </form>
 
             @endif

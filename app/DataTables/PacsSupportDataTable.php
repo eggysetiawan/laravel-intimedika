@@ -101,6 +101,13 @@ class PacsSupportDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false)
+                ->width(20),
+
             // action
             Column::computed('action')
                 ->title('<i class="fas fa-cogs"></i>')
@@ -110,13 +117,6 @@ class PacsSupportDataTable extends DataTable
                 ->searchable(false)
                 ->width(50)
                 ->addClass('text-center'),
-
-            // No.
-            Column::make('DT_RowIndex')
-                ->title('No.')
-                ->orderable(false)
-                ->searchable(false)
-                ->width(20),
 
             // Nama Rumah Sakit
             Column::computed('installation.hospital.name')

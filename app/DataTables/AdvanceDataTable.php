@@ -90,16 +90,17 @@ class AdvanceDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
+            Column::computed('DT_RowIndex')
+                ->title('No.')
+                ->width(20),
+
             // action
             Column::computed('action')
                 ->title('<i class="fas fa-cogs"></i>')
                 ->width(50)
                 ->addClass('text-left'),
 
-            // No.
-            Column::computed('DT_RowIndex')
-                ->title('No.')
-                ->width(20),
 
             Column::computed('pdf')
                 ->title('File')

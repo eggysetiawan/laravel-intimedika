@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 class InventoryService
 {
 
+
+
     public function createInventory($request)
     {
         $attr = $request->all();

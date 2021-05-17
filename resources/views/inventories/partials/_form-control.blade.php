@@ -78,7 +78,7 @@
     <div class="form-group">
         <label for="purchase_date">Tanggal Pembelian</label>
         <input type="date" name="purchase_date" id="purchase_date" class="form-control"
-            value="{{ old('purchase_date') ?? (date('Y-m-d', strtotime($inventory->purchase_date)) ?? now()->format('Y-m-d')) }}">
+            value="{{ old('purchase_date') ?? date('Y-m-d', strtotime($inventory->purchase_date ?? now())) }}">
     </div>
 
     <div class="form-group">
