@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     @hasrole('superadmin|sales')
-    {{-- <div class="row justify-content-start">
+    <div class="row justify-content-start">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <div class="row justify-content-center">
         <div class="col-md-12">
