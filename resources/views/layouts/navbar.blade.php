@@ -151,6 +151,9 @@
                 @if (auth()->user()->username != 'intimedika01')
                     <a href="{{ route('targets.index') }}" class="dropdown-item">Target Sales</a>
                 @endif
+
+                {{-- PROFILE --}}
+                <a href="{{ route('profiles.edit', auth()->user()->username) }}" class="dropdown-item">update profile</a>
             </div>
         </li>
         <ul class="navbar-nav">
