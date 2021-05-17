@@ -15,46 +15,46 @@ class ModalitySeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $modalities = SalesModality::all();
+        // $modalities = SalesModality::all();
 
-        foreach ($modalities as $modality) {
-            Modality::create([
-                'id' => $modality->pk_mod,
-                'name' => $modality->nama_mod,
-                'slug' => Str::slug($modality->nama_mod),
-                'model' => $modality->model_mod,
-                'brand' => $modality->merk_mod,
-                'price' => $modality->harga_mod,
-                'spec' => $modality->spek_mod,
-                'stock' => $modality->stock_mod,
-                'category' => strtolower($modality->jenis_mod),
-                'reference' => $modality->type_mod,
+        // foreach ($modalities as $modality) {
+        //     Modality::create([
+        //         'id' => $modality->pk_mod,
+        //         'name' => $modality->nama_mod,
+        //         'slug' => Str::slug($modality->nama_mod),
+        //         'model' => $modality->model_mod,
+        //         'brand' => $modality->merk_mod,
+        //         'price' => $modality->harga_mod,
+        //         'spec' => $modality->spek_mod,
+        //         'stock' => $modality->stock_mod,
+        //         'category' => strtolower($modality->jenis_mod),
+        //         'reference' => $modality->type_mod,
 
-            ]);
-        }
-        // $faker = Faker::create('id_ID');
-        // $modalitiesName = ['Intiwid RIS PACS', 'Salient S', 'Salient D', 'MRI', 'Stellant D', 'Injector', 'AJAX', 'Mini PACS', 'Mini RIS PACS', 'Careray Flat Pannel'];
-        // $brands = ['AGFA', 'Iradimed', 'Bayer', 'Careray'];
-        // $categories = ['BHP', 'Modality', 'Software'];
-        // $referenfes = ['E-Catalogue', 'Non E-Catalogue'];
-
-        // foreach ($modalitiesName as $modalityname) {
-        //     $randCategories = array_rand($categories);
-        //     $randReferences = array_rand($referenfes);
-        //     $randBrands = array_rand($brands);
-        //     Modality::insert([
-        //         'name' => $modalityname,
-        //         'slug' => Str::slug($modalityname),
-        //         'model' => $faker->word,
-        //         'brand' => $brands[$randBrands],
-        //         'price' => rand(100000, 999999999),
-        //         'spec' => $faker->sentence(),
-        //         'stock' => rand(1, 99),
-        //         'category' => $categories[$randCategories],
-        //         'reference' => $referenfes[$randReferences],
-        //         'created_at' => now()->toDateTimeString(),
-        //         'updated_at' => now()->toDateTimeString(),
         //     ]);
         // }
+        $faker = Faker::create('id_ID');
+        $modalitiesName = ['Intiwid RIS PACS', 'Salient S', 'Salient D', 'MRI', 'Stellant D', 'Injector', 'AJAX', 'Mini PACS', 'Mini RIS PACS', 'Careray Flat Pannel'];
+        $brands = ['AGFA', 'Iradimed', 'Bayer', 'Careray'];
+        $categories = ['BHP', 'Modality', 'Software'];
+        $referenfes = ['E-Catalogue', 'Non E-Catalogue'];
+
+        foreach ($modalitiesName as $modalityname) {
+            $randCategories = array_rand($categories);
+            $randReferences = array_rand($referenfes);
+            $randBrands = array_rand($brands);
+            Modality::insert([
+                'name' => $modalityname,
+                'slug' => Str::slug($modalityname),
+                'model' => $faker->word,
+                'brand' => $brands[$randBrands],
+                'price' => rand(100000, 999999999),
+                'spec' => $faker->sentence(),
+                'stock' => rand(1, 99),
+                'category' => $categories[$randCategories],
+                'reference' => $referenfes[$randReferences],
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
+            ]);
+        }
     }
 }

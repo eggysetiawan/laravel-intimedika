@@ -18,6 +18,11 @@
             placeholder="Tuliskan deskripsi laporan harian">{{ old('description') ?? $dailyJob->description }}</textarea>
     </div>
 
+    <div class="form-group">
+        <label for="files">Upload File</label>
+        <input type="file" name="files" id="files" class="form-control-file">
+    </div>
+
 </div>
 
 <div class="card-footer">
