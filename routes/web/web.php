@@ -91,6 +91,11 @@ Route::middleware('auth')->group(function () {
         Route::patch('{tax}/update', 'PaymentController@update')->name('update');
     });
 
+    // PROFILES
+    Route::resource('profiles', 'ProfileController')->parameters([
+        'profiles' => 'user:username',
+    ]);
+
     // progresses
     Route::prefix('progresses')->name('progresses.')->group(function () {
         Route::get('approval', 'ProgressController@approval')->name('approval');

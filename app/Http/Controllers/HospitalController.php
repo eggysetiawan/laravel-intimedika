@@ -41,8 +41,7 @@ class HospitalController extends Controller
 
     public function update(HospitalRequest $request, Hospital $hospital)
     {
-        $attr = $request->all();
-        $hospital->update($attr);
+        $hospital->update($request->all());
         session()->flash('success', 'Rumah Sakit berhasil di Update!');
 
         return redirect('hospitals');
