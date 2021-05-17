@@ -51,6 +51,7 @@ class Customer extends Model
         return $this->belongsToMany(Hospital::class);
     }
 
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
