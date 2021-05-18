@@ -21,6 +21,7 @@
     <div class="form-group">
         <label for="img">Upload File (optional)</label>
         <input type="file" name="img" id="img" class="form-control-file" accept=".zip,.rar">
+        <small>.zip, .rar</small>
     </div>
     {{-- testestsetse --}}
 </div>

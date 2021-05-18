@@ -152,8 +152,8 @@
                 @endhasrole
 
                 {{-- PROFILE --}}
-                <a href="{{ route('profiles.edit', auth()->user()->username) }}" class="dropdown-item">Update
-                    profile Picture
+                <a href="{{ route('profiles.edit', auth()->user()->username) }}" class="dropdown-item">Edit
+                    Profile
                 </a>
             </div>
         </li>

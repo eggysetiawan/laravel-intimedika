@@ -35,8 +35,14 @@
     <div class="form-group">
         <label for="type">Jenis Barang</label>
         <select name="type" id="type" class="form-control type">
+            @isset($inventory->type)
+                <option selected value="{{ $inventory->type }}">{{ $inventory->type }}
+                </option>
+            @endisset
             @foreach ($types as $type)
-                <option value="{{ $type->name }}">{{ $type->name }}</option>
+                @if ($inventory->type != $type->name)
+                    <option value="{{ $type->name }}">{{ $type->name }}</option>
+                @endif
             @endforeach
         </select>
     </div>

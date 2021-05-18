@@ -92,6 +92,11 @@ Route::middleware('auth')->group(function () {
     });
 
     // PROFILES
+    Route::prefix('profiles')->name('profiles.')->group(function () {
+        Route::patch('{user:username}/password', 'ProfileController@changePassword')->name('password');
+        Route::patch('{user:username}/picture', 'ProfileController@updatePicture')->name('picture');
+    });
+
     Route::resource('profiles', 'ProfileController')->parameters([
         'profiles' => 'user:username',
     ]);
@@ -102,8 +107,6 @@ Route::middleware('auth')->group(function () {
         Route::get('{offer:slug}', 'ProgressController@create')->name('create');
         Route::patch('{offer:slug}/update', 'ProgressController@update')->name('update');
     });
-
-
 
 
     // targets
