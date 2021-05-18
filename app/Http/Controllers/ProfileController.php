@@ -98,13 +98,31 @@ class ProfileController extends Controller
 
     public function updatePicture(User $user)
     {
-        $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+        // jika belum ada foto
+        if (!$user->getFirstMediaUrl('profile')) {
+            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+            $user->addMediaFromRequest('img')
+                ->usingFileName($imgSlug)
+                ->toMediaCollection('profile');
 
+            session()->flash('success', 'Foto berhasil diperbarui!');
+
+            return back();
+        }
+
+        // update foto
+        $user->media()->delete();
+        $imgSlug = uniqid() . '.' . request()->file('img')->extension();
         $user->addMediaFromRequest('img')
             ->usingFileName($imgSlug)
             ->toMediaCollection('profile');
 
-        return redirect()->route('home');
+        session()->flash('success', 'Foto berhasil diperbarui!');
+
+        return back();
+
+        session()->flash('success', 'Foto berhasil diperbarui!');
+        return back();
     }
 
     /**
