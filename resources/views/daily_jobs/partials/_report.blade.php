@@ -4,10 +4,7 @@
         <div class="card card-widget">
             <div class="card-header">
                 <div class="user-block">
-                    <img class="img-circle"
-                        src="{{ asset(
-    auth()->user()->getFirstMediaUrl('profile', 'thumb'),
-) }}"
+                    <img class="img-circle" src="{{ asset($dailyJob->author->getFirstMediaUrl('profile', 'thumb')) }}"
                         alt="User Image">
                     <span class="username"><a href="#">{{ $dailyJob->author->name }}.</a></span>
                     <span class="description">Di publikasikan pada - {{ $dailyJob->created_at->diffForHumans() }}
