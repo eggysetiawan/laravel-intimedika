@@ -93,7 +93,7 @@ class ProfileController extends Controller
         ]);
 
         session()->flash('success', 'Password telah berhasil diperbarui!');
-        return redirect()->route('home');
+        return back();
     }
 
     public function updatePicture(User $user)
