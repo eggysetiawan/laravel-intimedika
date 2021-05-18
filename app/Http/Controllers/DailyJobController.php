@@ -53,7 +53,7 @@ class DailyJobController extends Controller
         DB::transaction(function () use ($request) {
             $dailyJob = (new DailyJobService())->createDailyJob($request);
 
-            $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+            $imgSlug = (new DailyJobService())->getSlug($request) . '.' . request()->file('img')->extension();
             $dailyJob
                 ->addMediaFromRequest('img')
                 ->usingFileName($imgSlug)

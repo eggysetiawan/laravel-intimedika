@@ -147,13 +147,14 @@
                     @endif
                 @endif
 
-
-                @if (auth()->user()->username != 'intimedika01')
-                    <a href="{{ route('targets.index') }}" class="dropdown-item">Target Sales</a>
-                @endif
+                @hasrole('superadmin|sales')
+                <a href="{{ route('targets.index') }}" class="dropdown-item">Target Sales</a>
+                @endhasrole
 
                 {{-- PROFILE --}}
-                <a href="{{ route('profiles.edit', auth()->user()->username) }}" class="dropdown-item">update profile</a>
+                <a href="{{ route('profiles.edit', auth()->user()->username) }}" class="dropdown-item">Update
+                    profile Picture
+                </a>
             </div>
         </li>
         <ul class="navbar-nav">

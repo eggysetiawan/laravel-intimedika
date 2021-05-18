@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Services\ChartService;
-use Illuminate\Support\Facades\Auth;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 
@@ -66,12 +65,11 @@ class HomeController extends Controller
         }
 
         $user = auth()->user();
-        $name = $user->name;
         $offers = $user->offers[0]->invoices[0]->orders[0]->price ?? '0';
         $targets = $user->targets[0]->target ?? '0';
 
         $percentage = $offers == 0 || $targets == 0 ? '0' : $offers / $targets * 100;
 
-        return view('home', compact('chart1', 'charts', 'name', 'offers', 'percentage', 'targets'));
+        return view('home', compact('chart1', 'charts', 'offers', 'percentage', 'targets'));
     }
 }

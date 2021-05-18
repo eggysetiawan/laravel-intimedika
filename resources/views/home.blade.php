@@ -13,7 +13,7 @@
                     Target Tahunan
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{ $name }}</h5>
+                    <h5 class="card-title font-weight-bold">{{ auth()->user()->name }}</h5>
                     <p class="card-text">Rp
                         {{ number_format($offers, 0, ',', '.') }}/{{ number_format($targets, 0, ',', '.') }}
                     </p>
