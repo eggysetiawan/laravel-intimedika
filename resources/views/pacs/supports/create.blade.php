@@ -18,5 +18,5 @@
 @endsection
 
 @section('script')
-    @include('customers.partials._select-customer')
+    @include('hospitals.partials._select-hospital-script')
 @endsection
