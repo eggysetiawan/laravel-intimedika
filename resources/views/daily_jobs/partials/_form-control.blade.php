@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-group">
-        <label for="img">Upload File</label>
+        <label for="img">Upload File (optional)</label>
         <input type="file" name="img" id="img" class="form-control-file" accept=".zip,.rar">
     </div>
     {{-- testestsetse --}}

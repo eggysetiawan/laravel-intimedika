@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -16,7 +15,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view('profiles.index', [
+            'user' => auth()->user(),
+        ]);
     }
 
     /**
@@ -77,7 +78,7 @@ class ProfileController extends Controller
             ->usingFileName($imgSlug)
             ->toMediaCollection('profile');
 
-        return redirect('home');
+        return redirect()->route('home');
     }
 
     /**
