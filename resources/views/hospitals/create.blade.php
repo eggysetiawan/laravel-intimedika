@@ -21,3 +21,42 @@
         </form>
     </x-card>
 @endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+
+            $('#city').change(function() {
+                if ($(this).val() != '') {
+                    var select = $(this).attr("id");
+                    var value = $(this).val();
+                    var dependent = $(this).data('dependent');
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: "{{ route('hospitals.select.district') }}",
+                        method: "POST",
+                        data: {
+                            select: select,
+                            value: value,
+                            _token: _token,
+                            dependent: dependent
+                        },
+                        success: function(result) {
+                            $('#' + dependent).html(result);
+                        }
+
+                    })
+                }
+            });
+
+            // $('#city').change(function() {
+            //     $('#district').val('');
+            // });
+
+
+
+
+        });
+
+    </script>
+@endsection

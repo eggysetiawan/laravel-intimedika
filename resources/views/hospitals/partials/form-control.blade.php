@@ -30,16 +30,32 @@
             </span>
         @enderror
     </div>
+
     <div class="form-group">
-        <label for="city">Kota*</label>
-        <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city"
-            placeholder="Masukan Nomor Telepon" value="{{ old('city') ?? $hospital->city }}">
+        <label for="city">Provinsi*</label>
+        <select name="city" id="city" class="form-control" data-dependent="district">
+            @foreach ($provinces as $province)
+                <option value="{{ $province['id'] }}">{{ $province['nama'] }}</option>
+            @endforeach
+
+        </select>
         @error('city')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}
             </span>
         @enderror
     </div>
+    {{-- <div class="form-group">
+        <label for="district">Kota*</label>
+        <select name="district" id="district" class="form-control">
+            <option selected disabled>Pilih Kota</option>
+        </select>
+        @error('district')
+            <span class="invalid-feedback" role="alert">
+                {{ $message }}
+            </span>
+        @enderror
+    </div> --}}
 
     <div class="form-group">
         <label for="class">Kelas/Tipe*</label>

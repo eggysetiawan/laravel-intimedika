@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Hospital;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Http;
 use App\DataTables\HospitalDataTable;
 use App\Http\Requests\HospitalRequest;
 
@@ -20,7 +21,16 @@ class HospitalController extends Controller
     {
         return view('hospitals.create', [
             'hospital' => new Hospital(),
+            'provinces' => Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')['provinsi'],
+            'districts' => Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=32')['kota_kabupaten']
+
         ]);
+    }
+
+    public function district()
+    {
+        $districts = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' . request('select'))['kota_kabupaten'];
+        return response()->json($districts);
     }
 
     public function store(HospitalRequest $request)

@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
 
     //  hospitals
     Route::post('hospitals/select', 'SelectHospitalController')->name('hospitals.select');
+    Route::post('hospitals/district', 'HospitalController@district')->name('hospitals.select.district');
     Route::resource('hospitals', 'HospitalController')->parameters([
         'hospitals' => 'hospital:slug',
     ]);
