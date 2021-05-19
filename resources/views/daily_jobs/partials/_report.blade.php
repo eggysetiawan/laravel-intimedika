@@ -6,7 +6,10 @@
                 <div class="user-block">
                     <img class="img-circle" src="{{ asset($dailyJob->author->getFirstMediaUrl('profile', 'thumb')) }}"
                         alt="{{ $dailyJob->author->initial }}">
-                    <span class="username"><a href="#">{{ $dailyJob->author->name }}.</a></span>
+                    <span class="username">
+                        <a href="{{ route('profiles.show', $dailyJob->author->username) }}">{{ $dailyJob->author->name }}
+                        </a>
+                    </span>
                     <span class="description">Di publikasikan pada - {{ $dailyJob->created_at->diffForHumans() }}
                     </span>
                 </div>
@@ -41,7 +44,7 @@
             <div class="card-body">
                 <!-- post text -->
                 <h4 class="attachment-heading">{{ $dailyJob->title }}</h4>
-                <pre style="white-space:pre-wrap;">{{ $dailyJob->description }}</pre>
+                <pre class="wordwrap">{{ $dailyJob->description }}</pre>
 
                 <!-- Attachment -->
                 {{-- <div class="attachment-block clearfix">

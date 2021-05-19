@@ -12,9 +12,7 @@
             <div class="card card-teal card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img style="width: 110px; height: 110px;" class="profile-user-img img-fluid img-circle"
-                            src={{ $user->getFirstMediaUrl('profile', 'thumb') }} " alt="
-                            {{ $user->intial ?? auth()->user()->initial }}">
+                        <img style="width: 110px; height: 110px;" class="profile-user-img img-fluid img-circle" src=@if ($user->getFirstMediaUrl('thumb')) {{ $user->getFirstMediaUrl('thumb') }} @else {{ asset('image/defaultpic.jpg') }} @endif" alt="{{ $user->intial ?? auth()->user()->initial }}">
                     </div>
 
                     <h3 class="profile-username text-center">{{ $user->name }}</h3>
@@ -49,21 +47,21 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                    {{-- <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
                     <p class="text-muted">
                         B.S. in Computer Science from the University of Tennessee at Knoxville
                     </p>
 
-                    <hr>
+                    <hr> --}}
 
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-                    <p class="text-muted">Malibu, California</p>
+                    <p class="text-muted">{{ $user->address . ', ' . $user->city }}</p>
 
-                    <hr>
+                    {{-- <hr> --}}
 
-                    <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                    {{-- <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
 
                     <p class="text-muted">
                         <span class="tag tag-danger">UI Design</span>
@@ -73,12 +71,11 @@
                         <span class="tag tag-teal">Node.js</span>
                     </p>
 
-                    <hr>
-
-                    <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+                    <hr> --}}
+                    {{-- <strong><i class="far fa-file-alt mr-1"></i> Bio</strong>
 
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim
-                        neque.</p>
+                        neque.</p> --}}
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -89,14 +86,14 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+                        {{-- <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li> --}}
                         <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                        {{-- <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li> --}}
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="active tab-pane" id="activity">
+                        {{-- <div class="active tab-pane" id="activity">
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
@@ -211,9 +208,9 @@
                                 <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
                             </div>
                             <!-- /.post -->
-                        </div>
+                        </div> --}}
                         <!-- /.tab-pane -->
-                        <div class="tab-pane" id="timeline">
+                        <div class="active tab-pane" id="timeline">
                             <!-- The timeline -->
                             <div class="timeline timeline-inverse">
                                 <!-- timeline time label -->
@@ -310,7 +307,7 @@
                         </div>
                         <!-- /.tab-pane -->
 
-                        <div class="tab-pane" id="settings">
+                        {{-- <div class="tab-pane" id="settings">
                             <form class="form-horizontal">
                                 <div class="form-group row">
                                     <label for="inputName" class="col-sm-2 col-form-label">Name</label>
@@ -358,7 +355,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                         <!-- /.tab-pane -->
                     </div>
                     <!-- /.tab-content -->

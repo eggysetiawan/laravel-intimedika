@@ -35,4 +35,19 @@ class PacsSupportRequest extends FormRequest
             'pacs_engineers' => ['nullable', 'required'],
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'pacs_installation' => 'Rumah Sakit',
+            'hospital_personel' => 'Personel Rumah Sakit',
+            'report_date' => 'Tanggal lapor',
+            'report_time' => 'Waktu lapor',
+            'problem' => 'Permasalahan',
+            'solve' => 'Penyelesaian',
+            'solve_date' => 'Tanggal penyelesaian',
+            'solve_time' => 'Waktu penyelesaian',
+            'pacs_engineers' => 'Teknisi PACS',
+        ];
+    }
 }

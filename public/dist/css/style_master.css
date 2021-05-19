@@ -196,3 +196,7 @@ body::-webkit-scrollbar-thumb {
         /* border: 3px solid rgb(117, 209, 63); */
     }
 }
+
+.wordwrap {
+    white-space: pre-wrap;
+}

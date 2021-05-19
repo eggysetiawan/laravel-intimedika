@@ -18,7 +18,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profiles.index', [
+        return view('profiles.show', [
             'user' => auth()->user(),
         ]);
     }
@@ -50,9 +50,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('profiles.show', compact('user'));
     }
 
     /**
