@@ -15,7 +15,7 @@
                     src="{{ asset(
     auth()->user()->getFirstMediaUrl('profile', 'thumb'),
 ) }}"
-                    class="img-circle elevation-2" alt="User Image">
+                    class="img-circle elevation-2" alt="{{ auth()->user()->initial }}">
             </div>
             <div class="info">
                 <a href="{{ route('profiles.index') }}" class="d-block">

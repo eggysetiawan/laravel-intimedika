@@ -13,7 +13,8 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img style="width: 110px; height: 110px;" class="profile-user-img img-fluid img-circle"
-                            src={{ $user->getFirstMediaUrl('profile', 'thumb') }} " alt=" User profile picture">
+                            src={{ $user->getFirstMediaUrl('profile', 'thumb') }} " alt="
+                            {{ $user->intial ?? auth()->user()->initial }}">
                     </div>
 
                     <h3 class="profile-username text-center">{{ $user->name }}</h3>
