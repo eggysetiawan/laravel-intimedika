@@ -26,9 +26,10 @@ class PacsInstallationDataTable extends DataTable
                 ]);
             })
             ->addColumn('pdf', function (PacsInstallation $pacsInstallation) {
-                return view('pacs.installation.partials.pdf', [
-                    'pacsInstallation' => $pacsInstallation,
-                ]);
+                if (!$pacsInstallation->getFirstMediaUrl('files')) {
+                    return view('pacs.installation.partials.upload', compact('pacsInstallation'));
+                }
+                return view('pacs.installation.partials.pdf', compact('pacsInstallation'));
             })
             ->editColumn('engineers.technician.name', function (PacsInstallation $pacsInstallation) {
                 $technicians = $pacsInstallation->engineers;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -30,7 +31,7 @@ class ProfileRequest extends FormRequest
             'phone' => ['numeric', 'required'],
             'address' => ['string', 'required'],
             'city' => ['string', 'required'],
-            'email' => ['required', 'email', 'unique:users,email', 'unique:users'],
+            'email' => ['required', 'email',  Rule::unique('users')->ignore($this->user->id, 'id')],
         ];
     }
 }

@@ -86,7 +86,7 @@
 
             {{-- upload files --}}
             <div class="form-group">
-                <label for="uploads">Upload File Berkas*</label>
+                <label for="uploads">Upload File Berkas</label>
                 <input type="file" name="img[]" id="img" class="form-control-file" multiple>
             </div>
 

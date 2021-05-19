@@ -49,7 +49,9 @@ class PacsInstallationController extends Controller
             $pacs_installations = $pacsInstallationService->createPacsInstallation($request);
             $pacs_installations->stakeholder()->create($request->all());
             $pacsInstallationService->insertEngineer($request);
-            $pacsInstallationService->uploadFiles();
+            if ($request->has('img')) {
+                $pacsInstallationService->uploadFiles();
+            }
         });
 
         session()->flash('success', 'Instalasi telah berhasil dibuat');
