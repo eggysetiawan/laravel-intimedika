@@ -74,20 +74,20 @@
         </div>
     </div>
 
-    @empty($support)
-        {{-- Engineer --}}
-        <div class="form-group">
-            <label for="pacs_engineers">Intwid Engineer</label>
+    {{-- @empty($support) --}}
+    {{-- Engineer --}}
+    <div class="form-group">
+        <label for="pacs_engineers">Intwid Engineer</label>
 
-            <select name="pacs_engineers[]" id="pacs_engineers" class="form-control select2 js-example-basic-multiple"
-                multiple aria-placeholder="Pilih Engineer">
-                @foreach ($engineers as $engineer)
-                    <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
-                @endforeach
+        <select name="pacs_engineers[]" id="pacs_engineers" class="form-control select2 js-example-basic-multiple"
+            multiple aria-placeholder="Pilih Engineer">
+            @foreach ($engineers as $engineer)
+                <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
+            @endforeach
 
-            </select>
-        </div>
-    @endempty
+        </select>
+    </div>
+    {{-- @endempty --}}
 </div>
 
 <div class="card-footer">
