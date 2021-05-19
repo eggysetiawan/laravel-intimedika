@@ -18,5 +18,5 @@
 @endsection
 
 @section('script')
-    @include('hospitals.partials._select-hospital-script')
+    @include('pacs.supports.partials._select-installation-script')
 @endsection

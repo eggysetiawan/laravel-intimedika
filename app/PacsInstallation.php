@@ -35,6 +35,14 @@ class PacsInstallation extends Model implements HasMedia
         'anydesk_workstation'
     ];
 
+    public static function selectInstallation($search)
+    {
+        return static::whereHas('hospital', function ($query) use ($search) {
+            return $query->where('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('city', 'LIKE', '%' . $search . '%');
+        })->get();
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
