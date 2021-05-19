@@ -22,7 +22,7 @@
     </x-card>
 @endsection
 
-@section('script')
+{{-- @section('script')
     <script>
         $(document).ready(function() {
 
@@ -59,4 +59,4 @@
         });
 
     </script>
-@endsection
+@endsection --}}

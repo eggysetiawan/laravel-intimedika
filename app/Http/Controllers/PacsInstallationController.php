@@ -34,6 +34,7 @@ class PacsInstallationController extends Controller
         return view('pacs.installation.create', [
             'engineers' => User::getRole('it'),
             'pacsInstallation' => new PacsInstallation(),
+            'create' => true,
         ]);
     }
 
@@ -79,7 +80,8 @@ class PacsInstallationController extends Controller
         $pacsInstallation->load('engineers', 'stakeholder');
         return view('pacs.installation.edit', [
             'engineers' => User::getRole('it'),
-            'pacsInstallation' => $pacsInstallation
+            'pacsInstallation' => $pacsInstallation,
+            'create' => false,
         ]);
     }
 
@@ -114,21 +116,25 @@ class PacsInstallationController extends Controller
                     'email_radiographer' => $request->email_radiographer,
                 ]);
 
-                foreach ($request->pacs_engineers as $engineer) {
-                    $pacsInstallation->engineers()->update([
-                        'engineerable_id' => $pacsInstallation->id,
-                        'engineerable_type' => 'App\PacsInstallation',
-                        'user_id' => $engineer,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
+                if ($request->has('pacs_engineers')) {
+                    foreach ($request->pacs_engineers as $engineer) {
+                        $pacsInstallation->engineers()->update([
+                            'engineerable_id' => $pacsInstallation->id,
+                            'engineerable_type' => 'App\PacsInstallation',
+                            'user_id' => $engineer,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
                 }
 
-                $pacsInstallation
-                    ->addMultipleMediaFromRequest(['img'])
-                    ->each(function ($fileAdder) {
-                        $fileAdder->toMediaCollection('files');
-                    });
+                if ($request->has('img')) {
+                    $pacsInstallation
+                        ->addMultipleMediaFromRequest(['img'])
+                        ->each(function ($fileAdder) {
+                            $fileAdder->toMediaCollection('files');
+                        });
+                }
             }
         );
 

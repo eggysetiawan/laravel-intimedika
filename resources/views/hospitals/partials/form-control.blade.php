@@ -49,6 +49,9 @@
         <label for="district">Kota*</label>
         <select name="district" id="district" class="form-control">
             <option selected disabled>Pilih Kota</option>
+            @foreach ($districts as $district)
+                <option value="{{ $district-> }}"></option>
+            @endforeach
         </select>
         @error('district')
             <span class="invalid-feedback" role="alert">

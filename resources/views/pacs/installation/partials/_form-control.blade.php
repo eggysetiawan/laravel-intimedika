@@ -71,18 +71,20 @@
             </div>
 
             {{-- Engineer --}}
-            <div class="form-group">
-                <label for="pacs_engineers">Intwid Engineer</label>
+            @if ($create)
+                <div class="form-group">
+                    <label for="pacs_engineers">Intwid Engineer</label>
 
-                <select name="pacs_engineers[]" id="pacs_engineers"
-                    class="form-control select2 js-example-basic-multiple" multiple>
+                    <select name="pacs_engineers[]" id="pacs_engineers"
+                        class="form-control select2 js-example-basic-multiple" multiple>
 
-                    @foreach ($engineers as $engineer)
-                        <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
-                    @endforeach
+                        @foreach ($engineers as $engineer)
+                            <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
+                        @endforeach
 
-                </select>
-            </div>
+                    </select>
+                </div>
+            @endif
 
             {{-- upload files --}}
             <div class="form-group">

@@ -33,7 +33,7 @@ class PacsInstallationRequest extends FormRequest
             'finish_installation_date' => ['date', 'required'],
             'warranty_start' => ['date', 'required'],
             'warranty_end' => ['date', 'required'],
-            'pacs_engineers.*' => ['nullable'],
+            'pacs_engineers.*' => ['sometimes', 'nullable'],
             'it_hospital_name' => ['string', 'required'],
             'phone_it' => ['nullable'],
             'email_it' => ['nullable', 'email'],
