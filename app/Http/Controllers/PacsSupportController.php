@@ -6,8 +6,6 @@ use App\User;
 use App\PacsSupport;
 use App\PacsEngineer;
 use App\PacsInstallation;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\DataTables\PacsSupportDataTable;
 use App\Http\Requests\PacsSupportRequest;
 use App\Http\Requests\UpdatePacsSupportRequest;
