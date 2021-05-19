@@ -3,12 +3,15 @@
     <div class="form-group">
         <label for="pacs_installation">Rumah Sakit</label>
         <select name="pacs_installation" id="pacs_installation" class="form-control select2 select2-teal">
+            <option selected disabled>Pilih Rumah Sakit</option>
             @if ($edit)
                 <option value="{{ $support->pacs_installation_id }}" selected>
                     {{ $support->installation->hospital->name }}
                 </option>
             @else
-                <option disabled selected>Pilih Rumah Sakit</option>
+                @foreach ($pacss as $pacs)
+                    <option value="{{ $pacs->id }}">{{ $pacs->hospital->name }}</option>
+                @endforeach
             @endif
 
         </select>

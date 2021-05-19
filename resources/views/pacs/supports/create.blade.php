@@ -17,6 +17,6 @@
     </x-card>
 @endsection
 
-{{-- @section('script')
-    @include('pacs.supports.partials._select-installation-script')
-@endsection --}}
+@section('script')
+    @include('customers.partials._select-customer')
+@endsection
