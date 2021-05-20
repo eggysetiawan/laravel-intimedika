@@ -68,16 +68,19 @@
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
-                    <tr>
-                        <td style="font-weight: bold;font-size: 14px">Up. Bpk/Ibu {{ $offer->customer->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="font-size: 14px">{{ $offer->customer->role }}</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
+                    @if ($offer->form_up)
+                        <tr>
+                            <td style="font-weight: bold;font-size: 14px">Up.
+                                {{ $offer->name_up ?? $offer->customer->name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14px">{{ $offer->customer->role }}</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td style="font-size: 14px">Dengan hormat,</td>
                     </tr>

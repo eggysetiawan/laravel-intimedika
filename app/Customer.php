@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $fillable = ['slug', 'name', 'mobile', 'role', 'email',  'user_id'];
+    protected $fillable = ['slug', 'name', 'mobile', 'role', 'email',  'user_id', 'person_in_charge'];
 
     public static function selectCustomer()
     {

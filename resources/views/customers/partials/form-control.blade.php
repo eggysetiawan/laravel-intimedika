@@ -26,7 +26,7 @@
     @endempty
 
     <div class="form-group">
-        <label for="name">Nama/Perusahaan</label>
+        <label for="name">Perusahaan</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
             placeholder="Masukan Nama" value="{{ old('name') ?? $customer->name }}">
         @error('name')
@@ -35,10 +35,23 @@
             </span>
         @enderror
     </div>
+
+    <div class="form-group">
+        <label for="person_in_charge">Nama PIC</label>
+        <input type="text" class="form-control @error('person_in_charge') is-invalid @enderror" id="person_in_charge"
+            name="person_in_charge" placeholder="Masukan Nama PIC"
+            value="{{ old('person_in_charge') ?? $customer->person_in_charge }}">
+        @error('person_in_charge')
+            <span class="invalid-feedback" role="alert">
+                {{ $message }}
+            </span>
+        @enderror
+    </div>
+
     <div class="form-group">
         <label for="role">Jabatan</label>
         <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role"
-            placeholder="Masukan Jabatan" value="{{ old('role') ?? $customer->role }}">
+            placeholder="Masukan Jabatan PIC" value="{{ old('role') ?? $customer->role }}">
         @error('role')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}
@@ -47,7 +60,7 @@
     </div>
 
     <div class="form-group">
-        <label for="mobile">Hp Kunjungan</label>
+        <label for="mobile">Hp Customer</label>
         <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile"
             placeholder="Masukan Nomor Hp" value="{{ old('mobile') ?? $customer->mobile }}">
         @error('mobile')
