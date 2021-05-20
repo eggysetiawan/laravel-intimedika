@@ -123,7 +123,7 @@ class ProgressService
     {
         // insert image to media table
         $request->validate([
-            'img' => ['required_if:progress,99', 'mimes:png,jpg,jpeg'],
+            'img' => ['required_if:progress,99', 'mimes:png,jpg,jpeg,pdf'],
         ]);
         $imgName = uniqid() . '.' . request()->file('img')->extension();
         return $offer->invoices->first()
