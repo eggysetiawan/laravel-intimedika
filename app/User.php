@@ -58,6 +58,14 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
+    public static function salesChart()
+    {
+        return static::query()
+            ->where('position', 'sales')
+            ->whereHas('charts')
+            ->get();
+    }
+
     public  function theAuthor($model)
     {
         return auth()->id() === $model->user_id;

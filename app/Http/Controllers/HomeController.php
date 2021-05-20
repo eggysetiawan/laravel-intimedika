@@ -28,38 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $chart_options = [
-            'chart_title' => 'Penjualan Sales per Bulan',
-            'chart_type' => 'line',
-            'report_type' => 'group_by_string',
-            'model' => 'App\OrderChart',
-            'date_format' => 'Y-m-d',
-            'group_by_field' => 'offer_date', //represent $order->invoice->offer->offer_date
-            'group_by_period' => 'month',
-            'continuous_time' => true,
-            'aggregate_function' => 'sum',
-            'aggregate_field' => 'price',
+        $chart1 = (new ChartService())->all_sales_chart();
+        $chart = (new ChartService())->loggedInChart();
 
-
-            'conditions'            => [
-                ['name' => 'Last Year', 'condition' => 'year = 2020', 'color' => 'blue', 'fill' => true],
-                ['name' => 'This Year', 'condition' => 'year = 2021', 'color' => 'green', 'fill' => true],
-            ],
-
-            'filter_field' => 'offer_date',
-            'filter_days' => 364, // show only transactions for last 30 days
-            'filter_period' => 'month', // show only transactions for this week
-        ];
-        $chart1 = new LaravelChart($chart_options);
-
-
-
-        $allsales = User::query()
-            ->where('position', 'sales')
-            ->whereHas('charts')
-            ->get();
+        $allsales = User::salesChart();
         $charts = [];
-
         foreach ($allsales as $sales) {
             $charts[] = (new ChartService())->sales_chart($sales);
         }
@@ -70,6 +43,6 @@ class HomeController extends Controller
 
         $percentage = $offers == 0 || $targets == 0 ? '0' : $offers / $targets * 100;
 
-        return view('home', compact('chart1', 'charts', 'offers', 'percentage', 'targets'));
+        return view('home', compact('chart1', 'charts', 'offers', 'percentage', 'targets', 'chart'));
     }
 }
