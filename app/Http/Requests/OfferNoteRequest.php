@@ -24,7 +24,9 @@ class OfferNoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'form_note' => ['string', 'required'],
+            'form_note' => ['required'],
+            'form_up' => ['sometimes'],
+            'name_up' => ['required_if:form_up,on'],
         ];
     }
 }

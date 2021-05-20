@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{ asset('image/ipi2.png') }}" type="image/png">
+    <style>
+        .table-pdf th,
+        .table-pdf td {
+            font-size: 14px;
+        }
+
+    </style>
 </head>
 
 <body onload="window.print()">
@@ -19,7 +26,7 @@
             <div class="card-body">
                 @isset($offer->is_approved)
                     <label style="font-size: 14px; float:right">Jakarta,
-                        {{ date('d F Y', strtotime($offer->approved_at)) }}</label>
+                        {{ date('d F Y', strtotime($offer->offer_date)) }}</label>
                 @endisset
                 <table>
                     <tr>
@@ -75,12 +82,14 @@
                         <td style="font-size: 14px">Dengan hormat,</td>
                     </tr>
                     <tr>
-                        <td style="font-size: 14px">ket_form</td>
+                        <td style="font-size: 14px">
+                            {{ $offer->form_note ?? '--Keterangan Penawaran--' }}
+                        </td>
                     </tr>
                 </table>
                 <div class="fill">
                     <div class="detail-table">
-                        <table class="table" border="1" style="border-collapse: collapse;width:100%">
+                        <table class="table table-pdf" border="1" style="border-collapse: collapse;width:100%;">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>No.</th>
@@ -107,11 +116,12 @@
                                         <div style=" font-weight: bold;" class="mt-0">
                                             {{ $order->modality->name }}
                                         </div>
-                                        <br>
-                                        Merk : {{ $order->modality->brand }}<br>
+
+                                        Merk : {{ $order->modality->brand }}
                                         Model : {{ $order->modality->model }}
                                         <div style="text-align: justify;text-justify:auto;justify-content">
-                                            <pre>{{ $order->modality->spec }}</pre><br>
+                                            <pre style="font-family: " Lobster",
+                                                cursive;">{{ $order->modality->spec }}</pre>
                                         </div>
                                     </td>
                                     {{-- <td>

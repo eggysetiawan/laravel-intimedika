@@ -32,7 +32,9 @@ class Offer extends Model implements HasMedia
         'approved_by',
         'offer_date',
         'slug',
-        'form_note'
+        'form_note',
+        'form_up',
+        'name_up'
     ];
 
     public function hasDemo()

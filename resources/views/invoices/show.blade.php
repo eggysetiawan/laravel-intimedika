@@ -109,7 +109,7 @@
                                     <div class="card-body">
                                         @isset($offer->is_approved)
                                             <label style="font-size: 14px; float:right">Jakarta,
-                                                {{ date('d F Y', strtotime($offer->approved_at)) }}</label>
+                                                {{ date('d F Y', strtotime($offer->offer_date)) }}</label>
                                         @endisset
                                         <table>
                                             <tr>
@@ -151,23 +151,26 @@
                                             <tr>
                                                 <td>&nbsp;</td>
                                             </tr>
-                                            <tr>
-                                                <td style="font-weight: bold;font-size: 14px">Up. Bpk/Ibu
-                                                    {{ $offer->customer->name }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px">{{ $offer->customer->role }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                            </tr>
+                                            @if ($offer->form_up)
+                                                <tr>
+                                                    <td style="font-weight: bold;font-size: 14px">Up.
+                                                        {{ $offer->name_up ?? $offer->customer->name }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 14px">{{ $offer->customer->role }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            @endif
                                             <tr>
                                                 <td style="font-size: 14px">Dengan hormat,</td>
                                             </tr>
                                             <tr>
                                                 <td style="font-size: 14px">
-                                                    {{ $offer->form_note ?? '--Keterangan Penawaran--' }}</td>
+                                                    {{ $offer->form_note ?? '--Keterangan Penawaran--' }}
+                                                </td>
                                             </tr>
                                         </table>
                                         <div class="fill">
@@ -1028,10 +1031,20 @@
                     @csrf
                     @method('patch')
                     <div class="modal-body">
+
+                        <input class="mr-2" style="margin: 0px" type="checkbox" name="form_up" id="form_up" @if ($offer->form_up) checked @endif><label for="form_up">Nama
+                            Up.</label>
+                        <div class="input-group">
+
+                            <input type="text" name="name_up" id="name_up" value="{{ $offer->customer->name }}"
+                                class="form-control" placeholder="Input group example" aria-label="Input group example"
+                                aria-describedby="btnGroupAddon">
+                        </div>
+
                         <div class="form-group">
                             <label for="form_note" class="col-form-label">Keterangan Penawaran:</label>
                             <textarea name="form_note" class="form-control"
-                                id="form_note">{{ $offer->form_note ?? old('form_note') }}</textarea>
+                                id="form_note">{{ $offer->form_note ?? (old('form_note') ?? '--Keterangan Penawaran--') }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
