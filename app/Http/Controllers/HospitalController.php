@@ -46,7 +46,8 @@ class HospitalController extends Controller
 
     public function edit(Hospital $hospital)
     {
-        return view('hospitals.edit', compact('hospital'));
+        $provinces = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi')['provinsi'];
+        return view('hospitals.edit', compact('hospital', 'provinces'));
     }
 
     public function update(HospitalRequest $request, Hospital $hospital)
