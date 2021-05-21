@@ -30,6 +30,7 @@ class ProgressController extends Controller
         abort_if($offer->progress->progress > 99, 403);
         return view('progress.create', [
             'offer' => $offer,
+            'i' => 0,
         ]);
     }
 

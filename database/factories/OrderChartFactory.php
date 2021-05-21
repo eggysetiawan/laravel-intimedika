@@ -14,6 +14,7 @@ $factory->define(OrderChart::class, function (Faker $faker) {
 
     return [
         'user_id' => 6,
+        'invoice_id' => 1,
         'sales_name' => $sales_names[$randSales],
         'price' => round(rand(200000, 1000000000), -4),
         'is_approved' => rand(0, 1),

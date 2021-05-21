@@ -49,7 +49,7 @@
                     <input type="text" name="prices[]" id="price"
                         class="form-control @error('prices.' . $i) is-invalid @enderror"
                         data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
-                        data-mask value="{{ old('prices.' . $i) }}" required>
+                        data-mask value="{{ old('prices.' . ($i - 1)) }}" required>
                 </div>
 
                 @error('prices.' . $i)

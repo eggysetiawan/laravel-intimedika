@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="form-group icheck-danger">
-                        <input type="checkbox" name="progress" id="check6" value="99" @if ($offer->progress->progress == 99) checked @endif>
+                        <input type="checkbox" name="progress" id="check6" value="99" @if ($offer->progress->progress == 99) checked @endif @if (old('progress')) checked @endif )>
                         <label for="check6">
                             Sudah ada PO.
                         </label>
@@ -92,6 +92,9 @@
                         <div id="img">
 
                             @foreach ($offer->invoices->first()->orders as $order)
+                                @php
+                                    $i++;
+                                @endphp
                                 <div class="attachment-block clearfix px-0 mx-0">
                                     <div class="d-flex justify-content-center">
 
@@ -128,8 +131,8 @@
                                                 </div>
                                                 <input type="hidden" name="references[]" value="{{ $order->references }}">
                                                 <input type="text" name="price[]" id="price"
-                                                    class="form-control @error('price') is-invalid @enderror" value=""
-                                                    required
+                                                    class="form-control @error('price') is-invalid @enderror"
+                                                    value="{{ old('price.' . ($i - 1)) }}" required
                                                     data-inputmask="'mask': ['9,999','99,999','999,999','9,999,999', '99,999,999', '99,999,999', '999,999,999','9,999,999,999','99,999,999,999','999,999,999,999','9,999,999,999,999','99,999,999,999,999','999,999,999,999,999']"
                                                     data-mask>
 
@@ -153,7 +156,7 @@
                                                 </div>
                                                 <input type="number" name="qty[]" id="qty"
                                                     class="form-control @error('qty') is-invalid @enderror"
-                                                    placeholder="unit" required>
+                                                    placeholder="unit" required value="{{ old('qty.' . ($i - 1)) }}">
                                                 @error('qty')
                                                     <span class="invalid-feedback" role="alert">
                                                         {{ $message }}
@@ -199,7 +202,8 @@
 
                             {{-- image --}}
                             <div class="form-group">
-                                <input type="file" name="img" class="@error('img') is-invalid @enderror">
+                                <input type="file" name="img" class="@error('img') is-invalid @enderror"
+                                    value="{{ old('img') }}">
                                 @error('img')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}

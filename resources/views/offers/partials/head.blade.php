@@ -16,7 +16,8 @@
                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                 </div>
                 <input type="date" name="date" id="datemask" class="form-control @error('date') is-invalid @enderror"
-                    data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask max="2021-01-01">
+                    data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask max="2021-01-01"
+                    value="{{ old('date') }}">
                 @error('date')
                     <span class="invalid-feedback" role="alert">
                         {{ $message }}
