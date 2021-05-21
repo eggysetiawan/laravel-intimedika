@@ -13,11 +13,35 @@ class InvoiceService
         $shipping,
         $price_po;
 
+    public function getPrice($request, $order)
+    {
+        if (!isset($request->price[$order->id])) {
+            return $order->price;
+        }
+
+        return str_replace([",", "_"], "", $request->price[$order->id]);
+    }
+
     public function repeatInvoice($invoice)
     {
         return $this->invoice_create = Invoice::create([
             'offer_id' => $invoice->offer_id,
             'date' => now()->format('Y-m-d'),
+        ]);
+    }
+
+    public function createOrderChart($invoice)
+    {
+        return  $invoice->chart()->create([
+            'user_id' => $invoice->offer->user_id,
+            'sales_name' => $invoice->offer->author->name,
+            'price' => $this->price_po,
+            'is_approved' => 0,
+            'year' => $invoice->offer->offer_date->format('Y'),
+            'offer_date' => $invoice->offer->offer_date->format('Y-m-d'),
+            'invoice_date' => $invoice->date->format('Y-m-d'),
+            'is_approved' => 1
+
         ]);
     }
 
@@ -46,7 +70,8 @@ class InvoiceService
         $insert = [];
         $orders->each(function ($order, $i) use ($invoice, $request, &$price_po, &$insert) {
 
-            $price = isset($request->price[$order->id]) ? str_replace([",", "_"], "", $request->price[$order->id]) : $price = $order->price;
+            // $price = isset($request->price[$order->id]) ? str_replace([",", "_"], "", $request->price[$order->id]) : $order->price;
+            $price = $this->getPrice($request, $order);
 
             $insert =  $order->insert([
                 'invoice_id' => $invoice->id,
@@ -86,24 +111,26 @@ class InvoiceService
     public function createTax($offer)
     {
 
-        $main_modality = strtolower($offer->invoices->first()->orders->first()->modality->category);
-
-        if ($main_modality == 'software') {
-            $komisi_percentage = 3;
-            $komisi = $this->price_po * (3 / 100);
-        }
-
-        if ($main_modality != 'software') {
-            $komisi_percentage = 1;
-            $komisi = $this->price_po * (1 / 100);
-        }
-
         $shipping = isset($this->shipping) ?
             str_replace([",", "_"], "", $this->shipping)
             : 0;
 
+        $main_modality = strtolower($offer->invoices->first()->orders->first()->modality->category);
+
+        if ($main_modality == 'software') {
+            $komisi_percentage = 3;
+            $komisi = ($this->price_po - $shipping) * (3 / 100);
+        }
+
+        if ($main_modality != 'software') {
+            $komisi_percentage = 1;
+            $komisi = ($this->price_po - $shipping) * (1 / 100);
+        }
+
+
+
         $cn_percentage = $offer->taxes->first()->cn_percentage;
-        $cn = $this->price_po * ($offer->taxes->first()->cn_percentage / 100);
+        $cn = ($this->price_po - $shipping) * ($offer->taxes->first()->cn_percentage / 100);
 
         return Tax::create([
             'offer_id' => $offer->id,

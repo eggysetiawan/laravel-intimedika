@@ -232,7 +232,7 @@
                     <div class="form-group">
                         <textarea name="detail" id="detail" rows="4"
                             class="form-control @error('detail') is-invalid @enderror"
-                            placeholder="Berikan keterangan progress..">{{ $offer->progress->detail }}</textarea>
+                            placeholder="Berikan keterangan progress..">{{ old('detail') ?? $offer->progress->detail }}</textarea>
                         @error('detail')
                             <span class="invalid-feedback" role="alert">
                                 {{ $message }}

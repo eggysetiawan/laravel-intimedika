@@ -89,7 +89,7 @@ class ProgressService
             str_replace([",", "_"], "", $request->shipping)
             : 0;
 
-        $cn = $this->price_po * ($request->cn / 100);
+        $cn = ($this->price_po - $shipping) * ($request->cn / 100);
 
         return Tax::create([
             'offer_id' => $offer->id,
@@ -108,14 +108,16 @@ class ProgressService
 
     public function createOrderChart($offer)
     {
-        OrderChart::create([
+        return OrderChart::create([
             'user_id' => $offer->user_id,
             'invoice_id' => $offer->invoices->first()->id,
             'sales_name' => $offer->author->name,
             'price' => $this->price_po,
             'is_approved' => 0,
             'year' => $offer->offer_date->format('Y'),
-            'offer_date' => $offer->offer_date->format('Y-m-d')
+            'offer_date' => $offer->offer_date->format('Y-m-d'),
+            'invoice_date' => $offer->invoices->first()->date->format('Y-m-d'),
+
         ]);
     }
 

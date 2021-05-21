@@ -6,7 +6,6 @@ use App\Http\Requests\RepeatRequest;
 use App\Offer;
 use App\Invoice;
 use App\Services\InvoiceService;
-use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
@@ -17,6 +16,7 @@ class InvoiceController extends Controller
         $invoiceService->insertOrder($request);
         $invoiceService->updatePrice($invoice->offer, $request);
         $invoiceService->createTax($invoice->offer);
+        $invoiceService->createOrderChart($invoice);
 
         session()->flash('success', 'Repeat order berhasil!');
         return back();

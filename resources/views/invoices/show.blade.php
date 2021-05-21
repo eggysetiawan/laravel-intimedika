@@ -453,12 +453,13 @@
                                                                 <td>@currency($invoice->tax->ppn)</td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Ongkos Kirim:</th>
-                                                                <td>@currency($invoice->tax->shipping)</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <th>Total:</th>
                                                                 <td>@currency($invoice->totalPurchase)</td>
+                                                            </tr>
+                                                            <hr>
+                                                            <tr>
+                                                                <th>Ongkos Kirim:</th>
+                                                                <td>@currency($invoice->tax->shipping)</td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -639,8 +640,20 @@
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Total:</th>
-                                                                <td>@currency($invoice->totalPurchase)</td>
+                                                                <th>Subtotal :</th>
+                                                                <td>@currency($invoice->tax->price_po)</td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:50%">Ongkos Kirim :</th>
+                                                                <td>@currency($invoice->tax->shipping) <span
+                                                                        class="float-right font-weight-bold">_</span>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total :</th>
+                                                                <td>@currency($invoice->totalCn)</td>
                                                             </tr>
                                                             <tr>
                                                                 <th style="width:50%">CN
@@ -814,8 +827,20 @@
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Total:</th>
-                                                                <td>@currency($invoice->totalPurchase)</td>
+                                                                <th>Subtotal :</th>
+                                                                <td>@currency($invoice->tax->price_po)</td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:50%">Ongkos Kirim :</th>
+                                                                <td>@currency($invoice->tax->shipping) <span
+                                                                        class="float-right font-weight-bold">_</span>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total :</th>
+                                                                <td>@currency($invoice->totalCn)</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Komisi {{ $invoice->tax->komisi_percentage }}%:</th>

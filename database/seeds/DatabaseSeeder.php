@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             VisitSeeder::class,
             ModalitySeeder::class,
-            OrderChartSeeder::class,
+            // OrderChartSeeder::class,
         ]);
     }
 }

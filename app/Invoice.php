@@ -13,6 +13,7 @@ class Invoice extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
 
+    protected $dates = ['date'];
     protected $fillable = ['status', 'date', 'offer_id'];
 
     // business logic
@@ -30,14 +31,18 @@ class Invoice extends Model implements HasMedia
             return 'Belum Lunas';
         }
 
-        if (!$not_paid) {
-            return 'Lunas';
-        }
+        return 'Lunas';
     }
+
+
 
     public function getTotalPurchaseAttribute()
     {
-        return $this->tax->price_po + $this->tax->ppn + $this->tax->shipping;
+        return $this->tax->price_po + $this->tax->ppn;
+    }
+    public function getTotalCnAttribute()
+    {
+        return $this->tax->price_po - $this->tax->shipping;
     }
 
     public function registerMediaConversions(Media $media = null): void
