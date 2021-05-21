@@ -44,7 +44,7 @@
             <div class="card-body">
                 <!-- post text -->
                 <h4 class="attachment-heading">{{ $dailyJob->title }}</h4>
-                <pre class="wordwrap">{{ $dailyJob->description }}</pre>
+                <pre class="wordwrap" style="font-family:  Arial;">{{ $dailyJob->description }}</pre>
 
                 <!-- Attachment -->
                 {{-- <div class="attachment-block clearfix">
