@@ -55,31 +55,32 @@
           <p>Semua Penawaran</p>
       </a>
   </li>
+  @endhasrole
+
 
   {{-- approval penawaran & purchase --}}
-  @can('approval')
-      <li class="nav-item">
-          <a href="{{ route('offers.approval') }}"
-              class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-              <i class="fas fa-exclamation nav-icon"></i>
-              <p>Approve Penawaran </p>
-              @if ($readyToApprove > 0)
-                  <span class="badge badge-danger right">{{ $readyToApprove }}</span>
-              @endif
-          </a>
-      </li>
-      <li class="nav-item">
-          <a href="{{ route('progresses.approval') }}"
-              class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
-              <i class="fas fa-hand-holding-usd nav-icon"></i>
-              <p>Approve Purchase-Order</p>
-              @if ($readyToPurchase > 0)
-                  <span class="badge badge-danger right">{{ $readyToPurchase }}</span>
-              @endif
+  @hasrole('director|superadmin')
+  <li class="nav-item">
+      <a href="{{ route('offers.approval') }}"
+          class="nav-link {{ request()->segment(1) == 'offers' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+          <i class="fas fa-exclamation nav-icon"></i>
+          <p>Approve Penawaran </p>
+          @if ($readyToApprove > 0)
+              <span class="badge badge-danger right">{{ $readyToApprove }}</span>
+          @endif
+      </a>
+  </li>
+  <li class="nav-item">
+      <a href="{{ route('progresses.approval') }}"
+          class="nav-link {{ request()->segment(1) == 'progresses' && request()->segment(2) == 'approval' ? ' active' : '' }}">
+          <i class="fas fa-hand-holding-usd nav-icon"></i>
+          <p>Approve Purchase-Order</p>
+          @if ($readyToPurchase > 0)
+              <span class="badge badge-danger right">{{ $readyToPurchase }}</span>
+          @endif
 
-          </a>
-      </li>
-  @endcan
+      </a>
+  </li>
 
   {{-- penawaran berhasil --}}
   <li class="nav-item">
@@ -89,5 +90,4 @@
           <p>Penawaran Berhasil</p>
       </a>
   </li>
-
   @endhasrole

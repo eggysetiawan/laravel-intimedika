@@ -176,6 +176,63 @@ class UserSeeder extends Seeder
             'city' => 'Jakarta',
         ]);
 
+        $teten = User::create([
+            'name' => 'Teten Sutendi',
+            'username' => 'teten_intimed',
+            'position' => 'Sales',
+            'initial' => 'TS',
+            'email' => 'teten.intimed@gmail.com',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0822032030',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $fahmi = User::create([
+            'name' => 'M Fahmi Fadli',
+            'username' => 'fahmi_intimed',
+            'position' => 'Sales',
+            'initial' => 'MFF',
+            'email' => 'fahmi@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0822032030',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $saidi = User::create([
+            'name' => 'Saidi',
+            'username' => 'saidi_intimed',
+            'position' => 'Sales',
+            'initial' => 'IDI',
+            'email' => 'saidi@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0822032030',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+        $eka = User::create([
+            'name' => 'Eka Ariandi',
+            'username' => 'eka_intimed',
+            'position' => 'Sales',
+            'initial' => 'EK',
+            'email' => 'eka@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0822032030',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
+        $adewidayanti = User::create([
+            'name' => 'Ade Widayanti',
+            'username' => 'widayantiade',
+            'position' => 'Admin',
+            'initial' => 'AW',
+            'email' => 'adewidayanti@intimedika.co',
+            'password' => bcrypt('intiwid1'),
+            'phone' => '0822032030',
+            'address' => 'North Jakarta',
+            'city' => 'Jakarta',
+        ]);
+
         Permission::create(['name' => 'approval']);
         Permission::create(['name' => 'salesman']);
         Permission::create(['name' => 'engineering']);
@@ -223,6 +280,7 @@ class UserSeeder extends Seeder
         $userSupervisor->assignRole('sales');
         $userIT->assignRole('it');
 
+        // it
         $rahmat->assignRole('it');
         $rafli->assignRole('it');
         $febrian->assignRole('it');
@@ -231,5 +289,15 @@ class UserSeeder extends Seeder
         $dimas->assignRole('it');
         $hardian->assignRole('it');
         $hardian->assignRole('supervisor');
+
+        // sales
+        $teten->assignRole('supervisor');
+        $teten->assignRole('sales');
+        $fahmi->assignRole('sales');
+        $saidi->assignRole('sales');
+        $eka->assignRole('sales');
+
+        $adewidayanti->assignRole('admin');
+        $adewidayanti->assignRole('teknisi');
     }
 }

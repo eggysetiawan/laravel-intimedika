@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerHospitalTable extends Migration
+class CreateSidebarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCustomerHospitalTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_hospital', function (Blueprint $table) {
+        Schema::create('sidebars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
-            $table->foreignId('hospital_id')->constrained('hospitals')->cascadeOnDelete();
+            $table->string('name', 50);
+            $table->string('route', 50);
+            $table->string('icon', 150);
+            $table->string('role')->nullable();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateCustomerHospitalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_hospital');
+        Schema::dropIfExists('sidebars');
     }
 }

@@ -39,11 +39,7 @@
                         <p>Home</p>
                     </a>
                 </li>
-
-
-
                 {{-- Inventories --}}
-                <li class="nav-header">Inventory</li>
                 <li class="nav-item">
                     <a href="{{ route('inventories.index') }}"
                         class="nav-link{{ request()->segment(1) == 'inventories' ? ' active' : '' }}">
