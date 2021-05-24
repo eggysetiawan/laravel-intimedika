@@ -11,7 +11,7 @@ class FunnelService
 
     public function createOffer($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         // insert into offer table
         $attr['customer_id'] = $request->customer;
         return $this->offer = auth()->user()->offers()->create($attr);
@@ -50,7 +50,7 @@ class FunnelService
 
     public function createFunnel($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['slug'] = Str::slug($request->description . ' ' . date('YmdHis'));
         return $this->offer->funnel()->create($attr);
     }

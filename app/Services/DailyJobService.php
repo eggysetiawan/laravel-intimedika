@@ -21,7 +21,7 @@ class DailyJobService
 
     public function createDailyJob($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['slug'] = $this->getSlug($request);
         return $this->dailyJob = auth()->user()->daily_jobs()->create($attr);
     }

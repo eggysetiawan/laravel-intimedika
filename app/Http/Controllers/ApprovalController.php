@@ -27,7 +27,7 @@ class ApprovalController extends Controller
     public function allPurchase(ApprovalRequest $request)
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
-        $request->all();
+        $request->validated();
 
         // approved
         if ($request->approval == 1) {
@@ -67,7 +67,7 @@ class ApprovalController extends Controller
     public function allOffer(ApprovalRequest $request)
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
-        $request->all();
+        $request->validated();
 
         //  approved
         if ($request->approval == 1) {
@@ -107,7 +107,7 @@ class ApprovalController extends Controller
     public function progress(ApprovalRequest $request, Offer $offer)
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
-        $request->all();
+        $request->validated();
 
         // approved
         if ($request->approval == 1) {
@@ -144,7 +144,7 @@ class ApprovalController extends Controller
     public function offer(ApprovalRequest $request, Offer $offer)
     {
         abort_unless(auth()->user()->two_factor_code, 403); //abort jika  belum request otp
-        $request->all();
+        $request->validated();
 
         // get approved
         if ($request->approval == 1) {

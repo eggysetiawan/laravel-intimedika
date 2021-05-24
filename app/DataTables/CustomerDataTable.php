@@ -22,6 +22,9 @@ class CustomerDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
+            ->editColumn('hospitals.name', function (Customer $customer) {
+                return $customer->hospitals->first()->name ?? '';
+            })
             ->editColumn('action', function (Customer $customer) {
                 return view('customers.partials.action', [
                     'customer' => $customer
@@ -104,8 +107,16 @@ class CustomerDataTable extends DataTable
                 ->addClass('text-center'),
 
             // name
-            Column::make('name')
+            Column::make('hospitals.name')
                 ->title('Rumah Sakit/Perusahaan'),
+
+            // Nama
+            Column::make('name')
+                ->title('name'),
+
+            // PIC
+            Column::make('person_in_charge')
+                ->title('PIC'),
             // hp customer
             Column::make('mobile')
                 ->title('Hp/Telepon')

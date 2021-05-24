@@ -16,7 +16,7 @@ class ArrivalController extends Controller
 
     public function update(ArrivalRequest $request, Visit $visit)
     {
-        $attr  = $request->all();
+        $attr  = $request->validated();
 
         // update table customers
         $visit->customer()->update([

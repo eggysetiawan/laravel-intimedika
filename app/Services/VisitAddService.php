@@ -19,7 +19,7 @@ class VisitAddService
     public function createCustomer($request)
     {
         // validate input
-        $attr = $request->all();
+        $attr = $request->validated();
 
         // assignt name to slug
         $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
@@ -35,7 +35,7 @@ class VisitAddService
 
     public function addVisit($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['slug'] = $this->slug();
         $attr['customer_id'] = $this->customer->id;
         $attr['is_visited'] = 1;

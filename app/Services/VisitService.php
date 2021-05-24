@@ -13,7 +13,7 @@ class VisitService
     }
     public function create($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['slug'] = $this->setSlug();
         $attr['customer_id'] = $request->customer;
         $attr['is_visited'] = 1;
@@ -30,7 +30,7 @@ class VisitService
             ->usingFileName($imgSlug)
             ->toMediaCollection('images');
 
-        $attr = $request->all();
+        $attr = $request->validated();
         return $visit->update($attr);
     }
 }

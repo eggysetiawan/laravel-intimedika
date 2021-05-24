@@ -12,7 +12,7 @@ class PacsSupportService
 
     public function createPacsSupport($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $hospital_name = PacsInstallation::hospitalRequest($request);
 
         $attr['slug'] = Str::slug($hospital_name . '-' . uniqid());

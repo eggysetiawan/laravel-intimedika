@@ -13,7 +13,7 @@ class InventoryService
 
     public function createInventory($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $sn = $request->service_tag ?? $request->serial_number;
         $attr['slug'] = Str::slug($request->item . '-' . $sn);
         $attr['department_id'] = $request->department;
@@ -34,7 +34,7 @@ class InventoryService
 
     public function updateInventory($request, $inventory)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['department_id'] = $request->department;
         return  $inventory->update($attr);
     }

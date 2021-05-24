@@ -11,7 +11,7 @@ class AdvanceService
 
     public function createAdvance($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['slug'] = Str::slug($request->destination . '-' . $request->objective);
         return $this->advance = auth()->user()->advances()->create($attr);
     }

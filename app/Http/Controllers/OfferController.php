@@ -83,12 +83,13 @@ class OfferController extends Controller
 
     public function update(UpdateOfferRequest $request, Offer $offer, OfferService $offerService)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
 
         // update orders table
         $offerService->updateOrder($offer, $request);
 
         // update offer table
+        $attr['is_approved'] = 0;
         $offer->update($attr);
 
         // send mail to admin via event & listener

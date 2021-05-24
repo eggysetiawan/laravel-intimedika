@@ -12,7 +12,7 @@ class PacsInstallationService
 
     public function createPacsInstallation($request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $hospital_name = Hospital::findOrFail(request('hospital'))->name;
         $attr['slug'] = Str::slug($hospital_name . ' ' . now()->format('Y'));
         $attr['handover_date'] = date('Y-m-d H:i:s', strtotime($request->handover_date));

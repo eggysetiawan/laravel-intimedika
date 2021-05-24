@@ -15,7 +15,7 @@ class OfferFunnelService
 
     public function updateOffer($offer, $request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
 
         // convert month romawi
         $array_bln = array(1 => "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");

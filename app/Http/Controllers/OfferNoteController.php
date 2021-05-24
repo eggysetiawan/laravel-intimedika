@@ -15,12 +15,17 @@ class OfferNoteController extends Controller
      */
     public function __invoke(Offer $offer, OfferNoteRequest $request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
         $attr['form_up'] = 1;
 
         if (!$request->has('form_up')) {
             $attr['form_up'] = 0;
         }
+
+        if (!$request->has('has_form_note')) {
+            $attr['has_form_note'] = 0;
+        }
+
         $offer->update($attr);
 
         session()->flash('success', 'Keterangan Form Penawaran telah berhasil diubah!');
