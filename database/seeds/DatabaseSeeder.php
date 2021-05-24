@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             HospitalSeeder::class,
             CustomerOnlySeeder::class,
-            // VisitSeeder::class,
+            VisitSeeder::class,
             ModalitySeeder::class,
             SidebarSeeder::class,
+            DepartmentSeeder::class,
             // OrderChartSeeder::class,
         ]);
     }
