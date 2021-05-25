@@ -32,8 +32,9 @@
     </div>
 
     <div class="form-group">
-        <label for="city">Provinsi*</label>
-        <select name="city" id="city" class="form-control select2" data-dependent="district">
+        <label for="city">Kota*</label>
+        <select name="city" id="city" class="form-control select2 @error('city') is-invalid @enderror"
+            data-dependent="district">
             @isset($hospital->city)
                 <option value="{{ $hospital->city }}" selected>{{ $hospital->city }}</option>
                 @foreach ($provinces as $province)
@@ -42,8 +43,9 @@
                     @endempty
                 @endforeach
             @else
+                <option selected disabled>Pilih Kota</option>
                 @foreach ($provinces as $province)
-                    <option value="{{ $province['id'] }}">{{ $province['nama'] }}</option>
+                    <option value="{{ $province['nama'] }}">{{ $province['nama'] }}</option>
                 @endforeach
             @endisset
 
@@ -70,7 +72,7 @@
     </div> --}}
 
 <div class="form-group">
-    <label for="class">Kelas/Tipe*</label>
+    <label for="class">Kelas/Tipe(Optional)</label>
     <select name="class" id="class" class="form-control">
         @isset($hospital->class)
             <option value="{{ $hospital->class }}">Kelas {{ $hospital->class }}</option>

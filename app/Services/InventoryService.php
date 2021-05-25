@@ -15,7 +15,11 @@ class InventoryService
     {
         $attr = $request->validated();
         $sn = $request->service_tag ?? $request->serial_number;
-        $attr['slug'] = Str::slug($request->item . '-' . $sn);
+        $slug = Str::slug($request->item . '-' . $sn);
+        if ($slug == '') {
+            $slug = Str::slug(uniqid('inventories-'));
+        }
+        $attr['slug'] = $slug;
         $attr['department_id'] = $request->department;
         return auth()->user()->inventories()->create($attr);
     }

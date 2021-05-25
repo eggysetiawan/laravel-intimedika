@@ -29,7 +29,7 @@ class HospitalRequest extends FormRequest
             'city' => 'required|string',
             'address' => 'required|string',
             'email' => 'nullable|unique:hospitals,email',
-            'class' => 'string',
+            'class' => 'nullable',
         ];
     }
     public function messages()
