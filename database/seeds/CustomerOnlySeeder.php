@@ -57,7 +57,7 @@ class CustomerOnlySeeder extends Seeder
             $customers = Customer::create([
                 'id' => $customer->pk_cust,
                 'user_id' => $username,
-                'slug' => Str::slug(uniqid('cust') . '-' . $slug),
+                'slug' => Str::slug(uniqid('cust-') . '-' . $slug),
                 'name' => $customer->nama_cust,
                 'person_in_charge' => $customer->nama_cust,
                 'mobile' => $customer->hp_cust,

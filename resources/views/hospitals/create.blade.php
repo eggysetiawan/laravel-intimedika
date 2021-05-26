@@ -15,7 +15,7 @@
         <!-- /.card-header -->
         <!-- form start -->
 
-        <form role="form" method="post" action="{{ route('hospitals.store') }}">
+        <form role="form" method="post" action="{{ route('hospitals.store') }}" autocomplete="off">
             @csrf
             @include('hospitals.partials.form-control', ['submit' => 'Create'])
         </form>
