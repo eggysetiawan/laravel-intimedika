@@ -9,10 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ 'IPI Portal | ' . $title ?? 'Portal Intimedika' }}</title>
-
     <!-- Ionicons -->
     @include('layouts.head')
-
+    <livewire:styles />
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse accent-teal">
@@ -67,6 +66,7 @@
     <!-- REQUIRED SCRIPTS -->
     @include('layouts.script-footer')
     @yield('script')
+    <livewire:scripts />
 </body>
 
 

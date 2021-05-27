@@ -8,4 +8,5 @@ class SalesFunnel extends Model
 {
     protected $connection = 'mysql2';
     protected $table = 'sales_funnel';
+    protected $dates = ['start_funnel'];
 }

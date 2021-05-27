@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/migrasiPdf
 /vendor
 .env
 .env.backup
