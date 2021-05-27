@@ -5,6 +5,7 @@ use App\Offer;
 use App\Invoice;
 use App\SalesFunnel;
 use App\SalesPenawaran;
+use App\SalesTarget;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -81,15 +82,14 @@ class OfferSeeder extends Seeder
                     'updated_at' => $penawaran->tgl_penawaran,
                 ]);
 
-                $offers->invoices()->create([
-                    'offer_id' => $offers->id,
-                    'date' => $penawaran->tgl_penawaran,
-                    'status' => 'old',
-                ]);
+
                 $sales_funnel = SalesFunnel::query()
                     ->whereNotNull('penawaran_fk')
                     ->where('penawaran_fk', $penawaran->pk_penawaran)
                     ->first();
+
+
+
 
                 if ($sales_funnel->penawaran_fk) {
 
@@ -128,8 +128,40 @@ class OfferSeeder extends Seeder
                         'created_at' => $sales_funnel->start_funnel,
                         'updated_at' => $sales_funnel->start_funnel
                     ]);
+
+
+
+                    $sales_targeting = SalesTarget::query()
+                        ->where('funnel_fk', $sales_funnel->pk)
+                        ->first();
+
+                    $invoices = $offers->invoices()->create([
+                        'offer_id' => $offers->id,
+                        'date' => $penawaran->tgl_penawaran,
+                        'status' => 'old',
+                    ]);
+                    if ($sales_funnel->gambar) {
+                        $invoices
+                            ->addMedia(storage_path('MigrasiPdf/' . $sales_funnel->gambar))
+                            ->preservingOriginal()
+                            ->toMediaCollection('image_po');
+                    }
+
+
+                    if ($sales_targeting) {
+                        $ppn = $sales_targeting->harga_po_targeting * (10 / 100);
+
+                        $invoices->tax()->create([
+                            'offer_id' => $offers->id,
+                            'is_paid' => 0,
+                            'price_po' => $sales_targeting->harga_po_targeting,
+                            'dpp' => $sales_targeting->harga_po_targeting,
+                            'ppn' => $ppn,
+                            'nett' => $sales_targeting->harga_po_targeting,
+                        ]);
+                    }
                 }
-            });
+            }); //DB::transaction
         }
     }
 }

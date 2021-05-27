@@ -9,4 +9,10 @@ class SalesFunnel extends Model
     protected $connection = 'mysql2';
     protected $table = 'sales_funnel';
     protected $dates = ['start_funnel'];
+    protected $primaryKey = 'pk';
+
+    public function sales_targeting()
+    {
+        return $this->hasOne(SalesTarget::class, 'funnel_fk', 'pk');
+    }
 }

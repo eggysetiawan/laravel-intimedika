@@ -14,7 +14,7 @@ class Invoice extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $dates = ['date'];
-    protected $fillable = ['status', 'date', 'offer_id'];
+    protected $fillable = ['status', 'date', 'offer_id', 'invoice_no'];
 
     // business logic
 
