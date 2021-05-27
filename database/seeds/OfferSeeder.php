@@ -83,14 +83,11 @@ class OfferSeeder extends Seeder
                 ]);
 
 
-                $sales_funnel = SalesFunnel::query()
-                    ->whereNotNull('penawaran_fk')
+                $funnel = SalesFunnel::query();
+
+                $sales_funnel = $funnel->whereNotNull('penawaran_fk')
                     ->where('penawaran_fk', $penawaran->pk_penawaran)
                     ->first();
-
-
-
-
                 if ($sales_funnel->penawaran_fk) {
 
                     switch ($sales_funnel->approve2) {
@@ -109,6 +106,7 @@ class OfferSeeder extends Seeder
                     }
 
                     $approved_at = $sales_funnel->start_funnel->addDays(1);
+
                     if ($sales_funnel->approve2 != 'approved') {
                         $approved_at = null;
                         $approved_by = null;
@@ -140,6 +138,7 @@ class OfferSeeder extends Seeder
                         'date' => $penawaran->tgl_penawaran,
                         'status' => 'old',
                     ]);
+
                     if ($sales_funnel->gambar) {
                         $invoices
                             ->addMedia(storage_path('MigrasiPdf/' . $sales_funnel->gambar))
