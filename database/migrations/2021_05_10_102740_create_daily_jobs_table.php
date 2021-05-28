@@ -17,7 +17,7 @@ class CreateDailyJobsTable extends Migration
             $table->id();
             $table->string('slug');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->longText('description');
             $table->dateTime('date');
             $table->timestamps();

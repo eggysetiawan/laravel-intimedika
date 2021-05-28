@@ -13,7 +13,6 @@ class DailyJob extends Model implements HasMedia
     use InteractsWithMedia;
     protected $dates = ['date'];
     protected $fillable = [
-        'title',
         'slug',
         'description',
         'date'

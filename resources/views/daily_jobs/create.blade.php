@@ -10,9 +10,9 @@
         <div class="card-header">
             <h3 class="card-title">Buat Laporan Harian</h3>
         </div>
-        <form method="POST" action="{{ route('daily_jobs.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('daily_jobs.store') }}" enctype="multipart/form-data" autocomplete="off">
             @csrf
-            @include('daily_jobs.partials._form-control', ['submit' => 'Create'])
+            <livewire:daily-jobs.create />
         </form>
     </x-card>
 @endsection

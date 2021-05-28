@@ -3,8 +3,12 @@
         <x-testing-user></x-testing-user>
         <div class="form-group">
             <label for="date">Tanggal</label>
-            <input type="date" name="date" id="date" class="form-control"
-                value="{{ old('date') ?? date('Y-m-d', strtotime($dailyJob->date ?? now())) }}">
+            <input type="date" name="date" id="date"
+                class="form-control @error('date') is-invalid @else is-valid @enderror" value="{{ date('Y-m-d') }}"
+                wire:model.debounce.500ms="date">
+            @error('date')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         {{-- <div class="form-group">
@@ -15,8 +19,12 @@
 
         <div class="form-group">
             <label for="description">Deskripsi</label>
-            <textarea name="description" id="description" rows="3" class="form-control"
-                placeholder="Tuliskan deskripsi laporan harian">{{ old('description') ?? $dailyJob->description }}</textarea>
+            <textarea name="description" id="description" rows="3"
+                class="form-control @error('description') is-invalid @else is-valid @enderror"
+                placeholder="Tuliskan deskripsi laporan harian" wire:model.debounce.500ms="description"></textarea>
+            @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">

@@ -101,8 +101,8 @@ class DailyJobDataTable extends DataTable
                 ->width(10),
 
             // title
-            Column::make('title')
-                ->title('Title'),
+            // Column::make('title')
+            //     ->title('Title'),
 
             // description
             Column::make('description')
