@@ -14,6 +14,6 @@ class SalesTarget extends Model
 
     public function sales_funnel()
     {
-        return $this->belongsTo(SalesFunnel::class, 'funnel_fk', 'pk',);
+        return $this->belongsTo(SalesFunnel::class, 'funnel_fk', 'pk');
     }
 }

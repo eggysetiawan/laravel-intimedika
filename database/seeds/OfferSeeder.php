@@ -2,10 +2,12 @@
 
 use App\User;
 use App\Offer;
+use App\Order;
 use App\Invoice;
+use App\SalesOrder;
 use App\SalesFunnel;
-use App\SalesPenawaran;
 use App\SalesTarget;
+use App\SalesPenawaran;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -83,11 +85,14 @@ class OfferSeeder extends Seeder
                 ]);
 
 
-                $funnel = SalesFunnel::query();
-
-                $sales_funnel = $funnel->whereNotNull('penawaran_fk')
+                $sales_funnel = SalesFunnel::query()
+                    ->with('sales_targeting')
+                    ->whereNotNull('penawaran_fk')
                     ->where('penawaran_fk', $penawaran->pk_penawaran)
                     ->first();
+
+
+
                 if ($sales_funnel->penawaran_fk) {
 
                     switch ($sales_funnel->approve2) {
@@ -106,17 +111,22 @@ class OfferSeeder extends Seeder
                     }
 
                     $approved_at = $sales_funnel->start_funnel->addDays(1);
-
+                    $progress = str_replace("%", "", $sales_funnel->buy_funnel);
                     if ($sales_funnel->approve2 != 'approved') {
                         $approved_at = null;
                         $approved_by = null;
                     }
 
+                    if ($sales_funnel->approve2 != 'approved' && str_replace("%", "", $sales_funnel->buy_funnel) == 100) {
+                        $progress = 99;
+                    }
+
+
 
                     $offers->progress()->create([
                         'id' => $sales_funnel->pk,
                         'offer_id' => $sales_funnel->penawaran_fk,
-                        'progress' => str_replace("%", "", $sales_funnel->buy_funnel),
+                        'progress' => $progress,
                         'detail' => $sales_funnel->status2_funnel,
                         'status' => $sales_funnel->status_funnel,
                         'progress_date' => $sales_funnel->start_funnel->format('Y-m-d'),
@@ -127,17 +137,35 @@ class OfferSeeder extends Seeder
                         'updated_at' => $sales_funnel->start_funnel
                     ]);
 
+                    $invoice_no = null;
+                    $invoice_date = null;
 
-
-                    $sales_targeting = SalesTarget::query()
-                        ->where('funnel_fk', $sales_funnel->pk)
-                        ->first();
+                    if ($sales_funnel->sales_targeting) {
+                        $invoice_no = $sales_funnel->sales_targeting->noInvoice_targeting ?? null;
+                        $invoice_date = $sales_funnel->sales_targeting->tgl_invoice_targeting ?? null;
+                    }
 
                     $invoices = $offers->invoices()->create([
                         'offer_id' => $offers->id,
-                        'date' => $penawaran->tgl_penawaran,
+                        'date' => $invoice_date,
+                        'invoice_no' => $invoice_no,
                         'status' => 'old',
                     ]);
+
+                    foreach ($penawaran->sales_order as $order) {
+                        if ($order->fk_penawaran && $order->pk_mod_order) {
+
+                            Order::insert([
+                                'invoice_id' => $invoices->id,
+                                'modality_id' => $order->pk_mod_order,
+                                'price' => str_replace(",", ".", $order->harga_order),
+                                'quantity' => $order->qty_order,
+                                'references' => $order->sales_penawaran->referensi_penawaran,
+                                'created_at' => $order->sales_penawaran->tgl_penawaran,
+                                'updated_at' => $order->sales_penawaran->tgl_penawaran,
+                            ]);
+                        }
+                    }
 
                     if ($sales_funnel->gambar) {
                         $invoices
@@ -147,16 +175,27 @@ class OfferSeeder extends Seeder
                     }
 
 
-                    if ($sales_targeting) {
-                        $ppn = $sales_targeting->harga_po_targeting * (10 / 100);
+                    // if ($sales_funnel->sales_targeting) {
+                    //     if ($sales_funnel->sales_targeting->gambarPO_targeting) {
+                    //         $invoices
+                    //             ->addMedia(storage_path('MigrasiPdf/' . $sales_funnel->gambar))
+                    //             ->preservingOriginal()
+                    //             ->toMediaCollection('image_po');
+                    //     }
+                    // }
+
+
+
+                    if ($sales_funnel->sales_targeting) {
+                        $ppn = $sales_funnel->sales_targeting->harga_po_targeting * (10 / 100);
 
                         $invoices->tax()->create([
                             'offer_id' => $offers->id,
                             'is_paid' => 0,
-                            'price_po' => $sales_targeting->harga_po_targeting,
-                            'dpp' => $sales_targeting->harga_po_targeting,
+                            'price_po' => $sales_funnel->sales_targeting->harga_po_targeting,
+                            'dpp' => $sales_funnel->sales_targeting->harga_po_targeting,
                             'ppn' => $ppn,
-                            'nett' => $sales_targeting->harga_po_targeting,
+                            'nett' => $sales_funnel->sales_targeting->harga_po_targeting,
                         ]);
                     }
                 }

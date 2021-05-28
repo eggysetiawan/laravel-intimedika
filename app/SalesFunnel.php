@@ -15,4 +15,9 @@ class SalesFunnel extends Model
     {
         return $this->hasOne(SalesTarget::class, 'funnel_fk', 'pk');
     }
+
+    public function sales_order()
+    {
+        return $this->hasMany(SalesOrder::class, 'penawaran_fk', 'pk_penawaran');
+    }
 }
