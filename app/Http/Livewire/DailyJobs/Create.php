@@ -3,14 +3,17 @@
 namespace App\Http\Livewire\DailyJobs;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
     public $date, $description, $img;
 
     protected $validationAttributes = [
         'description' => 'Deskripsi',
         'date' => 'Tanggal Laporan',
+        'img' => 'File',
     ];
 
     public function requiredField($field)
@@ -26,7 +29,7 @@ class Create extends Component
         $this->validateOnly($fields, [
             'date' => ['required', 'date'],
             'description' => ['required', 'min:6'],
-            'img' => ['nullable', 'mimes:zip,rar'],
+            'img' => ['nullable', 'mimes:zip,rar', 'max:100000000'],
         ]);
     }
 

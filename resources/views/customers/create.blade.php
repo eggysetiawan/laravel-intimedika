@@ -17,7 +17,7 @@
 
         <form role="form" method="post" action="{{ route('customers.store') }}" novalidate>
             @csrf
-            @include('customers.partials.form-control', ['submit' => 'Create'])
+            <livewire:customers.create />
         </form>
     </x-card>
 @endsection

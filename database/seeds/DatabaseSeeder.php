@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             CustomerOnlySeeder::class,
             VisitSeeder::class,
             ModalitySeeder::class,
-            OfferSeeder::class,
+            // OfferSeeder::class,
             SidebarSeeder::class,
             DepartmentSeeder::class,
             // OrderChartSeeder::class,

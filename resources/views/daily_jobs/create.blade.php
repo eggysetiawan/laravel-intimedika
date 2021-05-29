@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <x-alert></x-alert>
     <x-card>
         <div class="card-header">
             <h3 class="card-title">Buat Laporan Harian</h3>

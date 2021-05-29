@@ -26,7 +26,7 @@ class DailyJobRequest extends FormRequest
         return [
             'date' => ['required', 'date'],
             'description' => ['required', 'string'],
-            'img' => ['nullable', 'mimes:zip,rar'],
+            'img' => ['nullable', 'mimes:zip,rar,pdf'],
 
         ];
     }

@@ -50,9 +50,15 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('js/pre.js') }}"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 
+<script>
+    AOS.init({
+        once: true
+    });
 
+</script>
 
 {{-- <script>
     $(document).on({

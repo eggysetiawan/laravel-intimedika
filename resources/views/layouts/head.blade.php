@@ -32,3 +32,4 @@
 {{-- style master --}}
 <link rel="stylesheet" href="{{ asset('dist/css/style_master.css') }}">
 <link rel="stylesheet" href="{{ asset('css/pre.css') }}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
