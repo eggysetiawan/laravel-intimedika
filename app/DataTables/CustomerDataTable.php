@@ -23,15 +23,12 @@ class CustomerDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->editColumn('hospitals.name', function (Customer $customer) {
-                return $customer->hospitals->first()->name ?? '';
+                return $customer->hospitals->first()->name ?? $customer->name;
             })
             ->editColumn('action', function (Customer $customer) {
                 return view('customers.partials.action', [
                     'customer' => $customer
                 ]);
-            })
-            ->editColumn('name', function (Customer $customer) {
-                return $customer->hospitals->first()->name ?? $customer->name;
             })
             ->editColumn('visit.count', function (Customer $customer) {
                 return view('customers.partials.count', [
@@ -110,9 +107,9 @@ class CustomerDataTable extends DataTable
             Column::make('hospitals.name')
                 ->title('Rumah Sakit/Perusahaan'),
 
-            // Nama
-            Column::make('name')
-                ->title('name'),
+            // // Nama
+            // Column::make('name')
+            //     ->title('name'),
 
             // PIC
             Column::make('person_in_charge')

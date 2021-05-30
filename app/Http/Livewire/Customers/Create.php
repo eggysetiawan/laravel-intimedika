@@ -7,11 +7,21 @@ use Livewire\Component;
 class Create extends Component
 {
 
-    public $name, $hospital;
+    public $name,
+        $mobile,
+        $person_in_charge,
+        $role,
+        $email,
+        $address;
 
-
-
-    public $nohospital = false;
+    protected $validationAttributes = [
+        'hospital' => 'Rumah Sakit',
+        'role' => 'Jabatan',
+        'email' => 'Email',
+        'name' => 'Perusahaan/Institusi',
+        'mobile' => 'Nomor Handphone',
+        'address' => 'Alamat',
+    ];
 
 
     public function requiredField($field, $name)
@@ -24,26 +34,22 @@ class Create extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'name' => ['min:5'],
+            'name' => ['min:3', 'string', 'required'],
+            'mobile' => ['digits_between:9,13', 'required'],
+            'person_in_charge' => ['min:3', 'string', 'required'],
+            'role' => ['min:5', 'string', 'required'],
+            'email' => ['email', 'present', 'unique:customers,email'],
+            'address' => ['present', 'string'],
         ]);
-    }
-
-
-    public function hideHospital()
-    {
-        $this->nohospital = true;
-    }
-
-    public function showHospital()
-    {
-        $this->nohospital = false;
     }
 
     public function mount()
     {
-
-        $this->nohospital = false;
+        $this->name = old('name');
         $this->requiredField('name', 'Nama');
+        $this->requiredField('mobile', 'Nomor Handphone');
+        $this->requiredField('person_in_charge', 'Nama PIC');
+        $this->requiredField('role', 'Jabatan');
     }
     public function render()
     {

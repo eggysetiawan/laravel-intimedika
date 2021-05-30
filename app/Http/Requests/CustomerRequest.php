@@ -24,22 +24,24 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'role' => 'required',
-            'email' => 'nullable|unique:customers,email',
-            'name' => 'required|string',
-            'person_in_charge' => 'required',
-            'mobile' => 'required|numeric',
-            'address' => 'nullable',
+            'hospital' => ['required', 'integer'],
+            'name' => ['min:3', 'string', 'required'],
+            'mobile' => ['digits_between:9,13', 'required'],
+            'person_in_charge' => ['min:3', 'string', 'required'],
+            'role' => ['min:5', 'string', 'required'],
+            'email' => ['present'],
+            'address' => ['present'],
         ];
     }
 
     public function attributes()
     {
         return [
+            'hospital' => 'Rumah Sakit',
             'role' => 'Jabatan',
             'email' => 'Email',
-            'name' => 'Nama',
-            'mobile' => 'Nomor Hp',
+            'name' => 'Perusahaan/Institusi',
+            'mobile' => 'Nomor Handphone',
             'address' => 'Alamat',
         ];
     }
