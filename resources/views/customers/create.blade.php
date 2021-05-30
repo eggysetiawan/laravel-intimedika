@@ -12,17 +12,14 @@
         <div class="card-header">
             <h3 class="card-title">Tambah Customer</h3>
         </div>
-        <!-- /.card-header -->
-        <!-- form start -->
-
-        <form role="form" method="post" action="{{ route('customers.store') }}" novalidate>
+        <form role="form" method="post" action="{{ route('customers.store') }}" novalidate autocomplete="off">
             @csrf
             <livewire:customers.create />
         </form>
     </x-card>
 @endsection
 
-
 @section('script')
-    @include('hospitals.partials._select-hospital-script')
+    <x-script-hospital />
+    <x-script-user />
 @endsection

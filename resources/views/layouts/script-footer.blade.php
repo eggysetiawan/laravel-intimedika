@@ -60,6 +60,7 @@
 
 </script>
 
+
 {{-- <script>
     $(document).on({
         ajaxStart: function() {

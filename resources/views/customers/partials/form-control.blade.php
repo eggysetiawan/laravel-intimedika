@@ -1,23 +1,8 @@
 <div class="card-body">
-    <x-testing-user></x-testing-user>
+    <livewire:superadmin.user />
 
 
     @if (!$nohospital)
-        {{-- <div class="form-group">
-            <label for="hospital">Pilih Rumah Sakit</label>
-            <span class="input-group-append">
-                <x-hospitals></x-hospitals>
-                <a class="btn bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}"
-                    title="Rumah Sakit tidak ditemukan? tambahkan disini.">+</a>
-                <a class="btn btn-danger btn-flat fa fa-times-circle" href="#!" wire:click="hideHospital"
-                    title="Hilangkan Rumah Sakit"></a>
-            </span>
-            @error('hospital')
-                <span class="invalid-feedback" role="alert">
-                    {{ $message }}
-                </span>
-            @enderror
-        </div> --}}
         <livewire:customers.hospital />
     @else
         <a href="{{ route('customers.create') }}" class="btn btn-outline-success form-control"
@@ -50,10 +35,10 @@
     <div class="form-group">
         <label for="role">Jabatan</label>
         <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role"
-            placeholder="Masukan Jabatan PIC" ">
-@error('role')
-                                                    <span class=" invalid-feedback" role="alert">
-            {{ $message }}
+            placeholder="Masukan Jabatan PIC">
+        @error('role')
+            <span class=" invalid-feedback" role="alert">
+                {{ $message }}
             </span>
         @enderror
     </div>

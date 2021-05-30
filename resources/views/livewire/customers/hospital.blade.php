@@ -12,7 +12,5 @@
                 {{ $message }}
             </span>
         @enderror
-        @section('script')
-            @include('hospitals.partials._select-hospital-script')
-        @endsection
+
     </div>
