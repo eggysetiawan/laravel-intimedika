@@ -40,7 +40,7 @@ class CustomerController extends Controller
     {
         DB::transaction(function () use ($request) {
             $attr = $request->all();
-
+            dd($request->hospital);
             // assignt name to slug (slug = name-role)
             $attr['slug'] = Str::slug(request('name') . ' ' . request('role'));
             $nohospital = (@request('hospital') == 'false') ? true : false;

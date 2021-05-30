@@ -3,7 +3,7 @@
 
 
     @if (!$nohospital)
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="hospital">Pilih Rumah Sakit</label>
             <span class="input-group-append">
                 <x-hospitals></x-hospitals>
@@ -17,8 +17,8 @@
                     {{ $message }}
                 </span>
             @enderror
-
-        </div>
+        </div> --}}
+        <livewire:customers.hospital />
     @else
         <a href="{{ route('customers.create') }}" class="btn btn-outline-success form-control"
             data-aos="zoom-out">Munculkan
@@ -27,8 +27,8 @@
 
     <div class="form-group">
         <label for="name">Perusahaan</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-            placeholder="Masukan Nama">
+        <input type="text" class="form-control @error('name') is-invalid @else is-valid @enderror" id="name"
+            name="name" placeholder="Masukan Nama" wire:model.debounce.500ms="name">
         @error('name')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}

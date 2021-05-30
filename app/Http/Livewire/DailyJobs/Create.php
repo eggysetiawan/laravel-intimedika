@@ -16,11 +16,10 @@ class Create extends Component
         'img' => 'File',
     ];
 
-    public function requiredField($field)
+    public function requiredField($field, $name)
     {
-        $fields = str_replace('description', 'Deskripsi', $field);
         if (!$this->$field) {
-            return $this->addError($field, $fields . ' wajib diisi!');
+            return $this->addError($field, $name . ' wajib diisi!');
         }
     }
 
@@ -36,7 +35,7 @@ class Create extends Component
     public function mount()
     {
         $this->date = date('Y-m-d');
-        $this->requiredField('description');
+        $this->requiredField('description', 'Deskripsi');
     }
 
     public function render()
