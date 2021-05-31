@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Customer;
-use Spatie\Image\Image;
 use Illuminate\Support\Str;
 
 class VisitAddService

@@ -40,7 +40,7 @@
     <div class="form-group">
         <label for="mobile">Hp Customer</label>
         <input type="number" class="form-control @error('mobile') is-invalid @else is-valid @enderror" id="mobile"
-            name="mobile" placeholder="Masukan Nomor Hp" wire:model.debounce.500ms="mobile">
+            name="mobile" placeholder="Masukan Nomor Hp" wire:model.debounce.500ms="mobile" min="0">
         @error('mobile')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}
@@ -69,5 +69,6 @@
 
 
 <div class="card-footer">
-    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
+    <x-button-submit>
+        {{ $submit ?? 'Update' }}</x-button-submit>
 </div>

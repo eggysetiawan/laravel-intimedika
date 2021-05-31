@@ -17,11 +17,13 @@
 
         <form role="form" method="post" action="{{ route('visitadd.store') }}" enctype="multipart/form-data">
             @csrf
-            @include('visits.partials.form-control2', ['submit' => 'Create'])
+            <livewire:visits.create />
         </form>
     </x-card>
 @endsection
 
 @section('script')
-    @include('hospitals.partials._select-hospital-script')
+    <x-script-hospital />
+    <x-script-user />
+    <x-script-hospital-blade />
 @endsection

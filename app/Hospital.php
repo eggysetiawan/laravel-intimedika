@@ -26,12 +26,11 @@ class Hospital extends Model
         return static::whereHas('pacs')->groupBy('id')->get();
     }
 
-    public function scopeSelectHospitalLimit()
+    public static function hospitalBlade()
     {
-        return $this->select(['id', 'name', 'city'])
+        return static::select(['id', 'name', 'city'])
             ->orderBy('name', 'asc')
             ->where('name', '!=', '')
-            ->limit(1000)
             ->get();
     }
     public static function selectHospital()

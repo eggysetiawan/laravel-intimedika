@@ -9,6 +9,7 @@ class Hospital extends Component
 {
     public $hospital;
     public $nohospital = false;
+
     protected $validationAttributes = [
         'hospital' => 'Rumah Sakit',
     ];
@@ -50,7 +51,7 @@ class Hospital extends Component
             $this->hospital = Model::find($item);
             $this->emit('selectedHospitalId', $this->hospital->id);
         } else {
-            $this->hospital = 4000;
+            $this->hospital = null;
         }
     }
     public function hideHospital()
