@@ -4,6 +4,7 @@ use App\User;
 use App\Offer;
 use App\Order;
 use App\Invoice;
+use App\OrderChart;
 use App\SalesOrder;
 use App\SalesFunnel;
 use App\SalesTarget;
@@ -26,9 +27,9 @@ class OfferSeeder extends Seeder
         foreach ($sales_penawaran as $penawaran) {
             DB::transaction(function () use ($penawaran) {
 
-                $username = 1;
+                $username = User::where('username', 'intiwid01')->first();
                 if (User::where('username', $penawaran->username)->first()) {
-                    $username = User::where('username', $penawaran->username)->first()->id;
+                    $username = User::where('username', $penawaran->username)->first();
                 }
 
                 $approved_by = User::where('id', 2)->first()->id;
@@ -66,7 +67,7 @@ class OfferSeeder extends Seeder
                 $offers = Offer::create([
                     'id' => $penawaran->pk_penawran,
                     'customer_id' => $penawaran->pk_cust_penawaran,
-                    'user_id' => $username,
+                    'user_id' => $username->id,
                     'offer_no' => $penawaran->no_penawaran,
                     'slug' => Str::slug(str_replace('/', '-', $penawaran->no_penawaran)),
                     'budget' => $penawaran->budget_penawaran,
@@ -186,16 +187,29 @@ class OfferSeeder extends Seeder
 
 
 
-                    if ($sales_funnel->sales_targeting) {
-                        $ppn = $sales_funnel->sales_targeting->harga_po_targeting * (10 / 100);
+                    $ppn = $sales_funnel->harga_po * (10 / 100);
 
+                    if ($sales_funnel->harga_po) {
                         $invoices->tax()->create([
                             'offer_id' => $offers->id,
                             'is_paid' => 0,
-                            'price_po' => $sales_funnel->sales_targeting->harga_po_targeting,
-                            'dpp' => $sales_funnel->sales_targeting->harga_po_targeting,
+                            'price_po' => $sales_funnel->harga_po,
+                            'dpp' => $sales_funnel->harga_po,
                             'ppn' => $ppn,
-                            'nett' => $sales_funnel->sales_targeting->harga_po_targeting,
+                            'nett' => $sales_funnel->harga_po,
+                        ]);
+                    }
+
+
+                    if ($sales_funnel->approve2) {
+                        $invoices->chart()->create([
+                            'user_id' => $username->id,
+                            'sales_name' => $username->name,
+                            'price' => $sales_funnel->harga_po,
+                            'is_approved' => $approval,
+                            'offer_date' => date('Y-m-d', strtotime($penawaran->tgl_penawaran)),
+                            'invoice_date' => date('Y-m-d', strtotime($invoice_date ?? $penawaran->tgl_penawaran)),
+                            'year' => date('Y', strtotime($penawaran->tgl_penawaran)),
                         ]);
                     }
                 }

@@ -35,7 +35,8 @@ class OfferRequest extends FormRequest
             'modalities' => 'required',
             'modalities.*' => 'required|distinct',
             'references.*' => 'nullable',
-            'price.*' => 'integer|nullable',
+            'prices.*' => ['present'],
+            'qty.*' => ['present', 'numeric'],
             'user' => ['integer', 'nullable'],
         ];
     }

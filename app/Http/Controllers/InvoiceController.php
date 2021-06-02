@@ -26,6 +26,7 @@ class InvoiceController extends Controller
     {
         return view('invoices.show', [
             'offer' => $offer->load(['invoices.orders.modality', 'author',  'customer.hospitals', 'progress', 'invoices.tax']),
+            'qtyArray' => $offer->invoices->first()->orders->pluck('quantity')->toArray(),
         ]);
     }
     public function toOrder(Offer $offer)

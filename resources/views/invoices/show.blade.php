@@ -249,20 +249,20 @@
                                                         <table class="table">
                                                             <tr>
                                                                 <th style="width:50%">Subtotal:</th>
-                                                                <td>@currency($invoice->tax->dpp)</td>
+                                                                <td>@currency($invoice->tax->dpp ?? null)</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>PPN (10%)</th>
-                                                                <td>@currency($invoice->tax->ppn)</td>
+                                                                <td>@currency($invoice->tax->ppn ?? null)</td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Total:</th>
-                                                                <td>@currency($invoice->totalPurchase)</td>
+                                                                <td>@currency($invoice->totalPurchase ?? null)</td>
                                                             </tr>
                                                             <hr>
                                                             <tr>
                                                                 <th>Ongkos Kirim:</th>
-                                                                <td>@currency($invoice->tax->shipping)</td>
+                                                                <td>@currency($invoice->tax->shipping ?? null)</td>
                                                             </tr>
                                                         </table>
                                                     </div>

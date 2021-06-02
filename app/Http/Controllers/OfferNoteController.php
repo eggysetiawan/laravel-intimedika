@@ -17,6 +17,7 @@ class OfferNoteController extends Controller
     {
         $attr = $request->validated();
         $attr['form_up'] = 1;
+        $attr['has_form_note'] = 1;
 
         if (!$request->has('form_up')) {
             $attr['form_up'] = 0;

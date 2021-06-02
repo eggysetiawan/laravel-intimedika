@@ -84,6 +84,9 @@
                                 <th>
                                     <center>Harga Satuan</center>
                                 </th>
+                                <th>
+                                    <center>Jumlah</center>
+                                </th>
 
                             </tr>
                         </thead>
@@ -100,11 +103,17 @@
                                     Merk : {{ $order->modality->brand }}<br>
                                     Model : {{ $order->modality->model }}
                                     <div style="text-align: justify;text-justify:auto;justify-content">
-                                        <p>{{ $order->modality->spec }}</p><br>
+                                        <pre class="wordwrap"
+                                            style="font-family:  Arial;">{{ $order->modality->spec }}</pre><br>
+
                                     </div>
                                 </td>
+
                                 <td class="text-center">
                                     @currency($order->price)
+                                </td>
+                                <td class="text-center">
+                                    {{ $order->quantity ?? 1 }}
                                 </td>
 
                             </tr>
@@ -148,7 +157,9 @@
                         <tr>
                             <td style="font-size: 14px">Keterangan</td>
                             <td style="font-size: 14px">:</td>
-                            <td style="font-size: 14px">{{ $offer->note }}</td>
+                            <td style="font-size: 14px">
+                                <pre class="wordwrap" style="font-family:  Arial;">{{ $offer->note }}</pre>
+                            </td>
                         </tr>
                     @endif
 

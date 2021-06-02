@@ -1,11 +1,11 @@
-<div class="dropright text-center">
-    <a href="#" class="text-dark h3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown text-center">
+    <a href="#" class="text-dark h3 dropbtn">
         <i class="fas fa-ellipsis-v"></i>
     </a>
 
-    <div class="dropdown-menu">
-        <a href="{{ route('inventories.edit', $inventory->slug) }}" class="dropdown-item"
-            title="Edit detail barang ini."><i class="fas fa-edit nav-icon"></i> Edit</a>
+    <div class="dropdown-content">
+        <a href="{{ route('inventories.edit', $inventory->slug) }}" title="Edit detail barang ini."
+            style="color: black;"><i class="fas fa-edit nav-icon"></i> Edit</a>
 
         <form action="{{ route('inventories.destroy', $inventory->slug) }}" class="inline" method="post">
             @csrf

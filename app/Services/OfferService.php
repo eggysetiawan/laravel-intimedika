@@ -81,6 +81,7 @@ class OfferService
                 'invoice_id' => $this->invoice->id,
                 'modality_id' => $request->modalities[$i],
                 'price' => str_replace([",", "_"], "", $request->prices[$i]),
+                'quantity' => $request->qty[$i],
                 'references' => $request->references[$i],
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
