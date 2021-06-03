@@ -25,6 +25,7 @@ class ModalityRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'unit' => 'present',
             'model' => 'required',
             'brand' => 'required',
             'category' => 'required',

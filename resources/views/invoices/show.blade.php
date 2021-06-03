@@ -23,8 +23,8 @@
                             role="tab" aria-controls="vert-tabs-home" aria-selected="true">Penawaran</a>
 
 
-                        <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-final-tab" data-toggle="pill" href="#vert-tabs-final"
-                            role="tab" aria-controls="vert-tabs-final" aria-selected="false">Harga Final</a>
+                        {{-- <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-final-tab" data-toggle="pill" href="#vert-tabs-final"
+                            role="tab" aria-controls="vert-tabs-final" aria-selected="false">Harga Final</a> --}}
 
 
                         <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"

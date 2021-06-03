@@ -94,7 +94,7 @@ class ProgressService
         return Tax::create([
             'offer_id' => $offer->id,
             'invoice_id' => $offer->invoices->first()->id,
-            'price_po' => $this->price_po,
+            'price_po' => $this->price_po + $this->ppn,
             'dpp' => $this->price_po,
             'ppn' => $this->ppn,
             'nett' => $this->price_po,

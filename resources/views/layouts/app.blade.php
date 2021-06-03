@@ -14,7 +14,7 @@
     <livewire:styles />
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse accent-teal">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed  accent-teal">
     {{-- Preloader Content --}}
     @include('layouts.preloader')
 

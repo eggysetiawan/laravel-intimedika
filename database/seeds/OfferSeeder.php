@@ -64,6 +64,7 @@ class OfferSeeder extends Seeder
                     $penawaran->approved_by = null;
                     $approved_by = null;
                 }
+
                 $offers = Offer::create([
                     'id' => $penawaran->pk_penawran,
                     'customer_id' => $penawaran->pk_cust_penawaran,

@@ -82,11 +82,15 @@
                                     <center>Nama Alat</center>
                                 </th>
                                 <th>
+                                    <center>Jumlah</center>
+                                </th>
+                                <th>
                                     <center>Harga Satuan</center>
                                 </th>
                                 <th>
-                                    <center>Jumlah</center>
+                                    <center>Total</center>
                                 </th>
+
 
                             </tr>
                         </thead>
@@ -108,12 +112,14 @@
 
                                     </div>
                                 </td>
-
+                                <td class="text-center">
+                                    {{ $order->quantity ?? 1 }}
+                                </td>
                                 <td class="text-center">
                                     @currency($order->price)
                                 </td>
                                 <td class="text-center">
-                                    {{ $order->quantity ?? 1 }}
+                                    @currency($order->price * $order->quantity)
                                 </td>
 
                             </tr>

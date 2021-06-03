@@ -13,11 +13,22 @@ class ModalitySeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
         $modalities = SalesModality::all();
 
         foreach ($modalities as $modality) {
+
+            switch (strtolower($modality->jenis_mod)) {
+                case 'bhp':
+                    $unit = 'pce';
+                    break;
+
+                default:
+                    $unit = 'unit';
+                    break;
+            }
+
             Modality::create([
                 'id' => $modality->pk_mod,
                 'name' => $modality->nama_mod,
@@ -25,6 +36,7 @@ class ModalitySeeder extends Seeder
                 'model' => $modality->model_mod,
                 'brand' => $modality->merk_mod,
                 'price' => $modality->harga_mod,
+                'unit' => $unit,
                 'spec' => $modality->spek_mod,
                 'stock' => $modality->stock_mod,
                 'category' => strtolower($modality->jenis_mod),

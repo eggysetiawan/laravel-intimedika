@@ -15,7 +15,8 @@ class Modality extends Model
         'spec',
         'category',
         'reference',
-        'stock'
+        'stock',
+        'unit'
     ];
 
     public function scopeSelectModality()
