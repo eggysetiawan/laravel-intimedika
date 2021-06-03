@@ -122,12 +122,14 @@
 
                     </table>
                 </div>
+
                 <table>
                     <tr>
                         <td style="font-size: 14px">Kondisi Penawaran</td>
                         <td style="font-size: 14px">:</td>
                     </tr>
                 </table>
+
                 <table>
                     @if ($offer->price_note)
                         <tr>
@@ -136,6 +138,7 @@
                             <td style="font-size: 14px">{{ $offer->price_note }}</td>
                         </tr>
                     @endif
+
                     @if ($offer->availability_note)
 
                         <tr>
@@ -146,19 +149,21 @@
                     @endif
 
                     @if ($offer->payment)
-
                         <tr>
                             <td style="font-size: 14px">Pembayaran/Penawaran</td>
                             <td style="font-size: 14px">:</td>
                             <td style="font-size: 14px">{{ $offer->payment }}</td>
                         </tr>
                     @endif
+
                     @if ($offer->note)
                         <tr>
-                            <td style="font-size: 14px">Keterangan</td>
-                            <td style="font-size: 14px">:</td>
-                            <td style="font-size: 14px">
-                                <pre class="wordwrap" style="font-family:  Arial;">{{ $offer->note }}</pre>
+                            <th scope="row"
+                                style="font-size: 14px; display: table-cell; vertical-align: top;font-weight:unset;">
+                                Keterangan</th>
+                            <td style="font-size: 14px; vertical-align: top;">:</td>
+                            <td style="font-size: 14px; vertical-align: top;">
+                                <span class="wordwrap" style="font-family:  Arial;">{{ $offer->note }}</span>
                             </td>
                         </tr>
                     @endif

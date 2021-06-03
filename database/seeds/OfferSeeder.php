@@ -8,6 +8,7 @@ use App\OrderChart;
 use App\SalesOrder;
 use App\SalesFunnel;
 use App\SalesTarget;
+use App\FixPriceOrder;
 use App\SalesPenawaran;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -63,12 +64,12 @@ class OfferSeeder extends Seeder
                     $penawaran->approved_by = null;
                     $approved_by = null;
                 }
-
                 $offers = Offer::create([
                     'id' => $penawaran->pk_penawran,
                     'customer_id' => $penawaran->pk_cust_penawaran,
                     'user_id' => $username->id,
                     'offer_no' => $penawaran->no_penawaran,
+                    'offer_no_unique' => substr($penawaran->no_penawaran, 2, 4) . date('Y', strtotime($penawaran->tgl_penawaran)),
                     'slug' => Str::slug(str_replace('/', '-', $penawaran->no_penawaran)),
                     'budget' => $penawaran->budget_penawaran,
                     'offer_date' => date('Y-m-d', strtotime($penawaran->tgl_penawaran)),
@@ -91,7 +92,6 @@ class OfferSeeder extends Seeder
                     ->whereNotNull('penawaran_fk')
                     ->where('penawaran_fk', $penawaran->pk_penawaran)
                     ->first();
-
 
 
                 if ($sales_funnel->penawaran_fk) {
@@ -165,6 +165,21 @@ class OfferSeeder extends Seeder
                                 'created_at' => $order->sales_penawaran->tgl_penawaran,
                                 'updated_at' => $order->sales_penawaran->tgl_penawaran,
                             ]);
+
+                            $order_id = null;
+                            $fixPrice = null;
+                            if ($sales_funnel->harga_po) {
+                                $order_id = $order->pk_order;
+                                $fixPrice = str_replace(",", ".", $order->harga_order);
+                            }
+                            FixPriceOrder::insert([
+                                'order_id' => $order_id,
+                                'offer_id' => $invoices->offer->id,
+                                'modality_id' => $order->pk_mod_order,
+                                'price' => $fixPrice,
+                                'created_at' => $order->sales_penawaran->tgl_penawaran,
+                                'updated_at' => $order->sales_penawaran->tgl_penawaran,
+                            ]);
                         }
                     }
 
@@ -187,13 +202,14 @@ class OfferSeeder extends Seeder
 
 
 
-                    $ppn = $sales_funnel->harga_po * (10 / 100);
+
 
                     if ($sales_funnel->harga_po) {
+                        $ppn = $sales_funnel->harga_po * (10 / 100);
                         $invoices->tax()->create([
                             'offer_id' => $offers->id,
                             'is_paid' => 0,
-                            'price_po' => $sales_funnel->harga_po,
+                            'price_po' => $sales_funnel->harga_po + $ppn,
                             'dpp' => $sales_funnel->harga_po,
                             'ppn' => $ppn,
                             'nett' => $sales_funnel->harga_po,

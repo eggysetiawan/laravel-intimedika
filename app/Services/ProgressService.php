@@ -45,7 +45,7 @@ class ProgressService
         $orders = $offer->fixPrices->whereIn('modality_id', $modality_id);
         foreach ($orders as $i => $order) {
             $fix_price = $order->update([
-                'price' => str_replace(",", "", $request->price[$j]),
+                'price' => str_replace([",", "_"], "", $request->price[$j]),
                 'order_id' => $request->id_order[$j],
                 'updated_at' => now()->toDateString(),
             ]);

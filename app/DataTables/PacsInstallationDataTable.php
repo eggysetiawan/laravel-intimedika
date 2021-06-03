@@ -70,12 +70,12 @@ class PacsInstallationDataTable extends DataTable
     {
         return $model->newQuery()
             ->with(['hospital', 'engineers.technician', 'author', 'stakeholder'])
-            ->latest()
             ->when($this->hospital, function ($query) {
                 return $query->whereHas('hospital', function ($query) {
                     return $query->where('slug', $this->hospital);
                 });
-            });
+            })
+            ->orderBy('start_installation_date', 'desc');
         // ->when($this->hospital, function($query){
 
         // });

@@ -10,6 +10,7 @@ class SalesPenawaran extends Model
     protected $table = 'sales_penawaran';
 
     protected $primaryKey = 'pk_penawaran';
+    protected $dates = ['tgl_penawaran'];
 
     public function sales_order()
     {

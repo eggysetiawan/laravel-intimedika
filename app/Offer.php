@@ -19,6 +19,7 @@ class Offer extends Model implements HasMedia
     protected $fillable = [
         'customer_id',
         'offer_no',
+        'offer_no_unique',
         'budget',
         'reference',
         'offer_date',

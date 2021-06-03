@@ -25,6 +25,7 @@ class OfferRequest extends FormRequest
     {
         return [
             'customer' => 'integer|required',
+            'offer_no_unique' => ['unique:offers,offer_no_unique'],
             'budget' => 'required',
             'price_note' => 'nullable',
             'warranty_note' => 'nullable',
@@ -45,6 +46,7 @@ class OfferRequest extends FormRequest
     {
         return [
             'customer' => 'Pelanggan',
+            'offer_no_unique' => 'Nomor Penawaran',
             'budget' => 'Sumber Dana',
             'references' => 'Referensi',
             'modalities' => 'Alat Kesehatan',
