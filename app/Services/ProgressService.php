@@ -7,7 +7,7 @@ use App\{Demo, OrderChart, Tax};
 
 class ProgressService
 {
-    private $price_po, $ppn;
+    private $dpp, $ppn;
     public function createDemo($offer, $request)
     {
         return Demo::create([
@@ -21,7 +21,6 @@ class ProgressService
     {
         $orders = $offer->invoices->first()->orders
             ->whereIn('id', $request->id_order);
-        $this->price_po = 0;
 
         $order = [];
         foreach ($orders as $i => $order) {
@@ -29,9 +28,9 @@ class ProgressService
                 'price' => str_replace([",", "_"], "", $request->price[$i]),
                 'quantity' => $request->qty[$i],
             ]);
-            $this->price_po += str_replace([",", "_"], "", $request->price[$i]) * $request->qty[$i];
+            $this->dpp += str_replace([",", "_"], "", $request->price[$i]) * $request->qty[$i];
         }
-        $this->ppn = ($this->price_po * (10 / 100));
+        $this->ppn  = $this->dpp * (10 / 100);
         return $order;
     }
 
@@ -77,33 +76,40 @@ class ProgressService
 
         if ($main_modality == 'software') {
             $komisi_percentage = 3;
-            $komisi = $this->price_po * (3 / 100);
+            $komisi = $this->dpp * (3 / 100);
         }
 
         if ($main_modality != 'software') {
             $komisi_percentage = 1;
-            $komisi = $this->price_po * (1 / 100);
+            $komisi = $this->dpp * (1 / 100);
         }
 
         $shipping = isset($request->shipping) ?
             str_replace([",", "_"], "", $request->shipping)
             : 0;
 
-        $cn = ($this->price_po - $shipping) * ($request->cn / 100);
+        $cn = ($this->dpp - $shipping) * ($request->cn / 100);
 
-        return Tax::create([
-            'offer_id' => $offer->id,
-            'invoice_id' => $offer->invoices->first()->id,
-            'price_po' => $this->price_po + $this->ppn,
-            'dpp' => $this->price_po,
-            'ppn' => $this->ppn,
-            'nett' => $this->price_po,
-            'cn' => $cn,
-            'cn_percentage' => $request->cn,
-            'komisi' => $komisi,
-            'komisi_percentage' => $komisi_percentage,
-            'shipping' => $shipping,
-        ]);
+        return Tax::updateOrCreate(
+            [
+                'offer_id' => $offer->id,
+                'invoice_id' => $offer->invoices->first()->id
+            ],
+
+            [
+                'offer_id' => $offer->id,
+                'invoice_id' => $offer->invoices->first()->id,
+                'price_po' => $this->dpp + $this->ppn,
+                'dpp' => $this->dpp,
+                'ppn' => $this->ppn,
+                'nett' => $this->dpp,
+                'cn' => $cn,
+                'cn_percentage' => $request->cn,
+                'komisi' => $komisi,
+                'komisi_percentage' => $komisi_percentage,
+                'shipping' => $shipping,
+            ]
+        );
     }
 
     public function createOrderChart($offer)
@@ -112,7 +118,7 @@ class ProgressService
             'user_id' => $offer->user_id,
             'invoice_id' => $offer->invoices->first()->id,
             'sales_name' => $offer->author->name,
-            'price' => $this->price_po,
+            'price' => $this->dpp,
             'is_approved' => 0,
             'year' => $offer->offer_date->format('Y'),
             'offer_date' => $offer->offer_date->format('Y-m-d'),

@@ -18,6 +18,12 @@ class Order extends Model
         'references'
     ];
 
+    // relationship
+    public function first_offer()
+    {
+        return $this->hasOne(FirstOffer::class);
+    }
+
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);

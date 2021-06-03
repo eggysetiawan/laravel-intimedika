@@ -94,7 +94,7 @@
 
                             </tr>
                         </thead>
-                        @foreach ($offer->invoices->last()->orders as $order)
+                        @foreach ($offer->invoices->first()->orders as $order)
                             <tr>
                                 <td>
                                     <center>{{ $loop->iteration }}</center>
@@ -113,13 +113,13 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    {{ $order->quantity ?? 1 }}
+                                    {{ $order->first_offer->quantity ?? 1 }} {{ $order->modality->unit }}
                                 </td>
                                 <td class="text-center">
-                                    @currency($order->price)
+                                    @currency($order->first_offer->price)
                                 </td>
                                 <td class="text-center">
-                                    @currency($order->price * $order->quantity)
+                                    @currency($order->first_offer->price * $order->first_offer->quantity)
                                 </td>
 
                             </tr>

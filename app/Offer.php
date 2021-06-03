@@ -77,8 +77,6 @@ class Offer extends Model implements HasMedia
         $this->save();
     }
 
-
-
     public function scopeFirstDateComplete()
     {
 
@@ -105,6 +103,11 @@ class Offer extends Model implements HasMedia
     }
 
     // relationship
+
+    public function first_offer()
+    {
+        return $this->hasMany(FirstOffer::class);
+    }
 
     public function fixPrices()
     {

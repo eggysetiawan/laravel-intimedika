@@ -199,9 +199,9 @@
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>Qty</th>
                                                                 <th>Alat</th>
                                                                 <th>Spesifikasi</th>
+                                                                <th>Qty</th>
                                                                 <th>Price List</th>
                                                                 <th>Harga Purchase-Order</th>
                                                             </tr>
@@ -209,9 +209,9 @@
                                                         <tbody>
                                                             @foreach ($invoice->orders->whereNotNull('quantity') as $order)
                                                                 <tr>
-                                                                    <td>{{ $order->quantity }}</td>
                                                                     <td>{{ $order->modality->name }}</td>
                                                                     <td>{{ $order->modality->spec }}</td>
+                                                                    <td>{{ $order->quantity }}</td>
                                                                     <td>@currency($order->modality->price)</td>
                                                                     <td>@currency($order->price)</td>
                                                                 </tr>
@@ -257,7 +257,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Total:</th>
-                                                                <td>@currency($invoice->totalPurchase ?? null)</td>
+                                                                <td>@currency($invoice->tax->price_po ?? null)</td>
                                                             </tr>
                                                             <hr>
                                                             <tr>
@@ -394,9 +394,9 @@
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>Qty</th>
                                                                 <th>Alat</th>
                                                                 <th>Spesifikasi</th>
+                                                                <th>Qty</th>
                                                                 <th>Price List</th>
                                                                 <th>Harga Purchase-Order</th>
                                                             </tr>
@@ -404,9 +404,9 @@
                                                         <tbody>
                                                             @foreach ($invoice->orders->whereNotNull('quantity') as $order)
                                                                 <tr>
-                                                                    <td>{{ $order->quantity }}</td>
                                                                     <td>{{ $order->modality->name }}</td>
                                                                     <td>{{ $order->modality->spec }}</td>
+                                                                    <td>{{ $order->quantity }}</td>
                                                                     <td>@currency($order->modality->price)</td>
                                                                     <td>@currency($order->price)</td>
                                                                 </tr>
@@ -444,7 +444,7 @@
                                                         <table class="table">
                                                             <tr>
                                                                 <th>Subtotal :</th>
-                                                                <td>@currency($invoice->tax->price_po)</td>
+                                                                <td>@currency($invoice->tax->dpp)</td>
 
                                                             </tr>
                                                             <tr>
@@ -581,9 +581,9 @@
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th>Qty</th>
                                                                 <th>Alat</th>
                                                                 <th>Spesifikasi</th>
+                                                                <th>Qty</th>
                                                                 <th>Price List</th>
                                                                 <th>Harga Purchase-Order</th>
                                                             </tr>
@@ -591,9 +591,9 @@
                                                         <tbody>
                                                             @foreach ($invoice->orders->whereNotNull('quantity') as $order)
                                                                 <tr>
-                                                                    <td>{{ $order->quantity }}</td>
                                                                     <td>{{ $order->modality->name }}</td>
                                                                     <td>{{ $order->modality->spec }}</td>
+                                                                    <td>{{ $order->quantity }}</td>
                                                                     <td>@currency($order->modality->price)</td>
                                                                     <td>@currency($order->price)</td>
                                                                 </tr>

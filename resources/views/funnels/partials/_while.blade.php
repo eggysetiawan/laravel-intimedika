@@ -65,5 +65,26 @@
                 @enderror
             </div>
         </div>
+
+        <div class="d-flex row">
+            <div class="col-md-12">
+                <label for="qty.{{ $i }}">Qty #{{ $i }}</label>
+                <div class="input-group mb-3">
+
+                    <input type="text" name="qty[]" id="price"
+                        class="form-control @error('qty.' . $i) is-invalid @enderror"
+                        value="{{ old('qty.' . $i) ?? $order->quantity }}">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">unit/pcs</span>
+                    </div>
+                </div>
+
+                @error('price.' . $i)
+                    <span class="invalid-feedback" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+        </div>
     </div>
 @endforeach

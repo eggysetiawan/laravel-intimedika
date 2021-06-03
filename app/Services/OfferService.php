@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\FixPriceOrder;
 use App\Offer;
 use App\Order;
+use App\FirstOffer;
+use App\FixPriceOrder;
 
 class OfferService
 {
@@ -87,9 +88,31 @@ class OfferService
                 'created_at' => now()->toDateTimeString(),
                 'updated_at' => now()->toDateTimeString(),
             ]);
+
+            // insert into first offer table
+
         }
         return $order;
     }
+
+    public function insertFirstOffer()
+    {
+        $firstOffer = [];
+        foreach ($this->invoice->orders as $order) {
+            // to table orders
+            $firstOffer = FirstOffer::insert([
+                'offer_id' => $order->invoice->offer->id,
+                'order_id' => $order->id,
+                'price' => str_replace([",", "_"], "", $order->price),
+                'quantity' => $order->quantity,
+            ]);
+
+            // insert into first offer table
+
+        }
+        return $firstOffer;
+    }
+
     public function insertPrice($request)
     {
         $order = [];
@@ -108,7 +131,7 @@ class OfferService
     public function updateOrder($offer, $request)
     {
         $order = [];
-        foreach ($offer->invoices->last()->orders as $i => $order) {
+        foreach ($offer->invoices->first()->orders as $i => $order) {
             // to table orders
             $order = $order->update([
                 'modality_id' => $request->modality[$i],
@@ -118,5 +141,17 @@ class OfferService
             ]);
         }
         return $order;
+    }
+
+    public function updateFirstOffer($offer, $request)
+    {
+        $firstOffer = [];
+        foreach ($offer->invoices->first()->orders as $i => $order) {
+            $firstOffer = $order->first_offer->update([
+                'price' => str_replace([",", "_"], "", $request->price[$i]),
+                'quantity' => $request->qty[$i],
+            ]);
+        }
+        return $firstOffer;
     }
 }

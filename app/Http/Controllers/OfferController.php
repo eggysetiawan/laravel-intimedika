@@ -61,6 +61,8 @@ class OfferController extends Controller
             $offerService->createProgress($request);
             // to orders table
             $offerService->insertOrder($request);
+            // to orders table
+            $offerService->insertFirstOffer();
             // to fix price table
             $offerService->insertPrice($request);
             // send mail to admin via event & listener
@@ -83,10 +85,13 @@ class OfferController extends Controller
 
     public function update(UpdateOfferRequest $request, Offer $offer, OfferService $offerService)
     {
-        $attr = $request->validated();
+        DB::transaction(function () use ($request, $offer, $offerService) {
+            $request->validated();
+            // update orders table
+            $offerService->updateOrder($offer, $request);
+            $offerService->updateFirstOffer($offer, $request);
+        });
 
-        // update orders table
-        $offerService->updateOrder($offer, $request);
 
         // update offer table
         $attr['is_approved'] = 0;
