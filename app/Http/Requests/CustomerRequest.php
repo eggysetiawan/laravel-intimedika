@@ -24,7 +24,7 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'hospital' => ['required', 'integer'],
+            'hospital' => ['filled', 'integer'],
             'name' => ['min:3', 'string', 'required'],
             'mobile' => ['digits_between:9,13', 'required'],
             'person_in_charge' => ['min:3', 'string', 'required'],

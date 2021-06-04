@@ -7,19 +7,24 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public $hospital, $hospitals = [];
+    public $hospitals = [];
+    public $hospital;
+    public $label;
 
     public function mount()
     {
+        $this->label = '';
         $this->hospitals = Hospital::hospitalBlade();
-        $this->hospital = 'Pilih Rumah Sakit';
-
-        $isVisited = Hospital::whereHas('customers')->where('id', $this->hospital)->exists();
     }
 
-    public function changeEvent($value)
+    public function updatedHospital($value)
     {
-        dd($value);
+        return $this->label = 'Berhasil';
+    }
+
+    public function hydrate()
+    {
+        $this->emit('select2');
     }
 
     public function render()

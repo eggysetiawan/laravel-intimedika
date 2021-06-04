@@ -28,9 +28,7 @@
         }
         initSelectHospitalDrop();
         $('#hospital').on('change', function(e) {
-            // livewire.emit('selectedHospital', e.target.value)
-            // livewire.emit('selectedHospitalVisited', e.target.value)
-
+            livewire.emit('selectedHospitalItem', e.target.value);
         });
 
         window.livewire.on('select2', () => {

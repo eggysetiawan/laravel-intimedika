@@ -21,7 +21,9 @@
                     <form role="form" method="post" action="{{ route('customers.update', $customer->slug) }}" novalidate>
                         @method('patch')
                         @csrf
-                        @include('customers.partials.edit-form-control')
+                        {{-- @include('customers.partials.edit-form-control') --}}
+                        <livewire:customers.edit :key="$customer->id" :customer="$customer" />
+
                     </form>
                 </div>
                 <!-- /.card -->

@@ -27,6 +27,7 @@ class ProgressService
             $order->update([
                 'price' => str_replace([",", "_"], "", $request->price[$i]),
                 'quantity' => $request->qty[$i],
+                'is_order' => 1,
             ]);
             $this->dpp += str_replace([",", "_"], "", $request->price[$i]) * $request->qty[$i];
         }

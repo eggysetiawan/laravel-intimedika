@@ -19,8 +19,8 @@
             @enderror
         </div>
     @else
-        <a href="#" class="btn btn-outline-success form-control" data-aos="zoom-in"
-            wire:click.prevent="showHospital">Munculkan
+        <a href="{{ route('customers.create') }}" class="btn btn-outline-success form-control"
+            data-aos="zoom-in">Munculkan
             Rumah Sakit</a>
     @endempty
 </div>

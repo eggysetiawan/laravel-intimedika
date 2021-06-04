@@ -123,8 +123,6 @@ class OfferSeeder extends Seeder
                         $progress = 99;
                     }
 
-
-
                     $offers->progress()->create([
                         'id' => $sales_funnel->pk,
                         'offer_id' => $sales_funnel->penawaran_fk,
@@ -163,6 +161,7 @@ class OfferSeeder extends Seeder
                                 'price' => str_replace(",", ".", $order->harga_order),
                                 'quantity' => $order->qty_order,
                                 'references' => $order->sales_penawaran->referensi_penawaran,
+                                'is_order' => 1,
                                 'created_at' => $order->sales_penawaran->tgl_penawaran,
                                 'updated_at' => $order->sales_penawaran->tgl_penawaran,
                             ]);

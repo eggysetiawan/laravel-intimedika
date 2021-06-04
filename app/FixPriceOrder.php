@@ -13,6 +13,11 @@ class FixPriceOrder extends Model
         return $this->belongsTo(Offer::class);
     }
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function modality()
     {
         return $this->belongsTo(Modality::class);

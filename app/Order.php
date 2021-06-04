@@ -15,13 +15,19 @@ class Order extends Model
         'quantity',
         'status',
         'price',
-        'references'
+        'references',
+        'is_order'
     ];
 
     // relationship
     public function first_offer()
     {
         return $this->hasOne(FirstOffer::class);
+    }
+
+    public function fix_price()
+    {
+        return $this->hasOne(FixPriceOrder::class);
     }
 
     public function invoice()

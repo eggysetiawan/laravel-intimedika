@@ -7,10 +7,12 @@
                 <select name="hospital" id="hospitals"
                     class="form-control @error('hospital') is-invalid @else is-valid @enderror"
                     wire:model.debounce.500ms="hospital">
+                    <option value="" selected>Piih Rumah Sakit</option>
                     @foreach ($hospitals as $hospital)
                         <option value="{{ $hospital->id }}">{{ $hospital->name . ' - ' . $hospital->city }}</option>
                     @endforeach
                 </select>
+                {{ $label }}
                 <span class="input-group-append">
                     <a class="btn btn-teal bg-teal btn-flat" target="_blank" href="{{ route('hospitals.create') }}"
                         title="Rumah Sakit belum ada dalam daftar? klik disini untuk menambahkan.">+</a>

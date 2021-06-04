@@ -113,13 +113,22 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    {{ $order->first_offer->quantity ?? 1 }} {{ $order->modality->unit }}
+                                    {{ $order->first_offer->quantity ?? 1 }}
+                                    @if ($order->first_offer->quantity > 1)
+                                        {{ str_replace('pce', 'pcs', $order->modality->unit) }}
+                                    @else
+                                        {{ $order->modality->unit }}
+                                    @endif
                                 </td>
                                 <td class="text-center">
-                                    @currency($order->first_offer->price)
+                                    @currency($order->first_offer->price ?? $order->price)
                                 </td>
                                 <td class="text-center">
-                                    @currency($order->first_offer->price * $order->first_offer->quantity)
+                                    @if ($order->first_offer)
+                                        @currency($order->first_offer->price * $order->first_offer->quantity)
+                                    @else
+                                        @currency($order->price * $order->quantity)
+                                    @endif
                                 </td>
 
                             </tr>

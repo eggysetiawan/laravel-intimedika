@@ -1,7 +1,25 @@
 <div class="card-body">
+    {{-- <x-alert /> --}}
 
     <livewire:superadmin.user />
-    <livewire:customers.hospital />
+
+    @if ($hasHospital)
+
+        <livewire:customers.hospital />
+        @if ($showHospital)
+            <div class="form-group">
+                <input type="text" name="hospital_name" wire:model.debounce.500ms="hospital_name"
+                    class="form-control @error('hospital') is-invalid @else is-valid @enderror" readonly>
+                @error('hospital')
+                    <span class="invalid-feedback" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
+                <input type="hidden" name="hospital" wire:model.debounce.500ms="hospital">
+            </div>
+        @endif
+    @endif
+
 
     <div class="form-group">
         <label for="name">Perusahaan/Institusi</label>
@@ -69,6 +87,6 @@
 
 
 <div class="card-footer">
-    <x-button-submit>
-        {{ $submit ?? 'Update' }}</x-button-submit>
+    <button type="submit" class="btn bg-teal" @if ($errors->any()) disabled @endif>Submit</button>
+
 </div>

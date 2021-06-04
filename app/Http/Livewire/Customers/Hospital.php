@@ -8,7 +8,7 @@ use Livewire\Component;
 class Hospital extends Component
 {
     public $hospital;
-    public $nohospital = false;
+    public $nohospital;
 
     protected $validationAttributes = [
         'hospital' => 'Rumah Sakit',
@@ -29,12 +29,13 @@ class Hospital extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'hospital' => ['filled', 'integer'],
+            'hospital' => ['nullable'],
         ]);
     }
 
     public function mount()
     {
+        $this->nohospital = false;
         $this->requiredField('hospital', 'Rumah Sakit');
     }
 
@@ -47,22 +48,26 @@ class Hospital extends Component
 
     public function selectedHospitalItem($item)
     {
-        if ($item) {
-            $this->hospital = Model::find($item);
-            $this->emit('selectedHospitalId', $this->hospital->id);
-        } else {
-            $this->hospital = null;
-        }
+        // dd($item);
+        $this->emit('hospitalSelected', $item);
+
+        // if ($item) {
+        //     $this->hospital = Model::find($item);
+        //     $this->emit('hospitalSelected', $this->hospital->id);
+        // } else {
+        //     $this->hospital = null;
+        // }
     }
     public function hideHospital()
     {
-        // dd('works');
         $this->nohospital = true;
+        $this->emit('hideHospital');
     }
 
     public function showHospital()
     {
         $this->nohospital = false;
+        $this->emit('showHospital');
     }
 
 

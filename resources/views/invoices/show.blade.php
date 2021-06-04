@@ -207,7 +207,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($invoice->orders->whereNotNull('quantity') as $order)
+                                                            @foreach ($invoice->orders->whereNotNull('is_order') as $order)
                                                                 <tr>
                                                                     <td>{{ $order->modality->name }}</td>
                                                                     <td>{{ $order->modality->spec }}</td>
@@ -248,7 +248,7 @@
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <tr>
-                                                                <th style="width:50%">Subtotal:</th>
+                                                                <th style="width:50%">DPP:</th>
                                                                 <td>@currency($invoice->tax->dpp ?? null)</td>
                                                             </tr>
                                                             <tr>
@@ -256,7 +256,7 @@
                                                                 <td>@currency($invoice->tax->ppn ?? null)</td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Total:</th>
+                                                                <th>Nilai Kontrak:</th>
                                                                 <td>@currency($invoice->tax->price_po ?? null)</td>
                                                             </tr>
                                                             <hr>
@@ -402,7 +402,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($invoice->orders->whereNotNull('quantity') as $order)
+                                                            @foreach ($invoice->orders->whereNotNull('is_order') as $order)
                                                                 <tr>
                                                                     <td>{{ $order->modality->name }}</td>
                                                                     <td>{{ $order->modality->spec }}</td>
@@ -443,7 +443,7 @@
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Subtotal :</th>
+                                                                <th>DPP :</th>
                                                                 <td>@currency($invoice->tax->dpp)</td>
 
                                                             </tr>
@@ -589,7 +589,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($invoice->orders->whereNotNull('quantity') as $order)
+                                                            @foreach ($invoice->orders->whereNotNull('is_order') as $order)
                                                                 <tr>
                                                                     <td>{{ $order->modality->name }}</td>
                                                                     <td>{{ $order->modality->spec }}</td>
@@ -630,7 +630,7 @@
                                                     <div class="table-responsive">
                                                         <table class="table">
                                                             <tr>
-                                                                <th>Subtotal :</th>
+                                                                <th>DPP :</th>
                                                                 <td>@currency($invoice->tax->price_po)</td>
 
                                                             </tr>
