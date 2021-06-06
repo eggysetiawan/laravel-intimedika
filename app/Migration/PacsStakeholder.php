@@ -4,8 +4,7 @@ namespace App\Migration;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PacsStakeholder2 extends Model
+class PacsStakeholder extends Model
 {
     protected $connection = 'mysql3';
-    protected $table = 'pacs_stakeholders';
 }
