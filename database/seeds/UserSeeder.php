@@ -291,8 +291,8 @@ class UserSeeder extends Seeder
         $hardian->assignRole('supervisor');
 
         // sales
-        $teten->assignRole('supervisor');
         $teten->assignRole('sales');
+        $teten->assignRole('supervisor');
         $fahmi->assignRole('sales');
         $saidi->assignRole('sales');
         $eka->assignRole('sales');
