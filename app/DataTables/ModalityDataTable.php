@@ -58,20 +58,20 @@ class ModalityDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-        ->setTableId('visit-table')
-        ->minifiedAjax()
-        ->parameters([
-            'stateSave' => true,
-            'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
-            'buttons'      => ['reload', 'reset'],
-            'order'   => [0, 'desc'],
-            'lengthMenu' => [
-                [10, 25, 50, 100],
-                ['10', '25', '50', '100']
-            ],
-            'processing' => false,
-        ])
-        ->columns($this->getColumns());
+            ->setTableId('visit-table')
+            ->minifiedAjax()
+            ->parameters([
+                'stateSave' => true,
+                'dom'          => "B<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>rtip",
+                'buttons'      => ['reload', 'reset'],
+                'order'   => [0, 'desc'],
+                'lengthMenu' => [
+                    [10, 25, 50, 100],
+                    ['10', '25', '50', '100']
+                ],
+                'processing' => false,
+            ])
+            ->columns($this->getColumns());
     }
 
     /**
@@ -82,6 +82,12 @@ class ModalityDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false)
+                ->width(10),
             // action
             Column::computed('action')
                 ->title('<i class="fas fa-cogs"></i>')
@@ -91,12 +97,7 @@ class ModalityDataTable extends DataTable
                 ->searchable(false)
                 ->width(50)
                 ->addClass('text-center'),
-            // No.
-            Column::make('DT_RowIndex')
-                ->title('No.')
-                ->orderable(false)
-                ->searchable(false)
-                ->width(30),
+
 
             // nama
             Column::make('name')

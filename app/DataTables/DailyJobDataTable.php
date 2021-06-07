@@ -87,18 +87,19 @@ class DailyJobDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            //action
-            Column::computed('action')
-                ->title('Action')
-                ->exportable(false)
-                ->width(10),
-
             // No.
             Column::make('DT_RowIndex')
                 ->title('No.')
                 ->orderable(false)
                 ->searchable(false)
                 ->width(10),
+
+            //action
+            Column::computed('action')
+                ->title('Action')
+                ->exportable(false)
+                ->width(10),
+
 
             // title
             // Column::make('title')

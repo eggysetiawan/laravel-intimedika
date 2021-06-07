@@ -16,7 +16,7 @@ class PacsSupportSeeder extends Seeder
         $supports = PacsSupport::get();
 
         foreach ($supports as $support) {
-            AppPacsSupport::created([
+            AppPacsSupport::create([
                 'user_id' => $support->user_id,
                 'slug' => $support->slug,
                 'pacs_installation_id' => $support->pacs_installation_id,

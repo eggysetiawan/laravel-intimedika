@@ -89,6 +89,13 @@ class FunnelDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false)
+                ->width(10),
+
             // action
             Column::computed('action')
                 ->title('<i class="fas fa-cogs"></i>')
@@ -96,15 +103,9 @@ class FunnelDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->searchable(false)
-                ->width(50)
+                ->width(10)
                 ->addClass('text-center'),
 
-            // No.
-            Column::make('DT_RowIndex')
-                ->title('No.')
-                ->orderable(false)
-                ->searchable(false)
-                ->width(10),
 
             // customer
             Column::make('offer.customer.hospitals.name')

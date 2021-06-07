@@ -6,18 +6,32 @@
     <li class="breadcrumb-item">{{ Str::limit($modality->name, 20, '...') }}</li>
 @endsection
 @section('content')
-    <div class="d-flex justify-content-start">
-        <h1>{{ $modality->model }}aaa</h1>
-    </div>
-    <small class="text-danger">
-        <div class="container px-2">
-            <div class="d-flex justify-content-between h3">
-                {{ $modality->category }}
-                <p>Harga : @currency($modality->price)</p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ asset('sampleModality/cr12x.png') }}" class="img-fluid" alt="Responsive image">
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex justify-content-start">
+                    <h1>{{ $modality->brand }}</h1>
+                </div>
+
+                <hr style="margin: 0px;">
+                <br>
+                <div class="container px-2">
+                    <div class="d-flex justify-content-between">
+                        <p>Kategori :{{ $modality->category }}</p>
+                        <p>Harga : @currency($modality->price)</p>
+                    </div>
+                </div>
+
+                <pre class="wordwrap">{{ $modality->spec }}</pre>
+
             </div>
         </div>
-    </small>
 
-    <p>{{ $modality->spec }}</p>
+    </div>
 
 @endsection

@@ -1,35 +1,28 @@
-<div class="dropright text-center">
-    <a href="#" class="text-dark h3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-ellipsis-v"></i>
+<x-dropdown>
+    <a href="{{ route('daily_jobs.show', $dailyJob->slug) }}" class="dropdown-item"
+        title="detail data Laporan harian ini."><i class="fas fa-eye nav-icon"></i>
+        Detail
     </a>
 
-    <div class="dropdown-menu">
-        <a href="{{ route('daily_jobs.show', $dailyJob->slug) }}" class="dropdown-item"
-            title="detail data Laporan harian ini."><i class="fas fa-eye nav-icon"></i>
-            Detail
+    @if (auth()->user()->theAuthor($dailyJob))
+        <a href="{{ route('daily_jobs.edit', $dailyJob->slug) }}" class="dropdown-item"
+            title="Edit data Laporan harian ini."><i class="fas fa-edit nav-icon"></i>
+            Edit
         </a>
 
-        @if (auth()->user()->theAuthor($dailyJob))
-            <a href="{{ route('daily_jobs.edit', $dailyJob->slug) }}" class="dropdown-item"
-                title="Edit data Laporan harian ini."><i class="fas fa-edit nav-icon"></i>
-                Edit
-            </a>
+        @if (!$dailyJob->deleted_at)
 
-            @if (!$dailyJob->deleted_at)
+            <form action="{{ route('daily_jobs.destroy', $dailyJob->slug) }}" method="POST">
+                @csrf
+                @method('delete')
 
-                <form action="{{ route('daily_jobs.destroy', $dailyJob->slug) }}" method="POST">
-                    @csrf
-                    @method('delete')
-
-                    <button type="submit" onclick="return confirm('anda yakin ingin menghapus?')" class="dropdown-item"
-                        title="Hapus data kunjungan dari tabel"><i class="far fa-trash-alt nav-icon"></i>
-                        Hapus
-                    </button>
-                </form>
-
-            @endif
+                <button type="submit" onclick="return confirm('anda yakin ingin menghapus?')" class="dropdown-item"
+                    title="Hapus data kunjungan dari tabel"><i class="far fa-trash-alt nav-icon"></i>
+                    Hapus
+                </button>
+            </form>
 
         @endif
-    </div>
 
-</div>
+    @endif
+</x-dropdown>

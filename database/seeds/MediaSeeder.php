@@ -1,8 +1,7 @@
 <?php
 
-use App\User;
+use App\Migration\Media;
 use Illuminate\Database\Seeder;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaSeeder extends Seeder
 {
@@ -14,12 +13,18 @@ class MediaSeeder extends Seeder
     public function run()
     {
         $medias = Media::get();
-        $model_id = $medias->pluck('model_id')->toArray();
-        $model_type = $medias->pluck('model_type')->toArray();
-        $user = [];
-        foreach ($model_id as $id) {
-            $user[] = $id;
+
+
+        foreach ($medias as $media) {
+            $model = $media->model_type;
+
+            $mediaInsert = $model::find($media->model_id);
+
+            $mediaInsert
+                ->addMedia(storage_path('MigrasiMedia/' . $media->id . '/' . $media->file_name))
+                ->preservingOriginal()
+                ->usingFileName($media->file_name)
+                ->toMediaCollection($media->collection_name);
         }
-        dd($model_type);
     }
 }

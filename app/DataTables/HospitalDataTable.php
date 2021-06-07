@@ -80,7 +80,7 @@ class HospitalDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false),
+            Column::make('DT_RowIndex')->title('No.')->orderable(false)->searchable(false)->width(10),
 
             // action
             Column::computed('action')
@@ -89,7 +89,7 @@ class HospitalDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->searchable(false)
-                ->width(50)
+                ->width(30)
                 ->addClass('text-center'),
 
             Column::make('name')->title('Rumah Sakit'),

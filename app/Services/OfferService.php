@@ -6,6 +6,7 @@ use App\Offer;
 use App\Order;
 use App\FirstOffer;
 use App\FixPriceOrder;
+use App\Events\OfferCreated;
 
 class OfferService
 {
@@ -153,5 +154,13 @@ class OfferService
             ]);
         }
         return $firstOffer;
+    }
+
+    public function sendOfferEmailToDirector($request, $offer)
+    {
+        $offer_no = $request->queue . date('Y', strtotime($request->date));
+        if ($offer_no > 1002021) {
+            return  event(new OfferCreated($offer));
+        }
     }
 }

@@ -4,6 +4,7 @@ use App\User;
 use App\Offer;
 use App\Order;
 use App\Invoice;
+use App\FirstOffer;
 use App\OrderChart;
 use App\SalesOrder;
 use App\SalesFunnel;
@@ -156,6 +157,7 @@ class OfferSeeder extends Seeder
                         if ($order->fk_penawaran && $order->pk_mod_order) {
 
                             Order::insert([
+                                'id' => $order->pk_order,
                                 'invoice_id' => $invoices->id,
                                 'modality_id' => $order->pk_mod_order,
                                 'price' => str_replace(",", ".", $order->harga_order),
@@ -165,6 +167,15 @@ class OfferSeeder extends Seeder
                                 'created_at' => $order->sales_penawaran->tgl_penawaran,
                                 'updated_at' => $order->sales_penawaran->tgl_penawaran,
                             ]);
+
+                            FirstOffer::insert([
+                                'offer_id' => $invoices->offer->id,
+                                'order_id' => $order->pk_order,
+                                'quantity' => $order->qty_order,
+                                'price' => str_replace(",", ".", $order->harga_order),
+                            ]);
+
+
 
                             $order_id = null;
                             $fixPrice = null;

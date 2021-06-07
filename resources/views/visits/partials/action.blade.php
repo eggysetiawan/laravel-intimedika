@@ -1,43 +1,35 @@
-<div class="dropright text-center">
-    <a href="#" class="text-dark h3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-ellipsis-v"></i>
-    </a>
+<x-dropdown>
+    @if (request()->segment(1) == 'visits')
+        <a href="{{ route('visits.show', $visit->slug) }}" class="dropdown-item"
+            title="Lihat detail kunjungan ini."><i class="far fa-eye nav-icon"></i>
+            Detail</a>
+    @endif
 
-    <div class="dropdown-menu">
+    @if (request()->segment(1) == 'visitplan')
+        <a href="{{ route('arrival.edit', $visit->slug) }}" class="dropdown-item"
+            title="Klik disini untuk melengkapi data kunjungan harian apabila anda telah melakukan kunjungan ke Rumah sakit ini."><i
+                class="fas fa-plane-departure nav-icon"></i>
+            Lakukan Kunjungan</a>
 
-        @if (request()->segment(1) == 'visits')
-            <a href="{{ route('visits.show', $visit->slug) }}" class="dropdown-item"
-                title="Lihat detail kunjungan ini."><i class="far fa-eye nav-icon"></i>
-                Detail</a>
-        @endif
+        <a href="{{ route('visitplan.edit', $visit->slug) }}" class="dropdown-item"
+            title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
+            Edit</a>
+    @endif
 
-        @if (request()->segment(1) == 'visitplan')
-            <a href="{{ route('arrival.edit', $visit->slug) }}" class="dropdown-item"
-                title="Klik disini untuk melengkapi data kunjungan harian apabila anda telah melakukan kunjungan ke Rumah sakit ini."><i
-                    class="fas fa-plane-departure nav-icon"></i>
-                Lakukan Kunjungan</a>
+    @if (!$visit->deleted_at)
 
-            <a href="{{ route('visitplan.edit', $visit->slug) }}" class="dropdown-item"
-                title="Edit data Rencana Kunjungan ini."><i class="fas fa-edit nav-icon"></i>
-                Edit</a>
-        @endif
+        <form action="{{ route('visits.destroy', $visit->slug) }}" method="POST">
+            @csrf
+            @method('delete')
 
-        @if (!$visit->deleted_at)
+            <button type="submit" onclick="return confirm('anda yakin ingin menghapus?')" class="dropdown-item"
+                title="Hapus data kunjungan dari tabel"><i class="far fa-trash-alt nav-icon"></i>
+                Hapus</button>
 
-            <form action="{{ route('visits.destroy', $visit->slug) }}" method="POST">
-                @csrf
-                @method('delete')
-
-                <button type="submit" onclick="return confirm('anda yakin ingin menghapus?')" class="dropdown-item"
-                    title="Hapus data kunjungan dari tabel"><i class="far fa-trash-alt nav-icon"></i>
-                    Hapus</button>
-
-            </form>
-        @else
-            <a href="{{ route('visits.restore', $visit->slug) }}" class="dropdown-item"
-                onclick="return confirm('apakah anda yakin?')"><i class="fas fa-trash-restore nav-icon"></i>
-                Restore</a>
-        @endif
-    </div>
-
-</div>
+        </form>
+    @else
+        <a href="{{ route('visits.restore', $visit->slug) }}" class="dropdown-item"
+            onclick="return confirm('apakah anda yakin?')"><i class="fas fa-trash-restore nav-icon"></i>
+            Restore</a>
+    @endif
+</x-dropdown>

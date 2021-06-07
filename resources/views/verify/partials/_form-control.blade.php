@@ -9,7 +9,7 @@
         your
         email address
     @endempty
-    <b class="text-orange">{{ auth()->user()->two_factor_code }}</b></span>
+    <b class="text-orange">{{ auth()->user()->email }}</b></span>
 <div class="mt-5 mb-3">
     @if (auth()->user()->two_factor_code)
         <input type="text" name="two_factor_code" class="form-control" autofocus="" placeholder="Enter 4-digit code"

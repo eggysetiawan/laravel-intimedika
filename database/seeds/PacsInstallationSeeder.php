@@ -2,6 +2,7 @@
 
 use App\Migration\PacsInstallation;
 use App\PacsInstallation as AppPacsInstallation;
+use App\PacsStakeholder;
 use Illuminate\Database\Seeder;
 
 class PacsInstallationSeeder extends Seeder
@@ -13,10 +14,11 @@ class PacsInstallationSeeder extends Seeder
      */
     public function run()
     {
-        $pacs_installations = PacsInstallation::get();
+        $pacs_installations = PacsInstallation::with('stakeholder')->get();
 
         foreach ($pacs_installations as $installations) {
             AppPacsInstallation::create([
+                'id' => $installations->id,
                 'slug' => $installations->slug,
                 'hospital_id' => $installations->hospital_id,
                 'user_id' => $installations->user_id,
@@ -31,6 +33,23 @@ class PacsInstallationSeeder extends Seeder
                 'created_at' => $installations->created_at,
                 'updated_at' => $installations->updated_at,
                 'deleted_at' => $installations->deleted_at,
+            ]);
+
+            PacsStakeholder::create([
+                'pacs_installation_id' => $installations->stakeholder->pacs_installation_id,
+                'radiology_name' => $installations->stakeholder->radiology_name,
+                'phone_radiology' => $installations->stakeholder->phone_radiology,
+                'radiographer_name' => $installations->stakeholder->radiographer_name,
+                'it_hospital_name' => $installations->stakeholder->it_hospital_name,
+                'phone_it' => $installations->stakeholder->phone_it,
+                'email_it' => $installations->stakeholder->email_it,
+                'phone_radiographer' => $installations->stakeholder->phone_radiographer,
+                'email_radiographer' => $installations->stakeholder->email_radiographer,
+                'email_radiology' => $installations->stakeholder->email_radiology,
+                'user_note' => $installations->stakeholder->user_note,
+                'created_at' => $installations->stakeholder->created_at,
+                'updated_at' => $installations->stakeholder->updated_at,
+                'deleted_at' => $installations->stakeholder->deleted_at,
             ]);
         }
     }

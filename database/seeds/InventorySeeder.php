@@ -16,10 +16,30 @@ class InventorySeeder extends Seeder
         $inventories = Inventory::all();
 
         foreach ($inventories as $inventory) {
+
+            switch ($inventory->department_id) {
+                case '5':
+                    $department_id = 1;
+                    break;
+                case '6':
+                    $department_id = 2;
+                    break;
+                case '7':
+                    $department_id = 3;
+                    break;
+                case '8':
+                    $department_id = 4;
+                    break;
+
+                default:
+                    $department_id = $inventory->department_id;
+                    break;
+            }
+
             AppInventory::create([
                 'user_id' => $inventory->user_id,
                 'slug' => $inventory->slug,
-                'departement_id' => $inventory->departement_id,
+                'department_id' => $department_id,
                 'service_tag' => $inventory->service_tag,
                 'serial_number' => $inventory->serial_number,
                 'item' => $inventory->item,

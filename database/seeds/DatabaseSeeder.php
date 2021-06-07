@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
             OfferSeeder::class,
             SidebarSeeder::class,
             DepartmentSeeder::class,
-            //
+            // sync databsae
             InventoryTypeSeeder::class,
             InventorySeeder::class,
             DailyJobSeeder::class,
             PacsInstallationSeeder::class,
-            PacsSupportSeeder::class, //
-            PacsStakeholderSeeder::class,
+            PacsSupportSeeder::class,
+            // PacsStakeholderSeeder::class,
             PacsEngineerSeeder::class,
             MediaSeeder::class,
         ]);

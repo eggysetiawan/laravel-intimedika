@@ -196,6 +196,6 @@ class User extends Authenticatable implements HasMedia
 
     public static function emailToDirector()
     {
-        return static::where('username', 'intiwid01')->first();
+        return static::where('username', 'intimedika01')->first();
     }
 }

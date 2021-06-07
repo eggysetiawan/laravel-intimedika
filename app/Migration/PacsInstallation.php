@@ -8,4 +8,9 @@ class PacsInstallation extends Model
 {
     protected $connection = 'mysql3';
     protected $table = 'pacs_installations';
+
+    public function stakeholder()
+    {
+        return $this->hasOne(PacsStakeholder::class);
+    }
 }

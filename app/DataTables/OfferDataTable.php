@@ -109,8 +109,8 @@ class OfferDataTable extends DataTable
             ->when($this->trash, function ($query) { //menu restore.
                 return $query->onlyTrashed();
             })
-            ->latest()
-            ->whereNotNull('offer_date'); //order berdasarkan data terbaru.
+            ->whereNotNull('offer_date')
+            ->orderBy('offer_no_unique', 'desc'); //order berdasarkan no_penawaran terbaru
     }
 
     /**

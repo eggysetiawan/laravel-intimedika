@@ -34,7 +34,7 @@ class VisitPlanController extends Controller
     public function create()
     {
         return view('visitplan.create', [
-            'hospitals' => Hospital::selectHospitalLimit(),
+            'hospitals' => Hospital::hospitalBlade(),
             'visit' => new Visit(),
             'visitplan' => new VisitPlan(),
             'customer' => new Customer(),
