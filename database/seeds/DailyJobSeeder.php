@@ -1,6 +1,7 @@
 <?php
 
 use App\DailyJob;
+use App\Migration\DailyJob as MigrationDailyJob;
 use Illuminate\Database\Seeder;
 
 class DailyJobSeeder extends Seeder
@@ -12,6 +13,19 @@ class DailyJobSeeder extends Seeder
      */
     public function run()
     {
-        factory(DailyJob::class, 1000)->create();
+        $dailyJobs = MigrationDailyJob::get();
+
+        foreach ($dailyJobs as $dailyJob) {
+            DailyJob::create([
+                'slug' => $dailyJob->slug,
+                'user_id' => $dailyJob->user_id,
+                'title' => $dailyJob->title,
+                'description' => $dailyJob->description,
+                'date' => $dailyJob->date,
+                'created_at' => $dailyJob->created_at,
+                'updated_at' => $dailyJob->updated_at,
+                'deleted_at' => $dailyJob->deleted_at,
+            ]);
+        }
     }
 }

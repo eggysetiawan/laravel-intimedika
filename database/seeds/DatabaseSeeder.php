@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
             OfferSeeder::class,
             SidebarSeeder::class,
             DepartmentSeeder::class,
+            //
+            InventoryTypeSeeder::class,
+            InventorySeeder::class,
+            DailyJobSeeder::class,
+            PacsInstallationSeeder::class,
+            PacsSupportSeeder::class, //
+            PacsStakeholderSeeder::class,
+            PacsEngineerSeeder::class,
+            MediaSeeder::class,
         ]);
     }
 }
