@@ -28,7 +28,7 @@ class VisitPlanRequest extends FormRequest
             'mobile' => 'nullable',
             'hospital' => 'required',
             'date' => 'date|after_or_equal:' . date('d-m-Y'),
-            'email' => 'email|nullable',
+            'email' => 'email|nullable|max:191',
             'description' => 'required',
             'territory' => 'nullable',
             'area' => 'nullable',

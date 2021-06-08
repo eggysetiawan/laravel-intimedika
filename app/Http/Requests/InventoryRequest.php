@@ -24,11 +24,11 @@ class InventoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'service_tag' => ['nullable', 'string'],
+            'service_tag' => ['nullable', 'string', 'max:191'],
             'department' => ['integer', 'required'],
-            'serial_number' => ['nullable', 'string'],
-            'item' => ['required', 'string'],
-            'user' => ['string', 'nullable'],
+            'serial_number' => ['nullable', 'string', 'max:191'],
+            'item' => ['required', 'string', 'max:191'],
+            'user' => ['string', 'nullable', 'max:191'],
             'quantity' => ['required'],
             'type' => ['required'],
             'location' => ['nullable'],

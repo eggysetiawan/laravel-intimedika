@@ -24,8 +24,8 @@ class AdvanceRequest extends FormRequest
     public function rules()
     {
         return [
-            'destination' => ['string', 'required'],
-            'objective' => ['string', 'required'],
+            'destination' => ['string', 'required', 'max:191'],
+            'objective' => ['string', 'required', 'max:191'],
             'start_date' => ['date', 'required'],
             'end_date' => ['date', 'required'],
             'needs.*' => ['required', 'distinct'],

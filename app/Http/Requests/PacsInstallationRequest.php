@@ -24,8 +24,8 @@ class PacsInstallationRequest extends FormRequest
     public function rules()
     {
         return [
-            'anydesk_server' => ['nullable'],
-            'anydesk_workstation' => ['nullable'],
+            'anydesk_server' => ['nullable', 'max:191'],
+            'anydesk_workstation' => ['nullable', 'max:191'],
             'hospital' => ['sometimes', 'integer', 'required', 'unique:pacs_installations,hospital_id'],
             'handover_date' => ['date'],
             'start_installation_date' => ['date', 'required'],
@@ -34,15 +34,15 @@ class PacsInstallationRequest extends FormRequest
             'warranty_start' => ['date', 'required'],
             'warranty_end' => ['date', 'required'],
             'pacs_engineers.*' => ['sometimes', 'nullable'],
-            'it_hospital_name' => ['string', 'required'],
-            'phone_it' => ['nullable'],
-            'email_it' => ['nullable', 'email'],
-            'radiographer_name' => ['required'],
-            'phone_radiographer' => ['nullable'],
-            'email_radiographer' => ['nullable', 'email'],
-            'radiology_name' => ['required'],
-            'phone_radiology' => ['nullable'],
-            'email_radiology' => ['nullable', 'email'],
+            'it_hospital_name' => ['string', 'required', 'max:191'],
+            'phone_it' => ['nullable', 'max:191'],
+            'email_it' => ['nullable', 'email', 'max:191'],
+            'radiographer_name' => ['required', 'max:191'],
+            'phone_radiographer' => ['nullable', 'max:191'],
+            'email_radiographer' => ['nullable', 'email', 'max:191'],
+            'radiology_name' => ['required', 'max:191'],
+            'phone_radiology' => ['nullable', 'max:191'],
+            'email_radiology' => ['nullable', 'email', 'max:191'],
             'user_note' => ['string', 'nullable'],
         ];
     }

@@ -25,13 +25,13 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'position' => ['required', 'string'],
+            'name' => ['required', 'string', 'max:191'],
+            'position' => ['required', 'string', 'max:191'],
             'username' => ['required', 'string', 'max:25'],
             'role' => ['required', Rule::In(['sales', 'teknisi', 'admin', 'supervisor', 'it'])],
             'phone' => ['required', 'max:15'],
-            'email' => ['required', 'email', 'unique:users,email', 'unique:users'],
-            'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'email' => ['required', 'email', 'unique:users,email', 'unique:users', 'max:191'],
+            'password' => ['required', 'string', 'min:4', 'confirmed', 'max:191'],
             'terms' => ['accepted'],
         ];
     }

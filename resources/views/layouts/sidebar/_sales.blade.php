@@ -52,7 +52,7 @@
       <a href="{{ route('offers.index') }}"
           class="nav-link {{ (request()->segment(1) == 'offers' && !request()->segment(2)) || request()->segment(2) == 'filter' ? ' active' : '' }}">
           <i class="fab fa-buffer nav-icon"></i>
-          <p>Semua Penawaran</p>
+          <p>@hasrole('superadmin|director') Semua @endhasrole Penawaran</p>
       </a>
   </li>
   @endhasrole

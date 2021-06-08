@@ -24,11 +24,11 @@ class HospitalRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
+            'name' => 'required|string|max:191',
             'phone' => 'required|numeric',
-            'city' => 'required|string',
+            'city' => 'required|string|max:191',
             'address' => 'required|string',
-            'email' => 'nullable|unique:hospitals,email',
+            'email' => 'nullable|unique:hospitals,email|max:191',
             'class' => 'nullable',
         ];
     }

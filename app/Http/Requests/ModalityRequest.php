@@ -24,10 +24,10 @@ class ModalityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'unit' => 'present',
-            'model' => 'required',
-            'brand' => 'required',
+            'name' => 'required|max:191',
+            'unit' => 'present|max:191',
+            'model' => 'required|max:191',
+            'brand' => 'required|max:191',
             'category' => 'required',
             'reference' => 'required',
             'price' => 'filled|numeric',

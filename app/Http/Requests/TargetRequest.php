@@ -24,7 +24,7 @@ class TargetRequest extends FormRequest
     public function rules()
     {
         return [
-            'year' => 'required',
+            'year' => 'required|max:4',
             'target' => 'required',
         ];
     }

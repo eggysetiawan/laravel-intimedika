@@ -25,7 +25,7 @@ class PacsSupportRequest extends FormRequest
     {
         return [
             'pacs_installation' => ['integer', 'required'],
-            'hospital_personel' => ['string', 'required'],
+            'hospital_personel' => ['string', 'required', 'max:191'],
             'report_date' => ['date', 'required'],
             'report_time' => ['required'],
             'problem' => ['string', 'required'],

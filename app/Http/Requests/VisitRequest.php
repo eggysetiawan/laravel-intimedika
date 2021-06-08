@@ -26,10 +26,10 @@ class VisitRequest extends FormRequest
         return [
             'result' => 'required',
             'request' => 'required',
-            'name' => 'sometimes|required',
-            'mobile' => 'sometimes|required|numeric',
-            'role' => 'sometimes|required',
-            'email' => 'sometimes|email|unique:customers,email',
+            'name' => 'sometimes|required|max:191',
+            'mobile' => 'sometimes|required|numeric|max:191',
+            'role' => 'sometimes|required|max:191',
+            'email' => 'sometimes|email|unique:customers,email|max:191',
             'hospital' => 'sometimes',
             'img' => 'image|mimes:png,jpg,jpeg,svg|max:10240',
         ];

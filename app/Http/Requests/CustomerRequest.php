@@ -25,10 +25,10 @@ class CustomerRequest extends FormRequest
     {
         return [
             'hospital' => ['filled', 'integer'],
-            'name' => ['min:3', 'string', 'required'],
+            'name' => ['min:3', 'string', 'required', 'max:191'],
             'mobile' => ['digits_between:9,13', 'required'],
-            'person_in_charge' => ['min:3', 'string', 'required'],
-            'role' => ['min:5', 'string', 'required'],
+            'person_in_charge' => ['min:3', 'string', 'required', 'max:191'],
+            'role' => ['min:5', 'string', 'required', 'max:191'],
             'email' => ['present'],
             'address' => ['present'],
         ];

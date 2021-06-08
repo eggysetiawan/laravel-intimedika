@@ -26,7 +26,7 @@ class CustomerUpdateRequest extends FormRequest
         return [
             'role' => 'required',
             'email' => 'email|required|sometimes',
-            'name' => 'required|string',
+            'name' => 'required|string|max:191',
             'mobile' => 'required|numeric',
             'address' => 'string',
         ];
