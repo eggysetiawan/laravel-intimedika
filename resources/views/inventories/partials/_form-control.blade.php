@@ -27,7 +27,7 @@
             <div class="col-md">
                 <label for="quantity">Jumlah/Unit</label>
                 <input type="number" name="quantity" id="quantity" class="form-control" placeholder="qty"
-                    value="{{ old('quantity') ?? $inventory->quantity }}">
+                    value="{{ old('quantity') ?? $inventory->quantity }}" min="1">
             </div>
         </div>
     </div>
@@ -55,13 +55,13 @@
 
     <div class="form-group">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="location">Lokasi</label>
                 <input type="text" name="location" id="location" class="form-control"
                     placeholder="Tuliskan lokasi barang saat ini.."
                     value="{{ old('location') ?? $inventory->location }}">
             </div>
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <label for="department">Departement/Divisi</label>
                 <select name="department" id="department" class="form-control">
                     @isset($inventory->department_id)
@@ -77,7 +77,7 @@
                     @endforeach
 
                 </select>
-            </div>
+            </div> --}}
         </div>
     </div>
 

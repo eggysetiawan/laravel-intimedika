@@ -9,6 +9,20 @@
       </a>
   </li> --}}
   @endhasrole
+
+
+  @role('superadmin')
+  {{-- management users --}}
+  <li class="nav-header">Management User</li>
+  <li class="nav-item">
+      <a href="{{ route('managements.index') }}"
+          class="nav-link{{ request()->segment(1) == 'managements' ? ' active' : '' }}">
+          <i class="fas fa-users-cog nav-icon"></i>
+          <p>Management User</p>
+      </a>
+  </li>
+  @endrole
+
   @hasrole('superadmin|it')
   {{-- PACS Installation --}}
   <li class="nav-header">Laporan Harian</li>

@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
+use App\Department;
 use App\InventoryType;
 use Illuminate\Support\Str;
 
 
 class InventoryService
 {
-
-
-
     public function createInventory($request)
     {
         $attr = $request->validated();
@@ -19,8 +17,10 @@ class InventoryService
         if ($slug == '') {
             $slug = Str::slug(uniqid('inventories-'));
         }
+        $attr['service_tag'] = $request->service_tag ?? 0;
+        $attr['serial_number'] = $request->serial_number ?? 0;
         $attr['slug'] = $slug;
-        $attr['department_id'] = $request->department;
+        $attr['department_id'] = Department::getDepartmentId();
         return auth()->user()->inventories()->create($attr);
     }
 

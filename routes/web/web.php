@@ -63,6 +63,11 @@ Route::middleware('auth')->group(function () {
         Route::post('{invoice:id}/repeat', 'InvoiceController@repeat')->name('repeat');
     });
 
+    // managements users
+    Route::resource('managements', 'ManagementController')->parameters([
+        'managements' => 'user:username',
+    ]);
+
     // modalities
     Route::resource('modalities', 'ModalityController')->parameters([
         'modalities' => 'modality:slug',

@@ -59,7 +59,7 @@
                 @endif
 
 
-                <div class="card-body table-responsive ">
+                <div class="card-body table-responsive">
                     @if (request()->segment(2) == 'completed')
                         @if ($completedCount > 0)
                             <a href="{{ route('excel.offer') }}" class="btn btn-success btn-sm mb-2"><i

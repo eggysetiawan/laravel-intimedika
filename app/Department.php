@@ -13,6 +13,10 @@ class Department extends Model
         'location'
     ];
 
+    public static function getDepartmentId()
+    {
+        return static::where('name', auth()->user()->position)->first()->id;
+    }
 
     // relations
     public function inventories()
