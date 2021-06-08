@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\{Demo, OrderChart, Tax};
+use App\Events\PurchaseOrderCreated;
 
 class ProgressService
 {
@@ -139,5 +140,32 @@ class ProgressService
             ->addMediaFromRequest('img')
             ->usingFileName($imgName)
             ->toMediaCollection('image_po');
+    }
+
+    public function sendPurchaseEmail($offer)
+    {
+        if ($offer->offer_no_unique > 2021105) {
+            return event(new PurchaseOrderCreated($offer));
+        }
+
+        return null;
+    }
+
+    public function directApprove($offer)
+    {
+        if ($offer->offer_no_unique < 2020222) {
+            $offer->progress->update([
+                'progress' => 100,
+                'is_approved' => 1,
+                'approved_by' => 2,
+                'approved_at' => $offer->offer_date->addDays(1)
+            ]);
+
+            $offer->invoices->first()->chart()->update([
+                'is_approved' => 1,
+            ]);
+        }
+
+        return null;
     }
 }

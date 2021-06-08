@@ -110,7 +110,7 @@ class OfferDataTable extends DataTable
                 return $query->onlyTrashed();
             })
             ->whereNotNull('offer_date')
-            ->orderBy('offer_no_unique', 'desc'); //order berdasarkan no_penawaran terbaru
+            ->orderBy('offer_no_unique', 'desc'); //order by no_penawaran terbaru
     }
 
     /**
@@ -145,6 +145,12 @@ class OfferDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            // No.
+            Column::make('DT_RowIndex')
+                ->title('No.')
+                ->orderable(false)
+                ->searchable(false)
+                ->width(20),
 
             // action
             Column::computed('action')
@@ -155,13 +161,6 @@ class OfferDataTable extends DataTable
                 ->searchable(false)
                 ->width(50)
                 ->addClass('text-center'),
-
-            // No.
-            Column::make('DT_RowIndex')
-                ->title('No.')
-                ->orderable(false)
-                ->searchable(false)
-                ->width(20),
 
 
             // no.penawaran

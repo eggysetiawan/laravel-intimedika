@@ -47,7 +47,7 @@ class OfferService
         $tahun = date('Y', strtotime($request->date));
 
         $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
-        $attr['offer_no_unique'] = $request->queue . $tahun;
+        $attr['offer_no_unique'] =   $tahun . $request->queue;
         $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
         $date = $this->getDate($request);
         $attr['offer_date'] = $date;
@@ -156,11 +156,23 @@ class OfferService
         return $firstOffer;
     }
 
-    public function sendOfferEmailToDirector($request, $offer)
+    public function sendOfferEmailToDirector()
     {
-        $offer_no = $request->queue . date('Y', strtotime($request->date));
-        if ($offer_no > 1002021) {
-            return  event(new OfferCreated($offer));
+        if ($this->offer->offer_no_unique > 2021105) {
+            return event(new OfferCreated($this->offer));
         }
+        return null;
+    }
+
+    public function directOffer()
+    {
+        if ($this->offer->offer_no_unique <= 2021105) {
+            return  $this->offer->update([
+                'is_approved' => 1,
+                'approved_by' => $this->offer->approved_by,
+                'approved_at' => now()
+            ]);
+        }
+        return null;
     }
 }

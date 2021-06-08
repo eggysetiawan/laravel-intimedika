@@ -54,7 +54,9 @@ class ProgressController extends Controller
                     $offer->progress->update($attr);
                     $progressService->uploadPurchase($offer, $request);
                     $progressService->updateOrderId($offer);
-                    event(new PurchaseOrderCreated($offer));
+                    $progressService->sendPurchaseEmail($offer);
+
+                    $progressService->directApprove($offer);
                     break;
 
                 default:

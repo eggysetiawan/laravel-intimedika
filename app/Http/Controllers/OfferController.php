@@ -55,7 +55,7 @@ class OfferController extends Controller
         DB::transaction(function () use ($request, $offerService) {
             // dd($request->queue . date('Y', strtotime($request->date)));
             // to offers table
-            $offer = $offerService->createOffer($request);
+            $offerService->createOffer($request);
             // to invoices table
             $offerService->createInvoice($request);
             // to offer_progress table
@@ -67,7 +67,9 @@ class OfferController extends Controller
             // to fix price table
             $offerService->insertPrice($request);
             // send mail to admin via event & listener
-            $offerService->sendOfferEmailToDirector($request, $offer);
+            $offerService->sendOfferEmailToDirector();
+            // direct approve offer under 105/2020
+            $offerService->directOffer();
         });
 
         // alert success

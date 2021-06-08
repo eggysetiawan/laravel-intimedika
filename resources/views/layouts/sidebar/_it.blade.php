@@ -9,7 +9,7 @@
       </a>
   </li> --}}
   @endhasrole
-  @hasrole('superadmin|it|director')
+  @hasrole('superadmin|it')
   {{-- PACS Installation --}}
   <li class="nav-header">Laporan Harian</li>
   <li class="nav-item">

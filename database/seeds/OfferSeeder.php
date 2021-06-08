@@ -44,34 +44,38 @@ class OfferSeeder extends Seeder
                     $form_note = null;
                 }
 
-                switch ($penawaran->approve) {
-                    case 'approved':
-                        $approval = 1;
-                        break;
-                    case 'revisi':
-                        $approval = 3;
-                        break;
-                    case 'rejected':
-                        $approval = 2;
-                        break;
+                // switch ($penawaran->approve) {
+                //     case 'approved':
+                //         $approval = 1;
+                //         break;
+                //     case 'revisi':
+                //         $approval = 3;
+                //         break;
+                //     case 'rejected':
+                //         $approval = 2;
+                //         break;
 
-                    default:
-                        $approval = null;
-                        break;
-                }
+                //     default:
+                //         $approval = null;
+                //         break;
+                // }
 
-                if ($penawaran->approve != 'approved') {
-                    $penawaran->approvecreated_at = null;
-                    $penawaran->approved_by = null;
-                    $approved_by = null;
-                }
+                // if ($penawaran->approve != 'approved') {
+                //     $penawaran->approvecreated_at = null;
+                //     $penawaran->approved_by = null;
+                //     $approved_by = null;
+                // }
+
+                // if ($penawaran->approve != 'approved') {
+                $penawaran->approvecreated_at = date('Y-m-d', strtotime('+1 day'));
+                // }
 
                 $offers = Offer::create([
                     'id' => $penawaran->pk_penawran,
                     'customer_id' => $penawaran->pk_cust_penawaran,
                     'user_id' => $username->id,
                     'offer_no' => $penawaran->no_penawaran,
-                    'offer_no_unique' => substr($penawaran->no_penawaran, 2, 4) . date('Y', strtotime($penawaran->tgl_penawaran)),
+                    'offer_no_unique' =>  date('Y', strtotime($penawaran->tgl_penawaran)) . substr($penawaran->no_penawaran, 3, 3),
                     'slug' => Str::slug(str_replace('/', '-', $penawaran->no_penawaran)),
                     'budget' => $penawaran->budget_penawaran,
                     'offer_date' => date('Y-m-d', strtotime($penawaran->tgl_penawaran)),
@@ -81,7 +85,7 @@ class OfferSeeder extends Seeder
                     'payment_note' => $penawaran->pen_keterangan,
                     'has_form_note' => $has_form_note,
                     'form_note' => $form_note,
-                    'is_approved' => $approval,
+                    'is_approved' => 1,
                     'approved_at' => $penawaran->approvecreated_at,
                     'approved_by' => $approved_by,
                     'created_at' => $penawaran->tgl_penawaran,
@@ -148,7 +152,7 @@ class OfferSeeder extends Seeder
 
                     $invoices = $offers->invoices()->create([
                         'offer_id' => $offers->id,
-                        'date' => $invoice_date,
+                        'date' => $invoice_date ?? $penawaran->tgl_penawaran->format('Y-m-d'),
                         'invoice_no' => $invoice_no,
                         'status' => 'old',
                     ]);
