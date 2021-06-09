@@ -51,9 +51,14 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // inventories
+    Route::prefix('inventories')->name('inventories.')->middleware(['role:superadmin|admin'])->group(function () {
+        Route::get('{inventory:slug}/edit', 'InventoryController@edit')->name('edit');
+        Route::patch('{inventory:slug}/update', 'InventoryController@update')->name('update');
+        Route::delete('{inventory:slug}', 'InventoryTypeController@destroy')->name('destroy');
+    });
     Route::resource('inventories', 'InventoryController')->parameters([
         'inventories' => 'inventory:slug',
-    ]);
+    ])->except(['edit', 'update', 'delete']);
 
     // invoices
     Route::prefix('invoices')->name('invoices.')->group(function () {
@@ -64,10 +69,13 @@ Route::middleware('auth')->group(function () {
     });
 
     // managements users
-    Route::patch('managements/{user:username}/remove-role', 'ManagementController@removeRole')->name('managements.removeRole');
-    Route::resource('managements', 'ManagementController')->parameters([
-        'managements' => 'user:username',
-    ]);
+    Route::middleware('role:superadmin')->group(function () {
+        Route::patch('managements/{user:username}/remove-role', 'ManagementController@removeRole')->name('managements.removeRole');
+        Route::resource('managements', 'ManagementController')->parameters([
+            'managements' => 'user:username',
+        ]);
+    });
+
 
     // modalities
     Route::resource('modalities', 'ModalityController')->parameters([

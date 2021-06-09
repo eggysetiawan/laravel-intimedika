@@ -39,7 +39,7 @@ class InventoryService
     public function updateInventory($request, $inventory)
     {
         $attr = $request->validated();
-        $attr['department_id'] = $request->department;
+        $attr['department_id'] = Department::getDepartmentId();
         return  $inventory->update($attr);
     }
 }

@@ -1,4 +1,5 @@
 <x-dropdown>
+    @hasrole('admin|superadmin')
     <a href="{{ route('inventories.edit', $inventory->slug) }}" title="Edit detail barang ini."
         style="color: black;"><i class="fas fa-edit nav-icon"></i> Edit</a>
 
@@ -9,4 +10,6 @@
             title="Hapus data barang dari tabel"><i class="far fa-trash-alt nav-icon"></i>
             Hapus</button>
     </form>
+    @endhasrole
+
 </x-dropdown>
