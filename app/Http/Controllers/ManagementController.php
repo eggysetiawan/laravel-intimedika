@@ -15,7 +15,7 @@ class ManagementController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $users = User::orderBy('last_login_time', 'desc')->get();
         $roles = Role::where('name', '!=', 'superadmin')->get();
         return view('managements.users.index', compact('users'));
     }
