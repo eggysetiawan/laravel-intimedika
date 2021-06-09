@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddRoleRequest;
+use App\Http\Requests\RemoveRoleRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -17,7 +19,7 @@ class ManagementController extends Controller
     {
         $users = User::orderBy('last_login_time', 'desc')->get();
         $roles = Role::where('name', '!=', 'superadmin')->get();
-        return view('managements.users.index', compact('users'));
+        return view('managements.users.index', compact('users', 'roles'));
     }
 
     /**
@@ -70,9 +72,20 @@ class ManagementController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(AddRoleRequest $request, User $user)
     {
-        //
+        $request->validated();
+        $user->assignRole($request->roles);
+        session()->flash('success', 'Role berhasil ditambahkan');
+        return back();
+    }
+
+    public function removeRole(RemoveRoleRequest $request, User $user)
+    {
+        $request->validated();
+        $user->removeRole($request->roles);
+        session()->flash('success', 'Role berhasil dihapus');
+        return back();
     }
 
     /**
@@ -83,6 +96,5 @@ class ManagementController extends Controller
      */
     public function destroy(User $user)
     {
-        //
     }
 }

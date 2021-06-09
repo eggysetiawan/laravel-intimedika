@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // managements users
+    Route::patch('managements/{user:username}/remove-role', 'ManagementController@removeRole')->name('managements.removeRole');
     Route::resource('managements', 'ManagementController')->parameters([
         'managements' => 'user:username',
     ]);
