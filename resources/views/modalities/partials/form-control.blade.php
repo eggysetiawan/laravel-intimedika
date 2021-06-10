@@ -114,7 +114,7 @@
     <div class="form-group">
         <label for="spec">Spesifikasi Alat</label>
         <textarea name="spec" id="spec" class="form-control @error('spec') is-invalid @enderror" cols="30" rows="4"
-            placeholder="Tuliskan spesifikasi alat/software disini">{{ old('spec') ?? '<pre class="wordwrap">' . $modality->spec . '</pre>' }}</textarea>
+            placeholder="Tuliskan spesifikasi alat/software disini">@empty($modality->spec){{ old('spec') ?? null }} @else {{ old('spec') ?? '<pre class="wordwrap">' . $modality->spec . '</pre>' }} @endempty</textarea>
         {{-- <div id="spec">{{ old('spec') ?? $modality->spec }}</div> --}}
         @error('spec')
             <span class="invalid-feedback" role="alert">
