@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <pre class="wordwrap">{{ $modality->spec }}</pre>
+                <pre class="wordwrap">{!! $modality->spec !!}</pre>
 
             </div>
         </div>

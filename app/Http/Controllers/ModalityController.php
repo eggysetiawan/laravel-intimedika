@@ -34,7 +34,8 @@ class ModalityController extends Controller
 
     public function store(ModalityRequest $request)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
+        dd($attr['spec']);
         $attr['slug'] = Str::slug(request('name'));
 
         Modality::create($attr);
@@ -49,7 +50,7 @@ class ModalityController extends Controller
 
     public function update(ModalityRequest $request, Modality $modality)
     {
-        $attr = $request->all();
+        $attr = $request->validated();
 
         $modality->update($attr);
 

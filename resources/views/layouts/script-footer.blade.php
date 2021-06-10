@@ -30,9 +30,10 @@
 <script src="{{ asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+{{-- Sweetalert2 --}}
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-
-{{-- selectize --}}
+{{-- summernote --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <script
     src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js') }}">
