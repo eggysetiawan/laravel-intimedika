@@ -20,7 +20,9 @@
             @include('modalities.partials.form-control', ['submit' => 'Update'])
         </form>
     </x-card>
+@endsection
 
 
-
+@section('script')
+    <x-summernote-modality />
 @endsection
