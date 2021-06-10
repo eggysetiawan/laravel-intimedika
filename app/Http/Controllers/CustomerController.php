@@ -60,20 +60,19 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
-        // $hospitals = Hospital::selectHospitalLimit();
+        $hospitals = Hospital::hospitalBlade();
 
-        // if ($customer->doesntHave('hospitals')) {
-        //     $nohospital = true;
-        // } else {
-        //     $customer->load('hospitals');
-        //     $nohospital = false;
-        // }
+        if ($customer->doesntHave('hospitals')) {
+            $nohospital = true;
+        } else {
+            $customer->load('hospitals');
+            $nohospital = false;
+        }
 
 
-        // $create = null;
+        $create = null;
 
-        return view('customers.edit', compact('customer'));
-        // return 'hola';
+        return view('customers.edit', compact('customer', 'nohospital', 'create'));
     }
 
     public function update(CustomerUpdateRequest $request, Customer $customer)
