@@ -1,6 +1,8 @@
 <x-dropdown>
     <a href="#!" data-toggle="modal" data-target="#addRole-{{ $user->username }}">Add Role</a>
-    <a href="#!" data-toggle="modal" data-target="#removeRole-{{ $user->username }}">Remove Role</a>
+    @if ($user->roles->count() > 1)
+        <a href="#!" data-toggle="modal" data-target="#removeRole-{{ $user->username }}">Remove Role</a>
+    @endif
 </x-dropdown>
 <!-- Add Role Modal -->
 <div class="modal fade" id="addRole-{{ $user->username }}" tabindex="-1" aria-labelledby="addRoleLabel"
@@ -87,7 +89,7 @@
                     @enderror
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn bg-teal">Update</button>
+                    <button type="submit" class="btn bg-teal" @if ($user->roles->count() <= 1) disabled title="Role tidak bisa dihapus jika user hanya memiliki 1 role." @endif>Remove</button>
                 </div>
             </form>
 
