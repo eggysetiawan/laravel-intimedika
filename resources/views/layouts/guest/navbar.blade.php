@@ -3,7 +3,8 @@
       <div class="container d-flex align-items-center">
 
           <div class="logo mr-auto">
-              <a href="index.php"><img src="{{ asset('assets/img/LogoIntimedika-1-2.png') }}"></a>
+              <a href="{{ route('landingpage.home') }}"><img
+                      src="{{ asset('assets/img/LogoIntimedika-1-2.png') }}"></a>
               <!-- Uncomment below if you prefer to use an image logo -->
               <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
           </div>

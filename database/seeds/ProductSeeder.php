@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
         foreach ($titles as $title) {
             // DB::transaction(function () use ($title, $categories, $contact, $descriptions, $origins, $i, $j) {
             $products = Product::create([
-                'slug' => Str::slug($title . $categories[$i]),
+                'slug' => Str::slug($title . '-' . $categories[$i]),
                 'title' => $title,
                 'category' => $categories[$i],
                 'origin' => $origins[$i],
