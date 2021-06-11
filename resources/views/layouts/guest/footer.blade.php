@@ -17,10 +17,10 @@
             </div>
             <div class="col-lg-6">
                 <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-                    <a href="index.php#intro" class="scrollto">Home</a>
-                    <a href="index.php#about" class="scrollto">About</a>
-                    <a href="contactus.php">Contact Us</a>
-                    <a href="products.php">Products</a>
+                    <a href="{{ route('landingpage.home') }}#" class="scrollto">Home</a>
+                    <a href="{{ route('landingpage.home') }}#about" class="scrollto">About</a>
+                    <a href="{{ route('contact') }}">Contact Us</a>
+                    <a href="{{ route('products.index') }}">Products</a>
                 </nav>
             </div>
         </div>

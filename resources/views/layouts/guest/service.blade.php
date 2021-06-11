@@ -56,11 +56,12 @@
                 <div class="card" style='background-image: url("assets/img/ct1.jpg");' data-aos="fade-up"
                     data-aos-delay="100">
                     <div class="card-body">
-                        <h6 class="card-title"><a href="">Wide Range of Medical Devices With The Latest Technology</a>
+                        <h6 class="card-title"><a href="#!">Wide Range of Medical Devices With The Latest Technology</a>
                         </h6>
                         <p class="card-text">We provide wide range of medical devices from our trustworthy partners
                             throughout Indonesia. Click here to find more about our distribution products.</p>
-                        <div class="read-more"><a href="products.php"><i class="icofont-arrow-right"></i> Read More</a>
+                        <div class="read-more"><a href="{{ route('products.index') }}"><i
+                                    class="icofont-arrow-right"></i> Read More</a>
                         </div>
                     </div>
                 </div>
@@ -69,10 +70,12 @@
                 <div class="card" style='background-image: url("assets/img/ct2.jpg");' data-aos="fade-up"
                     data-aos-delay="200">
                     <div class="card-body">
-                        <h6 class="card-title"><a href="">Trusted by major Healthcare Institutions in Indonesia</a></h6>
+                        <h6 class="card-title"><a href="#!">Trusted by major Healthcare Institutions in Indonesia</a>
+                        </h6>
                         <p class="card-text">We provides medical equipments to many trustworthy hospitals in Indonesia.
                             Click here to find more about our clients.</p>
-                        <div class="read-more"><a href="#"><i class="icofont-arrow-right"></i> Read More</a></div>
+                        <div class="read-more"><a href="{{ route('products.index') }}">
+                                <i class="icofont-arrow-right"></i> Read More</a></div>
                     </div>
                 </div>
 
@@ -81,10 +84,12 @@
                 <div class="card" style='background-image: url("assets/img/ct3.jpg");' data-aos="fade-up"
                     data-aos-delay="100">
                     <div class="card-body">
-                        <h6 class="card-title"><a href="">Trusted by Our International Manufacturer Partners</a></h6>
+                        <h6 class="card-title"><a href="{{ route('products.index') }}">Trusted by Our International
+                                Manufacturer Partners</a></h6>
                         <p class="card-text">We are trusted by many international medical manufacturers. Click here to
                             find more about our manufacturers partners.</p>
-                        <div class="read-more"><a href="#"><i class="icofont-arrow-right"></i> Read More</a></div>
+                        <div class="read-more"><a href="{{ route('products.index') }}"><i
+                                    class="icofont-arrow-right"></i> Read More</a></div>
                     </div>
                 </div>
             </div>

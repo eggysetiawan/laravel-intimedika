@@ -11,21 +11,22 @@
 
           <nav class="nav-menu d-none d-lg-block">
               <ul>
-                  <li class="active"><a href="#">Home</a></li>
+                  <li class="active"><a href="{{ route('landingpage.home') }}">Home</a></li>
 
-                  <li><a href="#services">Services</a></li>
-                  <li class="drop-down"><a href="products.php">Products</a>
+                  <li><a href="{{ route('landingpage.home') }}#services">Services</a></li>
+                  <li class="drop-down"><a href="{{ route('products.index') }}">Products</a>
                       <ul>
                           @foreach ($products as $product)
-                              <li><a
-                                      href="{{ route('products.show', $product->slug) }}">{{ ucfirst($product->title) }}</a>
+                              <li>
+                                  <a href="{{ route('products.show', $product->slug) }}">{{ ucfirst($product->title) }}
+                                  </a>
                               </li>
                           @endforeach
 
                       </ul>
                   </li>
-                  <li><a href="#about">About</a></li>
-                  <li><a href="contactus.php">Contact Us</a></li>
+                  <li><a href="{{ route('landingpage.home') }}#about">About</a></li>
+                  <li><a href="{{ route('contact') }}">Contact Us</a></li>
 
                   <!-- <li class="get-started"><a href="#about">Login</a></li> -->
               </ul>

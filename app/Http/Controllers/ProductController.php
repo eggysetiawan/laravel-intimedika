@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Modality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $modalitySelects = Modality::query()
+            ->select(['brand'])
+            ->select('brand', DB::raw('count(*) as total'))
+            ->whereHas('media')
+            ->groupBy('brand')
+            ->get();
+
+        $modalities = Modality::query()
+            ->whereHas('media')
+            ->get();
+        return view('guest.products.index', compact('modalities', 'modalitySelects'));
     }
 
     /**
