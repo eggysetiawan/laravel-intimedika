@@ -10,11 +10,11 @@ class DailyJobService
 
     public function getSlug($request)
     {
-        $slug = Str::slug(Str::limit($request->description, 300));
+        $slug = Str::slug(Str::limit($request->description, 191));
 
         $findSlug = DailyJob::where('slug', Str::slug($request->title))->exists();
         if ($findSlug) {
-            $slug = Str::slug(Str::limit($request->description, 300) . '-' . uniqid(auth()->user()->initial . '-'));
+            $slug = Str::slug(Str::limit($request->description, 100) . '-' . uniqid(auth()->user()->initial . '-'));
         }
         return $slug;
     }
