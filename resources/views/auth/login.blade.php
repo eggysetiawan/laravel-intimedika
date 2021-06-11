@@ -96,6 +96,8 @@
                         <a href="{{ route('login.email') }}" class="btn btn-block btn-secondary"><i
                                 class="fas fa-at mr-2"></i>
                             {{ __('Sign in using Email') }}</a>
+                        <a href="/" class="btn btn-block btn-danger"><i class="far fa-user nav-icon"></i>
+                            {{ __('Sign in as Guest') }}</a>
                     </div>
 
                     <!-- /.social-auth-links -->
@@ -147,7 +149,8 @@
 
     <script>
         AOS.init();
-      </script>
+
+    </script>
 </body>
 
 </html>

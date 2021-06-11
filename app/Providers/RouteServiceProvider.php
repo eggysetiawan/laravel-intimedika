@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/';
+    public const HOME = '/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -44,11 +44,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
+        $this->mapGuestRoutes();
         $this->mapSearchRoutes();
         $this->mapWebRoutes();
         $this->mapApprovalRoutes();
         $this->mapExportRoutes();
-        $this->mapGuestRoutes();
         $this->mapPacsRoutes();
 
 
@@ -75,6 +75,8 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/web/web.php'));
     }
+
+
     protected function mapApprovalRoutes()
     {
         Route::middleware('web')
@@ -99,6 +101,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/web/guest.php'));
     }
+
 
     /**
      * Define the "api" routes for the application.

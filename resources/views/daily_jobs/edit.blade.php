@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title'=>'Edit Laporan Harian'])
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('daily_jobs.index') }}">Daftar Laporan</a></li>
-    <li class="breadcrumb-item">{{ $dailyJob->slug }}</li>
+    <li class="breadcrumb-item">{{ Str::limit($dailyJob->slug, 30, '') }}</li>
 @endsection
 
 @section('content')

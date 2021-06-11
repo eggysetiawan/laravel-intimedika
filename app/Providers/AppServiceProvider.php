@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\User;
 use App\Offer;
 use App\Observers\OfferObserver;
+use App\Product;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -43,5 +44,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share('users', User::select('id', 'name')->get());
         view()->share('readyToApprove', Offer::readyToApproveCount());
         view()->share('readyToPurchase', Offer::readyToPurchaseCount());
+        view()->share('products', Product::get());
     }
 }
