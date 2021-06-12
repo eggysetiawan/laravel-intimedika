@@ -35,12 +35,6 @@
                                 <li data-filter=".filter-{{ str_replace('BAYER MEDRAD', 'BAYER', $modality->brand) }}">
                                     {{ str_replace('BAYER MEDRAD', 'BAYER', $modality->brand) }}</li>
                             @endforeach
-                            {{-- <li data-filter=".filter-INTIWID">Intiwid</li>
-                            <li data-filter=".filter-AGFA">Agfa</li>
-                            <li data-filter=".filter-BAYER">Bayer</li>
-                            <li data-filter=".filter-Careray">Careray</li>
-                            <li data-filter=".filter-CLEAR">Clear</li>
-                            <li data-filter=".filter-IRadimed">Iradimed</li> --}}
                         </ul>
                     </div>
                 </div>
