@@ -6,6 +6,7 @@ use App\User;
 use App\Offer;
 use App\Observers\OfferObserver;
 use App\Product;
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -45,5 +46,6 @@ class AppServiceProvider extends ServiceProvider
         view()->share('readyToApprove', Offer::readyToApproveCount());
         view()->share('readyToPurchase', Offer::readyToPurchaseCount());
         view()->share('products', Product::get());
+        view()->share('preloadingQuoute', Inspiring::quote());
     }
 }

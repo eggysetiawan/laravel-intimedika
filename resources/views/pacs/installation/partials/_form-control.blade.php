@@ -170,14 +170,8 @@
                     value="{{ old('anydesk_workstation') ?? $pacsInstallation->anydesk_workstation }}"
                     placeholder="Tuliskan alamat anydesk workstation disini..">
             </div>
-
-
         </div>
-
-
     </div>
-
-
 
     <div class="form-group">
         <label for="user_note">Keterangan</label>
