@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <livewire:styles />
 </head>
 
 <body class="hold-transition login-page accent-orange">
@@ -30,44 +31,11 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in with email to start your session</p>
 
-                <form action="{{ route('login') }}" method="post" novalidate>
+                <form action="{{ route('login') }}" method="post" novalidate autocomplete="off">
                     @csrf
 
-                    @if (session('message'))
-                        <div class="alert alert-danger alert-dismissible">
-                            <h5><i class="icon fas fa-exclamation-triangle"></i> Whoops! something error.
-                            </h5>
-                            <ul>
-                                {{ session('message') }}
-                            </ul>
-                        </div>
-                    @endif
+                    <livewire:auth.email />
 
-
-                    <div class="input-group mb-3">
-                        <input placeholder="email" id="email" type="email"
-                            class="form-control  @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" autocomplete="email" autofocus>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="row">
-
-                        <!-- /.col -->
-                        <div class="col-12">
-                            <button type="submit" name="submit" value="magic-link" class="btn bg-orange btn-block">Send
-                                Login Email</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
                 </form>
             </div>
             <!-- /.login-card-body -->
@@ -81,6 +49,7 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <livewire:scripts />
 
 </body>
 

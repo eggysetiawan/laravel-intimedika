@@ -42,7 +42,7 @@
                         <ul>
                             <li><strong>Category</strong>: {{ strtoupper($product->category) }}</li>
                             <li><strong>Country</strong>: {{ $product->origin }}</li>
-                            <li><strong>Product</strong>: {{ $product->product }}</li>
+                            <li><strong>Product</strong>: {{ ucfirst($product->product) }}</li>
                             <li><strong>Contact Us</strong>: {{ $product->contact }}</li>
                         </ul>
 

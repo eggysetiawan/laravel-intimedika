@@ -47,6 +47,7 @@ class LoginController extends Controller
         if ($request->submit == 'magic-link') :
             $this->loginViaMagicLink($request);
             $userEmail = User::where('email', $request->email)->first();
+
             if (!$userEmail) {
                 return redirect()->route('login.email')
                     ->withErrors(['email' => 'User tidak ditemukan.'])
@@ -90,6 +91,7 @@ class LoginController extends Controller
     private function loginViaMagicLink(Request $request)
     {
         $user = User::where('email', $request->email)->first();
+
         if ($user) :
             $user->notify(new LoginMagicLinkNotification());
         endif;

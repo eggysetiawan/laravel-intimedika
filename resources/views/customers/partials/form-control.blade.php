@@ -88,5 +88,4 @@
 
 <div class="card-footer">
     <button type="submit" class="btn bg-teal" @if ($errors->any()) disabled @endif>Submit</button>
-
 </div>

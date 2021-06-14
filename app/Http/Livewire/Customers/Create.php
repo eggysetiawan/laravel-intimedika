@@ -47,25 +47,25 @@ class Create extends Component
         $hospitals = Hospital::with('customers.author')->where('id', $value)->first();
 
         if (@$hospitals->customers->first()->author->name) {
-            $this->resetErrorBag();
+            $this->resetErrorBag('hospital');
             $this->addError('hospital',   'Rumah Sakit telah menjadi customer ' . $hospitals->customers->first()->author->name);
             $this->hospital = null;
             $this->hospital_name = $hospitals->name;
 
             // $this->requiredField('hospital', 'Rumah Sakit');
-            $this->requiredField('name', 'Nama');
-            $this->requiredField('mobile', 'Nomor Handphone');
-            $this->requiredField('person_in_charge', 'Nama PIC');
-            $this->requiredField('role', 'Jabatan');
+            // $this->requiredField('name', 'Nama');
+            // $this->requiredField('mobile', 'Nomor Handphone');
+            // $this->requiredField('person_in_charge', 'Nama PIC');
+            // $this->requiredField('role', 'Jabatan');
         } else {
             $this->hospital = $hospitals->id;
             $this->hospital_name = $hospitals->name;
-            $this->resetErrorBag();
+            $this->resetErrorBag('hospital');
 
-            $this->requiredField('name', 'Nama');
-            $this->requiredField('mobile', 'Nomor Handphone');
-            $this->requiredField('person_in_charge', 'Nama PIC');
-            $this->requiredField('role', 'Jabatan');
+            // $this->requiredField('name', 'Nama');
+            // $this->requiredField('mobile', 'Nomor Handphone');
+            // $this->requiredField('person_in_charge', 'Nama PIC');
+            // $this->requiredField('role', 'Jabatan');
         }
     }
 
