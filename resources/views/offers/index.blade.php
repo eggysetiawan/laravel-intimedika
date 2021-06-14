@@ -9,26 +9,24 @@
     @endif
 @endsection
 @section('content')
-    <div class="container-fluid">
-        @hasrole('superadmin|sales')
-        <div class="d-flex justify-content-end mb-4">
-            <div class="btn-group">
-                <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-sm">
-                    Buat Penawaran
-                </button>
-                @if (request()->segment(2) == 'trash')
-                    <a href="{{ route('offers.index') }}" class="btn btn-primary btn-sm"><i
-                            class="fas fa-table nav-icon"></i> Semua Penawaran</a>
-                @else
-                    @can('openworld')
-                        <a href="{{ route('offers.trash') }}" class="btn btn-warning btn-sm"><i
-                                class="fas fa-recycle nav-icon"></i> Recyle Bin</a>
-                    @endcan
-                @endif
-            </div>
+    @hasrole('superadmin|sales')
+    <div class="d-flex justify-content-end mb-4">
+        <div class="btn-group">
+            <button type="button" class="btn bg-teal btn-sm" data-toggle="modal" data-target="#modal-sm">
+                Buat Penawaran
+            </button>
+            @if (request()->segment(2) == 'trash')
+                <a href="{{ route('offers.index') }}" class="btn btn-primary btn-sm"><i class="fas fa-table nav-icon"></i>
+                    Semua Penawaran</a>
+            @else
+                @can('openworld')
+                    <a href="{{ route('offers.trash') }}" class="btn btn-warning btn-sm"><i
+                            class="fas fa-recycle nav-icon"></i> Recyle Bin</a>
+                @endcan
+            @endif
         </div>
-        @endhasrole
     </div>
+    @endhasrole
 
 
     <div class="d-flex justify-content-center">

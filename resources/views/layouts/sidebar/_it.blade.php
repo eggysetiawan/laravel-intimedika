@@ -48,4 +48,14 @@
           <p>Support PACS</p>
       </a>
   </li>
+  @hasrole('supervisor|superadmin')
+  <li class="nav-item">
+      <a href="{{ route('pacs_exports') }}"
+          class="nav-link{{ request()->segment(1) == 'pacs_exports' ? ' active' : '' }}">
+          <i class="fas fa-file-export nav-icon"></i>
+          <p>PACS Report</p>
+      </a>
+  </li>
+  @endhasrole
+
   @endhasrole

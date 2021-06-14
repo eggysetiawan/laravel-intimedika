@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Pacs\Export;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,7 @@ Route::middleware('auth')->group(function () {
         Route::post('select', 'SelectInstallationController')->name('pacs_installations.select');
     });
 
+    Route::get('pacs-exports', 'PacsReportController')->name('pacs_exports');
 
     Route::resource('pacs_installations', 'PacsInstallationController')->parameters([
         'pacs_installations' => 'pacs_installation:slug',
