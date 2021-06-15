@@ -10,6 +10,8 @@ class Export extends Component
 {
     use WithPagination;
 
+    public $query = '';
+
     public $perPage = 10;
     public $select = [];
 
@@ -17,11 +19,6 @@ class Export extends Component
     public $selectedRows = [];
 
 
-
-    public function mount()
-    {
-        // $this->pacs_installations = PacsInstallation::paginate($this->perPage);
-    }
 
     public function updatedselectPageRows($value)
     {
@@ -36,7 +33,14 @@ class Export extends Component
 
     public function getPacsInstallationsProperty()
     {
-        return PacsInstallation::orderBy('start_installation_date', 'desc')->paginate($this->perPage);
+
+        return PacsInstallation::query()
+            ->whereHas('hospital', function ($q) {
+                return $q->where('name', 'like', "%$this->query%")
+                    ->orWhere('city', 'like', "%$this->query%");
+            })
+            ->orderBy('start_installation_date', 'desc')
+            ->paginate($this->perPage);
     }
 
     public function loadMore()

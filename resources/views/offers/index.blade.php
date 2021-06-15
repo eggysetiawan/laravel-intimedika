@@ -9,6 +9,7 @@
     @endif
 @endsection
 @section('content')
+
     @hasrole('superadmin|sales')
     <div class="d-flex justify-content-end mb-4">
         <div class="btn-group">
@@ -32,6 +33,7 @@
     <div class="d-flex justify-content-center">
         <div class="container-fluid">
             <div class="card">
+
                 <div class="card-header">
                     <h3 class="card-title">{{ $tableHeader ?? 'Semua Penawaran' }}</h3>
                     <div class="card-tools">

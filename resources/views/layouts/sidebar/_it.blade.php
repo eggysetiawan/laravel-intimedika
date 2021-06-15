@@ -48,7 +48,7 @@
           <p>Support PACS</p>
       </a>
   </li>
-  @hasrole('supervisor|superadmin')
+  @hasrole('superadmin')
   <li class="nav-item">
       <a href="{{ route('pacs_exports') }}"
           class="nav-link{{ request()->segment(1) == 'pacs_exports' ? ' active' : '' }}">

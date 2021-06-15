@@ -3,16 +3,28 @@
 
 
         <div class="col-md-4">
-            <input type="text" wire:model="query" class="form-control" placeholder="Search people . . ">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="search" wire:model="query" class="form-control" placeholder="Cari Rumah Sakit - Kota"
+                    autocomplete="off">
+            </div>
         </div>
-        <div class="col-md-4">
-            <input type="text" wire:model="query" class="form-control" placeholder="Search people . . ">
-        </div>
+
     </div>
 
 
     <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Tabel Instalasi Pacs</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
         <div class="card-body">
+            <a href="{{ route('excel.pacs.report') }}" class="btn btn-outline-success">Export to Excel</a>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -38,10 +50,11 @@
                     @endforeach
                 </tbody>
             </table>
-            @dump($selectedRows)
             <div class="mt-3">
                 @if ($pacsInstallations->hasMorePages())
-                    <button class="btn btn-primary btn-block" wire:click.prevent="loadMore">Load more!</button>
+                    <button class="btn btn-primary btn-block" wire:click.prevent="loadMore">
+                        Load more!
+                    </button>
                 @endif
             </div>
         </div>
