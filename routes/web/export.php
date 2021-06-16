@@ -18,5 +18,4 @@ Route::prefix('excel')->middleware('auth')->name('excel.')->group(function () {
     Route::get('customers', 'ExcelController@customer')->name('customer');
     Route::get('funnels', 'ExcelController@funnel')->name('funnel');
     Route::get('modalities', 'ExcelController@modality')->name('modality');
-    Route::get('pacs-report', 'ExcelController@pacsReport')->name('pacs.report');
 });

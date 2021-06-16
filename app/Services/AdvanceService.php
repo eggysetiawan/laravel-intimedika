@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Advance;
 use App\Need;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,14 @@ class AdvanceService
     public function createAdvance($request)
     {
         $attr = $request->validated();
-        $attr['slug'] = Str::slug($request->destination . '-' . $request->objective);
+
+        $slug = Str::slug($request->destination . '-' . $request->objective);
+        $attr['slug'] = $slug;
+
+        if (Advance::where('slug', $slug)->exists()) {
+            $attr['slug'] = $slug . uniqid();
+        }
+
         return $this->advance = auth()->user()->advances()->create($attr);
     }
 

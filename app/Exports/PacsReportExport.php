@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 class PacsReportExport implements
     ShouldAutoSize,
     WithMapping,
-    WithHeadings,
+    // WithHeadings,
     WithEvents,
     FromQuery,
     WithCustomStartCell
@@ -42,26 +42,42 @@ class PacsReportExport implements
         $rows = [];
         foreach ($pacsInstallation->supports as $support) {
             $rows[] = [
+                $support->report_date->format('d F, Y'),
                 $support->problem,
             ];
         }
-        return $rows;
-    }
 
+        $pacsInstallationRows = [
+            [
+                $pacsInstallation->hospital->name,
+                $pacsInstallation->hospital->city
+            ],
+            [],
+            [
+                $pacsInstallation->start_installation_date
+            ]
 
-
-    public function headings(): array
-    {
-        return [
-            'Nama Rumah Sakit',
-            'Kota'
         ];
+
+        $finalArray = array_merge($pacsInstallationRows, $rows);
+
+        return $finalArray;
     }
+
+
+
+    // public function headings(): array
+    // {
+    //     return [
+    //         'Tanggal',
+    //         'Kegiatan'
+    //     ];
+    // }
 
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class    => function (AfterSheet $event) {
+            AfterSheet::class => function (AfterSheet $event) {
                 $event->sheet->getStyle('B2:C2')->applyFromArray([
                     'font' => [
                         'bold' => true,
@@ -70,7 +86,7 @@ class PacsReportExport implements
 
                 $event->sheet->getStyle('B3:C17')->applyFromArray([
                     'alignment' => [
-                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                     ],
                     'borders' => [
                         'allBorders' => [

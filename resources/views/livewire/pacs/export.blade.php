@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="card-body">
-            <a href="{{ route('excel.pacs.report') }}" class="btn btn-outline-success">Export to Excel</a>
+            <a href="#!" class="btn btn-outline-success" wire:click.prevent="exportExcel">Export to Excel</a>
             <table class="table table-hover">
                 <thead>
                     <tr>

@@ -28,7 +28,7 @@ class PdfService
 
         $destination = str_replace(" ", "_", $advance->destination);
         $date = date('Y_m_d', strtotime($advance->start_date));
-        return $pdf->stream('Advance_' . $destination . '_' . $date . '.pdf');
+        return $pdf->stream('Advance_' . $destination . '_' . $date . '_' . $advance->author->name . '.pdf');
     }
 
     public function exportPacsInstallation($pacsInstallation)

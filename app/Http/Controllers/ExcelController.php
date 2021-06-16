@@ -48,10 +48,4 @@ class ExcelController extends Controller
     {
         return $this->excel->download(new ModalityExport, 'IPI_Modality_' . uniqid() . '.xlsx');
     }
-
-    public function pacsReport()
-    {
-        $pacsInstallationId = [10, 5, 6, 7];
-        return $this->excel->download(new PacsReportMultiSheetExport($pacsInstallationId), 'IPI_Intiwid_' . date('Ymd') . '.xlsx');
-    }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Pacs;
 
-use App\PacsInstallation;
 use Livewire\Component;
+use App\PacsInstallation;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PacsReportMultiSheetExport;
+
 
 class Export extends Component
 {
@@ -18,6 +21,8 @@ class Export extends Component
     public $selectPageRows = false;
     public $selectedRows = [];
 
+    private $excel;
+
 
 
     public function updatedselectPageRows($value)
@@ -29,6 +34,11 @@ class Export extends Component
         } else {
             $this->reset(['selectedRows', 'selectPageRows']);
         }
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new PacsReportMultiSheetExport($this->selectedRows), 'IPI_Intiwid_' . date('Ymd') . '.xlsx');
     }
 
     public function getPacsInstallationsProperty()
