@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\PacsInstallation;
+use App\PacsSupport;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -23,6 +24,7 @@ class PacsReportExport implements
 {
 
     public int $id;
+    public $totalRow;
 
     public function __construct(int $id)
     {
@@ -31,11 +33,18 @@ class PacsReportExport implements
 
     public function query()
     {
-        return PacsInstallation::query()
+        $pacsInstallation =  PacsInstallation::query()
             ->with('supports')
             ->where('id', $this->id);
+
+        return $pacsInstallation;
     }
 
+
+    public function getTotalSupportRow()
+    {
+        return PacsSupport::where('pacs_installation_id', $this->id)->count() + 6;
+    }
 
     public function map($pacsInstallation): array
     {
@@ -49,13 +58,23 @@ class PacsReportExport implements
 
         $pacsInstallationRows = [
             [
-                $pacsInstallation->hospital->name,
+                'Rumah Sakit :',
+                $pacsInstallation->hospital->name
+            ],
+            [
+                'Kota :',
                 $pacsInstallation->hospital->city
+            ],
+            [
+                'Alamat',
+                $pacsInstallation->hospital->address
             ],
             [],
             [
-                $pacsInstallation->start_installation_date
+                'Tanggal',
+                'Kegiatan'
             ]
+
 
         ];
 
@@ -78,15 +97,37 @@ class PacsReportExport implements
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-                $event->sheet->getStyle('B2:C2')->applyFromArray([
+
+                $event->sheet->getStyle('B6:C6')->applyFromArray([
                     'font' => [
                         'bold' => true,
                     ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                        ],
+                    ],
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                    ],
                 ]);
 
-                $event->sheet->getStyle('B3:C17')->applyFromArray([
+                $event->sheet->getStyle('B7:B' . $this->getTotalSupportRow())->applyFromArray([
                     'alignment' => [
                         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                        ],
+                    ],
+                ]);
+
+                $event->sheet->getStyle('C7:C' . $this->getTotalSupportRow())->applyFromArray([
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                     ],
                     'borders' => [
                         'allBorders' => [

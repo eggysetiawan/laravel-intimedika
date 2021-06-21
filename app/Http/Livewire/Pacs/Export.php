@@ -21,16 +21,13 @@ class Export extends Component
     public $selectPageRows = false;
     public $selectedRows = [];
 
-    private $excel;
-
-
 
     public function updatedselectPageRows($value)
     {
         if ($value) {
             $this->selectedRows = $this->pacsInstallations->pluck('id')->map(function ($id) {
                 return (string) $id;
-            });
+            })->toArray();
         } else {
             $this->reset(['selectedRows', 'selectPageRows']);
         }
@@ -38,6 +35,7 @@ class Export extends Component
 
     public function exportExcel()
     {
+
         return Excel::download(new PacsReportMultiSheetExport($this->selectedRows), 'IPI_Intiwid_' . date('Ymd') . '.xlsx');
     }
 

@@ -12,7 +12,13 @@
                     <h2 data-aos="fade-up" data-aos-delay="400">We provide medical solution to major hospital and
                         healthcare institutions in Indonesia</h2>
                     <div data-aos="fade-up" data-aos-delay="800">
-                        <a href="{{ route('login') }}" class="btn-get-started scrollto">Go to Login</a>
+                        <a href="{{ route('login') }}" class="btn-get-started scrollto">
+                            @auth
+                                Go to Dashboard
+                            @else
+                                Go to Login
+                            @endauth
+                        </a>
                     </div>
                 </div>
 
@@ -64,7 +70,7 @@
         <section id="clients" class="clients clients">
             <div class="container-fluid">
 
-                <div class="row">
+                {{-- <div class="row">
 
                     <div class="col-lg-2 col-md-4 col-6">
                         <a href="{{ route('products.show', 'intiwid-ris-pacs') }}">
@@ -108,7 +114,7 @@
                         </a>
                     </div>
 
-                </div>
+                </div> --}}
 
             </div>
         </section><!-- End Clients Section -->
@@ -117,54 +123,54 @@
 
         <!-- ======= Counts Section ======= -->
         <!-- <section id="counts" class="counts">
-                                                                                                                                          <div class="container">
+                                                                                                                                                      <div class="container">
 
-                                                                                                                                            <div class="row">
-                                                                                                                                              <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start" data-aos="fade-right" data-aos-delay="150">
-                                                                                                                                                <img src="assets/img/counts-img.svg" alt="" class="img-fluid">
-                                                                                                                                              </div>
+                                                                                                                                                        <div class="row">
+                                                                                                                                                          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start" data-aos="fade-right" data-aos-delay="150">
+                                                                                                                                                            <img src="assets/img/counts-img.svg" alt="" class="img-fluid">
+                                                                                                                                                          </div>
 
-                                                                                                                                              <div class="col-xl-7 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-left" data-aos-delay="300">
-                                                                                                                                                <div class="content d-flex flex-column justify-content-center">
-                                                                                                                                                  <div class="row">
-                                                                                                                                                    <div class="col-md-6 d-md-flex align-items-md-stretch">
-                                                                                                                                                      <div class="count-box">
-                                                                                                                                                        <i class="icofont-simple-smile"></i>
-                                                                                                                                                        <span data-toggle="counter-up">65</span>
-                                                                                                                                                        <p><strong>Happy Clients</strong> consequuntur voluptas nostrum aliquid ipsam architecto ut.</p>
+                                                                                                                                                          <div class="col-xl-7 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-left" data-aos-delay="300">
+                                                                                                                                                            <div class="content d-flex flex-column justify-content-center">
+                                                                                                                                                              <div class="row">
+                                                                                                                                                                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                                                                                                                                                                  <div class="count-box">
+                                                                                                                                                                    <i class="icofont-simple-smile"></i>
+                                                                                                                                                                    <span data-toggle="counter-up">65</span>
+                                                                                                                                                                    <p><strong>Happy Clients</strong> consequuntur voluptas nostrum aliquid ipsam architecto ut.</p>
+                                                                                                                                                                  </div>
+                                                                                                                                                                </div>
+
+                                                                                                                                                                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                                                                                                                                                                  <div class="count-box">
+                                                                                                                                                                    <i class="icofont-document-folder"></i>
+                                                                                                                                                                    <span data-toggle="counter-up">85</span>
+                                                                                                                                                                    <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium et quia dere tan</p>
+                                                                                                                                                                  </div>
+                                                                                                                                                                </div>
+
+                                                                                                                                                                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                                                                                                                                                                  <div class="count-box">
+                                                                                                                                                                    <i class="icofont-clock-time"></i>
+                                                                                                                                                                    <span data-toggle="counter-up">12</span>
+                                                                                                                                                                    <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam ducimus aut voluptate non vel</p>
+                                                                                                                                                                  </div>
+                                                                                                                                                                </div>
+
+                                                                                                                                                                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                                                                                                                                                                  <div class="count-box">
+                                                                                                                                                                    <i class="icofont-award"></i>
+                                                                                                                                                                    <span data-toggle="counter-up">15</span>
+                                                                                                                                                                    <p><strong>Awards</strong> rerum asperiores dolor alias quo reprehenderit eum et nemo pad der</p>
+                                                                                                                                                                  </div>
+                                                                                                                                                                </div>
+                                                                                                                                                              </div>
+                                                                                                                                                            </div>
+                                                                                                                                                          </div>
+                                                                                                                                                        </div>
+
                                                                                                                                                       </div>
-                                                                                                                                                    </div>
-
-                                                                                                                                                    <div class="col-md-6 d-md-flex align-items-md-stretch">
-                                                                                                                                                      <div class="count-box">
-                                                                                                                                                        <i class="icofont-document-folder"></i>
-                                                                                                                                                        <span data-toggle="counter-up">85</span>
-                                                                                                                                                        <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium et quia dere tan</p>
-                                                                                                                                                      </div>
-                                                                                                                                                    </div>
-
-                                                                                                                                                    <div class="col-md-6 d-md-flex align-items-md-stretch">
-                                                                                                                                                      <div class="count-box">
-                                                                                                                                                        <i class="icofont-clock-time"></i>
-                                                                                                                                                        <span data-toggle="counter-up">12</span>
-                                                                                                                                                        <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam ducimus aut voluptate non vel</p>
-                                                                                                                                                      </div>
-                                                                                                                                                    </div>
-
-                                                                                                                                                    <div class="col-md-6 d-md-flex align-items-md-stretch">
-                                                                                                                                                      <div class="count-box">
-                                                                                                                                                        <i class="icofont-award"></i>
-                                                                                                                                                        <span data-toggle="counter-up">15</span>
-                                                                                                                                                        <p><strong>Awards</strong> rerum asperiores dolor alias quo reprehenderit eum et nemo pad der</p>
-                                                                                                                                                      </div>
-                                                                                                                                                    </div>
-                                                                                                                                                  </div>
-                                                                                                                                                </div>
-                                                                                                                                              </div>
-                                                                                                                                            </div>
-
-                                                                                                                                          </div>
-                                                                                                                                        </section> -->
+                                                                                                                                                    </section> -->
         <!-- End Counts Section -->
 
         @include('layouts.guest.service')
@@ -218,10 +224,10 @@
                             the solution of your medical devices needs.
                         </p>
                         <!--  <ul>
-                                                                                                                                                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                                                                                                                                                  <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                                                                                                                                                  <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                                                                                                                                                </ul> -->
+                                                                                                                                                              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                                                                                                                                                              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+                                                                                                                                                              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                                                                                                                                                            </ul> -->
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
                         <p>

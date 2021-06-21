@@ -54,6 +54,7 @@ class DailyJobController extends Controller
             $dailyJob = (new DailyJobService())->createDailyJob($request);
 
             if (request()->has('img')) {
+
                 $imgSlug = (new DailyJobService())->getSlug($request) . '.' . request()->file('img')->extension();
                 $dailyJob
                     ->addMediaFromRequest('img')

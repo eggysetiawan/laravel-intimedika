@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exports\PacsReportExport;
 use Illuminate\Support\Str;
 
 class VisitService
@@ -11,6 +12,8 @@ class VisitService
         $timestamp = date('YmdHis');
         return Str::slug(request('request') . ' ' . $timestamp);
     }
+
+
     public function create($request)
     {
         $attr = $request->validated();

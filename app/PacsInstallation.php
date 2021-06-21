@@ -13,6 +13,7 @@ class PacsInstallation extends Model implements HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
 
+
     protected $dates = [
         'training_date',
         'handover_date',
