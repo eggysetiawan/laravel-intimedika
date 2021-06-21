@@ -27,7 +27,7 @@ class VisitRequest extends FormRequest
             'result' => 'required',
             'request' => 'required',
             'name' => 'sometimes|required|max:191',
-            'mobile' => 'sometimes|required|numeric|max:191',
+            'mobile' => 'sometimes|required|digits_between:9,13|max:191',
             'role' => 'sometimes|required|max:191',
             'email' => 'sometimes|email|unique:customers,email|max:191',
             'hospital' => 'sometimes',
