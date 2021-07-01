@@ -43,6 +43,8 @@ class Export extends Component
     {
 
         return PacsInstallation::query()
+            ->with('supports', 'hospital')
+            ->has('supports')
             ->whereHas('hospital', function ($q) {
                 return $q->where('name', 'like', "%$this->query%")
                     ->orWhere('city', 'like', "%$this->query%");

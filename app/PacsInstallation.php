@@ -84,6 +84,6 @@ class PacsInstallation extends Model implements HasMedia
 
     public function supports()
     {
-        return $this->hasMany(PacsSupport::class);
+        return $this->hasMany(PacsSupport::class)->orderBy('report_date', 'asc');
     }
 }
