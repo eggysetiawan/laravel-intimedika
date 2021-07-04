@@ -12,7 +12,7 @@ class DailyJobService
     {
         $slug = Str::slug(Str::limit($request->description, 191));
 
-        $findSlug = DailyJob::where('slug', Str::slug($request->title))->exists();
+        $findSlug = DailyJob::where('slug', Str::slug($request->description))->exists();
         if ($findSlug) {
             $slug = Str::slug(Str::limit($request->description, 100) . '-' . uniqid(auth()->user()->initial . '-'));
         }

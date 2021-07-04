@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             PacsSupportSeeder::class,
             // PacsStakeholderSeeder::class,
             PacsEngineerSeeder::class,
-            MediaSeeder::class,
+            // MediaSeeder::class,
             ProductSeeder::class,
             ModalityProductSeeder::class,
         ]);
