@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSoftwaresTable extends Migration
+class CreateSparepartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateSoftwaresTable extends Migration
      */
     public function up()
     {
-        Schema::create('softwares', function (Blueprint $table) {
+        Schema::create('spareparts', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 150);
             $table->unsignedBigInteger('modality_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('name', 150);
+            $table->double('quantity');
+            $table->string('sn', 50);
+            $table->string('sn_history', 50);
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateSoftwaresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('softwares');
+        Schema::dropIfExists('spareparts');
     }
 }
