@@ -20,6 +20,14 @@ class CreateInstallationsTable extends Migration
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->foreignId('software_id')->constrained('software')->cascadeOnDelete();
             $table->string('sn', 50);
+            $table->date('date')->nullable();
+            $table->tinyInteger('is_installed');
+            $table->tinyInteger('is_tested');
+            $table->tinyInteger('is_trained');
+            $table->text('note');
+            $table->text('pre_installation_note');
+            $table->string('refrence', 20);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
