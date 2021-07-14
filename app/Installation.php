@@ -12,6 +12,22 @@ class Installation extends Model implements HasMedia
     use InteractsWithMedia;
     use SoftDeletes;
 
+    protected $dates = ['dates'];
+
+    protected $fillable = [
+        'modality_id',
+        'customer_id',
+        'software_id',
+        'sn',
+        'date',
+        'is_installed',
+        'is_tested',
+        'is_trained',
+        'note',
+        'pre_installation_note',
+        'reference',
+    ];
+
     // relations
     public function user()
     {
@@ -31,5 +47,15 @@ class Installation extends Model implements HasMedia
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function logs()
+    {
+        return $this->morphMany('App\Log', 'logable');
+    }
+
+    public function worktimes()
+    {
+        return $this->morphMany('App\Worktime', 'worktimable');
     }
 }
