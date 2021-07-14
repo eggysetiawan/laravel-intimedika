@@ -25,7 +25,7 @@ class DailyJobController extends Controller
     public function timeline()
     {
         return view('daily_jobs.timeline', [
-            'dailyJobs' => DailyJob::latest()->paginate(8),
+            'dailyJobs' => DailyJob::orderBy('date', 'desc')->paginate(8),
         ]);
     }
 
