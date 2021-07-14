@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInstallationsTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,22 @@ class CreateInstallationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('installations', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('installation_id')->constrained('installations')->cascadeOnDelete();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('modality_id');
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->foreignId('software_id')->constrained('software')->cascadeOnDelete();
             $table->string('sn', 50);
+            $table->text('condition')->nullable();
+            $table->text('problem')->nullable();
+            $table->text('service_note')->nullable();
+            $table->text('result')->nullable();
             $table->date('date')->nullable();
-            $table->boolean('is_installed', 1);
-            $table->boolean('is_tested', 1);
-            $table->boolean('is_trained', 1);
-            $table->text('note');
-            $table->text('pre_installation_note');
-            $table->string('refrence', 20);
-            $table->softDeletes();
+            $table->unsignedBigInteger('sales_id');
+            $table->text('status')->nullable();
+            $table->boolean('is_finished', 1);
             $table->timestamps();
         });
     }
@@ -39,6 +40,6 @@ class CreateInstallationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('installations');
+        Schema::dropIfExists('services');
     }
 }

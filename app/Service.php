@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Installation extends Model implements HasMedia
+class Service extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use SoftDeletes;
@@ -28,8 +28,8 @@ class Installation extends Model implements HasMedia
         return $this->belongsTo(Customer::class);
     }
 
-    public function services()
+    public function installation()
     {
-        return $this->hasMany(Service::class);
+        return $this->belongsTo(Installation::class);
     }
 }
