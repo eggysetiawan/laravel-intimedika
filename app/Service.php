@@ -58,6 +58,6 @@ class Service extends Model implements HasMedia
 
     public function worktimes()
     {
-        return $this->morphMany('App\Worktime', 'worktimable');
+        return $this->morphMany('App\Worktime', 'worktimeable');
     }
 }
