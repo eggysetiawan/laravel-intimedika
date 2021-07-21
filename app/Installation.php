@@ -58,4 +58,9 @@ class Installation extends Model implements HasMedia
     {
         return $this->morphMany('App\Worktime', 'worktimeable');
     }
+
+    public function activities()
+    {
+        return $this->morphMany('App\Activity', 'activityable');
+    }
 }
