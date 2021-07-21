@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => 'Beranda',])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Dashboard</li>
+    <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 @section('content')
     <div class="container">
