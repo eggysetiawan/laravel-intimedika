@@ -15,9 +15,11 @@ class CreateWorktimesTable extends Migration
     {
         Schema::create('worktimes', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('worktimeable_id');
             $table->string('worktimeable_type');
             $table->foreignId('log_id')->constrained('logs')->cascadeOnDelete();
+
             $table->date('start_date')->nullable();
             $table->time('start_time')->nullable();
             $table->date('end_date')->nullable();
