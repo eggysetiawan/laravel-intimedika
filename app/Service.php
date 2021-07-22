@@ -31,9 +31,9 @@ class Service extends Model implements HasMedia
     ];
 
     // relations
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function modality()
@@ -51,6 +51,7 @@ class Service extends Model implements HasMedia
         return $this->belongsTo(Installation::class);
     }
 
+    // polymorphism relationship
     public function logs()
     {
         return $this->morphMany('App\Log', 'logable');
@@ -63,6 +64,11 @@ class Service extends Model implements HasMedia
 
     public function activities()
     {
-        return $this->morphMany('App\Activity', 'activity');
+        return $this->morphMany('App\Activity', 'activityable');
+    }
+
+    public function warranties()
+    {
+        return $this->morphMany('App\Warranty', 'warrantyable');
     }
 }
