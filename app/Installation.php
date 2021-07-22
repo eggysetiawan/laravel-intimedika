@@ -49,6 +49,7 @@ class Installation extends Model implements HasMedia
         return $this->hasMany(Service::class);
     }
 
+
     // polymorphysm relationship
     public function logs()
     {
@@ -68,5 +69,10 @@ class Installation extends Model implements HasMedia
     public function warranties()
     {
         return $this->morphMany('App\Warranty', 'warrantyable');
+    }
+
+    public function date_changes()
+    {
+        return $this->morphMany('App\DateChange', 'changeable');
     }
 }

@@ -29,7 +29,7 @@ class Worktime extends Model
         return $this->belongsTo(Log::class);
     }
 
-    // polymorphism relationship
+    // polymorphysm relationship
     public function worktimeable()
     {
         return $this->morphTo();
