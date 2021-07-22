@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormAccessories extends Model
+class FormSparepart extends Model
 {
     protected $fillable = [
         'modality_id',
