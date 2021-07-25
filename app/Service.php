@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\TechnicianActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -11,6 +12,7 @@ class Service extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use SoftDeletes;
+    use TechnicianActivity;
 
     protected $dates = ['date'];
 
@@ -49,32 +51,5 @@ class Service extends Model implements HasMedia
     public function installation()
     {
         return $this->belongsTo(Installation::class);
-    }
-
-
-    // polymorphysm relationship
-    public function logs()
-    {
-        return $this->morphMany('App\Log', 'logable');
-    }
-
-    public function worktimes()
-    {
-        return $this->morphMany('App\Worktime', 'worktimeable');
-    }
-
-    public function activities()
-    {
-        return $this->morphMany('App\Activity', 'activityable');
-    }
-
-    public function warranties()
-    {
-        return $this->morphMany('App\Warranty', 'warrantyable');
-    }
-
-    public function date_changes()
-    {
-        return $this->morphMany('App\DateChange', 'changeable');
     }
 }
