@@ -18,12 +18,11 @@ class SoftwareSeeder extends Seeder
 
 
         foreach ($softwares as $software) {
-            $user_id = User::where('username', $software->username)->first()->id;
-
-            Software::create([
-                'id' => $softwares->pk_sw,
-                'name' => $softwares->swversion,
-                'modality_id' => $user_id,
+            $user = User::where('username', $software->username)->first();
+            $user->softwares()->create([
+                'id' => $software->pk_sw,
+                'name' => $software->swversion,
+                'modality_id' => $software->fk_mod,
             ]);
         }
     }

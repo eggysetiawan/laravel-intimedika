@@ -19,7 +19,6 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('modality_id');
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
-            $table->foreignId('software_id')->constrained('software')->cascadeOnDelete();
             $table->string('sn', 50);
             $table->text('condition')->nullable();
             $table->text('problem')->nullable();

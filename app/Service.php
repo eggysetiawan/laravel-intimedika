@@ -52,4 +52,9 @@ class Service extends Model implements HasMedia
     {
         return $this->belongsTo(Installation::class);
     }
+
+    public function sales()
+    {
+        return $this->belongsTo(User::class, 'sales_id');
+    }
 }

@@ -20,12 +20,12 @@ class CreateInstallationsTable extends Migration
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->string('sn', 50);
             $table->date('date')->nullable();
-            $table->boolean('is_installed', 1);
-            $table->boolean('is_tested', 1);
-            $table->boolean('is_trained', 1);
-            $table->text('note');
-            $table->text('pre_installation_note');
-            $table->string('refrence', 20);
+            $table->boolean('is_installed', 1)->nullable();
+            $table->boolean('is_tested', 1)->nullable();
+            $table->boolean('is_trained', 1)->nullable();
+            $table->text('note')->nullable()->nullable();
+            $table->text('pre_installation_note')->nullable();
+            $table->string('reference', 20)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

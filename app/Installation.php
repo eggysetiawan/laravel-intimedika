@@ -53,11 +53,16 @@ class Installation extends Model implements HasMedia
 
     public function installed_modalities()
     {
-        return $this->belongsTo(InstalledModality::class);
+        return $this->belongsToMany(InstalledModality::class);
     }
 
     public function softwares()
     {
-        return $this->belongsTo(Software::class);
+        return $this->belongsToMany(Software::class);
+    }
+
+    public function sales()
+    {
+        return $this->belongsTo(User::class, 'sales_id');
     }
 }

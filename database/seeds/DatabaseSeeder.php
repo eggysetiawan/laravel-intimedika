@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             // migrasi portal teknik
 
             SoftwareSeeder::class,
+            InstalledModalitySeeder::class,
             InstallationSeeder::class,
         ]);
     }

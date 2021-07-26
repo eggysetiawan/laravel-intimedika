@@ -171,6 +171,16 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(PacsEngineer::class);
     }
 
+    public function softwares()
+    {
+        return $this->hasMany(Software::class);
+    }
+
+    public function installed_modalities()
+    {
+        return $this->hasMany(InstalledModality::class);
+    }
+
 
 
     // roles
