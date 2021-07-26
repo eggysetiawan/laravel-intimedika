@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-
+Route::view('/', 'auth.login');
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', 'HomeController@index')->name('home');

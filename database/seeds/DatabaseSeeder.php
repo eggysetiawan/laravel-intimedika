@@ -14,23 +14,26 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             HospitalSeeder::class,
-            CustomerOnlySeeder::class,
+            CustomerSeeder::class,
+            // CustomerOnlySeeder::class,
             VisitSeeder::class,
             ModalitySeeder::class,
-            OfferSeeder::class,
+            // OfferSeeder::class,
             SidebarSeeder::class,
             DepartmentSeeder::class,
+
             // sync databsae
-            InventoryTypeSeeder::class,
-            InventorySeeder::class,
-            DailyJobSeeder::class,
-            PacsInstallationSeeder::class,
-            PacsSupportSeeder::class,
+            // InventoryTypeSeeder::class,
+            // InventorySeeder::class,
+            // DailyJobSeeder::class,
+            // PacsInstallationSeeder::class,
+            // PacsSupportSeeder::class,
             // PacsStakeholderSeeder::class,
-            PacsEngineerSeeder::class,
+            // PacsEngineerSeeder::class,
             // MediaSeeder::class,
-            ProductSeeder::class,
-            ModalityProductSeeder::class,
+
+            // ProductSeeder::class,
+            // ModalityProductSeeder::class,
         ]);
     }
 }
