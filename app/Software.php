@@ -22,4 +22,9 @@ class Software extends Model
     {
         return $this->belongsTo(Modality::class);
     }
+
+    public function installations()
+    {
+        return $this->belongsTo(Installation::class);
+    }
 }

@@ -28,4 +28,9 @@ trait TechnicianActivity
     {
         return $this->morphMany('App\DateChange', 'changeable');
     }
+
+    public function installed_modalities()
+    {
+        return $this->morphMany('App\InstalledModality', 'modalityable');
+    }
 }

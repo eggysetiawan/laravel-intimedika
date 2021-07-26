@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormSparepartsTable extends Migration
+class CreateInstallationSoftwareTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateFormSparepartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('form_spareparts', function (Blueprint $table) {
+        Schema::create('installation_software', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('modality_id')->constrained('modalities')->cascadeOnDelete();
-            $table->string('label');
+            $table->foreignId('installation_id')->constrained('installations')->cascadeOnDelete();
+            $table->foreignId('software_id')->constrained('software')->cascadeOnDelete();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateFormSparepartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form_spareparts');
+        Schema::dropIfExists('installation_software');
     }
 }

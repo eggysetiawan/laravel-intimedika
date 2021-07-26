@@ -18,7 +18,6 @@ class CreateInstallationsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('modality_id');
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
-            $table->foreignId('software_id')->constrained('software')->cascadeOnDelete();
             $table->string('sn', 50);
             $table->date('date')->nullable();
             $table->boolean('is_installed', 1);
