@@ -55,7 +55,7 @@ class InstallationSeeder extends Seeder
                 }
 
                 if ($installation->fk_modality && InstalledModality::find($installation->fk_modality)) {
-                    $installations->installed_modalities()->attach($installation->fk_modality);
+                    $installations->installed_mods()->attach($installation->fk_modality);
                 }
             }
         }

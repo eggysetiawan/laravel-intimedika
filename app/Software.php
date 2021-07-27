@@ -27,4 +27,9 @@ class Software extends Model
     {
         return $this->belongsTo(Installation::class);
     }
+
+    public function services()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

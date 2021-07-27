@@ -15,9 +15,7 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('installation_id')->constrained('installations')->cascadeOnDelete();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('modality_id');
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->string('sn', 50);
             $table->text('condition')->nullable();

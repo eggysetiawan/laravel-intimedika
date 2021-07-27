@@ -17,10 +17,7 @@ class Service extends Model implements HasMedia
     protected $dates = ['date'];
 
     protected $fillable = [
-        'installation_id',
-        'modality_id',
         'customer_id',
-        'software_id',
         'sn',
         'date',
         'condition',
@@ -48,13 +45,23 @@ class Service extends Model implements HasMedia
         return $this->belongsTo(Customer::class);
     }
 
-    public function installation()
+    public function installations()
     {
-        return $this->belongsTo(Installation::class);
+        return $this->belongsToMany(Installation::class);
     }
 
     public function sales()
     {
         return $this->belongsTo(User::class, 'sales_id');
+    }
+
+    public function installed_mods()
+    {
+        return $this->belongsToMany(InstalledModality::class);
+    }
+
+    public function softwares()
+    {
+        return $this->belongsToMany(Software::class);
     }
 }
