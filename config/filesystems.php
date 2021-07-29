@@ -48,6 +48,11 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'migration' => [
+            'driver' => 'local',
+            'root' => storage_path('MigrasiPdf'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
