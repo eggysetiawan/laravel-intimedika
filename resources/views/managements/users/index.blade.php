@@ -2,7 +2,7 @@
 'caption'=> ''])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Management User</li>
+    <li class="breadcrumb-item active">Management User</li>
 @endsection
 @section('content')
     <div class="row justify-content-center">

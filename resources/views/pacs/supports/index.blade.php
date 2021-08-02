@@ -2,7 +2,7 @@
 'caption'=> 'Intiwid Support'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Daftar Support</li>
+    <li class="breadcrumb-item active">Daftar Support</li>
 @endsection
 @section('content')
     @include('pacs.supports.partials._create-support')

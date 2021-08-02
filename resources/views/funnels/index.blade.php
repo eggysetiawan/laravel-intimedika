@@ -2,7 +2,7 @@
 'caption'=> 'Funnel'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Funnel</li>
+    <li class="breadcrumb-item active">Funnel</li>
 
 @endsection
 @section('content')

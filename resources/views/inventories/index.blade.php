@@ -2,7 +2,7 @@
 'caption'=> 'Daftar Inventory'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Daftar Inventory</li>
+    <li class="breadcrumb-item active">Daftar Inventory</li>
 @endsection
 
 @section('content')

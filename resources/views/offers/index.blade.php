@@ -4,8 +4,9 @@
 @section('breadcrumb')
     @if (request()->segment(2) == 'trash')
         <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Penawaran</a></li>
+        <li class="breadcrumb-item active">Penawaran (dihapus)</li>
     @else
-        <li class="breadcrumb-item"><a href="{{ route('offers.index') }}">Penawaran</a></li>
+        <li class="breadcrumb-item active">Penawaran</li>
     @endif
 @endsection
 @section('content')

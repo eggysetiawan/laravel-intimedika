@@ -2,7 +2,7 @@
 'caption'=> 'Daftar Customer'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Daftar Customer</li>
+    <li class="breadcrumb-item active">Daftar Customer</li>
 @endsection
 @section('content')
     <div class="col-md-12">
