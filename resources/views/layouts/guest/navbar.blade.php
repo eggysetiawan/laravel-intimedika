@@ -14,7 +14,7 @@
                   <li class="active"><a href="{{ route('landingpage.home') }}">Home</a></li>
 
                   <li><a href="{{ route('landingpage.home') }}#services">Services</a></li>
-                  <li class="drop-down"><a href="{{ route('products.index') }}">Products</a>
+                  <li class="drop-down"><a href="#!">Products</a>
                       <ul>
                           @foreach ($products as $product)
                               <li>
