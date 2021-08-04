@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class ServiceMediaSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds.s
      *
      * @return void
      */
