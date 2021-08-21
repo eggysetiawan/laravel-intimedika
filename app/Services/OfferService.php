@@ -47,7 +47,7 @@ class OfferService
         $tahun = date('Y', strtotime($request->date));
 
         $attr['offer_no'] = 'Q-' . $queue . '/IPI/' . $initial . '/' . $bln . '/' . $tahun;
-        $attr['offer_no_unique'] =   $tahun . $request->queue;
+        $attr['offer_no_unique'] =   $tahun . $queue;
         $attr['slug'] = 'Q-' . $queue . '-IPI-' . $initial . '-' . $bln . '-' . $tahun;
         $date = $this->getDate($request);
         $attr['offer_date'] = $date;

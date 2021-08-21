@@ -2,7 +2,7 @@
 'caption'=> 'Perjalanan Dinas'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Perjalanan Dinas</li>
+    <li class="breadcrumb-item active">Perjalanan Dinas</li>
     {{-- <li class="breadcrumb-item">Slug/Name Here</li> --}}
 @endsection
 @section('content')

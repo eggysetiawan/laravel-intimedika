@@ -9,7 +9,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h2>Details Product</h2>
                     <ol>
-                        <li><a href="index.php">Home</a></li>
+                        <li><a href="{{ route('landingpage.home') }}">Home</a></li>
                         <li>Details Product</li>
                         <li>{{ ucfirst($product->title) }}</li>
                     </ol>

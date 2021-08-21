@@ -36,7 +36,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <script
-    src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js') }}">
+src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js') }}">
 </script>
 
 <!-- DataTables -->
@@ -58,7 +58,6 @@
     AOS.init({
         once: true
     });
-
 </script>
 
 
@@ -102,7 +101,6 @@
                 toastr.success("{{ session()->get('success') }}")
             }, 550);
         });
-
     </script>
 
 @endif
@@ -119,7 +117,6 @@
 
 
         });
-
     </script>
 @endif
 
@@ -143,7 +140,6 @@
 
 
         });
-
     </script>
 
 @enderror
@@ -158,7 +154,6 @@
             x.type = "password";
         }
     }
-
 </script>
 <script>
     function myFunction() {
@@ -169,7 +164,6 @@
             x.type = "password";
         }
     }
-
 </script>
 
 <script>
@@ -181,7 +175,6 @@
             x.type = "password";
         }
     }
-
 </script>
 
 <script>
@@ -198,21 +191,18 @@
             $(this).addClass('active');
         });
     })
-
 </script>
 
 <script>
     $("input[data-bootstrap-switch]").each(function() {
         $(this).bootstrapSwitch('state', $(this).prop('checked', false));
     });
-
 </script>
 
 <script>
     $(document).ready(function() {
         $('.select2').select2();
     });
-
 </script>
 
 <script>
@@ -241,7 +231,6 @@
 
 
     })
-
 </script>
 
 <script type="text/javascript">
@@ -260,5 +249,4 @@
             scrollTop: 0
         }, '300');
     });
-
 </script>

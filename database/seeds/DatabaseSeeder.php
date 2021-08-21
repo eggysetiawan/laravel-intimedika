@@ -1,5 +1,6 @@
 <?php
 
+use App\Software;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,23 +15,32 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             HospitalSeeder::class,
-            CustomerOnlySeeder::class,
-            VisitSeeder::class,
+            CustomerSeeder::class,
             ModalitySeeder::class,
-            OfferSeeder::class,
-            SidebarSeeder::class,
-            DepartmentSeeder::class,
-            // sync databsae
-            InventoryTypeSeeder::class,
-            InventorySeeder::class,
-            DailyJobSeeder::class,
-            PacsInstallationSeeder::class,
-            PacsSupportSeeder::class,
+            // CustomerOnlySeeder::class,
+            // VisitSeeder::class,
+            // OfferSeeder::class,
+            // SidebarSeeder::class,
+            // DepartmentSeeder::class,
+            // // sync databsae
+
+            // InventoryTypeSeeder::class,
+            // InventorySeeder::class,
+            // DailyJobSeeder::class,
+            // PacsInstallationSeeder::class,
+            // PacsSupportSeeder::class,
+
             // PacsStakeholderSeeder::class,
-            PacsEngineerSeeder::class,
+            // PacsEngineerSeeder::class,
             // MediaSeeder::class,
-            ProductSeeder::class,
-            ModalityProductSeeder::class,
+            // ProductSeeder::class,
+            // ModalityProductSeeder::class,
+
+            // migrasi portal teknik
+
+            SoftwareSeeder::class,
+            InstalledModalitySeeder::class,
+            InstallationSeeder::class,
         ]);
     }
 }

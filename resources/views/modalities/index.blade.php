@@ -2,7 +2,7 @@
 'caption'=> 'Daftar Modalitas'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Daftar Modality</li>
+    <li class="breadcrumb-item active">Daftar Modality</li>
     {{-- <li class="breadcrumb-item">Slug/Name Here</li> --}}
 @endsection
 @section('content')

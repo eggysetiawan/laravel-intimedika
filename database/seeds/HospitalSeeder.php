@@ -15,20 +15,22 @@ class HospitalSeeder extends Seeder
      */
     public function run()
     {
-        $hospitals = MigrationHospital::all();
+        // $hospitals = MigrationHospital::all();
 
-        foreach ($hospitals as $hospital) {
-            Hospital::create([
-                'id' => $hospital->id,
-                'name' => $hospital->name,
-                'slug' => $hospital->slug,
-                'code' => $hospital->code ?? null,
-                'phone' => $hospital->phone,
-                'email' => $hospital->email ?? null,
-                'address' => $hospital->address,
-                'city' => $hospital->city,
-            ]);
-        }
-        // factory(Hospital::class, 100)->create();
+        // foreach ($hospitals as $hospital) {
+        //     Hospital::create([
+        //         'id' => $hospital->id,
+        //         'name' => $hospital->name,
+        //         'slug' => $hospital->slug,
+        //         'code' => $hospital->code ?? null,
+        //         'phone' => $hospital->phone,
+        //         'email' => $hospital->email ?? null,
+        //         'address' => $hospital->address,
+        //         'city' => $hospital->city,
+        //     ]);
+        // }
+        // from factory
+        factory(Hospital::class, 100)->create();
+
     }
 }
