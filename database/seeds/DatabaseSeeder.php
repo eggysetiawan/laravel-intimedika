@@ -13,20 +13,23 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // UserSeeder::class,
-            // HospitalSeeder::class,
+            UserSeeder::class,
+            HospitalSeeder::class,
+            CustomerSeeder::class,
+            ModalitySeeder::class,
             // CustomerOnlySeeder::class,
             // VisitSeeder::class,
-            // ModalitySeeder::class,
             // OfferSeeder::class,
             // SidebarSeeder::class,
             // DepartmentSeeder::class,
-            // sync databsae
+            // // sync databsae
+
             // InventoryTypeSeeder::class,
             // InventorySeeder::class,
             // DailyJobSeeder::class,
             // PacsInstallationSeeder::class,
             // PacsSupportSeeder::class,
+
             // PacsStakeholderSeeder::class,
             // PacsEngineerSeeder::class,
             // MediaSeeder::class,

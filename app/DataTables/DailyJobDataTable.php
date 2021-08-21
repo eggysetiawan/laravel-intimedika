@@ -52,7 +52,7 @@ class DailyJobDataTable extends DataTable
             ->when(!auth()->user()->isAdmin(), function ($query) {
                 return $query->where('user_id', auth()->id());
             })
-            ->latest();
+            ->orderBy('date', 'desc');
     }
 
     /**

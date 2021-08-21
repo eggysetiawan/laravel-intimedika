@@ -10,7 +10,7 @@
                         <a href="{{ route('profiles.show', $dailyJob->author->username) }}">{{ $dailyJob->author->name }}
                         </a>
                     </span>
-                    <span class="description">Di publikasikan pada - {{ $dailyJob->created_at->diffForHumans() }}
+                    <span class="description">Di publikasikan pada - {{ $dailyJob->date->diffForHumans() }}
                     </span>
                 </div>
                 <!-- /.user-block -->

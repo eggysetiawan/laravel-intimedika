@@ -2,7 +2,7 @@
 'caption'=> 'Instalasi PACS'])
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Daftar Instalasi</li>
+    <li class="breadcrumb-item active">Daftar Instalasi</li>
     {{-- <li class="breadcrumb-item">Slug/Name Here</li> --}}
 @endsection
 @section('content')
