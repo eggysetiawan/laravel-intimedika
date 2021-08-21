@@ -29,8 +29,8 @@ class HospitalSeeder extends Seeder
         //         'city' => $hospital->city,
         //     ]);
         // }
-
         // from factory
         factory(Hospital::class, 100)->create();
+
     }
 }

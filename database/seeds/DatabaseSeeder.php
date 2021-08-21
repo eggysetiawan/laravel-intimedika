@@ -1,5 +1,6 @@
 <?php
 
+use App\Software;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,16 +23,24 @@ class DatabaseSeeder extends Seeder
             // SidebarSeeder::class,
             // DepartmentSeeder::class,
             // // sync databsae
+
             // InventoryTypeSeeder::class,
             // InventorySeeder::class,
             // DailyJobSeeder::class,
             // PacsInstallationSeeder::class,
             // PacsSupportSeeder::class,
-            // // PacsStakeholderSeeder::class,
+
+            // PacsStakeholderSeeder::class,
             // PacsEngineerSeeder::class,
-            // // MediaSeeder::class,
+            // MediaSeeder::class,
             // ProductSeeder::class,
             // ModalityProductSeeder::class,
+
+            // migrasi portal teknik
+
+            SoftwareSeeder::class,
+            InstalledModalitySeeder::class,
+            InstallationSeeder::class,
         ]);
     }
 }
