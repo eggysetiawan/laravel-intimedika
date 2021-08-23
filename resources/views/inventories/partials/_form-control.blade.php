@@ -96,5 +96,5 @@
 </div>
 
 <div class="card-footer">
-    <x-button-submit>Submit</x-button-submit>
+    <x-button-submit>{{ $submit ?? "Create" }}</x-button-submit>
 </div>

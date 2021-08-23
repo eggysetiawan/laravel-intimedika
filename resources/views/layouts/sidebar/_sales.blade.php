@@ -1,6 +1,17 @@
   @hasrole('director|sales|superadmin')
+
   {{-- resource --}}
   <li class="nav-header">Resource</li>
+
+  {{-- hospital --}}
+  <li class="nav-item">
+      <a href="{{ route('hospitals.index') }}"
+          class="nav-link {{ request()->segment(1) == 'hospitals' ? ' active' : '' }}">
+          <i class="fas fa-hospital nav-icon"></i>
+          <p>Rumah Sakit</p>
+      </a>
+  </li>
+
   <li class="nav-item">
       <a href="{{ route('modalities.index') }}"
           class="nav-link {{ request()->segment(1) == 'modalities' ? ' active' : '' }}">

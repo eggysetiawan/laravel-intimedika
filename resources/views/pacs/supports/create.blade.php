@@ -12,7 +12,7 @@
         </div>
         <form method="POST" action="{{ route('pacs_supports.store') }}">
             @csrf
-            @include('pacs.supports.partials._form-control', ['submit' => 'Create'])
+            @include('pacs.supports.partials._form-control', ['submit' => 'Submit'])
         </form>
     </x-card>
 @endsection

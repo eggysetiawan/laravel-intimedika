@@ -13,7 +13,7 @@
         <form method="POST" action="{{ route('pacs_supports.update', $support->slug) }}">
             @csrf
             @method('patch')
-            @include('pacs.supports.partials._form-control', ['submit' => 'Create'])
+            @include('pacs.supports.partials._form-control')
         </form>
     </x-card>
 @endsection
