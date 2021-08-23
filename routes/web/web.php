@@ -44,11 +44,15 @@ Route::middleware('auth')->group(function () {
     ])->except(['create']);
 
     //  hospitals
-    Route::post('hospitals/select', 'SelectHospitalController')->name('hospitals.select');
-    Route::post('hospitals/district', 'HospitalController@district')->name('hospitals.select.district');
-    Route::resource('hospitals', 'HospitalController')->parameters([
-        'hospitals' => 'hospital:slug',
-    ]);
+
+    Route::middleware(['role:sales|admin'])->group(function () {
+        Route::post('hospitals/select', 'SelectHospitalController')->name('hospitals.select');
+        Route::post('hospitals/district', 'HospitalController@district')->name('hospitals.select.district');
+        Route::resource('hospitals', 'HospitalController')->parameters([
+            'hospitals' => 'hospital:slug',
+        ]);
+    });
+
 
     // inventories
     Route::prefix('inventories')->name('inventories.')->middleware(['role:superadmin|admin'])->group(function () {

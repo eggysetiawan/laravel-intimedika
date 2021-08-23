@@ -13,7 +13,9 @@
         <form method="POST" action="{{ route('inventories.update', $inventory->slug) }}">
             @csrf
             @method('patch')
-            @include('inventories.partials._form-control')
+            @include('inventories.partials._form-control',[
+            'submit' => 'Update',
+            ])
         </form>
     </x-card>
 @endsection
@@ -26,6 +28,5 @@
                 sortField: 'text'
             });
         });
-
     </script>
 @endsection

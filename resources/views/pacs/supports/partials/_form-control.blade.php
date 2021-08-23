@@ -74,22 +74,24 @@
         </div>
     </div>
 
-    {{-- @empty($support) --}}
-    {{-- Engineer --}}
-    <div class="form-group">
-        <label for="pacs_engineers">Intwid Engineer</label>
+    @if (!$edit)
 
-        <select name="pacs_engineers[]" id="pacs_engineers" class="form-control select2 js-example-basic-multiple"
-            multiple aria-placeholder="Pilih Engineer">
-            @foreach ($engineers as $engineer)
-                <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
-            @endforeach
+        {{-- Engineer --}}
+        <div class="form-group">
+            <label for="pacs_engineers">Intwid Engineer</label>
 
-        </select>
-    </div>
-    {{-- @endempty --}}
+            <select name="pacs_engineers[]" id="pacs_engineers" class="form-control select2 js-example-basic-multiple"
+                multiple aria-placeholder="Pilih Engineer">
+                @foreach ($engineers as $engineer)
+                    <option value="{{ $engineer->id }}">{{ $engineer->name }}</option>
+                @endforeach
+
+            </select>
+        </div>
+    @endif
+
 </div>
 
 <div class="card-footer">
-    <x-button-submit>Submit</x-button-submit>
+    <x-button-submit>{{ $submit ?? 'Update' }}</x-button-submit>
 </div>
