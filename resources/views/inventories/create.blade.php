@@ -12,7 +12,7 @@
         </div>
         <form method="POST" action="{{ route('inventories.store') }}">
             @csrf
-            @include('inventories.partials._form-control', ['submit' => 'Create'])
+            @include('inventories.partials._form-control', ['submit' => 'Submit'])
         </form>
     </x-card>
 @endsection

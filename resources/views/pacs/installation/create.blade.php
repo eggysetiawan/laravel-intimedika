@@ -20,7 +20,7 @@
                     </div>
                     <form method="POST" action="{{ route('pacs_installations.store') }}" enctype="multipart/form-data">
                         @csrf
-                        @include('pacs.installation.partials._form-control', ['submit' => 'Submit'])
+                        @include('pacs.installation.partials._form-control', ['submit' => 'Create'])
                     </form>
                 </div>
             </div>
