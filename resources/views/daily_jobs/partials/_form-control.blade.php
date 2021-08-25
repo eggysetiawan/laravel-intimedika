@@ -47,5 +47,5 @@
         <x-button-submit wire:loading.attr="disabled">Submit</x-button-submit>
     </div> --}}
     <div class="card-footer">
-        <button type="submit" class="btn bg-teal" @if ($errors->any()) disabled @endif wire:loading.attr="disabled">Submit</button>
+        <button type="submit" class="btn bg-teal" @if ($errors->any()) disabled @endif wire:loading.attr="disabled">{{$submit ?? "Submit"}}</button>
     </div>

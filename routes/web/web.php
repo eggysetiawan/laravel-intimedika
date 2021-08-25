@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
 
     //  hospitals
 
-    Route::middleware(['role:sales|admin'])->group(function () {
+    Route::middleware(['role:superadmin|sales|admin'])->group(function () {
         Route::post('hospitals/select', 'SelectHospitalController')->name('hospitals.select');
         Route::post('hospitals/district', 'HospitalController@district')->name('hospitals.select.district');
         Route::resource('hospitals', 'HospitalController')->parameters([

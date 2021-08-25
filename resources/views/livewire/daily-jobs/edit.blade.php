@@ -1,1 +1,1 @@
-@include('daily_jobs.partials._form-control')
+@include('daily_jobs.partials._form-control',['submit'=>"Update"])
