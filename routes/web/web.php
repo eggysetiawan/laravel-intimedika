@@ -11,7 +11,7 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', 'HomeController@index')->name('home');
 
     // advances
-    Route::resource('advances', 'AdvanceController')->parameters([
+    Route::middleware(['role:superadmin'])->resource('advances', 'AdvanceController')->parameters([
         'advances' => 'advance:slug',
     ]);
 

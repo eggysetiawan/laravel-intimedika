@@ -3,8 +3,7 @@
         <div class="form-group">
             <label for="date">Tanggal</label>
             <input type="date" name="date" id="date"
-                class="form-control @error('date') is-invalid @else is-valid @enderror"
-                wire:model.debounce.500ms="date">
+                class="form-control @error('date') is-invalid @else is-valid @enderror" wire:model.debounce.500ms="date">
             @error('date')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -36,6 +35,8 @@
                 <x-loading_file class="mt-2" />
                 <div><small>Processing file..</small></div>
             </div>
+            <small class="text-secondary">.zip,.rar,.pdf</small>
+
             @error('img')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -47,5 +48,6 @@
         <x-button-submit wire:loading.attr="disabled">Submit</x-button-submit>
     </div> --}}
     <div class="card-footer">
-        <button type="submit" class="btn bg-teal" @if ($errors->any()) disabled @endif wire:loading.attr="disabled">{{$submit ?? "Submit"}}</button>
+        <button type="submit" class="btn bg-teal" @if ($errors->any()) disabled @endif
+            wire:loading.attr="disabled">{{ $submit ?? 'Submit' }}</button>
     </div>

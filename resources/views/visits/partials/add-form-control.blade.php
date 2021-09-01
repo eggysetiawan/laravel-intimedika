@@ -34,6 +34,7 @@
 
     <div class="form-group">
         <input type="file" name="img" id="img" class="form-control @error('img') is-invalid @enderror">
+        <small class="text-secondary">.jpg,.jpeg,.png,</small>
         @error('img')
             <span class="invalid-feedback" role="alert">
                 {{ $message }}

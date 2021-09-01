@@ -39,6 +39,7 @@
                         <p>Home</p>
                     </a>
                 </li>
+                @hasrole('superadmin|admin')
                 {{-- Inventories --}}
                 <li class="nav-item">
                     <a href="{{ route('inventories.index') }}"
@@ -47,9 +48,10 @@
                         <p>Inventory</p>
                     </a>
                 </li>
+                @endhasrole
 
 
-
+                @hasrole('superadmin|admin|sales')
                 {{-- hospital --}}
                 <li class="nav-item">
                     <a href="{{ route('hospitals.index') }}"
@@ -58,6 +60,7 @@
                         <p>Rumah Sakit</p>
                     </a>
                 </li>
+                @endrole
 
                 {{-- IT --}}
                 @include('layouts.sidebar._it')

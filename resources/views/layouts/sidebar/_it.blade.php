@@ -1,4 +1,4 @@
-  @hasrole('superadmin|it')
+  @hasrole('superadmin')
   {{-- advances --}}
   <li class="nav-header">Perjalanan Dinas</li>
   <li class="nav-item">
