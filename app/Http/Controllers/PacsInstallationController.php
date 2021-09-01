@@ -129,11 +129,19 @@ class PacsInstallationController extends Controller
                 }
 
                 if ($request->has('img')) {
-                    $pacsInstallation
-                        ->addMultipleMediaFromRequest(['img'])
-                        ->each(function ($fileAdder) {
-                            $fileAdder->toMediaCollection('files');
-                        });
+                    if ($pacsInstallation->media()->delete()) {
+                        $pacsInstallation
+                            ->addMultipleMediaFromRequest(['img'])
+                            ->each(function ($fileAdder) {
+                                $fileAdder->toMediaCollection('files');
+                            });
+                    } else {
+                        $pacsInstallation
+                            ->addMultipleMediaFromRequest(['img'])
+                            ->each(function ($fileAdder) {
+                                $fileAdder->toMediaCollection('files');
+                            });
+                    }
                 }
             }
         );

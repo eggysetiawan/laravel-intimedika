@@ -8,9 +8,9 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('home') }}" class="nav-link">Home</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        {{-- <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('targets.index') }}" class="nav-link">Target</a>
-        </li>
+        </li> --}}
     </ul>
 
     <!-- SEARCH FORM -->

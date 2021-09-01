@@ -22,7 +22,13 @@ class VisitService
         $attr['is_visited'] = 1;
 
         // insert
-        return auth()->user()->visits()->create($attr);
+        $visits = auth()->user()->visits()->create($attr);
+        $imgSlug = uniqid() . '.' . request()->file('img')->extension();
+
+        $visits
+            ->addMediaFromRequest('img')
+            ->usingFileName($imgSlug)
+            ->toMediaCollection('images');
     }
 
     public function update($request, $visit)

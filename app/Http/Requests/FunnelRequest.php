@@ -25,6 +25,7 @@ class FunnelRequest extends FormRequest
     {
         return [
             'customer' => 'integer|required',
+            'description' => ['nullable'],
             'date' => 'date|required',
             'modality.*' => 'nullable',
             'references.*' => 'nullable',

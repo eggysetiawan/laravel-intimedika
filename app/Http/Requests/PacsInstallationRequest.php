@@ -44,6 +44,7 @@ class PacsInstallationRequest extends FormRequest
             'phone_radiology' => ['nullable', 'max:191'],
             'email_radiology' => ['nullable', 'email', 'max:191'],
             'user_note' => ['string', 'nullable'],
+            'img' => ['nullable'],
         ];
     }
 

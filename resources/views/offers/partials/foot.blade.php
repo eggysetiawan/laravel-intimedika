@@ -55,7 +55,7 @@
     </div>
 
     @isset($offer->invoices->first()->orders)
-        @include('funnels.partials._while')
+        @include('funnels.partials._while-create')
     @else
         @include('offers.partials._for')
     @endisset

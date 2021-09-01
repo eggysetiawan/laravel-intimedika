@@ -65,7 +65,8 @@
                 @enderror
             </div>
         </div>
-        {{-- <div class="d-flex row">
+
+        <div class="d-flex row">
             <div class="col-md-12">
                 <label for="qty.{{ $i }}">Qty #{{ $i }}</label>
                 <div class="input-group mb-3">
@@ -84,6 +85,6 @@
                     </span>
                 @enderror
             </div>
-        </div> --}}
+        </div>
     </div>
 @endforeach
