@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\DailyJobs;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Edit extends Component
 {
+    use WithFileUploads;
     public $dailyJob,
         $date,
         $description,
@@ -16,7 +18,7 @@ class Edit extends Component
         $this->validateOnly($fields, [
             'date' => ['required', 'date'],
             'description' => ['required', 'min:6'],
-            'img' => ['nullable', 'mimes:zip,rar'],
+            'img' => ['nullable', 'mimes:zip,rar,pdf'],
         ]);
     }
 

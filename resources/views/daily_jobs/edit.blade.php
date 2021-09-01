@@ -10,7 +10,7 @@
         <div class="card-header">
             <h3 class="card-title">Edit Laporan Harian</h3>
         </div>
-        <form method="POST" action="{{ route('daily_jobs.update', $dailyJob->slug) }}">
+        <form method="POST" action="{{ route('daily_jobs.update', $dailyJob->slug) }}" enctype="multipart/form-data">
             @csrf
             @method('patch')
             <livewire:daily-jobs.edit :key="$dailyJob->id" :dailyJob="$dailyJob" />

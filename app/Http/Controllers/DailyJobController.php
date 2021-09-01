@@ -99,7 +99,28 @@ class DailyJobController extends Controller
      */
     public function update(DailyJobRequest $request, DailyJob $dailyJob)
     {
-        $dailyJob->update($request->all());
+        DB::transaction(function () use ($request, $dailyJob) {
+            if (request()->has('img')) {
+
+                if ($dailyJob->getFirstMediaUrl('sourcecode')) {
+                    $dailyJob->media()->delete();
+
+                    $imgSlug = (new DailyJobService())->getSlug($request) . '.' . request()->file('img')->extension();
+                    $dailyJob
+                        ->addMediaFromRequest('img')
+                        ->usingFileName($imgSlug)
+                        ->toMediaCollection('sourcecode');
+                } else {
+                    $imgSlug = (new DailyJobService())->getSlug($request) . '.' . request()->file('img')->extension();
+                    $dailyJob
+                        ->addMediaFromRequest('img')
+                        ->usingFileName($imgSlug)
+                        ->toMediaCollection('sourcecode');
+                }
+            }
+            $dailyJob->update($request->validated());
+        });
+
         session()->flash('success', 'Laporan harian berhasil di update');
         return redirect()->route('daily_jobs.timeline');
     }
