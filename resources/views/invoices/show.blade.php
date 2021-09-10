@@ -27,21 +27,19 @@
                             role="tab" aria-controls="vert-tabs-final" aria-selected="false">Harga Final</a> --}}
 
 
-                        <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order" role="tab"
-                            aria-controls="vert-tabs-order" aria-selected="false">Order</a>
+                        <a class="nav-link" id="vert-tabs-order-tab" data-toggle="pill" href="#vert-tabs-order"
+                            role="tab" aria-controls="vert-tabs-order" aria-selected="false">Order</a>
 
 
                         <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-cn-tab" data-toggle="pill"
-                            href="#vert-tabs-cn" role="tab"
-                            aria-controls="vert-tabs-cn" aria-selected="false">CN</a>
+                            href="#vert-tabs-cn" role="tab" aria-controls="vert-tabs-cn" aria-selected="false">CN</a>
 
-                        <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-komisi-tab" data-toggle="pill" href="#vert-tabs-komisi"
-                            role="tab"
-                            aria-controls="vert-tabs-komisi" aria-selected="false">Komisi</a>
+                        <a class="nav-link @if (!$offer->purchaseApproved()) disabled @endif" id="vert-tabs-komisi-tab" data-toggle="pill"
+                            href="#vert-tabs-komisi" role="tab" aria-controls="vert-tabs-komisi"
+                            aria-selected="false">Komisi</a>
 
-                        <a class="nav-link @if (!$offer->hasDemo()) disabled @endif" id="vert-tabs-demo-tab" data-toggle="pill" href="#vert-tabs-demo"
-                            role="tab"
-                            aria-controls="vert-tabs-demo" aria-selected="false">Demo</a>
+                        <a class="nav-link @if (!$offer->hasDemo()) disabled @endif" id="vert-tabs-demo-tab" data-toggle="pill"
+                            href="#vert-tabs-demo" role="tab" aria-controls="vert-tabs-demo" aria-selected="false">Demo</a>
 
                     </div>
                 </div>
@@ -243,7 +241,8 @@
                                                 </div>
                                                 <!-- /.col -->
                                                 <div class="col-6">
-                                                    <p class="lead">{{ date('d/m/Y', strtotime($invoice->date)) }}</p>
+                                                    <p class="lead">
+                                                        {{ date('d/m/Y', strtotime($invoice->date)) }}</p>
 
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -438,7 +437,8 @@
                                                 </div>
                                                 <!-- /.col -->
                                                 <div class="col-6">
-                                                    <p class="lead">{{ date('d/m/Y', strtotime($invoice->date)) }}</p>
+                                                    <p class="lead">
+                                                        {{ date('d/m/Y', strtotime($invoice->date)) }}</p>
 
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -618,14 +618,16 @@
                                                             data-gallery="gallery">
                                                             <div class="product-image-thumb">
                                                                 <img src="{{ asset($invoice->getFirstMediaUrl('image_po', 'thumb')) }}"
-                                                                    class="img-fluid" alt="PO {{ $offer->slug }}" />
+                                                                    class="img-fluid"
+                                                                    alt="PO {{ $offer->slug }}" />
                                                             </div>
                                                         </a>
                                                     @endif
                                                 </div>
                                                 <!-- /.col -->
                                                 <div class="col-6">
-                                                    <p class="lead">{{ date('d/m/Y', strtotime($invoice->date)) }}</p>
+                                                    <p class="lead">
+                                                        {{ date('d/m/Y', strtotime($invoice->date)) }}</p>
 
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -684,7 +686,8 @@
                         </div>
 
                         {{-- tab_demo --}}
-                        <div class="tab-pane fade" id="vert-tabs-demo" role="tabpanel" aria-labelledby="vert-tabs-demo-tab">
+                        <div class="tab-pane fade" id="vert-tabs-demo" role="tabpanel"
+                            aria-labelledby="vert-tabs-demo-tab">
                             <table>
                                 <tr>
                                     <td>
@@ -827,6 +830,7 @@
                         <div class="form-group">
                             <label for="img">Masukan bukti PO</label><br>
                             <input type="file" name="img" id="img" class="@error('img') is-invalid @enderror">
+                            <small class="text-secondary">.jpg,.jpeg,.png,</small>
                             @error('img')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
@@ -860,7 +864,8 @@
                     @method('patch')
                     <div class="modal-body">
 
-                        <input class="mr-2" style="margin: 0px" type="checkbox" name="form_up" id="form_up" @if ($offer->form_up) checked @endif><label for="form_up">Nama
+                        <input class="mr-2" style="margin: 0px" type="checkbox" name="form_up" id="form_up"
+                            @if ($offer->form_up) checked @endif><label for="form_up">Nama
                             Up.</label>
                         <div class="input-group">
 
@@ -871,8 +876,9 @@
                         </div>
 
                         <div class="form-group">
-                            <input class="mr-2" style="margin: 0px" type="checkbox" name="has_form_note" id="has_form_note"
-                                @if ($offer->has_form_note) checked @endif><label for="has_form_note">Keterangan Form</label>
+                            <input class="mr-2" style="margin: 0px" type="checkbox" name="has_form_note"
+                                id="has_form_note" @if ($offer->has_form_note) checked @endif><label for="has_form_note">Keterangan
+                                Form</label>
                             <textarea name="form_note" class="form-control"
                                 id="form_note">{{ $offer->form_note ?? (old('form_note') ?? '--Keterangan Penawaran--') }}</textarea>
                         </div>
@@ -898,7 +904,6 @@
             };
 
             activaTab('vert-tabs-order');
-
         </script>
     @endsection
 @endif

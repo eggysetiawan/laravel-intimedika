@@ -204,6 +204,8 @@
                             <div class="form-group">
                                 <input type="file" name="img" class="@error('img') is-invalid @enderror"
                                     value="{{ old('img') }}">
+                                <small class="text-secondary">.jpg,.jpeg,.png,</small>
+
                                 @error('img')
                                     <span class="invalid-feedback" role="alert">
                                         {{ $message }}
@@ -261,7 +263,6 @@
             });
             $("#mycheckboxdiv").hide();
         });
-
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -276,6 +277,5 @@
                 }
             }); $("#img").hide();
         });
-
     </script>
 @endsection

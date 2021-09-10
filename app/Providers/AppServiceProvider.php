@@ -42,10 +42,10 @@ class AppServiceProvider extends ServiceProvider
         config(['app.locale' => 'id']);
         \Carbon\Carbon::setLocale('id');
 
-        view()->share('users', User::select('id', 'name')->get());
-        view()->share('readyToApprove', Offer::readyToApproveCount());
-        view()->share('readyToPurchase', Offer::readyToPurchaseCount());
-        view()->share('products', Product::get());
-        view()->share('preloadingQuoute', Inspiring::quote());
+        // view()->share('users', User::select('id', 'name')->get());
+        // view()->share('readyToApprove', Offer::readyToApproveCount());
+        // view()->share('readyToPurchase', Offer::readyToPurchaseCount());
+        // view()->share('products', Product::get());
+        // view()->share('preloadingQuoute', Inspiring::quote());
     }
 }
