@@ -1,4 +1,5 @@
 <x-dropdown>
+    @hasrole('superadmin|sales')
     <a href="{{ route('funnels.show', $funnel->slug) }}" class="dropdown-item" title="Lihat detail funnel ini.">
         <i class="far fa-eye nav-icon"></i>
         Detail
@@ -16,4 +17,5 @@
             Buat Penawaran
         </a>
     @endif
+    @endhasrole
 </x-dropdown>

@@ -5,6 +5,7 @@
             Detail</a>
     @endif
 
+    @hasrole('sales|superadmin')
     @if (request()->segment(1) == 'visitplan')
         <a href="{{ route('arrival.edit', $visit->slug) }}" class="dropdown-item"
             title="Klik disini untuk melengkapi data kunjungan harian apabila anda telah melakukan kunjungan ke Rumah sakit ini."><i
@@ -32,4 +33,5 @@
             onclick="return confirm('apakah anda yakin?')"><i class="fas fa-trash-restore nav-icon"></i>
             Restore</a>
     @endif
+    @endhasrole
 </x-dropdown>
