@@ -55,14 +55,15 @@
 
     @default
         <x-dropdown>
-            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item" title="Lihat detail penawaran ini."><i
-                    class="far fa-eye nav-icon"></i>
+            <a href="{{ route('invoices.order', $offer->slug) }}" class="dropdown-item"
+                title="Lihat detail penawaran ini."><i class="far fa-eye nav-icon"></i>
                 Detail
             </a>
-
+            @unlessrole('director')
             <a href="{{ route('offers.edit', $offer->slug) }}" class="dropdown-item" title="Edit data penawaran ini.">
                 <i class="fas fa-edit nav-icon"></i> Edit
             </a>
+            @endunlessrole('director')
 
             @can('approval')
 
@@ -89,7 +90,7 @@
 
             @endcan
 
-
+            @unlessrole('director')
             @can('view', $offer)
                 <form action="{{ route('offers.destroy', $offer->slug) }}" method="POST">
                     @csrf
@@ -101,6 +102,7 @@
                     </button>
                 </form>
             @endcan
+            @endunlessrole('director')
         </x-dropdown>
 
 
