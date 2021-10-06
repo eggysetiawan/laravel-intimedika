@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use App\Offer;
 use App\Http\Controllers\Controller;
 use App\Notifications\Offer\TwoFactorCode;
-use App\Offer;
 
 
 class TwoFactorController extends Controller
@@ -61,7 +62,7 @@ class TwoFactorController extends Controller
 
     public function send()
     {
-        $user = auth()->user();
+        $user = User::emailToDirector();
         $otp = $user->generateTwoFactorCode();
         $user->notify(new TwoFactorCode($otp));
         session()->flash('success', 'The two factor code has been sent to your email.');
@@ -70,7 +71,7 @@ class TwoFactorController extends Controller
 
     public function resend()
     {
-        $user = auth()->user();
+        $user = User::emailToDirector();
         $otp = $user->generateTwoFactorCode();
         $user->notify(new TwoFactorCode($otp));
 
